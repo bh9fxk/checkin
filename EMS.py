@@ -4,7 +4,7 @@
 # ✨✨✨ @Author CHERWIN✨✨✨
 # -------------------------------
 # cron "0 10 * * *" script-path=xxx.py,tag=匹配cron用
-# const $ = new Env('EMS邮惠中心小程序')
+# const $ = new Env('EMS邮惠中心')
 
 import os
 from datetime import date
