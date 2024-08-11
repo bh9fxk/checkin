@@ -1,4 +1,9 @@
 // 招商荟签到
+/**
+京洞察问卷通知
+35 9 * * * zsh.js
+*/
+
 const $ = new Env("招商荟");
 const zshCookie = process.env.zshCookie;
 
