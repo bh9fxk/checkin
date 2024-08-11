@@ -4,7 +4,7 @@
 # @Author CHERWIN✨✨✨
 # -------------------------------
 # cron "30 9 * * *" script-path=xxx.py,tag=匹配cron用
-# const $ = new Env('蜜雪冰城小程序')
+# const $ = new Env('蜜雪冰城')
 import json
 import base64
 import os
