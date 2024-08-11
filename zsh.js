@@ -7,6 +7,13 @@
  * const $ = new Env('招商荟');
  */
 
+class Env {
+    constructor(name) {
+        this.name = name;
+        this.http = require('axios');
+    }
+}
+
 const $ = new Env('招商荟');
 const zshCookie = process.env.zshCookie;
 
