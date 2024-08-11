@@ -1,8 +1,11 @@
-// 招商荟签到
 /**
-京洞察问卷通知
-35 9 * * * zsh.js
-*/
+ * cron: 50 5 * * *
+ *
+ * zsh
+ * 
+ * export zshCookie="抓小程序中的token 多个换行或者&分隔"
+ * const $ = new Env('招商荟');
+ */
 
 const $ = new Env("招商荟");
 const zshCookie = process.env.zshCookie;
