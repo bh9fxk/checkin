@@ -7,7 +7,7 @@
  * const $ = new Env('招商荟');
  */
 
-const $ = new Env("招商荟");
+const $ = new Env('招商荟');
 const zshCookie = process.env.zshCookie;
 
 async function signIn() {
