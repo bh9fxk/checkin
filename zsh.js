@@ -1,27 +1,29 @@
-// 招商荟签到脚本
-const axios = require('axios');
-const sendNotify = require('./sendNotify');
+// 招商荟签到
+const $ = new Env("招商荟");
+const zshCookie = process.env.zshCookie;
 
 async function signIn() {
-    try {
-        const response = await axios.post('https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go', {
-            // 这里填写你的请求参数
-            userId: '你的用户ID',
-            token: '你的token'
-        });
-
-        if (response.data.success) {
-            console.log('签到成功');
-            await sendNotify('招商荟签到', '签到成功');
-        } else {
-            console.log('签到失败:', response.data.message);
-            await sendNotify('招商荟签到', `签到失败: ${response.data.message}`);
+    const options = {
+        url: 'https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go',
+        headers: {
+            'Cookie': zshCookie
         }
-    } catch (error) {
-        console.error('签到出错:', error);
-        await sendNotify('招商荟签到', `签到出错: ${error.message}`);
+    };
+    const response = await $.http.get(options);
+    if (response.statusCode === 200) {
+        console.log("签到成功:", response.body);
+        await notify("招商荟签到成功", response.body);
+    } else {
+        console.log("签到失败:", response.body);
+        await notify("招商荟签到失败", response.body);
     }
 }
 
-// 执行签到
-signIn();
+async function notify(title, message) {
+    const notify = require('./sendNotify');
+    await notify.sendNotify(title, message);
+}
+
+(async () => {
+    await signIn();
+})();
