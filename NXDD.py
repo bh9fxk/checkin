@@ -241,7 +241,7 @@ class RUN:
             print(e)
 
     def main(self):
-        Log(f"\n开始执行第{self.index}个账号--------------->>>>>")
+        Log(f"\n开始执行第{self.index}个账号------->>>")
         base_userinfo_result = self.base_userinfo()
         if not base_userinfo_result:
             Log("用户信息无效，请更新CK")
