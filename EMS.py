@@ -254,7 +254,7 @@ class RUN:
             return False
 
     def main(self):
-        Log(f"\n开始执行第{self.index}个账号--------------->>>>>")
+        Log(f"\n开始执行第{self.index}个账号------->>>")
         # if self.login():
 
         if self.findByOpenIdAppId():
