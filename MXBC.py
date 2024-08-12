@@ -230,7 +230,7 @@ class RUN:
 
 
     def main(self):
-        Log(f"\n开始执行第{self.index}个账号--------------->>>>>")
+        Log(f"\n开始执行第{self.index}个账号------->>>")
         if self.login():
             self.get_userInfo()
             self.get_userInfo(True)
