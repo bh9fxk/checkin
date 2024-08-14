@@ -9,7 +9,6 @@
  环境变量: zsh_ck， 多账户用 @ 或换行分割。抓取 https://youhui.95516.com/newsign/api 请求 headers 中 Authorization
  */
 
-import { Env } from './utils';
 
 const $ = new Env('招商荟签到', { sep: ['@', '\n'] });
 $.init(signIn, 'zsh_ck').then(() => $.done());
