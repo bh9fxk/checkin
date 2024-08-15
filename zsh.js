@@ -13,23 +13,20 @@
 const $ = new Env('招商荟签到', { sep: ['@', '\n'] });
 $.init(signIn, 'zsh_ck').then(() => $.done());
 
-async function signIn(auth: string) {
-  const { data: result } = await $.req.post(
-    'https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in',
-    {},
-    {
-      Authorization: `${auth}`,
-      'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191'
-    }
-  );
 
-  if ('signedIn' in result) {
-    $.log(`今天是第${result['signInDays']['current']['days']}天签到 今日已签到成功,目前已连续签到${result['signInDays']['days']}天🎉`);
-  } else {
-    $.log(`用户查询:失败 ❌ 了呢,原因未知！`);
-    console.log(result);
-  }
+"use strict";
+async function signIn(auth) {
+    const { data: result } = await $.req.post('https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in', {}, {
+        Authorization: `${auth}`,
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191'
+    });
+    if ('signedIn' in result) {
+        $.log(`今天是第${result['signInDays']['current']['days']}天签到 今日已签到成功,目前已连续签到${result['signInDays']['days']}天🎉`);
+    }
+    else {
+        $.log(`用户查询:失败 ❌ 了呢,原因未知！`);
+        console.log(result);
+    }
 }
 
 function Env(t, e) {
