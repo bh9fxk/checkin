@@ -1,31 +1,165 @@
-/*
- * @Author: renxia
- * @Date: 2024-02-23 13:52:46
- * @LastEditors: renxia
- * @LastEditTime: 2024-02-23 15:37:32
- *
- cron: 15 7 * * *
- new Env('招商荟签到')
- 环境变量: zsh_ck， 多账户用 @ 或换行分割。抓取 https://youhui.95516.com/newsign/api 请求 headers 中 Authorization
+/**
+ * cron 27 19 * * *  zsh.js
+ * Show:每天运行一次
+ * @author:https://github.com/smallfawn/QLScriptPublic
+ * 变量名:wx_midea
+ * 变量值:https://mvip.midea.cn/next/mucuserinfo/getmucuserinfo headers中的COOKIE
+ * scriptVersionNow = "0.0.1";
  */
 
-
-const $ = new Env("招商荟签到");
-const auth = "zsh_ck";
-
-async function signIn(auth) {
-    const { data: result } = await $.req.post('https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in', {}, {
-        Authorization: `${auth}`,
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191'
-    });
-    if ('signedIn' in result) {
-        $.log(`今天是第${result['signInDays']['current']['days']}天签到 今日已签到成功,目前已连续签到${result['signInDays']['days']}天🎉`);
+const $ = new Env("微信小程序 - 美的会员");
+const notify = $.isNode() ? require('./sendNotify') : '';
+let ckName = "wx_midea";
+let envSplitor = ["@", "\n"]; //多账号分隔符
+let strSplitor = "&"; //多变量分隔符
+let userIdx = 0;
+let userList = [];
+class UserInfo {
+    constructor(str) {
+        this.index = ++userIdx;
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔符
+        this.ckStatus = true;
     }
-    else {
-        $.log(`用户查询:失败 ❌ 了呢,原因未知！`);
-        console.log(result);
+    async main() {
+        $.msg($.name, "", `开始第${this.index}个账号`)
+        //await this.user_info();
+        await $.wait(3000)
+        await this.signIn()
+        if (this.ckStatus) {
+            //await this.signIn()
+        }
+    }
+    async user_info() {
+        try {
+            let options = {
+                fn: "信息查询",
+                method: "get",
+                url: `https://mvip.midea.cn/next/mucuserinfo/getmucuserinfo`,
+                headers: {
+                    "Host": "mvip.midea.cn",
+                    "Connection": "keep-alive",
+                    "charset": "utf-8",
+                    "cookie": this.ck,
+                    "User-Agent": "Mozilla/5.0 (Linux; Android 10; MI 8 Lite Build/QKQ1.190910.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/111.0.5563.116 Mobile Safari/537.36 XWEB/1110005 MMWEBSDK/20230405 MMWEBID/2585 MicroMessenger/8.0.35.2360(0x2800235D) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android",
+                    "Content-Type": "application/json",
+                    "Accept-Encoding": "gzip,compress,br,deflate",
+                    "Referer": "https://servicewechat.com/wx03925a39ca94b161/409/page-frame.html"
+                },
+            }
+            let result  = await httpRequest(options);
+            //console.log(options);
+            //console.log(result);
+            if (result["errcode"] == 0) {
+                console.log(`✅${options.fn}成功 [${result.data.userinfo.Mobile}] 当前积分[${result.data.userinfo.VipGrow}]🎉`);
+                this.ckStatus = true;
+            } else {
+                console.log(`❌${options.fn}失败`);
+                this.ckStatus = false;
+                console.log(JSON.stringify(result));
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    async signIn() {
+        try {
+            let options = {
+                fn: "签到",
+                method: "get",
+                url: `https://mvip.midea.cn/my/score/create_daily_score`,
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    "cookie": this.ck,
+                },
+            }
+            let result  = await httpRequest(options);
+            //console.log(options);
+            //result = JSON.parse(result);
+            //console.log(result);
+            if (result["errcode"] == 0) {
+                console.log(`✅${options.fn}成功🎉`);
+            } else {
+                console.log(`❌${options.fn}失败`);
+                console.log(JSON.stringify(result));
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
+
+async function start() {
+const tasks = userList.map(user => user.main());
+await Promise.all(tasks);
+
+    /*let taskall = [];
+    for (let user of userList) {
+        if (user.ckStatus) {
+            taskall.push(await user.main());
+        }
+    }
+    await Promise.all(taskall);*/
+}
+
+!(async () => {
+    if (!(await checkEnv())) return;
+    if (userList.length > 0) {
+        await start();
+    }
+})()
+    .catch((e) => console.log(e))
+    .finally(() => $.done());
+
+//********************************************************
+/**
+ * 变量检查与处理
+ * @returns
+ */
+async function checkEnv() {
+    let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || "";
+    if (userCookie) {
+        let e = envSplitor[0];
+        for (let o of envSplitor)
+            if (userCookie.indexOf(o) > -1) {
+                e = o;
+                break;
+            }
+        for (let n of userCookie.split(e)) n && userList.push(new UserInfo(n));
+    } else {
+        console.log("未找到CK");
+        return;
+    }
+    return console.log(`共找到${userList.length}个账号`), true; //true == !0
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+function httpRequest(options) {
+    if (!options["method"]) {
+        return console.log(`请求方法不存在`);
+    }
+    if (!options["fn"]) {
+        console.log(`函数名不存在`);
+    }
+    return new Promise((resolve) => {
+        $[options.method](options, (err, resp, data) => {
+            try {
+                if (err) {
+                    $.logErr(err);
+                } else {
+                    try {
+                        data = JSON.parse(data);
+                    } catch (error) { }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve(data);
+            }
+        });
+    });
+}
+
+
 
 function Env(t, e) {
   class s {
