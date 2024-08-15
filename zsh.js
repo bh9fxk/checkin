@@ -10,9 +10,8 @@
  */
 
 
-"use strict";
-const $ = new Env('招商荟签到', { sep: ['@', '\n'] });
-$.init(signIn, 'zsh_ck').then(() => $.done());
+const $ = new Env("招商荟签到");
+const auth = "zsh_ck";
 
 async function signIn(auth) {
     const { data: result } = await $.req.post('https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in', {}, {
