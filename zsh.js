@@ -1,15 +1,15 @@
 /**
- * cron 27 19 * * *  zsh.js
+ * cron 27 23 * * *  zsh.js
  * Show:每天运行一次
  * @author:https://github.com/smallfawn/QLScriptPublic
- * 变量名:wx_midea
+ * 变量名:zsh_ck
  * 变量值:https://mvip.midea.cn/next/mucuserinfo/getmucuserinfo headers中的COOKIE
  * scriptVersionNow = "0.0.1";
  */
 
-const $ = new Env("微信小程序 - 美的会员");
+const $ = new Env("招商荟签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
-let ckName = "wx_midea";
+let ckName = "zsh_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
