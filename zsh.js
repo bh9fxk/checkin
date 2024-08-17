@@ -52,6 +52,7 @@ class UserInfo {
             //console.log(result);
             if (result["code"] == 'UNAUTHORIZED') {
                 console.log(`❌${options.fn}失败`);
+                await notify.sendNotifybyWxPucher("招商荟积分查询失败！！！`);
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
             } else {
