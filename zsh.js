@@ -22,11 +22,11 @@ class UserInfo {
     }
     async main() {
         $.msg($.name, "", `开始第${this.index}个账号`)
-        //await this.user_info();
+        await this.user_info();
         await $.wait(3000)
         await this.signIn()
         if (this.ckStatus) {
-            //await this.signIn()
+            await this.signIn()
         }
     }
     async user_info() {
