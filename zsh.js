@@ -52,7 +52,7 @@ class UserInfo {
             console.log(result);
             if (result["code"] == 'UNAUTHORIZED') {
                 console.log(`❌${options.fn}失败`);
-                await notify.sendNotify(`招商荟积分查询失败！！！`);
+                //await notify.sendNotify(`招商荟积分查询失败！！！`);
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
             } else {
@@ -68,22 +68,22 @@ class UserInfo {
         try {
             let options = {
                 fn: "签到",
-                method: "get",
-                url: `https://mvip.midea.cn/my/score/create_daily_score`,
+                method: "post",
+                url: `https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in`,
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    "cookie": this.ck,
+                    "authorization": this.ck,
                 },
             }
             let result  = await httpRequest(options);
-            //console.log(options);
-            //result = JSON.parse(result);
-            //console.log(result);
-            if (result["errcode"] == 0) {
-                console.log(`✅${options.fn}成功🎉`);
-            } else {
+            console.log(options);
+            result = JSON.parse(result);
+            console.log(result);
+            if (result["code"] == 'UNAUTHORIZED') {
                 console.log(`❌${options.fn}失败`);
                 console.log(JSON.stringify(result));
+            } else {
+                console.log(`✅${options.fn}成功🎉`);
             }
         } catch (e) {
             console.log(e);
