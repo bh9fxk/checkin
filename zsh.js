@@ -89,7 +89,7 @@ class UserInfo {
     }
 }
 
-*/
+
 
 async function start() {
 const tasks = userList.map(user => user.main());
@@ -104,6 +104,8 @@ await Promise.all(tasks);
     await Promise.all(taskall);*/
 }
 
+*/
+    
 !(async () => {
     if (!(await checkEnv())) return;
     if (userList.length > 0) {
