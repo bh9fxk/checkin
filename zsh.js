@@ -54,7 +54,7 @@ class UserInfo {
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
             } else {
-                console.log(`✅${options.fn}成功 [${result.data.userinfo.Mobile}] 当前积分[${result.data.userinfo.VipGrow}]🎉`);
+                console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
                 this.ckStatus = true;
             }
         } catch (e) {
