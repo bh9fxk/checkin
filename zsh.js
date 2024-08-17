@@ -76,9 +76,9 @@ class UserInfo {
                     "Content-Type": "application/json; charset=UTF-8",
                     "Accept-Encoding": "gzip,deflate,br",
                     "campaignId": "2799365216249249792",
-	                "campaignType": "INTERACTIVE",
-	                "capabilityId": "2799365866676748288",
-	                "capabilityType": "SIGN_IN"
+	            "campaignType": "INTERACTIVE",
+	            "capabilityId": "2799365866676748288",
+	            "capabilityType": "SIGN_IN",
                 },
             }
             let result  = await httpRequest(options);
