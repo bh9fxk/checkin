@@ -71,7 +71,7 @@ class UserInfo {
                 method: "post",
                 url: `https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in`,
                 headers: {
-                    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'content-type': 'application/json; charset=UTF-8',
                     "authorization": this.ck,
                 },
             }
