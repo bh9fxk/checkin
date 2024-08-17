@@ -61,7 +61,7 @@ class UserInfo {
             console.log(e);
         }
     }
-/**
+
     async signIn() {
         try {
             let options = {
@@ -90,12 +90,11 @@ class UserInfo {
 }
 
 
-*/
-/*
+
 async function start() {
 const tasks = userList.map(user => user.main());
 await Promise.all(tasks);
-*/
+
     /*let taskall = [];
     for (let user of userList) {
         if (user.ckStatus) {
@@ -103,7 +102,7 @@ await Promise.all(tasks);
         }
     }
     await Promise.all(taskall);*/
-//}
+}
     
 !(async () => {
     if (!(await checkEnv())) return;
