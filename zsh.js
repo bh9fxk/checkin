@@ -49,7 +49,7 @@ class UserInfo {
             let result  = await httpRequest(options);
             //console.log(options);
             result = JSON.parse(result);
-            //console.log(result);
+            console.log(result);
             if (result["code"] == 'UNAUTHORIZED') {
                 console.log(`❌${options.fn}失败`);
                 await notify.sendNotifybyWxPucher("招商荟积分查询失败！！！`);
