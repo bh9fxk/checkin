@@ -47,8 +47,8 @@ class UserInfo {
                 },
             }
             let result  = await httpRequest(options);
-            //console.log(options);
-            //console.log(result);
+            console.log(options);
+            console.log(result);
             if (result["errcode"] == 0) {
                 console.log(`✅${options.fn}成功 [${result.data.userinfo.Mobile}] 当前积分[${result.data.userinfo.VipGrow}]🎉`);
                 this.ckStatus = true;
