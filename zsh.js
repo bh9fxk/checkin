@@ -52,7 +52,7 @@ class UserInfo {
             console.log(result);
             let aa = result["code"];
             console.log(aa);
-            if (result["code"] == 0) {
+            if (result["code"] == 'UNAUTHORIZED') {
                 console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
                 this.ckStatus = true;
 
