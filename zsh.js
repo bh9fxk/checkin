@@ -32,7 +32,7 @@ class UserInfo {
     async user_info() {
         try {
             let options = {
-                fn: "信息查询",
+                fn: "积分查询",
                 method: "get",
                 url: `https://umopwx-api.saas.cmsk1979.com/be/api/pointBank/point/account`,
                 headers: {
@@ -47,7 +47,7 @@ class UserInfo {
                 },
             }
             let result  = await httpRequest(options);
-            console.log(options);
+            //console.log(options);
             console.log(result);
             if (result["errcode"] == 0) {
                 console.log(`✅${options.fn}成功 [${result.data.userinfo.Mobile}] 当前积分[${result.data.userinfo.VipGrow}]🎉`);
