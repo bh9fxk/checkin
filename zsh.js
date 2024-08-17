@@ -79,7 +79,7 @@ class UserInfo {
             console.log(options);
             result = JSON.parse(result);
             console.log(result);
-            if (result["code"] == 'UNAUTHORIZED') {
+            if (result["status"] == '405') {
                 console.log(`❌${options.fn}失败`);
                 console.log(JSON.stringify(result));
             } else {
