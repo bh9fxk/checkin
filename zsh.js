@@ -24,7 +24,7 @@ class UserInfo {
         $.msg($.name, "", `开始第${this.index}个账号`)
         await this.user_info();
         await $.wait(3000)
-        //await this.signIn()
+        await this.signIn()
         if (this.ckStatus) {
             await this.signIn()
         }
@@ -80,7 +80,7 @@ class UserInfo {
             }
             let result  = await httpRequest(options);
             console.log(options);
-            //result = JSON.parse(result);
+            result = JSON.parse(result);
             console.log(result);
             if (result["status"] == '405') {
                 console.log(`❌${options.fn}失败`);
@@ -98,7 +98,7 @@ class UserInfo {
 
 async function start() {
 const tasks = userList.map(user => user.main());
-//await Promise.all(tasks);
+await Promise.all(tasks);
 
     /*let taskall = [];
     for (let user of userList) {
@@ -112,7 +112,7 @@ const tasks = userList.map(user => user.main());
 !(async () => {
     if (!(await checkEnv())) return;
     if (userList.length > 0) {
-        //await start();
+        await start();
     }
 })()
     .catch((e) => console.log(e))
