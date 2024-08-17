@@ -49,6 +49,7 @@ class UserInfo {
             let result  = await httpRequest(options);
             console.log(options);
             console.log(result);
+            console.log(result.code);
             if (result["code"] == 0) {
                 console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
                 this.ckStatus = true;
