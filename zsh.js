@@ -75,6 +75,10 @@ class UserInfo {
                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
                     "Content-Type": "application/json; charset=UTF-8",
                     "Accept-Encoding": "gzip,deflate,br",
+                    "campaignId": "2799365216249249792",
+	                "campaignType": "INTERACTIVE",
+	                "capabilityId": "2799365866676748288",
+	                "capabilityType": "SIGN_IN"
                 },
             }
             let result  = await httpRequest(options);
