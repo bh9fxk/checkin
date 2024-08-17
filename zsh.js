@@ -34,16 +34,16 @@ class UserInfo {
             let options = {
                 fn: "信息查询",
                 method: "get",
-                url: `https://mvip.midea.cn/next/mucuserinfo/getmucuserinfo`,
+                url: `https://umopwx-api.saas.cmsk1979.com/be/api/pointBank/point/account`,
                 headers: {
-                    "Host": "mvip.midea.cn",
+                    "Host": "umopwx-api.saas.cmsk1979.com",
                     "Connection": "keep-alive",
                     "charset": "utf-8",
                     "cookie": this.ck,
-                    "User-Agent": "Mozilla/5.0 (Linux; Android 10; MI 8 Lite Build/QKQ1.190910.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/111.0.5563.116 Mobile Safari/537.36 XWEB/1110005 MMWEBSDK/20230405 MMWEBID/2585 MicroMessenger/8.0.35.2360(0x2800235D) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android",
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
                     "Content-Type": "application/json",
-                    "Accept-Encoding": "gzip,compress,br,deflate",
-                    "Referer": "https://servicewechat.com/wx03925a39ca94b161/409/page-frame.html"
+                    "Accept-Encoding": "gzip,deflate,br",
+                    "Referer": "https://servicewechat.com/wxde49dccaca3d346d/346/page-frame.htm"
                 },
             }
             let result  = await httpRequest(options);
