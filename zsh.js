@@ -48,6 +48,7 @@ class UserInfo {
             }
             let result  = await httpRequest(options);
             console.log(options);
+            result = JSON.parse(result);
             console.log(result);
             console.log(result["code"]);
             if (result["code"] == 0) {
