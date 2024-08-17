@@ -47,19 +47,16 @@ class UserInfo {
                 },
             }
             let result  = await httpRequest(options);
-            console.log(options);
+            //console.log(options);
             result = JSON.parse(result);
-            console.log(result);
-            let aa = result["code"];
-            console.log(aa);
+            //console.log(result);
             if (result["code"] == 'UNAUTHORIZED') {
-                console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
-                this.ckStatus = true;
-
-            } else {
                 console.log(`❌${options.fn}失败`);
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
+            } else {
+                console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
+                this.ckStatus = true;
             }
         } catch (e) {
             console.log(e);
