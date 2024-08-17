@@ -61,6 +61,7 @@ class UserInfo {
             console.log(e);
         }
     }
+/**
     async signIn() {
         try {
             let options = {
@@ -88,6 +89,8 @@ class UserInfo {
     }
 }
 
+*/
+
 async function start() {
 const tasks = userList.map(user => user.main());
 await Promise.all(tasks);
@@ -110,6 +113,7 @@ await Promise.all(tasks);
     .catch((e) => console.log(e))
     .finally(() => $.done());
 
+    
 //********************************************************
 /**
  * 变量检查与处理
