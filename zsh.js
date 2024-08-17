@@ -56,7 +56,7 @@ class UserInfo {
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
             } else {
-                console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
+                console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
                 this.ckStatus = true;
             }
         } catch (e) {
