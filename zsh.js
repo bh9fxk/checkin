@@ -76,6 +76,7 @@ class UserInfo {
 	            "campaignType": "INTERACTIVE",
 	            "capabilityId": "2799365866676748288",
 	            "capabilityType": "SIGN_IN",
+		    "Referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in"
                 },
             }
             let result  = await httpRequest(options);
