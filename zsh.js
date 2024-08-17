@@ -68,16 +68,13 @@ class UserInfo {
             let options = {
                 fn: "签到",
                 method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in`,
+                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
                     "Host": "activity-prd.saas.cmsk1979.com",
-                    "Connection": "keep-alive",
-                    "charset": "utf-8",
                     "authorization": this.ck,
                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json; charset=UTF-8",
                     "Accept-Encoding": "gzip,deflate,br",
-                    //"Referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxMTEwODc0NiIsInRva2VuIjoiOGZiYmU5OWJmMDM3ZDY5NzI0MzlmMjMwYmRiZmE2OTFmYTBjZDBhOGY0MTdkMTg5NGFiZTI1NTJmMmU1YmY1OSIsIm1lbWJlcklkIjoiMTAwMDQ4NjEzMCJ9._HyfayMaZ0mGZMi3dOaxXZwlpUz62KttZ395o34eSyc&campaignId=2799365216249249792&capabilityId=2799365866676748288&cmsk_stamp=lzxwtauk&isSubscribe=false&token=8fbbe99bf037d6972439f230bdbfa691fa0cd0a8f417d1894abe2552f2e5bf59"
                 },
             }
             let result  = await httpRequest(options);
