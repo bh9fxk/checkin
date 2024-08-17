@@ -50,7 +50,7 @@ class UserInfo {
             console.log(options);
             result = JSON.parse(result);
             console.log(result);
-            aa = result["code"];
+            let aa = result["code"];
             console.log(aa);
             if (result["code"] == 0) {
                 console.log(`✅${options.fn}成功 当前积分[${result.data}]🎉`);
