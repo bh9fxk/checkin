@@ -49,7 +49,7 @@ class UserInfo {
             let result  = await httpRequest(options);
             console.log(options);
             console.log(result);
-            if (result["code"] == "UNAUTHORIZED") {
+            if (result["code"] == 0) {
                 console.log(`❌${options.fn}失败`);
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
