@@ -74,7 +74,7 @@ class UserInfo {
                     //"authority": "activity-prd.saas.cmsk1979.com",
                     //"scheme": "https",
                     //"path": "/api/marketing/campaign/v1/go",
-                    "content-length": "129",
+                    //"content-length": "129",
                     "cache-control": "no-cache",
                     "pragma": "no-cache",
                     "accept-language": "zh-CN",
