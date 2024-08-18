@@ -75,7 +75,7 @@ class UserInfo {
                     "accept": "application/json",
                     "campaignId": "2799365216249249792",
                     "capabilityId": "2799365866676748288",
-                    "origin": "https://activity-prd.saas.cmsk1979.com",
+                    "origin": "https://activity-prd.saas.cmsk1979.com"
                 },
             }
             let result  = await httpRequest(options);
