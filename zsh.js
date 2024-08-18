@@ -76,6 +76,7 @@ class UserInfo {
 	            "capabilityId": "2799365866676748288",
 		    "cmsk_stamp": "lzycjftd",
 		    "isSubscribe": "false",
+		    "token": "e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e",
 		    "Referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in"
                 },
             }
