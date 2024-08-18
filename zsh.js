@@ -81,7 +81,7 @@ class UserInfo {
 		    "origin": "https://activity-prd.saas.cmsk1979.com",
 		    "sec-fetch-site": "same-origin",
 		    "sec-fetch-mode": "cors",
-                    "sec-fetch-dest": "empty"
+                    "sec-fetch-dest": "empty",
 		    "accept-encoding": "gzip, deflate, br",
 		    "Referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in"
                 },
