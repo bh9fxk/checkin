@@ -67,8 +67,8 @@ class UserInfo {
         try {
             let options = {
                 fn: "签到",
-                method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
+                //method: "post",
+                //url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
                     "method": "POST",
                     "authority": "activity-prd.saas.cmsk1979.com",
