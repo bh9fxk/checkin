@@ -73,9 +73,9 @@ class UserInfo {
                     "Host": "activity-prd.saas.cmsk1979.com",
                     "authorization": this.ck,
                     "campaignId": "2799365216249249792",
-	            "campaignType": "INTERACTIVE",
 	            "capabilityId": "2799365866676748288",
-	            "capabilityType": "SIGN_IN",
+		    "cmsk_stamp": "lzycjftd",
+		    "isSubscribe": "false",
 		    "Referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in"
                 },
             }
