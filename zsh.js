@@ -68,15 +68,21 @@ class UserInfo {
             let options = {
                 fn: "签到",
                 method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in`,
+                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
                     "Host": "activity-prd.saas.cmsk1979.com",
                     "authorization": this.ck,
+		    "accept-language": "zh-CN",
+		    "content-type": "application/json; charset=UTF-8",
+		    "accept": "application/json",
+		    "x-requested-with": "XMLHttpRequest",
                     "campaignId": "2799365216249249792",
 	            "capabilityId": "2799365866676748288",
-		    "cmsk_stamp": "lzycjftd",
-		    "isSubscribe": "false",
-		    "token": "e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e",
+		    "origin": "https://activity-prd.saas.cmsk1979.com",
+		    "sec-fetch-site": "same-origin",
+		    "sec-fetch-mode": "cors",
+                    "sec-fetch-dest": "empty"
+		    "accept-encoding": "gzip, deflate, br",
 		    "Referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in"
                 },
             }
