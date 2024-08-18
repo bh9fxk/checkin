@@ -92,9 +92,7 @@ class UserInfo {
                     "referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxMTEwODc0NiIsInRva2VuIjoiZTAzYzMzYzI0YWQ3MDgzZDg0YjgyOGZjNWQwODY5Yzk1MjYwZGY4NDAyMTJlOTExMDVmNzYyNTRmOGVjNzY4ZSIsIm1lbWJlcklkIjoiMTAwMDQ4NjEzMCJ9.fLSP4KZTJ2h-YNkb0fe_EduPUbfpvf-kbS8i5wjaoT8&campaignId=2799365216249249792&capabilityId=2799365866676748288&cmsk_stamp=lzycjftd&isSubscribe=false&token=e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e",
                     "accept-encoding": "gzip, deflate, br",
                     "cookie": "acw_tc=784c10e417239543258414270e65c6a297f84147c1603cf62d823cf78a7eca",
-                    "cookie": "cm_token_x=e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e",
-                    {"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"}
-
+                    "cookie": "cm_token_x=e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e"
                 },
             }
             let result  = await httpRequest(options);
