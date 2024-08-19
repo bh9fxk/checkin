@@ -83,7 +83,7 @@ class UserInfo {
                 },
             }
             let result  = await httpRequest(options);
-            console.log(options);
+            //console.log(options);
             //result = JSON.parse(result);
             console.log(result);
             if (result["code"] == null) {
