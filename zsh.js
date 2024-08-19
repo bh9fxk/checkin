@@ -132,13 +132,13 @@ class UserInfo {
             //console.log(options);
             //result = JSON.parse(result);
             console.log(result);
-            if (result["code"] == undefined) {
-		console.log(`✅${options.fn}成功🎉`);
-            } else {
-                console.log(`❌${options.fn}失败`);
+            //if (result["code"] == null) {
+		//console.log(`✅${options.fn}成功🎉`);
+            //} else {
+                //console.log(`❌${options.fn}失败`);
                 //console.log(JSON.stringify(result));
-		console.log(result);
-            }
+		//console.log(result);
+            //}
         } catch (e) {
             console.log(e);
         }
