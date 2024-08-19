@@ -126,7 +126,8 @@ class UserInfo {
 		    "cookie": "cm_token_x=5501714b177d724c1d53e4f731139ecec8d2baad4f6f4660178307ab4b6f06ed",
 		    "cookie": "acw_tc=2f6a1fdc17240793433813288ea2c8034dbda45b3ae17be4c8c84fefba4948"
                 },
-		body: JSON.stringify({"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"})
+		body: JSON.stringify({})
+		//body: JSON.stringify({"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"})
             }
             let result  = await httpRequest(options);
             console.log(options);
