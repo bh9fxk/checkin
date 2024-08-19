@@ -128,7 +128,7 @@ class UserInfo {
             }
             let result  = await httpRequest(options);
             console.log(options);
-            result = JSON.parse(result);
+            //result = JSON.parse(result);
             console.log(result);
             if (result["status"] == '405') {
                 console.log(`❌${options.fn}失败`);
