@@ -116,9 +116,10 @@ class UserInfo {
                     "accept": "application/json",
                     //"x-requested-with": "XMLHttpRequest",
                     "authorization": this.ck
-                    //"capabilityid": "2799365866676748288",
-                    //"campaignid": "2799365216249249792",
-                    //"capabilitytype": "SIGN_IN",
+                    "capabilityid": "2799365866676748288",
+                    "campaignid": "2799365216249249792",
+                    "capabilitytype": "SIGN_IN",
+                    "campaignType": "INTERACTIVE"
                     //"origin": "https://activity-prd.saas.cmsk1979.com"
                     //"sec-fetch-site": "same-origin",
                     //"sec-fetch-mode": "cors",
