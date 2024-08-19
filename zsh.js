@@ -117,9 +117,9 @@ class UserInfo {
                     //"x-requested-with": "XMLHttpRequest",
                     //"authorization": this.ck,
                     "campaignId": "2799365216249249792",
-	                "campaignType": "INTERACTIVE",
-	                "capabilityId": "2799365866676748288",
-	                "capabilityType": "SIGN_IN"
+	            "campaignType": "INTERACTIVE",
+	            "capabilityId": "2799365866676748288",
+	            "capabilityType": "SIGN_IN"
                     //"origin": "https://activity-prd.saas.cmsk1979.com"
                     //"sec-fetch-site": "same-origin",
                     //"sec-fetch-mode": "cors",
@@ -128,7 +128,7 @@ class UserInfo {
                 },
             }
             let result  = await httpRequest(options);
-            console.log(options);
+            //console.log(options);
             //result = JSON.parse(result);
             console.log(result);
             if (result["status"] == '405') {
