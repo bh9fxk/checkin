@@ -70,7 +70,7 @@ class UserInfo {
             let options = {
                 fn: "用户信息",
                 method: "get",
-                url: `https://umopwx-api.saas.cmsk1979.com/be/api/activities/signIn?cityCode=610100&loading=false`,
+                url: `https://umopwx-api.saas.cmsk1979.com/be/api/activities/signIn`,
                 headers: {
                     "Host": "umopwx-api.saas.cmsk1979.com",
                     "charset": "utf-8",
