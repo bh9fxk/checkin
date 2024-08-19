@@ -70,7 +70,7 @@ class UserInfo {
             let options = {
                 fn: "用户信息",
                 method: "get",
-                url: `https://umopwx-api.saas.cmsk1979.com/be/api/activities/signIn`,
+                url: `https://umopwx-api.saas.cmsk1979.com/be/api/activities/signIn?`,
                 headers: {
                     "Host": "umopwx-api.saas.cmsk1979.com",
                     "charset": "utf-8",
@@ -87,7 +87,7 @@ class UserInfo {
             console.log(options);
             //result = JSON.parse(result);
             console.log(result);
-            if (result["cityCode"] == '610100') {
+            if (result["code"] == 0) {
                 console.log(`✅${options.fn}成功 用户ID[${result.id}]🎉`);
                 this.ckStatus = true;
             } else {
