@@ -129,7 +129,7 @@ class UserInfo {
 		body: {"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"},
             }
             let result  = await httpRequest(options);
-            //console.log(options);
+            console.log(options);
             //result = JSON.parse(result);
             console.log(result);
             //if (result["code"] == null) {
