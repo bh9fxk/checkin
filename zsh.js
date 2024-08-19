@@ -86,7 +86,7 @@ class UserInfo {
             console.log(options);
             //result = JSON.parse(result);
             console.log(result);
-            if (result["code"] == 0) {
+            if (result["code"] == null) {
                 console.log(`✅${options.fn}成功 用户ID[${result.id}]🎉`);
                 this.ckStatus = true;
             } else {
