@@ -136,7 +136,8 @@ class UserInfo {
 		console.log(`✅${options.fn}成功🎉`);
             } else {
                 console.log(`❌${options.fn}失败`);
-                console.log(JSON.stringify(result));
+                //console.log(JSON.stringify(result));
+		console.log(result);
             }
         } catch (e) {
             console.log(e);
