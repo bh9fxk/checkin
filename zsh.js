@@ -76,7 +76,7 @@ class UserInfo {
                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
                     "Content-Type": "application/json",
                     "Accept-Encoding": "gzip,deflate,br",
-                    "Referer": "https://servicewechat.com/wxde49dccaca3d346d/346/page-frame.htm"
+                    "Referer": "https://servicewechat.com/wxde49dccaca3d346d/348/page-frame.html"
                 },
             }
             let result  = await httpRequest(options);
