@@ -105,8 +105,8 @@ class UserInfo {
             let options = {
                 fn: "签到",
                 method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/info`,
-                headers: {
+                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
+                //headers: {
                     //"Host": "activity-prd.saas.cmsk1979.com",
                     //"cache-control": "no-cache",
                     //"pragma": "no-cache",
@@ -125,7 +125,8 @@ class UserInfo {
                     //"sec-fetch-mode": "cors",
                     //"sec-fetch-dest": "empty",
                     //"accept-encoding": "gzip, deflate, br",
-                },
+                //},
+		body: {"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"},
             }
             let result  = await httpRequest(options);
             //console.log(options);
