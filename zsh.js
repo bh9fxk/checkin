@@ -107,6 +107,7 @@ class UserInfo {
                 method: "post",
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
+                    "Host": "activity-prd.saas.cmsk1979.com",
                     //"cache-control": "no-cache",
                     //"pragma": "no-cache",
                     //"accept-language": "zh-CN",
@@ -114,7 +115,7 @@ class UserInfo {
                     //"content-type": "application/json; charset=UTF-8",
                     "accept": "application/json",
                     //"x-requested-with": "XMLHttpRequest",
-                    //"authorization": this.ck,
+                    "authorization": this.ck
                     //"capabilityid": "2799365866676748288",
                     //"campaignid": "2799365216249249792",
                     //"capabilitytype": "SIGN_IN",
