@@ -133,10 +133,10 @@ class UserInfo {
             //result = JSON.parse(result);
             console.log(result);
             if (result["status"] == null) {
+		console.log(`✅${options.fn}成功🎉`);
+            } else {
                 console.log(`❌${options.fn}失败`);
                 console.log(JSON.stringify(result));
-            } else {
-                console.log(`✅${options.fn}成功🎉`);
             }
         } catch (e) {
             console.log(e);
