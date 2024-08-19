@@ -51,14 +51,14 @@ class UserInfo {
             //console.log(options);
             result = JSON.parse(result);
             console.log(result);
-            if (result["code"] == 'UNAUTHORIZED') {
+            if (result["code"] == null) {
+                console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
+                this.ckStatus = true;
+            } else {
                 console.log(`❌${options.fn}失败`);
                 //await notify.sendNotify(`招商荟积分查询失败！！！`);
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
-            } else {
-                console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
-                this.ckStatus = true;
             }
         } catch (e) {
             console.log(e);
