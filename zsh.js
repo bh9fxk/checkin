@@ -29,7 +29,7 @@ class UserInfo {
             await this.signIn()
         }
     }
-    async user_info() {
+    async user_point() {
         try {
             let options = {
                 fn: "积分查询",
@@ -63,6 +63,44 @@ class UserInfo {
         }
     }
 
+    async user_info() {
+        try {
+            let options = {
+                fn: "用户信息",
+                method: "get",
+                url: `https://umopwx-api.saas.cmsk1979.com//be/api/activities/signIn`,
+                headers: {
+                    "Host": "umopwx-api.saas.cmsk1979.com",
+                    "charset": "utf-8",
+                    "authorization": this.ck,
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
+                    "Content-Type": "application/json",
+                    "Accept-Encoding": "gzip,deflate,br",
+                    "Referer": "https://servicewechat.com/wxde49dccaca3d346d/346/page-frame.htm"
+                },
+            }
+            let result  = await httpRequest(options);
+            //console.log(options);
+            result = JSON.parse(result);
+            console.log(result);
+            if (result["cityCode"] == '610100') {
+                console.log(`✅${options.fn}成功 用户ID[${result.id}]🎉`);
+                this.ckStatus = true;
+                console.log(`❌${options.fn}失败`);
+                //await notify.sendNotify(`招商荟积分查询失败！！！`);
+                this.ckStatus = false;
+                console.log(JSON.stringify(result));
+            } else {
+                console.log(`❌${options.fn}失败`);
+                //await notify.sendNotify(`招商荟用户信息查询失败！！！`);
+                this.ckStatus = false;
+                console.log(JSON.stringify(result));
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async signIn() {
         try {
             let options = {
@@ -70,11 +108,6 @@ class UserInfo {
                 method: "post",
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
-                    //"method": "POST",
-                    //"authority": "activity-prd.saas.cmsk1979.com",
-                    //"scheme": "https",
-                    //"path": "/api/marketing/campaign/v1/go",
-                    //"content-length": "129",
                     "cache-control": "no-cache",
                     "pragma": "no-cache",
                     "accept-language": "zh-CN",
@@ -90,10 +123,7 @@ class UserInfo {
                     "sec-fetch-site": "same-origin",
                     "sec-fetch-mode": "cors",
                     "sec-fetch-dest": "empty",
-                    //"referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxMTEwODc0NiIsInRva2VuIjoiZTAzYzMzYzI0YWQ3MDgzZDg0YjgyOGZjNWQwODY5Yzk1MjYwZGY4NDAyMTJlOTExMDVmNzYyNTRmOGVjNzY4ZSIsIm1lbWJlcklkIjoiMTAwMDQ4NjEzMCJ9.fLSP4KZTJ2h-YNkb0fe_EduPUbfpvf-kbS8i5wjaoT8&campaignId=2799365216249249792&capabilityId=2799365866676748288&cmsk_stamp=lzycjftd&isSubscribe=false&token=e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e",
                     "accept-encoding": "gzip, deflate, br",
-                    //"cookie": "acw_tc=784c10e417239543258414270e65c6a297f84147c1603cf62d823cf78a7eca",
-                    //"cookie": "cm_token_x=e03c33c24ad7083d84b828fc5d0869c95260df840212e91105f76254f8ec768e"
                 },
             }
             let result  = await httpRequest(options);
