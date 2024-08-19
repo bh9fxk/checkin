@@ -132,7 +132,7 @@ class UserInfo {
             //console.log(options);
             //result = JSON.parse(result);
             console.log(result);
-            if (result["status"] == '405') {
+            if (result["status"] == null) {
                 console.log(`❌${options.fn}失败`);
                 console.log(JSON.stringify(result));
             } else {
