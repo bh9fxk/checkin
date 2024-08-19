@@ -104,7 +104,7 @@ class UserInfo {
         try {
             let options = {
                 fn: "签到",
-                method: "get",
+                method: "POST",
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/page-config?campaignId=2799365216249249792`,
                 headers: {
                     //"Host": "activity-prd.saas.cmsk1979.com",
