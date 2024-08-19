@@ -132,7 +132,7 @@ class UserInfo {
             //console.log(options);
             //result = JSON.parse(result);
             console.log(result);
-            if (result["status"] == null) {
+            if (result["code"] == null) {
 		console.log(`✅${options.fn}成功🎉`);
             } else {
                 console.log(`❌${options.fn}失败`);
