@@ -105,7 +105,7 @@ class UserInfo {
             let options = {
                 fn: "签到",
                 method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
+                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/info`,
                 headers: {
                     //"Host": "activity-prd.saas.cmsk1979.com",
                     //"cache-control": "no-cache",
