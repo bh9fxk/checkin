@@ -115,7 +115,7 @@ class UserInfo {
                     //"content-type": "application/json; charset=UTF-8",
                     //"accept": "application/json",
                     //"x-requested-with": "XMLHttpRequest",
-                    //"authorization": this.ck
+                    "authorization": this.ck
                     //"campaignId": "2799365216249249792",
 	            //"campaignType": "INTERACTIVE",
 	            //"capabilityId": "2799365866676748288",
