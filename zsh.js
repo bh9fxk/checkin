@@ -115,6 +115,7 @@ class UserInfo {
 		    "content-type": "application/json; charset=UTF-8",
 		    "accept": "application/json",
 		    "x-requested-with": "XMLHttpRequest",
+		    "authorization": this.ck,
 		    "capabilityid": "2799365866676748288",
 		    "campaignid": "2799365216249249792",
 		    "origin": "https://activity-prd.saas.cmsk1979.com",
