@@ -39,6 +39,7 @@ class UserInfo {
                 url: `https://umopwx-api.saas.cmsk1979.com/be/api/pointBank/point/account`,
                 headers: {
                     "Host": "umopwx-api.saas.cmsk1979.com",
+		    "Connection": "Keep-Alive",
                     "charset": "utf-8",
                     "authorization": this.ck,
                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
@@ -73,6 +74,7 @@ class UserInfo {
                 url: `https://umopwx-api.saas.cmsk1979.com/be/api/activities/signIn?cityCode=610100`,
                 headers: {
                     "Host": "umopwx-api.saas.cmsk1979.com",
+		    "Connection": "Keep-Alive",
                     "charset": "utf-8",
                     "authorization": this.ck,
                     //"loading": "false",
@@ -107,6 +109,7 @@ class UserInfo {
                 method: "post",
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/tickets`,
                 headers: {
+		    "Connection": "Keep-Alive",
 		    "content-length": 73,
                     "cache-control": "no-cache",
 		    "pragma": "no-cache",
