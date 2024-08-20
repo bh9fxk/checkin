@@ -111,7 +111,7 @@ class UserInfo {
                 headers: {
 		    "Host": "activity-prd.saas.cmsk1979.com",
 		    "Connection": "Keep-Alive",
-		    "content-length": 0,
+		    "content-length": 129,
                     "cache-control": "no-cache",
 		    "pragma": "no-cache",
 		    "accept-language": "zh-CN",
