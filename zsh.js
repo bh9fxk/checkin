@@ -124,7 +124,7 @@ class UserInfo {
 		    "sec-fetch-dest": "empty",
 		    "accept-encoding": "gzip,deflate,br"
                 },
-		body: JSON.stringify({})
+		//body: JSON.stringify({})
 		//body: JSON.stringify({"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"})
             }
             let result  = await httpRequest(options);
