@@ -110,8 +110,7 @@ class UserInfo {
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/page-config?campaignId=2799365216249249792`,
                 headers: {
 		    "Host": "activity-prd.saas.cmsk1979.com",
-		    "Connection": "Keep-Alive",
-		    //"content-length": 129,
+		    "content-length": 36,
                     "cache-control": "no-cache",
 		    "pragma": "no-cache",
 		    "accept-language": "zh-CN",
@@ -119,14 +118,11 @@ class UserInfo {
 		    "content-type": "application/json; charset=UTF-8",
 		    "accept": "application/json",
 		    "x-requested-with": "XMLHttpRequest",
-		    "authorization": this.ck,
-		    "capabilityid": "2799365866676748288",
-		    "campaignid": "2799365216249249792",
 		    "origin": "https://activity-prd.saas.cmsk1979.com",
 		    "sec-fetch-site": "same-origin",
 		    "sec-fetch-mode": "cors",
 		    "sec-fetch-dest": "empty",
-		    "accept-encoding": "gzip,deflate,br",
+		    "accept-encoding": "gzip,deflate,br"
                 },
 		body: JSON.stringify({})
 		//body: JSON.stringify({"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"})
