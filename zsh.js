@@ -107,11 +107,11 @@ class UserInfo {
             let options = {
                 fn: "签到",
                 method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/tickets`,
+                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/page-config?campaignId=2799365216249249792`,
                 headers: {
 		    "Host": "activity-prd.saas.cmsk1979.com",
 		    "Connection": "Keep-Alive",
-		    "content-length": 129,
+		    //"content-length": 129,
                     "cache-control": "no-cache",
 		    "pragma": "no-cache",
 		    "accept-language": "zh-CN",
@@ -126,10 +126,7 @@ class UserInfo {
 		    "sec-fetch-site": "same-origin",
 		    "sec-fetch-mode": "cors",
 		    "sec-fetch-dest": "empty",
-		    //"referer": "https://activity-prd.saas.cmsk1979.com/mactivity/2694396930360655872/sign-in?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiIxMTEwODc0NiIsInRva2VuIjoiNTUwMTcxNGIxNzdkNzI0YzFkNTNlNGY3MzExMzllY2VjOGQyYmFhZDRmNmY0NjYwMTc4MzA3YWI0YjZmMDZlZCIsIm1lbWJlcklkIjoiMTAwMDQ4NjEzMCJ9.YeRWtQ9RjB5Myn0WyARF_xFJTgQRWA7pfkZ6zcgta80&campaignId=2799365216249249792&capabilityId=2799365866676748288&cmsk_stamp=m00zw9a7&isSubscribe=false&token=5501714b177d724c1d53e4f731139ecec8d2baad4f6f4660178307ab4b6f06ed",
 		    "accept-encoding": "gzip,deflate,br",
-		    "cookie": "cm_token_x=5501714b177d724c1d53e4f731139ecec8d2baad4f6f4660178307ab4b6f06ed",
-		    "cookie": "acw_tc=2f6a1fdc17240793433813288ea2c8034dbda45b3ae17be4c8c84fefba4948"
                 },
 		body: JSON.stringify({})
 		//body: JSON.stringify({"campaignId":"2799365216249249792","campaignType":"INTERACTIVE","capabilityId":"2799365866676748288","capabilityType":"SIGN_IN"})
