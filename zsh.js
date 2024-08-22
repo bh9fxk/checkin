@@ -110,7 +110,7 @@ class UserInfo {
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/page-config?campaignId=2799365216249249792`,
                 headers: {
 		    "Host": "activity-prd.saas.cmsk1979.com",
-		    "content-length": 10,
+		    "content-length": null,
                     "cache-control": "no-cache",
 		    "pragma": "no-cache",
 		    "accept-language": "zh-CN",
