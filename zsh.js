@@ -128,7 +128,7 @@ class UserInfo {
 		    "cookie": "cm_token_x=f7eb780f9ba13788c8dcd48b90af24824120780954e5a3530276c9ca5f8c4bd7",
                 },
 		//body: JSON.stringify({})
-		body: JSON.stringify({campaignId: 2799365216249249792})
+		body: JSON.stringify({campaignId: 2799365216249249792}),
             }
             let result  = await httpRequest(options);
             console.log(options);
