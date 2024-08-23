@@ -125,7 +125,7 @@ class UserInfo {
 		    "accept-encoding": "gzip,deflate,br",
                 },
 		//body: JSON.stringify({})
-		body: JSON.parse({campaignid: 2799365216249249792})
+		body: JSON.stringify({campaignid: 2799365216249249792})
             }
             let result  = await httpRequest(options);
             console.log(options);
