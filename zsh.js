@@ -123,6 +123,8 @@ class UserInfo {
 		    "sec-fetch-mode": "cors",
 		    "sec-fetch-dest": "empty",
 		    "accept-encoding": "gzip,deflate,br",
+		    "cookie": "acw_tc=2f6a1fda17242486070652545ea404b6926a05ae1fdffc12e3afd62b570218",
+		    "cookie": "cm_token_x=f7eb780f9ba13788c8dcd48b90af24824120780954e5a3530276c9ca5f8c4bd7",
                 },
 		//body: JSON.stringify({})
 		body: JSON.stringify({campaignId: 2799365216249249792})
