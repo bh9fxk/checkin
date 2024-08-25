@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/smallfawn/QLScriptPublic
  * 变量名:zsh_ck
- * 变量值:https://mvip.midea.cn/next/mucuserinfo/getmucuserinfo headers中的COOKIE
+ * 变量值:抓包authorization和cookie的值（cm_token_x=……）
  * scriptVersionNow = "0.0.1";
  */
 
@@ -51,9 +51,7 @@ class UserInfo {
             let result  = await httpRequest(options);
             //console.log(options);
             result = JSON.parse(result);
-            console.log(result);
-	    console.log(this.ck);
-	    console.log(this.token);
+            //console.log(result);
             if (result["code"] == null) {
                 console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
                 this.ckStatus = true;
@@ -86,7 +84,6 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'Cookie': this.token
-		    //'Cookie': 'cm_token_x=045fe06ce0d4c39ceeb2faf50e96296ce32906ea9cf578447037f1e07442c590'
 		}
 	    }
 	    const req = https.request(options, res => {
