@@ -105,36 +105,39 @@ class UserInfo {
 
     async signIn() {
         try {
-            let options = {
-                fn: "签到",
-                method: "post",
-                url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
-                headers: {
-		    "Host": "activity-prd.saas.cmsk1979.com",
-		    "content-length": 154,
-                    "cache-control": "no-cache",
-		    "Connection": "Keep-Alive",
-		    "user-agent": "PostmanRuntime/7.41.2",
-		    "content-type": "application/json",
-		    "accept": "*/*",
-		    "accept-encoding": "gzip,deflate,br",
-		    "cookie": "acw_tc=784c10e117245798646821152ee3eb563f6a4ba590b9f8fb7012fb613b151f",
-		    "Cookie": "cm_token_x=045fe06ce0d4c39ceeb2faf50e96296ce32906ea9cf578447037f1e07442c590",
-                },
-		//body: JSON.stringify({})
-		body: JSON.stringify({"campaignId": "2799365216249249792","campaignType": "INTERACTIVE","capabilityId": "2799365866676748288","capabilityType": "SIGN_IN"})
-            }
-            let result  = await httpRequest(options);
-            console.log(options);
-            //result = JSON.parse(result);
-            console.log(result);
-            //if (result["code"] == null) {
-		//console.log(`✅${options.fn}成功🎉`);
-            //} else {
-                //console.log(`❌${options.fn}失败`);
-                //console.log(JSON.stringify(result));
-		//console.log(result);
-            //}
+	    const https = require('https')
+	    const data = JSON.stringify({
+                "campaignId": "2799365216249249792",
+                "campaignType": "INTERACTIVE",
+                "capabilityId": "2799365866676748288",
+                "capabilityType": "SIGN_IN"
+	    })
+	    const options = {
+		hostname: 'activity-prd.saas.cmsk1979.com',
+		port: 443,
+		path: ' /api/marketing/campaign/v1/go',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Cookie': 'cm_token_x=045fe06ce0d4c39ceeb2faf50e96296ce32906ea9cf578447037f1e07442c590'
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`状态码: ${res.statusCode}`)
+		    
+		res.on('data', d => {
+		    process.stdout.write(d)
+		})
+	    })
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+		
         } catch (e) {
             console.log(e);
         }
