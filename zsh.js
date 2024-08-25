@@ -111,7 +111,7 @@ class UserInfo {
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
 		    "Host": "activity-prd.saas.cmsk1979.com",
-		    //"content-length": 129,
+		    "content-length": 129,
                     "cache-control": "no-cache",
 		    "Connection": "Keep-Alive",
 		    "user-agent": "PostmanRuntime/7.41.2",
