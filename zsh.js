@@ -115,7 +115,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'activity-prd.saas.cmsk1979.com',
 		port: 443,
-		path: ' /api/marketing/campaign/v1/go',
+		path: '/api/marketing/campaign/v1/go',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
