@@ -119,7 +119,7 @@ class UserInfo {
 		    "accept": "*/*",
 		    "accept-encoding": "gzip,deflate,br",
 		    "cookie": "acw_tc=784c10e117245798646821152ee3eb563f6a4ba590b9f8fb7012fb613b151f",
-		    "Cookie": "cm_token_x=${cm_token}",
+		    "Cookie": "cm_token_x=045fe06ce0d4c39ceeb2faf50e96296ce32906ea9cf578447037f1e07442c590",
                 },
 		//body: JSON.stringify({})
 		body: {
