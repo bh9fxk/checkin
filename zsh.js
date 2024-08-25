@@ -10,6 +10,7 @@
 const $ = new Env("招商荟签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 let ckName = "zsh_ck";
+let cm_token = "zsh_token"; //!!!!
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
@@ -110,22 +111,15 @@ class UserInfo {
                 url: `https://activity-prd.saas.cmsk1979.com/api/marketing/campaign/v1/go`,
                 headers: {
 		    "Host": "activity-prd.saas.cmsk1979.com",
-		    "content-length": 36,
+		    "content-length": 154,
                     "cache-control": "no-cache",
-		    "pragma": "no-cache",
-		    "accept-language": "zh-CN",
+		    "Connection": "Keep-Alive",
 		    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
-		    "authorization": this.ck,
-		    "content-type": "application/json; charset=UTF-8",
-		    "accept": "application/json",
-		    "x-requested-with": "XMLHttpRequest",
-		    "origin": "https://activity-prd.saas.cmsk1979.com",
-		    "sec-fetch-site": "same-origin",
-		    "sec-fetch-mode": "cors",
-		    "sec-fetch-dest": "empty",
+		    "content-type": "application/json",
+		    "accept": "*/*",
 		    "accept-encoding": "gzip,deflate,br",
-		    "cookie": "acw_tc=2f6a1fda17242486070652545ea404b6926a05ae1fdffc12e3afd62b570218",
-		    "cookie": "cm_token_x=f7eb780f9ba13788c8dcd48b90af24824120780954e5a3530276c9ca5f8c4bd7",
+		    //"cookie": "acw_tc=2f6a1fda17242486070652545ea404b6926a05ae1fdffc12e3afd62b570218",
+		    "Cookie": "cm_token_x=${cm_token}",
                 },
 		//body: JSON.stringify({})
 		body: JSON.stringify({
@@ -151,7 +145,6 @@ class UserInfo {
         }
     }
 }
-
 
 
 async function start() {
