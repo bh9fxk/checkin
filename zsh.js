@@ -1,5 +1,5 @@
 /**
- * cron 27 00 * * *  zsh.js
+ * cron 27 0 * * *  zsh.js
  * Show:每天运行一次
  * @author:https://github.com/smallfawn/QLScriptPublic
  * 变量名:zsh_ck
