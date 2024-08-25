@@ -2,7 +2,7 @@
  * cron 27 0 * * *  zsh.js
  * Show:每天运行一次
  * @author:https://github.com/smallfawn/QLScriptPublic
- * 变量名:zsh_ck
+ * 变量名:zsh_ck,&分隔两个参数
  * 变量值:抓包authorization和cookie的值（cm_token_x=……）
  * scriptVersionNow = "0.0.1";
  */
@@ -10,7 +10,6 @@
 const $ = new Env("招商荟签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 let ckName = "zsh_ck";
-let cm_token = "zsh_token"; //!!!!
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
