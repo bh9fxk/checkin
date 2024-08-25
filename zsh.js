@@ -118,7 +118,7 @@ class UserInfo {
 		    "content-type": "application/json",
 		    "accept": "*/*",
 		    "accept-encoding": "gzip,deflate,br",
-		    //"cookie": "acw_tc=2f6a1fda17242486070652545ea404b6926a05ae1fdffc12e3afd62b570218",
+		    "cookie": "acw_tc=784c10e117245798646821152ee3eb563f6a4ba590b9f8fb7012fb613b151f",
 		    "Cookie": "cm_token_x=${cm_token}",
                 },
 		//body: JSON.stringify({})
