@@ -1,5 +1,5 @@
 /**
- * cron 27 23 * * *  zsh.js
+ * cron 27 00 * * *  zsh.js
  * Show:每天运行一次
  * @author:https://github.com/smallfawn/QLScriptPublic
  * 变量名:zsh_ck
@@ -18,7 +18,8 @@ let userList = [];
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔符
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.token = str.split(strSplitor)[1];
         this.ckStatus = true;
     }
     async main() {
@@ -52,7 +53,7 @@ class UserInfo {
             result = JSON.parse(result);
             console.log(result);
 	    console.log(this.ck);
-	    console.log(this.ck[1]);
+	    console.log(this.token);
             if (result["code"] == null) {
                 console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
                 this.ckStatus = true;
@@ -84,7 +85,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Cookie': this.ck
+		    'Cookie': this.token
 		    //'Cookie': 'cm_token_x=045fe06ce0d4c39ceeb2faf50e96296ce32906ea9cf578447037f1e07442c590'
 		}
 	    }
