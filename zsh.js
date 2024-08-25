@@ -25,8 +25,6 @@ class UserInfo {
         $.msg($.name, "", `开始第${this.index}个账号`)
         await this.user_point();
         await $.wait(3000)
-        await this.user_info();
-        await $.wait(3000)
         //await this.signIn()
         if (this.ckStatus) {
             await this.signIn()
@@ -59,42 +57,6 @@ class UserInfo {
             } else {
                 console.log(`❌${options.fn}失败`);
                 //await notify.sendNotify(`招商荟积分查询失败！！！`);
-                this.ckStatus = false;
-                console.log(JSON.stringify(result));
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async user_info() {
-        try {
-            let options = {
-                fn: "用户信息",
-                method: "get",
-                url: `https://umopwx-api.saas.cmsk1979.com/be/api/activities/signIn?cityCode=610100`,
-                headers: {
-                    "Host": "umopwx-api.saas.cmsk1979.com",
-		    "Connection": "Keep-Alive",
-                    "charset": "utf-8",
-                    "authorization": this.ck,
-                    //"loading": "false",
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
-                    "Content-Type": "application/json",
-                    "Accept-Encoding": "gzip,deflate,br",
-                    "Referer": "https://servicewechat.com/wxde49dccaca3d346d/348/page-frame.html"
-                },
-            }
-            let result  = await httpRequest(options);
-            //console.log(options);
-            //result = JSON.parse(result);
-            console.log(result);
-            if (result["code"] == null) {
-                console.log(`✅${options.fn}成功 用户ID[${result.id}]🎉`);
-                this.ckStatus = true;
-            } else {
-                console.log(`❌${options.fn}失败`);
-                //await notify.sendNotify(`招商荟用户信息查询失败！！！`);
                 this.ckStatus = false;
                 console.log(JSON.stringify(result));
             }
