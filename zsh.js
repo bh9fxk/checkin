@@ -51,6 +51,8 @@ class UserInfo {
             //console.log(options);
             result = JSON.parse(result);
             console.log(result);
+	    console.log(this.ck);
+	    console.log(this.ck[1]);
             if (result["code"] == null) {
                 console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
                 this.ckStatus = true;
