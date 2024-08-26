@@ -53,7 +53,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    process.stdout.write(d)
-		    console.log(`现积分为[${d}`])
+		    console.log(`现积分为${d}`)
 		    })
 	        }else{
 		 console.log(`积分查询失败`)
