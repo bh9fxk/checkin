@@ -91,6 +91,7 @@ class UserInfo {
 		    
 		res.on('data', d => {
 		    process.stdout.write(d)
+		    console.log(`状态码: ${d}`)
 		})
 	    })
 	    req.on('error', error => {
