@@ -34,14 +34,14 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const options = {
-	    hostname: 'umopwx-api.saas.cmsk1979.com',
-	    port: 443,
-	    path: '/be/api/pointBank/point/account',
-	    method: 'GET'
-	    headers: {
-		'Content-Type': 'application/json',
-		'Cookie': this.ck
-		}
+	        hostname: 'umopwx-api.saas.cmsk1979.com',
+	        port: 443,
+	        path: '/be/api/pointBank/point/account',
+	        method: 'GET',
+	        headers: {
+		    'Content-Type': 'application/json',
+		    'authorization': this.ck
+	        }
 	    }
 	    const req = https.request(options, res => {
 		console.log(`状态码: ${res.statusCode}`)
