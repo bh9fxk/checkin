@@ -117,7 +117,6 @@ class UserInfo {
     }
 }
 
-await notify('test', 'test 1')；
 
 async function start() {
 const tasks = userList.map(user => user.main());
