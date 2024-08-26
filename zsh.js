@@ -40,7 +40,7 @@ class UserInfo {
 	        method: 'GET',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'authorization': this.ck1
+		    'authorization': this.ck
 	        }
 	    }
 	    const req = https.request(options, res => {
@@ -49,7 +49,13 @@ class UserInfo {
 		    process.stdout.write(d)
 		})
 	    })
-		    
+
+	    if (${res.statusCode} == 200) {
+	        console.log(`积分查询成功`${res})
+	    }else{
+		 console.log(`积分查询失败)
+	    }
+		
 	    req.on('error', error => {
 		console.error(error)
 	    })
