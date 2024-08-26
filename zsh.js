@@ -48,7 +48,7 @@ class UserInfo {
 		
 		res.on('data', d => {
 		    process.stdout.write(d)
-		    let fen = process.stdout.write(d)
+		    const fen = process.stdout.write(d)
 		})
 		if ( `${res.statusCode}` == 200) {
 	        console.log(`积分查询成功:${fen}`)
