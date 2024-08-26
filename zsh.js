@@ -51,7 +51,7 @@ class UserInfo {
 		    console.log(`现积分为${d}`)
 		    })
 	        }else{
-		 console.log(`积分查询失败`)
+		 console.log(`签到失败`)
 	        }
 		
 		res.on('data', d => {
