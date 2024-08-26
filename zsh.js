@@ -45,15 +45,16 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`状态码: ${res.statusCode}`)
-		if ( `${res.statusCode}` == 200) {
-	        console.log(`积分查询成功`)
-	    }else{
-		 console.log(`积分查询失败`)
-	    }
 		
 		res.on('data', d => {
 		    process.stdout.write(d)
+		    let fen = process.stdout.write(d)
 		})
+		if ( `${res.statusCode}` == 200) {
+	        console.log(`积分查询成功:${fen}`)
+	        }else{
+		 console.log(`积分查询失败`)
+	        }
 	    })
 		
 	    req.on('error', error => {
