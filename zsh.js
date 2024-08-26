@@ -25,10 +25,10 @@ class UserInfo {
         $.msg($.name, "", `开始第${this.index}个账号`)
         await this.user_point();
         await $.wait(3000)
-        //await this.signIn()
-        if (this.ckStatus) {
-            await this.signIn()
-        }
+        await this.signIn()
+        //if (this.ckStatus) {
+        //    await this.signIn()
+        //}
     }
     async user_point() {
         try {
@@ -103,6 +103,7 @@ class UserInfo {
 		    process.stdout.write(d)
 		})
 	    })
+		
 	    req.on('error', error => {
 		console.error(error)
 	    })
