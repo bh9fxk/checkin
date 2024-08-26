@@ -50,7 +50,7 @@ class UserInfo {
 		    process.stdout.write(d)
 		})
 		if ( `${res.statusCode}` == 200) {
-	        console.log(`积分查询成功 process.stdout.write(d)`)
+	        console.log(`积分查询成功 ${d}`)
 	        }else{
 		 console.log(`积分查询失败`)
 	        }
@@ -91,7 +91,6 @@ class UserInfo {
 		    
 		res.on('data', d => {
 		    process.stdout.write(d)
-		    console.log(`状态码: ${d}`)
 		})
 	    })
 	    req.on('error', error => {
