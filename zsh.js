@@ -55,12 +55,6 @@ class UserInfo {
 		    process.stdout.write(d)
 		})
 	    })
-            console.log(`积分查询失败${res.statusCode}`)
-	    if ( `${res.statusCode}` == 200) {
-	        console.log(`积分查询成功${process.stdout.write(d)}`)
-	    }else{
-		 console.log(`积分查询失败`)
-	    }
 		
 	    req.on('error', error => {
 		console.error(error)
