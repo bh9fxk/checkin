@@ -34,40 +34,27 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const options = {
-	    hostname: 'nodejs.cn',
+	    hostname: 'umopwx-api.saas.cmsk1979.com',
 	    port: 443,
-	    path: '/todos',
+	    path: '/be/api/pointBank/point/account',
 	    method: 'GET'
+	    headers: {
+		'Content-Type': 'application/json',
+		'Cookie': this.ck
+		}
 	    }
+	    const req = https.request(options, res => {
+		console.log(`状态码: ${res.statusCode}`)
+		res.on('data', d => {
+		    process.stdout.write(d)
+		})
+	    })
+		    
+	    req.on('error', error => {
+		console.error(error)
+	    })
+	    req.end()
 	
-            let options = {
-                fn: "积分查询",
-                method: "get",
-                url: `https://umopwx-api.saas.cmsk1979.com/be/api/pointBank/point/account`,
-                headers: {
-                    "Host": "umopwx-api.saas.cmsk1979.com",
-		    "Connection": "Keep-Alive",
-                    //"charset": "utf-8",
-                    "authorization": this.ck,
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191",
-                    "Content-Type": "application/json",
-                    "Accept-Encoding": "gzip,deflate,br",
-                    "Referer": "https://servicewechat.com/wxde49dccaca3d346d/346/page-frame.htm"
-                },
-            }
-            let result  = await httpRequest(options);
-            //console.log(options);
-            //result = JSON.parse(result);
-            //console.log(result);
-            if (result["code"] == null) {
-                console.log(`✅${options.fn}成功 当前积分[${result}]🎉`);
-                this.ckStatus = true;
-            } else {
-                console.log(`❌${options.fn}失败`);
-                //await notify.sendNotify(`招商荟积分查询失败！！！`);
-                this.ckStatus = false;
-                console.log(JSON.stringify(result));
-            }
         } catch (e) {
             console.log(e);
         }
