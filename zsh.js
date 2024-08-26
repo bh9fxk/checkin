@@ -50,7 +50,7 @@ class UserInfo {
 		})
 	    })
 
-	    if (${res.statusCode} == 200) {
+	    if (res.statusCode == 200) {
 	        console.log(`积分查询成功`${res})
 	    }else{
 		 console.log(`积分查询失败)
