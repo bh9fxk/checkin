@@ -40,7 +40,7 @@ class UserInfo {
 	        method: 'GET',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'authorization': this.ck
+		    'authorization': this.ck1
 	        }
 	    }
 	    const req = https.request(options, res => {
