@@ -14,7 +14,6 @@ let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
-let msg;
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -23,7 +22,7 @@ class UserInfo {
         this.ckStatus = true;
     }
     async main() {
-        $msg($.name, "", `开始第${this.index}个账号`)
+        $.msg($.name, "", `开始第${this.index}个账号`)
         await this.user_point();
         await $.wait(3000)
         await this.signIn()
@@ -148,6 +147,50 @@ await Promise.all(tasks);
  * 变量检查与处理
  * @returns
  */
+async function checkEnv() {
+    let userCookie = ($.isNode() ? process.env[ckName] : $.getdata(ckName)) || "";
+    if (userCookie) {
+        let e = envSplitor[0];
+        for (let o of envSplitor)
+            if (userCookie.indexOf(o) > -1) {
+                e = o;
+                break;
+            }
+        for (let n of userCookie.split(e)) n && userList.push(new UserInfo(n));
+    } else {
+        console.log("未找到CK");
+        return;
+    }
+    return console.log(`共找到${userList.length}个账号`), true; //true == !0
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+function httpRequest(options) {
+    if (!options["method"]) {
+        return console.log(`请求方法不存在`);
+    }
+    if (!options["fn"]) {
+        console.log(`函数名不存在`);
+    }
+    return new Promise((resolve) => {
+        $[options.method](options, (err, resp, data) => {
+            try {
+                if (err) {
+                    $.logErr(err);
+                } else {
+                    try {
+                        data = JSON.parse(data);
+                    } catch (error) { }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve(data);
+            }
+        });
+    });
+}
+
 function Env(t, e) {
   class s {
     constructor(t) {
