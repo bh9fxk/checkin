@@ -25,7 +25,7 @@ class UserInfo {
     }
     async main() {
         //$.msg($.name, "", `开始第${this.index}个账号`)
-	msg += `开始第${this.index}个账号`
+	msg += `\n开始第${this.index}个账号`
         await this.user_point();
         await $.wait(3000);
         await this.signIn();
@@ -53,12 +53,12 @@ class UserInfo {
 		
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
-		    console.log(`现积分为${d}`)
-		    msg += `现积分为${d}`
+		    console.log(`\n现积分为${d}`)
+		    msg += `\n现积分为${d}`
 		    })
 	        }else{
-		 console.log(`积分查询失败`)
-		 msg += `积分查询失败`
+		 console.log(`\n积分查询失败`)
+		 msg += `\n积分查询失败`
 	        }
 		
 		res.on('data', d => {
@@ -100,12 +100,13 @@ class UserInfo {
 		console.log(`状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
-		        console.log(`签到成功`)
-			msg += `签到成功`
+		        console.log(`\n签到成功`)
+			msg += `\n签到成功`
 		        })
 	            }else{
-		        console.log(`签到失败`)
-			msg += `签到成功`
+		        console.log(`\n签到失败`)
+			msg += `\n签到成功`
+			console.log(result)
 	            }
 		    
 		res.on('data', d => {
