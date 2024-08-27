@@ -100,15 +100,13 @@ class UserInfo {
 		console.log(`状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
-		        console.log(`\n签到成功`)
+		        console.log(`\n签到成功`);
 			msg += `\n签到成功`
 		        })
 	            }else{
 		        console.log(`\n签到失败`);
-			msg += `\n签到成功`;
-			console.log(data);
-			console.log(d.error);
-			
+			console.log(${res.error});
+			msg += `\n签到失败`;
 	            }
 		    
 		res.on('data', d => {
