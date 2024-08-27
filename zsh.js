@@ -146,7 +146,6 @@ await Promise.all(tasks);
     .catch((e) => console.log(e))
     .finally(() => $.done());
 
-await $.wait(3000);
 await SendMsg(msg);
 // ============================================发送消息============================================ \\
 /**
