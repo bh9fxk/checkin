@@ -28,8 +28,8 @@ class UserInfo {
         await this.user_point();
         await $.wait(3000);
         await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
         //if (this.ckStatus) {
         //    await this.signIn()
         //}
@@ -146,6 +146,8 @@ await Promise.all(tasks);
     .catch((e) => console.log(e))
     .finally(() => $.done());
 
+await $.wait(3000);
+await SendMsg(msg);
 // ============================================发送消息============================================ \\
 /**
  * 添加消息
