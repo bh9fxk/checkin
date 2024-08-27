@@ -9,6 +9,7 @@
 
 const $ = new Env("招商荟签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
+const Notify = 1;
 let ckName = "zsh_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
@@ -28,7 +29,7 @@ class UserInfo {
         await $.wait(3000);
         await this.signIn();
 	await $.wait(3000)
-	await SendMsg(message);
+	await SendMsg(msg);
         //if (this.ckStatus) {
         //    await this.signIn()
         //}
