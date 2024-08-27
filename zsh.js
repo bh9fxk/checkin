@@ -14,7 +14,7 @@ let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
-let msg = " ";
+let msg;
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
