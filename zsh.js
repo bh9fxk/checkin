@@ -23,7 +23,7 @@ class UserInfo {
         this.ckStatus = true;
     }
     async main() {
-        $.msg($.name, "", `开始第${this.index}个账号`)
+        $msg($.name, "", `开始第${this.index}个账号`)
         await this.user_point();
         await $.wait(3000)
         await this.signIn()
