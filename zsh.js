@@ -28,7 +28,7 @@ class UserInfo {
         await $.wait(3000);
         await this.signIn();
 	await $.wait(3000)
-	await SendMsg(msg);
+	await SendMsg(message);
         //if (this.ckStatus) {
         //    await this.signIn()
         //}
