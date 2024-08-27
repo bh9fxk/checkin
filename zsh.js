@@ -24,7 +24,7 @@ class UserInfo {
         this.ckStatus = true;
     }
     async main() {
-        $.msg($.name, "", `开始第${this.index}个账号`)
+        //$.msg($.name, "", `开始第${this.index}个账号`)
 	msg += `开始第${this.index}个账号`
         await this.user_point();
         await $.wait(3000);
@@ -54,10 +54,11 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    console.log(`现积分为${d}`)
-		    $.msg($.name, "", `现积分为${d}`)
+		    msg += `现积分为${d}`
 		    })
 	        }else{
 		 console.log(`积分查询失败`)
+		 msg += `积分查询失败`
 	        }
 		
 		res.on('data', d => {
@@ -97,13 +98,15 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`状态码: ${res.statusCode}`)
-		    //if (`${res.statusCode}` == 200) {
-		    //    res.on('data', d => {
-		    //    console.log(`签到成功`)
-		    //    })
-	            //}else{
-		    //    console.log(`签到失败`)
-	            //}
+		    if (`${res.statusCode}` == 200) {
+		        res.on('data', d => {
+		        console.log(`签到成功`)
+			msg += `签到成功`
+		        })
+	            }else{
+		        console.log(`签到失败`)
+			msg += `签到成功`
+	            }
 		    
 		res.on('data', d => {
 		    process.stdout.write(d)
