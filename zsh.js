@@ -104,9 +104,9 @@ class UserInfo {
 			msg += `\n签到成功`
 		        })
 	            }else{
-		        console.log(`\n签到失败`);
-			console.log(`${res.error}`);
-			msg += `\n签到失败`;
+		        console.log(`\n签到失败!`);
+			msg += `\n签到失败!`;
+			//参与失败，您今日的参与次数已达上限!
 	            }
 		    
 		res.on('data', d => {
