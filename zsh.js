@@ -53,6 +53,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    console.log(`现积分为${d}`)
+		    $.msg($.name, "", `现积分为${d}`)
 		    })
 	        }else{
 		 console.log(`积分查询失败`)
