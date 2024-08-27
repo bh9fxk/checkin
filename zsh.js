@@ -106,7 +106,7 @@ class UserInfo {
 	            }else{
 		        console.log(`\n签到失败`);
 			msg += `\n签到成功`;
-			console.log($result);
+			console.log(data);
 			console.log(d.error);
 			
 	            }
