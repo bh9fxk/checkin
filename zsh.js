@@ -141,6 +141,35 @@ await Promise.all(tasks);
     .catch((e) => console.log(e))
     .finally(() => $.done());
 
+// ============================================发送消息============================================ \\
+/**
+ * 添加消息
+ * @param str
+ * @param is_log
+ */
+function addNotifyStr(str, is_log = true) {
+    if (is_log) {
+        log(`${accountTips}${str}\n`)
+    }
+    msg += `${accountTips}${str}\n`
+}
+
+async function SendMsg(message) {
+    if (!message)
+        return;
+
+    if (Notify > 0) {
+        if ($.isNode()) {
+            var notify = require('./sendNotify');
+            await notify.sendNotify($.name, message);
+        } else {
+            $.msg(message);
+        }
+    } else {
+        log(message);
+    }
+}
+
     
 //********************************************************
 /**
