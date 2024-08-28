@@ -37,7 +37,7 @@ class UserInfo {
                 "account_no":"602"
 	    })
 	    const params = {
-		methods: customer_info,
+		methods: 'customer_info',
 		token: A8149BE2D024102D60EF362FE5CAA4B8
 	    }
 	    const options = {
