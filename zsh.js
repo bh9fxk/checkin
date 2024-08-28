@@ -21,19 +21,14 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1];
-        //this.ckStatus = true;
     }
     async main() {
-        //$.msg($.name, "", `开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
         await this.signIn();
 	await $.wait(3000);
 	await this.user_point();
 	await $.wait(3000);
 	await SendMsg(msg);
-        //if (this.ckStatus) {
-        //    await this.signIn()
-        //}
     }
     async user_point() {
         try {
@@ -49,7 +44,7 @@ class UserInfo {
 	        }
 	    }
 	    const req = https.request(options, res => {
-		console.log(`状态码: ${res.statusCode}`)
+		console.log(`\n状态码: ${res.statusCode}`)
 		
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
@@ -97,7 +92,7 @@ class UserInfo {
 		}
 	    }
 	    const req = https.request(options, res => {
-		console.log(`状态码: ${res.statusCode}`)
+		console.log(`\n状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
 		        console.log(`\n签到成功，获得【${result.prizeName}】`);
