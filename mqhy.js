@@ -39,12 +39,12 @@ class UserInfo {
 	    const params = {
 		methods: customer_info,
 		token: A8149BE2D024102D60EF362FE5CAA4B8
-		}
+	    }
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
 	        path: '/saas/action/apimanager/execmulti',
-		query: params,
+		query: 'params',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
@@ -86,14 +86,11 @@ class UserInfo {
 	    const data = JSON.stringify({
                 "account_no":"602"
 	    })
-	    const params = {
-		methods: wx_customer_signin_submit,
-		token: A8149BE2D024102D60EF362FE5CAA4B8
-		}
+
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti',
+		path: '/saas/action/apimanager/execmulti?token=${this.ck}&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
