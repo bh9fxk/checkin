@@ -38,7 +38,7 @@ class UserInfo {
 	    })
 	    const params = {
 		methods: 'customer_info',
-		token: A8149BE2D024102D60EF362FE5CAA4B8
+		token: 'A8149BE2D024102D60EF362FE5CAA4B8'
 	    }
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
