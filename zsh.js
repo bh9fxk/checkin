@@ -9,7 +9,7 @@
 
 const $ = new Env("招商荟签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
-//const Notify = 1;
+const Notify = 1; //开启通知
 let ckName = "zsh_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
