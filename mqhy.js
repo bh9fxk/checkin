@@ -7,10 +7,10 @@
  * scriptVersionNow = "0.0.1";
  */
 
-const $ = new Env("招商荟签到");
+const $ = new Env("米旗会员签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
-let ckName = "zsh_ck";
+let ckName = "myqh_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
@@ -24,9 +24,9 @@ class UserInfo {
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
-        await this.signIn();
+        await this.user_point();
 	await $.wait(3000);
-	await this.user_point();
+	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
@@ -34,7 +34,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const options = {
-	        hostname: 'umopwx-api.saas.cmsk1979.com',
+	        hostname: 'vip.maky.com.cn',
 	        port: 443,
 	        path: '/be/api/pointBank/point/account',
 	        method: 'GET',
