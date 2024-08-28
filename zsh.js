@@ -9,7 +9,7 @@
 
 const $ = new Env("招商荟签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
-const Notify = 1;
+//const Notify = 1;
 let ckName = "zsh_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
@@ -21,14 +21,14 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1];
-        this.ckStatus = true;
+        //this.ckStatus = true;
     }
     async main() {
         //$.msg($.name, "", `开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_point();
-        await $.wait(3000);
         await this.signIn();
+	await $.wait(3000);
+	await this.user_point();
 	await $.wait(3000);
 	await SendMsg(msg);
         //if (this.ckStatus) {
@@ -61,9 +61,9 @@ class UserInfo {
 		 msg += `\n荟豆查询失败`
 	        }
 		
-		res.on('data', d => {
-		    process.stdout.write(d)
-		})
+		//res.on('data', d => {
+		//    process.stdout.write(d)
+		//})
 	    })
 		
 	    req.on('error', error => {
@@ -100,7 +100,7 @@ class UserInfo {
 		console.log(`状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
-		        console.log(`\n签到成功`);
+		        console.log(`\n签到成功，获得【${result.prizeName}】`);
 			msg += `\n签到成功`
 		        })
 	            } else if (`${res.statusCode}` == 500) {
