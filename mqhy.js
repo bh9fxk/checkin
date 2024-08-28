@@ -24,29 +24,38 @@ class UserInfo {
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
-        await this.user_point();
+        await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-    async user_point() {
+    async user_info() {
         try {
 	    const https = require('https')
+	    const data = JSON.stringify({
+                "account_no":"602"
+	    })
+	    const params = {
+		methods: customer_info,
+		token: A8149BE2D024102D60EF362FE5CAA4B8
+		}
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/be/api/pointBank/point/account',
-	        method: 'GET',
+	        path: '/saas/action/apimanager/execmulti',
+		query: params,
+	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'authorization': this.ck
+		    'Content-Length': data.length,
+		    //'authorization': this.ck
 	        }
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		
-		if (`${res.statusCode}` == 200) {
+		/*if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    console.log(`\n现荟豆为【${d}】`)
 		    msg += `\n现荟豆为【${d}】`
@@ -55,10 +64,10 @@ class UserInfo {
 		 console.log(`\n荟豆查询失败`)
 		 msg += `\n荟豆查询失败`
 	        }
-		
-		//res.on('data', d => {
-		//    process.stdout.write(d)
-		//})
+		*/
+		res.on('data', d => {
+		    process.stdout.write(d)
+		})
 	    })
 		
 	    req.on('error', error => {
@@ -75,20 +84,21 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                "campaignId": "2799365216249249792",
-                "campaignType": "INTERACTIVE",
-                "capabilityId": "2799365866676748288",
-                "capabilityType": "SIGN_IN"
+                "account_no":"602"
 	    })
+	    const params = {
+		methods: wx_customer_signin_submit,
+		token: A8149BE2D024102D60EF362FE5CAA4B8
+		}
 	    const options = {
-		hostname: 'activity-prd.saas.cmsk1979.com',
+		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/api/marketing/campaign/v1/go',
+		path: '/saas/action/apimanager/execmulti',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Cookie': this.token
+		    //'Cookie': this.token
 		}
 	    }
 	    const req = https.request(options, res => {
