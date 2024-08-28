@@ -53,12 +53,12 @@ class UserInfo {
 		
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
-		    console.log(`\n现积分为${d}`)
-		    msg += `\n现积分为${d}`
+		    console.log(`\n现荟豆为【${d}】`)
+		    msg += `\n现荟豆为【${d}】`
 		    })
 	        }else{
-		 console.log(`\n积分查询失败`)
-		 msg += `\n积分查询失败`
+		 console.log(`\n荟豆查询失败`)
+		 msg += `\n荟豆查询失败`
 	        }
 		
 		res.on('data', d => {
@@ -103,11 +103,16 @@ class UserInfo {
 		        console.log(`\n签到成功`);
 			msg += `\n签到成功`
 		        })
-	            }else{
-		        console.log(`\n签到失败!`);
+	            } else if (`${res.statusCode}` == 500) {
+		        console.log(`\n参与失败，您今日的参与次数已达上限!`);
+			msg += `\n参与失败，您今日的参与次数已达上限!`;
+	            } else if (`${res.statusCode}` == 401) {
+			console.log(`\n用户未登录，请检查CK!`);
+			msg += `\n用户未登录，请检查CK!`;
+		    } else {
+			console.log(`\n签到失败!`);
 			msg += `\n签到失败!`;
-			//参与失败，您今日的参与次数已达上限!
-	            }
+		    }
 		    
 		res.on('data', d => {
 		    process.stdout.write(d)
