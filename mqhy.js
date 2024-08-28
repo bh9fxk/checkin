@@ -10,7 +10,7 @@
 const $ = new Env("米旗会员签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
-let ckName = "myqh_ck";
+let ckName = "mqyh_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
