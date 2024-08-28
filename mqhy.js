@@ -9,7 +9,7 @@
 
 const $ = new Env("米旗会员签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
-const Notify = 0; // 1开启通知
+const Notify = 1; // 1开启通知
 let ckName = "mqhy_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
@@ -28,7 +28,7 @@ class UserInfo {
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
-	await SendMsg(msg);
+	//await SendMsg(msg);
     }
     async user_info() {
         try {
