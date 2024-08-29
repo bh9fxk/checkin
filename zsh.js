@@ -95,6 +95,7 @@ class UserInfo {
 		console.log(`\n状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
+			let result = JSON.parse(d)
 		        console.log(`\n签到成功，获得【${result.prizeName}】`);
 			msg += `\n签到成功`
 		        })
