@@ -23,12 +23,13 @@ class UserInfo {
 	this.token = str.split(strSplitor)[1];
     }
     async main() {
+	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await SendMsg(msg);
     }
     async user_info() {
         try {
