@@ -60,7 +60,7 @@ class UserInfo {
 		*/
 		res.on('data', d => {
 		    process.stdout.write(d)
-		    console.log(result)
+		    console.log(JSON.parse（d）)
 		})
 	    })
 		
