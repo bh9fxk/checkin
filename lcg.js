@@ -58,7 +58,6 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 	        console.log(`\n状态码: ${res.statusCode}`)
-		console.log（options）
 	        if (`${res.statusCode}` == 200) {
 	            res.on('data', d => {
 	                let result = JSON.parse(d)
