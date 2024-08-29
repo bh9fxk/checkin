@@ -58,14 +58,15 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 	        console.log(`\n状态码: ${res.statusCode}`)
-		
+		console.log（options）
 	        if (`${res.statusCode}` == 200) {
 	            res.on('data', d => {
 	                let result = JSON.parse(d)
+			console.log(result)
 	                console.log(`\n用户名称：【${result.d.NickName}】`)
-                        console.log(`\n现积分：【${result.d.TotalBonus}】`)
+                        console.log(`\n现总积分：【${result.d.TotalBonus}】`)
 		        msg += `\n用户名称：【${result.d.NickName}】`
-                        msg += `\n现积分：【${result.d.TotalBonus}】`
+                        msg += `\n现总积分：【${result.d.TotalBonus}】`
 		    })
 	        } else {
 		    console.log(`\n用户信息查询失败`)
