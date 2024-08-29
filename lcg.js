@@ -56,34 +56,34 @@ class UserInfo {
 		    'Content-Length': data.length,
 	        }
 	    }
-	          const req = https.request(options, res => {
-		        console.log(`\n状态码: ${res.statusCode}`)
+	    const req = https.request(options, res => {
+	        console.log(`\n状态码: ${res.statusCode}`)
 		
-		        if (`${res.statusCode}` == 200) {
-		            res.on('data', d => {
-		            let result = JSON.parse(d)
-		            console.log(`\n用户名称：【${result.d.NickName}】`)
-                console.log(`\n现积分：【${result.d.TotalBonus}】`)
-		            msg += `\n用户名称：【${result.d.NickName}】`
-                msg += `\n现积分：【${result.d.TotalBonus}】`
-		            })
-	            }else{
-		             console.log(`\n用户信息查询失败`)
-		             msg += `\n用户信息查询失败`
-	            }
+	        if (`${res.statusCode}` == 200) {
+	            res.on('data', d => {
+	                let result = JSON.parse(d)
+	                console.log(`\n用户名称：【${result.d.NickName}】`)
+                        console.log(`\n现积分：【${result.d.TotalBonus}】`)
+		        msg += `\n用户名称：【${result.d.NickName}】`
+                        msg += `\n现积分：【${result.d.TotalBonus}】`
+		    })
+	        } else {
+		    console.log(`\n用户信息查询失败`)
+		    msg += `\n用户信息查询失败`
+	        }
 
-		        //res.on('data', d => {
-		    		    //process.stdout.write(d)
-		        //let result = JSON.parse(d)
-		        //console.log(result)
-		        //console.log(result.customer_info.customer.MOBILEPHONE)
-		        //})
-	          })
+		//res.on('data', d => {
+		    //process.stdout.write(d)
+		    //let result = JSON.parse(d)
+		    //console.log(result)
+		    //console.log(result.customer_info.customer.MOBILEPHONE)
+		    //})
+	    })
 		
-	          req.on('error', error => {
-		            console.error(error)
-	           })
-	           req.end()
+	    req.on('error', error => {
+		console.error(error)
+	    })
+	    req.end()
 	
         } catch (e) {
             console.log(e);
@@ -92,7 +92,7 @@ class UserInfo {
 
     async signIn() {
         try {
-	          const https = require('https')
+	    const https = require('https')
 	          const data = JSON.stringify({
  
             })
