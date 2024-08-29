@@ -2,7 +2,7 @@
  * cron 41 0 * * *  lcg.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
- * 变量名:lcg_ck
+ * 变量名:dyc_ck
  * 变量值:抓包body中Token的值
  * scriptVersionNow = "0.0.1";
  */
