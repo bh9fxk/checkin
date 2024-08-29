@@ -39,7 +39,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/execmulti?token=+this.ck&methods=customer_info',
+	        path: '/saas/action/apimanager/execmulti?token=+${this.ck}&methods=customer_info',
 		//query: 'params',
 	        method: 'POST',
 	        headers: {
@@ -87,7 +87,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti?token=+this.ck&methods=wx_customer_signin_submit',
+		path: '/saas/action/apimanager/execmulti?token=+{this.ck}&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
 		    //'Content-Type': 'application/json',
