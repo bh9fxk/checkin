@@ -87,7 +87,7 @@ class UserInfo {
 		path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
-		    //'Content-Type': 'application/json',
+		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
 		}
 	    }
