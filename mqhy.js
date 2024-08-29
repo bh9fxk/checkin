@@ -36,10 +36,14 @@ class UserInfo {
 	    const data = JSON.stringify({
                 "account_no":"602"
 	    })
+	    const params = {
+		token: A8149BE2D024102D60EF362FE5CAA4B8,
+		methods: customer_info
+	    }
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: `/saas/action/apimanager/execmulti?token=${this.ck}&methods=customer_info`,
+	        path: '/saas/action/apimanager/execmulti',
 		//query: 'params',
 	        method: 'POST',
 	        headers: {
