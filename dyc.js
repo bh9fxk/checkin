@@ -10,7 +10,7 @@
 const $ = new Env("大悦城签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; // 1开启通知
-let ckName = "lcg_ck";
+let ckName = "dyc_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
