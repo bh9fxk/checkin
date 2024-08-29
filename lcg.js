@@ -36,7 +36,7 @@ class UserInfo {
 	    const data = JSON.stringify({
 		"MallId": 10471,
 		"Header": {
-		    "Token": "s6F4Ags1XU-1FlHHC0xi_AyZVdTQ-5LU,15512",
+		    "Token": this.ck,
 		    "systemInfo": {
 		        "model": "Mac14,2",
 		        "SDKVersion": "3.3.5",
