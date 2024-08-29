@@ -49,7 +49,7 @@ class UserInfo {
 		
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
-		    et result = JSON.parse(d)
+		    let result = JSON.parse(d)
 		    console.log(`\n用户为【${result.customer_info.customer.MOBILEPHONE}】`)
 		    msg += `\n用户为【${result.customer_info.customer.MOBILEPHONE}】`
 		    })
