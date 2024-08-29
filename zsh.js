@@ -97,16 +97,18 @@ class UserInfo {
 		console.log(`\n状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
-			const result = JSON.parse(d)
-			console.log(result)
-		        console.log(`\n签到成功，获得【${result.prizeName}】`);
-			msg += `\n签到成功，获得【${result.prizeName}】`
+			    const result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到成功，获得【${result.prizeName}】`);
+			    msg += `\n签到成功，获得【${result.prizeName}】`
 		        })
 		    } else {
-			const result = JSON.parse(d)
-			console.log(result)
-			console.log(`\n签到失败：【${result.error}】`);
-			msg += `\n签到失败：【${result.error}】`;
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到失败：【${result.error}】`);
+			    msg += `\n签到失败：【${result.error}】`
+		        })
 		    }
 		    
 		//res.on('data', d => {
