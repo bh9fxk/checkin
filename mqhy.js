@@ -2,8 +2,8 @@
  * cron 39 0 * * *  mqhy.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
- * 变量名:zsh_ck,&分隔两个参数
- * 变量值:抓包authorization和cookie的值（cm_token_x=……）
+ * 变量名:mqhy_ck
+ * 变量值:抓包URL中token的值
  * scriptVersionNow = "0.0.1";
  */
 
