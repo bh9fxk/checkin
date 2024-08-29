@@ -43,7 +43,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '`/saas/action/apimanager/execmulti?token=${this.ck}&methods=customer_info`',
+	        path: `/saas/action/apimanager/execmulti?token=${this.ck}&methods=customer_info`,
 		//query: 'params',
 	        method: 'POST',
 	        headers: {
@@ -101,6 +101,7 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
+		console.log(options)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
 		        console.log(`\n签到成功，获得【${result.prizeName}】`);
