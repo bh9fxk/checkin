@@ -53,7 +53,7 @@ class UserInfo {
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length
+		    //'Content-Length': data.length
 	        }
 	    }
 	    const req = https.request(options, res => {
