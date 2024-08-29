@@ -33,18 +33,15 @@ class UserInfo {
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-                "account_no":"602"
-	    })
+	    const data = JSON.stringify({})
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
 	        path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=customer_info',
-		//query: 'params',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    //'Content-Length': data.length,
 		    //'authorization': this.ck
 	        }
 	    }
