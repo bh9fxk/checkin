@@ -54,8 +54,8 @@ class UserInfo {
 		    msg += `\n用户为：【${result.customer_info.customer.MOBILEPHONE}】`
 		    })
 	        }else{
-		 console.log(`\n用户查询失败`)
-		 msg += `\n用户查询失败`
+		   console.log(`\n用户查询失败!`)
+		   msg += `\n用户查询失败!`
 	        }
 
 		//res.on('data', d => {
@@ -93,14 +93,19 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		    
-		res.on('data', d => {
-		    process.stdout.write(d)
-		    let result = JSON.parse(d)
-		    //console.log(result)
-		    console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
-		    msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
-		})
+
+		if (`${res.statusCode}` == 200) {
+		    res.on('data', d => {
+		        process.stdout.write(d)
+		        let result = JSON.parse(d)
+		        //console.log(result)
+		        console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
+		        msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
+		    })
+		} else {
+		    console.log(`\n签到失败!`)
+		    msg += `\n签到失败!`
+		}
 	    })
 		
 	    req.on('error', error => {
