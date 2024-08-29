@@ -61,6 +61,7 @@ class UserInfo {
 		*/
 		res.on('data', d => {
 		    process.stdout.write(d)
+		    process.stdout.write(d.customer_info)
 		})
 	    })
 		
