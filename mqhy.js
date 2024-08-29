@@ -25,9 +25,9 @@ class UserInfo {
     async main() {
 	msg += `\n开始第${this.index}个账号`
         await this.user_info();
-	await $.wait(3000);
-	await this.signIn();
-	await $.wait(3000);
+	//await $.wait(3000);
+	//await this.signIn();
+	//await $.wait(3000);
 	//await SendMsg(msg);
     }
     async user_info() {
@@ -43,7 +43,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: `/saas/action/apimanager/execmulti?token=${this.ck}&methods=customer_info`,
+	        path: '/saas/action/apimanager/execmulti?token='${this.ck}'&methods=customer_info',
 		//query: 'params',
 	        method: 'POST',
 	        headers: {
