@@ -50,8 +50,8 @@ class UserInfo {
 		    res.on('data', d => {
 		    let result = JSON.parse(d)
 		    console.log(result)
-		    console.log(`\n现荟豆为【${result}】`)
-		    msg += `\n现荟豆为【${result}】`
+		    console.log(`\n现有【${result}】荟豆`)
+		    msg += `\n现有【${result}】荟豆`
 		    })
 	        }else{
 		 console.log(`\n荟豆查询失败!`)
