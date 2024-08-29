@@ -48,12 +48,14 @@ class UserInfo {
 		
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
-		    console.log(`\n现荟豆为【${d}】`)
-		    msg += `\n现荟豆为【${d}】`
+		    let result = JSON.parse(d)
+		    console.log(result)
+		    console.log(`\n现荟豆为【${result}】`)
+		    msg += `\n现荟豆为【${result}】`
 		    })
 	        }else{
-		 console.log(`\n荟豆查询失败`)
-		 msg += `\n荟豆查询失败`
+		 console.log(`\n荟豆查询失败!`)
+		 msg += `\n荟豆查询失败!`
 	        }
 		
 		//res.on('data', d => {
@@ -96,23 +98,18 @@ class UserInfo {
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
 			let result = JSON.parse(d)
+			console.log(result)
 		        console.log(`\n签到成功，获得【${result.prizeName}】`);
-			msg += `\n签到成功`
+			msg += `\n签到成功，获得【${result.prizeName}】`
 		        })
-	            } else if (`${res.statusCode}` == 500) {
-		        console.log(`\n参与失败，您今日的参与次数已达上限!`);
-			msg += `\n参与失败，您今日的参与次数已达上限!`;
-	            } else if (`${res.statusCode}` == 401) {
-			console.log(`\n用户未登录，请检查CK!`);
-			msg += `\n用户未登录，请检查CK!`;
 		    } else {
-			console.log(`\n签到失败!`);
-			msg += `\n签到失败!`;
+			console.log(`\n签到失败：【${result.error}】`);
+			msg += `\n签到失败：【${result.error}】`;
 		    }
 		    
-		res.on('data', d => {
-		    process.stdout.write(d)
-		})
+		//res.on('data', d => {
+		    //process.stdout.write(d)
+		//})
 	    })
 		
 	    req.on('error', error => {
