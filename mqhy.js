@@ -97,9 +97,9 @@ class UserInfo {
 		res.on('data', d => {
 		    process.stdout.write(d)
 		    let result = JSON.parse(d)
-		    console.log(result.message)
-		    console.log(`\n【${result.message}】`);
-		    msg += `\n【${result.message}】`
+		    //console.log(result)
+		    console.log(`\n【${result.wx_customer_signin_submit.message}】`);
+		    msg += `\n【${result.wx_customer_signin_submit.message}】`
 		})
 	    })
 		
