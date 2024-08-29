@@ -50,8 +50,8 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    let result = JSON.parse(d)
-		    console.log(`\n用户为：【${result.customer_info.customer.MOBILEPHONE}】`)
-		    msg += `\n用户为：【${result.customer_info.customer.MOBILEPHONE}】`
+		    console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
+		    msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
 		    })
 	        }else{
 		   console.log(`\n用户查询失败!`)
