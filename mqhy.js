@@ -47,7 +47,7 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		console.log(options)
+		console.log(customer_info)
 		
 		/*if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
@@ -61,7 +61,6 @@ class UserInfo {
 		*/
 		res.on('data', d => {
 		    process.stdout.write(d)
-		    process.stdout.write(d.customer_info)
 		})
 	    })
 		
