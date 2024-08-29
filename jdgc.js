@@ -35,7 +35,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 10895,
+		"MallId": 11471,
 		"Header": {
 		    "Token": this.ck,
 		    "systemInfo": {
@@ -43,7 +43,7 @@ class UserInfo {
 			"SDKVersion": "3.3.5",
 			"system": "Mac OS X 14.6.1",
 			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
+			"miniVersion": "DZ.2.69.1.JDJT.G.12"
 		    }
 		}
             })
@@ -93,7 +93,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 10895,
+		"MallId": 11471,
 		"Header": {
 		    "Token": this.ck,
 		    "systemInfo": {
@@ -101,7 +101,7 @@ class UserInfo {
 			"SDKVersion": "3.3.5",
 			"system": "Mac OS X 14.6.1",
 			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
+			"miniVersion": "DZ.2.69.1.JDJT.G.12"
 		    }
 		}
             })
