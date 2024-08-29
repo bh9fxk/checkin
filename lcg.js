@@ -20,20 +20,20 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	      this.token = str.split(strSplitor)[1];
+	this.token = str.split(strSplitor)[1];
     }
     async main() {
-	      msg += `\n开始第${this.index}个账号`
+	msg += `\n开始第${this.index}个账号`
         await this.user_info();
-	      await $.wait(3000);
-	      await this.signIn();
-	      await $.wait(3000);
-	      await SendMsg(msg);
+	await $.wait(3000);
+	await this.signIn();
+	await $.wait(3000);
+	await SendMsg(msg);
     }
     async user_info() {
         try {
-	          const https = require('https')
-	          const data = JSON.stringify({
+	    const https = require('https')
+	    const data = JSON.stringify({
                 "MallId": 10471,
                 "Header": {
                     "Token": this.ck,
@@ -46,16 +46,16 @@ class UserInfo {
                     }
                 }
             })
-	          const options = {
-	              hostname: 'm.mallcoo.cn',
-	              port: 443,
-	              path: 'api/user/user/GetUserAndMallCard',
-	              method: 'POST',
-	              headers: {
-		                'Content-Type': 'application/json',
-		                'Content-Length': data.length,
-	              }
-	          }
+	    const options = {
+	        hostname: 'm.mallcoo.cn',
+	        port: 443,
+	        path: 'api/user/user/GetUserAndMallCard',
+	        method: 'POST',
+	        headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+	        }
+	    }
 	          const req = https.request(options, res => {
 		        console.log(`\n状态码: ${res.statusCode}`)
 		
