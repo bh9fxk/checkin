@@ -126,7 +126,7 @@ class UserInfo {
 		        //console.log(result)
 		        console.log(`\n签到结果：【${result.d.Msg}】`);
 		        msg += `\n签到结果：【${result.d.Msg}】`
-		    }
+		    })
                 } else {
                     console.log(`\n签到失败！`)
 		    msg += `\n签到失败！`
