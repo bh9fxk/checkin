@@ -42,28 +42,28 @@ class UserInfo {
 	        headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    //'authorization': this.ck
 	        }
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		
-		/*if (`${res.statusCode}` == 200) {
+		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
-		    console.log(`\n现荟豆为【${d}】`)
-		    msg += `\n现荟豆为【${d}】`
+		    et result = JSON.parse(d)
+		    console.log(`\n用户为【${result.customer_info.customer.MOBILEPHONE}】`)
+		    msg += `\n用户为【${result.customer_info.customer.MOBILEPHONE}】`
 		    })
 	        }else{
-		 console.log(`\n荟豆查询失败`)
-		 msg += `\n荟豆查询失败`
+		 console.log(`\n用户查询失败`)
+		 msg += `\n用户查询失败`
 	        }
-		*/
-		res.on('data', d => {
+
+		//res.on('data', d => {
 		    //process.stdout.write(d)
-		    let result = JSON.parse(d)
+		    //let result = JSON.parse(d)
 		    //console.log(result)
-		    console.log(result.customer_info.customer.MOBILEPHONE)
-		})
+		    //console.log(result.customer_info.customer.MOBILEPHONE)
+		//})
 	    })
 		
 	    req.on('error', error => {
@@ -79,27 +79,25 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-                "account_no":"602"
-	    })
+	    const data = JSON.stringify({})
 
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti?token=+{this.ck}&methods=wx_customer_signin_submit',
+		path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
 		    //'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    //'Cookie': this.token
+		    //'Content-Length': data.length,
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		console.log(options)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
-		        console.log(`\n签到成功，获得【${result.prizeName}】`);
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n签到成功`);
 			msg += `\n签到成功`
 		        })
 	            } else if (`${res.statusCode}` == 500) {
