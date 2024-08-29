@@ -27,8 +27,8 @@ class UserInfo {
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
     async user_info() {
         try {
@@ -72,12 +72,11 @@ class UserInfo {
 		    msg += `\n用户信息查询失败`
 	        }
 
-		//res.on('data', d => {
-		    //process.stdout.write(d)
-		    //let result = JSON.parse(d)
-		    //console.log(result)
-		    //console.log(result.customer_info.customer.MOBILEPHONE)
-		    //})
+		res.on('data', d => {
+		    process.stdout.write(d)
+		    let result = JSON.parse(d)
+		    console.log(result)
+		    })
 	    })
 		
 	    req.on('error', error => {
