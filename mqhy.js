@@ -90,10 +90,10 @@ class UserInfo {
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti?token=${this.ck}&methods=wx_customer_signin_submit',
+		path: '/saas/action/apimanager/execmulti?token='${+this.ck}'&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
-		    'Content-Type': 'application/json',
+		    //'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    //'Cookie': this.token
 		}
