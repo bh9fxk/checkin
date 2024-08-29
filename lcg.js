@@ -34,17 +34,17 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                "MallId": 10471,
-                "Header": {
-                    "Token": this.ck,
-                    "systemInfo": {
-                    "model": "Mac14,2",
-                    "SDKVersion": "3.3.5",
-                    "system": "Mac OS X 14.6.1",
-                    "version": "3.8.7",
-                    "miniVersion": "DZ.2.5.64.6.LCG.11"
-                    }
-                }
+		"MallId": 10471,
+		"Header": {
+		    "Token": "s6F4Ags1XU-1FlHHC0xi_AyZVdTQ-5LU,15512",
+		    "systemInfo": {
+		        "model": "Mac14,2",
+		        "SDKVersion": "3.3.5",
+                        "system": "Mac OS X 14.6.1",
+                        "version": "3.8.7",
+                        "miniVersion": "DZ.2.5.64.6.LCG.11"
+		    }
+		}
             })
 	    const options = {
 	        hostname: 'm.mallcoo.cn',
