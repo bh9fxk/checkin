@@ -61,8 +61,8 @@ class UserInfo {
 		res.on('data', d => {
 		    process.stdout.write(d)
 		    let result = JSON.parse(d)
-		    console.log(result)
-		    console.log(result.customer_info)
+		    //console.log(result)
+		    console.log(result.customer_info.customer)
 		})
 	    })
 		
