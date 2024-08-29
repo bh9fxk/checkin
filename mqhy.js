@@ -50,8 +50,8 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    let result = JSON.parse(d)
-		    console.log(`\n用户为【${result.customer_info.customer.MOBILEPHONE}】`)
-		    msg += `\n用户为【${result.customer_info.customer.MOBILEPHONE}】`
+		    console.log(`\n用户为：【${result.customer_info.customer.MOBILEPHONE}】`)
+		    msg += `\n用户为：【${result.customer_info.customer.MOBILEPHONE}】`
 		    })
 	        }else{
 		 console.log(`\n用户查询失败`)
@@ -98,8 +98,8 @@ class UserInfo {
 		    process.stdout.write(d)
 		    let result = JSON.parse(d)
 		    //console.log(result)
-		    console.log(`\n【${result.wx_customer_signin_submit.message}】`);
-		    msg += `\n【${result.wx_customer_signin_submit.message}】`
+		    console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
+		    msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
 		})
 	    })
 		
