@@ -93,12 +93,12 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const form = {
+	    const data = JSON.stringify({
 		    'module': 'app',
 		    'action': 'sign',
 		    'app': 'index',
 		    'access_id': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjQ5MzU5MDgsImV4cCI6MTcyNDk0MzEwOCwianRpIjoiOWQxY2YyMmNjYTk5MjdjYzI2MDRhOTIyZGU3NjRjZjAifQ.h_VR0YJXHVi0lOiIst6jSHdaj2METJEhujmS1WhxR5Q'
-	    }
+	    })
 
 	    const options = {
 		hostname: 'mall.bicrm.cn',
