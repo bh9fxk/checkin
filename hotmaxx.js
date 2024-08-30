@@ -35,8 +35,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                 "userId":"1580858916866166784",
-		 "gradeDetailflag":0
+                 "userId": this.userId,
+		 "gradeDetailflag": 0
 	    })
 	    const options = {
 	        hostname: 'openapi-gateway.hotmaxx.cn',
@@ -45,7 +45,7 @@ class UserInfo {
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'authorization': this.ck
+		    'Authorization': this.ck
 	        }
 	    }
 	    const req = https.request(options, res => {
