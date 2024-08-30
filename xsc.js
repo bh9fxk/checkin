@@ -115,7 +115,7 @@ class UserInfo {
 		        console.log(`\n签到结果：【${result.message}】`);
 			console.log(`\n现有积分：【${result.score}】`);
 		        msg += `\n签到结果：【${result.message}】`
-			msg += `\n签到结果：【${result.score}】`
+			msg += `\n现有积分：【${result.score}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
