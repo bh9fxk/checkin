@@ -117,8 +117,8 @@ class UserInfo {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到失败：【${result.error}】`);
-			    msg += `\n签到失败：【${result.error}】`
+		            console.log(`\n签到失败：【${result.msg}】`);
+			    msg += `\n签到失败：【${result.msg}】`
 		        })
 		    }
 		    
