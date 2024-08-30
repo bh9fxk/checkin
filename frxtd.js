@@ -37,7 +37,7 @@ class UserInfo {
 	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'scg.wtsg.ltd:28088',
+		hostname: 'scg.wtsg.ltd',
 		port: 28088,
 		path: '/api/VipInfo/QueryVipInfoAsync',
 		method: 'POST',
