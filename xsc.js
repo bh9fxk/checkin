@@ -100,7 +100,6 @@ class UserInfo {
 		port: 443,
 		path: '/index.php?store_id=6&store_type=1&module=app&action=sign&app=index&access_id='+this.ck+'',
 		method: 'POST',
-		payload: data,
 		headers: {
 		    'Content-Type': 'application/x-www-form-urlencoded',
 		    //'Content-Length': data.length,
