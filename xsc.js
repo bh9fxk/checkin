@@ -25,12 +25,13 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
-	await $.wait(3000);
+        //await this.user_info();
+	//await $.wait(3000);
 	await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
+/*	
     async user_info() {
         try {
 	    const https = require('https')
@@ -88,31 +89,24 @@ class UserInfo {
             console.log(e);
         }
     }
-
+*/
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-                "MallID": 10471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-		    "model": "Mac14,2",
-		    "SDKVersion": "3.3.5",
-		    "system": "Mac OS X 14.6.1",
-		    "version": "3.8.7",
-		    "miniVersion": "DZ.2.5.64.6.LCG.11"
-		    }
-		}
-            })
+	    const data = {
+		'module': 'app',
+		'action': 'sign',
+		'app': 'index',
+		'access_id': this.ck
+	    }
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'mall.bicrm.cn',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
+		path: '/index.php?store_id=6&store_type=1',
 		method: 'POST',
 		headers: {
-		    'Content-Type': 'application/json',
+		    'Content-Type': 'application/x-www-form-urlencoded',
 		    'Content-Length': data.length,
 		}
 	    }
@@ -123,8 +117,8 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+		        //console.log(`\n签到结果：【${result.d.Msg}】`);
+		        //msg += `\n签到结果：【${result.d.Msg}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
