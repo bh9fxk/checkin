@@ -80,7 +80,7 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({ "account_no":"602" })
 
 	    const options = {
 		hostname: 'vip.maky.com.cn',
@@ -89,7 +89,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    //'Content-Length': data.length,
+		    'Content-Length': data.length,
 		}
 	    }
 	    const req = https.request(options, res => {
