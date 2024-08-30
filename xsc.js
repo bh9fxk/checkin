@@ -1,5 +1,5 @@
 /**
- * cron 11,33 * * * *  xsc.js
+ * cron 11,33 23-8 * * *  xsc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:xsc_ck
