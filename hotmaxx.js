@@ -27,18 +27,22 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
         await this.signIn();
 	await $.wait(3000);
-	await this.user_point();
+	await this.user_info();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-    async user_point() {
+    async user_info() {
         try {
 	    const https = require('https')
+	    const data = JSON.stringify({
+                 "userId":"1580858916866166784",
+		 "gradeDetailflag":0
+	    })
 	    const options = {
-	        hostname: 'umopwx-api.saas.cmsk1979.com',
+	        hostname: 'openapi-gateway.hotmaxx.cn',
 	        port: 443,
-	        path: '/be/api/pointBank/point/account',
-	        method: 'GET',
+	        path: '/member/member/grade/queryByUserId',
+	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
 		    'authorization': this.ck
