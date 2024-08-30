@@ -20,43 +20,31 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.token = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        //await this.user_info();
-	//await $.wait(3000);
+        await this.user_info();
+	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-/*	
+
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-                "MallID": 10471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-		    "model": "Mac14,2",
-		    "SDKVersion": "3.3.5",
-		    "system": "Mac OS X 14.6.1",
-		    "version": "3.8.7",
-		    "miniVersion": "DZ.2.5.64.6.LCG.11"
-		    }
-		}
-            })
+	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
-		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
+		hostname: 'scg.wtsg.ltd:28088',
+		port: 28088,
+		path: '/api/VipInfo/QueryVipInfoAsync',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'Authorization': 'Bearer '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -66,10 +54,12 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
+		        console.log(`\n用户名称：【${result.data.member_surname}】`)
+			console.log(`\n用户手机：【${result.data.telephone}】`)
+			console.log(`\n现总积分：【${result.data.current_bonus"}】`) 
+		        msg += `\n用户名称：【${result.data.member_surname}】`
+			msg += `\n用户手机：【${result.data.telephone}】`
+			msg += `\n现总积分：【${result.data.current_bonus"}】`
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
@@ -89,16 +79,16 @@ class UserInfo {
             console.log(e);
         }
     }
-*/
+
     async signIn() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'a.zhimatech.com',
-		port: 443,
-		path: '/restful/mall/3785/checkInRecord',
+		hostname: 'scg.wtsg.ltd',
+		port: 2088,
+		path: '/api/Sign/SignInNew',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -114,9 +104,7 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 		        console.log(`\n签到结果：【${result.msg}】`);
-			console.log(`\n状态码：【${result.code}】`);
 		        msg += `\n签到结果：【${result.msg}】`
-			msg += `\n状态码：【${result.code}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
