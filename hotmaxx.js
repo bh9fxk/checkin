@@ -110,7 +110,7 @@ class UserInfo {
 			    console.log(result)
 		            console.log(`\n签到结果：【${result.msg}】`);
 			    console.log(`\n签到成功，获得【${result.growValue}】`);
-			    msg += `\n签到成功，获得【${${result.msg}}】`
+			    msg += `\n签到结果：【${result.msg}】`
 			    msg += `\n签到成功，获得【${result.growValue}】`
 		        })
 		    } else {
