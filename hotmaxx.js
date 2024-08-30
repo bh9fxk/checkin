@@ -25,9 +25,10 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.signIn();
-	await $.wait(3000);
+
 	await this.user_info();
+	await $.wait(3000);
+        await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
@@ -53,14 +54,16 @@ class UserInfo {
 		
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
-		    let result = JSON.parse(d)
-		    console.log(result)
-		    console.log(`\n现有【${result}】荟豆`)
-		    msg += `\n现有【${result}】荟豆`
+		        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`\n成长值：【${result.data.growValue}】`)
+			console.log(`\n等级：【${result.data.gradeName}】`)
+		        msg += `\n成长值：【${result.data.growValue}】`
+			msg += `\n等级：【${result.data.gradeName}】`
 		    })
-	        }else{
-		 console.log(`\n荟豆查询失败!`)
-		 msg += `\n荟豆查询失败!`
+	        } else {
+		    console.log(`\n用户信息失败!`)
+		    msg += `\n用户信息查询失败!`
 	        }
 		
 		//res.on('data', d => {
