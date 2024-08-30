@@ -50,6 +50,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
 		    res.on('data', d => {
 		    let result = JSON.parse(d)
+		    console.log(result)
 		    console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
 		    msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
 		    })
