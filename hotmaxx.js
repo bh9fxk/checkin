@@ -46,6 +46,7 @@ class UserInfo {
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
 		    'Authorization': this.ck
 	        }
 	    }
@@ -85,30 +86,32 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                "campaignId": "2799365216249249792",
-                "campaignType": "INTERACTIVE",
-                "capabilityId": "2799365866676748288",
-                "capabilityType": "SIGN_IN"
+                 "userId": this.userId,
+		 "gradeDetailflag": 0
 	    })
 	    const options = {
-		hostname: 'activity-prd.saas.cmsk1979.com',
+		hostname: 'openapi-gateway.hotmaxx.cn',
 		port: 443,
-		path: '/api/marketing/campaign/v1/go',
+		path: '/member/sign/signIn',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Cookie': this.token
+		    'Authorization': this.ck
+
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		    if (`${res.statusCode}` == 200) {
 		        res.on('data', d => {
-			    const jieguo = JSON.parse(d)
-			    console.log(jieguo)
-		            console.log(`\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`);
-			    msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
+			    //process.stdout.write(d)
+			    const result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到结果：【${result.msg}】`);
+			    console.log(`\n签到成功，获得【${result.growValue}】`);
+			    msg += `\n签到成功，获得【${${result.msg}}】`
+			    msg += `\n签到成功，获得【${result.growValue}】`
 		        })
 		    } else {
 			res.on('data', d => {
