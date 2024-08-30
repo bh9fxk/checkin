@@ -107,7 +107,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/x-www-form-urlencoded',
-		    'Content-Length': data.length,
+		    //'Content-Length': data.length,
 		}
 	    }
 	    const req = https.request(options, res => {
