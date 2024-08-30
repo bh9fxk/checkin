@@ -101,8 +101,9 @@ class UserInfo {
 		path: '/restful/mall/3785/checkInRecord',
 		method: 'POST',
 		headers: {
-		    'Content-Type': 'application/x-www-form-urlencoded',
-		    //'Content-Length': data.length,
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Authorization': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -112,10 +113,10 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.message}】`);
-			console.log(`\n现有积分：【${result.score}】`);
-		        msg += `\n签到结果：【${result.message}】`
-			msg += `\n签到结果：【${result.score}】`
+		        console.log(`\n签到结果：【${result.msg}】`);
+			console.log(`\n状态码：【${result.code}】`);
+		        msg += `\n签到结果：【${result.msg}】`
+			msg += `\n：状态码：【${result.code}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
