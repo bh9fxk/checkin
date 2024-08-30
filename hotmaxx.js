@@ -32,6 +32,7 @@ class UserInfo {
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+
     async user_info() {
         try {
 	    const https = require('https')
@@ -40,43 +41,50 @@ class UserInfo {
 		 "gradeDetailflag": 0
 	    })
 	    const options = {
-	        hostname: 'openapi-gateway.hotmaxx.cn',
-	        port: 443,
-	        path: '/member/member/grade/queryByUserId',
-	        method: 'POST',
-	        headers: {
+		hostname: 'openapi-gateway.hotmaxx.cn',
+		port: 443,
+		path: '/member/sign/signIn',
+		method: 'POST',
+		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'Authorization': this.ck
-	        }
+		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		
-		if (`${res.statusCode}` == 200) {
-		    res.on('data', d => {
-		        let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n成长值：【${result.data.growValue}】`)
-			console.log(`\n等级：【${result.data.gradeName}】`)
-		        msg += `\n成长值：【${result.data.growValue}】`
-			msg += `\n等级：【${result.data.gradeName}】`
-		    })
-	        } else {
-		    console.log(`\n用户信息失败!`)
-		    msg += `\n用户信息查询失败!`
-	        }
-		
+		    if (`${res.statusCode}` == 200) {
+		        res.on('data', d => {
+			    //process.stdout.write(d)
+			    const result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n成长值：【${result.data.growValue}】`)
+			    console.log(`\n等级：【${result.data.gradeName}】`)
+		            msg += `\n成长值：【${result.data.growValue}】`
+			    msg += `\n等级：【${result.data.gradeName}】`
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到失败：【${result.msg}】`);
+			    msg += `\n签到失败：【${result.msg}】`
+		        })
+		    }
+		    
 		//res.on('data', d => {
-		//    process.stdout.write(d)
+		    //process.stdout.write(d)
 		//})
 	    })
 		
 	    req.on('error', error => {
 		console.error(error)
 	    })
+
+	    req.write(data)
 	    req.end()
-	
+
+		
         } catch (e) {
             console.log(e);
         }
@@ -98,7 +106,6 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'Authorization': this.ck
-
 		}
 	    }
 	    const req = https.request(options, res => {
