@@ -43,7 +43,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'openapi-gateway.hotmaxx.cn',
 		port: 443,
-		path: '/member/sign/signIn',
+		path: '/member/member/grade/queryByUserId',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -94,8 +94,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                 "userId": this.userId,
-		 "gradeDetailflag": 0
+                 "userId": this.userId
 	    })
 	    const options = {
 		hostname: 'openapi-gateway.hotmaxx.cn',
