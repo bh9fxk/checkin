@@ -20,7 +20,6 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.token = str.split(strSplitor)[1];
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
