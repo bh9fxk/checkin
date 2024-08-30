@@ -67,8 +67,8 @@ class UserInfo {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到失败：【${result.msg}】`);
-			    msg += `\n签到失败：【${result.msg}】`
+		            console.log(`\n用户信息查询失败！`);
+			    msg += `\n用户信息失败！`
 		        })
 		    }
 		    
@@ -115,16 +115,21 @@ class UserInfo {
 			    const result = JSON.parse(d)
 			    console.log(result)
 		            console.log(`\n签到结果：【${result.msg}】`);
-			    console.log(`\n签到成功，获得【${result.growValue}】`);
 			    msg += `\n签到结果：【${result.msg}】`
-			    msg += `\n签到成功，获得【${result.growValue}】`
+			    if (result.code == 10001){
+			        console.log(`\n签到成功，获得【${result.growValue}】`)
+				msg += `\n签到成功，获得【${result.growValue}】`
+			    } else {
+				console.log(`\n已经签到过了！`);
+				msg += `\n已经签到过了！`
+			    }
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到失败：【${result.msg}】`);
-			    msg += `\n签到失败：【${result.msg}】`
+		            console.log(`\n签到失败！`);
+			    msg += `\n签到失败！`
 		        })
 		    }
 		    
