@@ -56,10 +56,10 @@ class UserInfo {
 		        console.log(result)
 		        console.log(`\n用户名称：【${result.data.member_surname}】`)
 			console.log(`\n用户手机：【${result.data.telephone}】`)
-			console.log(`\n现总积分：【${result.data.current_bonus"}】`) 
+			console.log(`\n现总积分：【${result.data.current_bonus}】`) 
 		        msg += `\n用户名称：【${result.data.member_surname}】`
 			msg += `\n用户手机：【${result.data.telephone}】`
-			msg += `\n现总积分：【${result.data.current_bonus"}】`
+			msg += `\n现总积分：【${result.data.current_bonus}】`
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
