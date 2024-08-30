@@ -103,7 +103,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': this.ck
+		    'Authorization': Bearer this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
