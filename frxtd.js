@@ -87,7 +87,7 @@ class UserInfo {
 
 	    const options = {
 		hostname: 'scg.wtsg.ltd',
-		port: 2088,
+		port: 28088,
 		path: '/api/Sign/SignInNew',
 		method: 'POST',
 		headers: {
