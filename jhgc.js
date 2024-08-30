@@ -116,7 +116,7 @@ class UserInfo {
 		        console.log(`\n签到结果：【${result.msg}】`);
 			console.log(`\n状态码：【${result.code}】`);
 		        msg += `\n签到结果：【${result.msg}】`
-			msg += `\n：状态码：【${result.code}】`
+			msg += `\n状态码：【${result.code}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
