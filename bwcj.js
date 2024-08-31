@@ -107,6 +107,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'User-Agent': 'PostmanRuntime/7.41.2',
 		    'qm-from': 'wechat',
 		    'accept': 'v=1.0',
 		    'qm-from-type': 'catering',
