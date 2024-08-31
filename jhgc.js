@@ -116,11 +116,13 @@ class UserInfo {
 			console.log(`\n状态码：【${result.code}】`);
 		        msg += `\n签到结果：【${result.msg}】`
 			msg += `\n状态码：【${result.code}】`
-			if (result.code == 200){
-			    console.log(`\n今日获得【${result.data.point_total}】积分`);
-			    console.log(`\n现总积分：【${result.data.otal_point}】`);
+			if (result.code == 200) {
+			    console.log(`\n已签到【${result.data.num}】天`)
+			    console.log(`\n今日获得【${result.data.point_total}】积分`)
+			    console.log(`\n现总积分：【${result.data.total_point}】`)
+			    msg += `\n已签到【${result.data.num}】天`
 		            msg += `\n今日获得【${result.data.point_total}】积分`
-			    msg += `\n现总积分：【${result.data.otal_point}】`
+			    msg += `\n现总积分：【${result.data.total_point}】`
 			}
 		    })
                 } else {
