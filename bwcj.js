@@ -108,6 +108,9 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'qm-from': 'wechat',
+		    'accept': 'v=1.0',
+		    'qm-from-type': 'catering',
 		    'Content-Length': data.length,
 		    'qm-user-token': this.ck
 		}
