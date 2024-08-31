@@ -102,7 +102,7 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
 			let aa = String(d)
-			eval('('+d+')')
+			console.log(eval('('+d+')'))
                         //let result = JSON.parse(aa)
 			//let result = String(d)
 			//console.log(String(d))
