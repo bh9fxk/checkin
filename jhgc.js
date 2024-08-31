@@ -116,6 +116,12 @@ class UserInfo {
 			console.log(`\n状态码：【${result.code}】`);
 		        msg += `\n签到结果：【${result.msg}】`
 			msg += `\n状态码：【${result.code}】`
+			if (result.code == 200){
+			    console.log(`\n今日获得【${result.data.point_total}】积分`);
+			    console.log(`\n现总积分：【${result.data.otal_point}】`);
+		            msg += `\n今日获得【${result.data.point_total}】积分`
+			    msg += `\n现总积分：【${result.data.otal_point}】`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
