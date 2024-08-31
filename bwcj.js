@@ -94,11 +94,10 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    console.log(Date.now())
-	    const ts = Date.now()
 	    const data = JSON.stringify({
 		"activityId": "947079313798000641",
 		"storeId": 49006,
-		"timestamp": ts,
+		"timestamp": "1725074610429",
 		"signature": "89F1442E5325824B9779C70195F7EB76",
 		"appid": "wxafec6f8422cb357b",
 		"store_id": 49006
