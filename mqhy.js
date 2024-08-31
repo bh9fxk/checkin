@@ -98,9 +98,16 @@ class UserInfo {
 		    res.on('data', d => {
 		        //process.stdout.write(d)
 		        let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
-		        msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
+			console.log(result)
+			if (result.success == true){
+			console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
+		        msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
+			} else {
+			    console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
+		            msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
+			}
+		        
+
 		    })
 		} else {
 		    console.log(`\n签到失败!`)
