@@ -57,7 +57,7 @@ class UserInfo {
 		        console.log(`\n登录状态：【${result.msg}】`)
 			console.log(`\n现总积分：【${result.data.integral}】`)
 			console.log(`\n已签到【${result.data.sign_num}】天`)
-		        msg += `\n用户名称：【${result.msg}】`
+		        msg += `\n登录状态：【${result.msg}】`
 			msg += `\n现总积分：【${result.data.integral}】`
 			msg += `\n已签到【${result.data.sign_num}】天`
 		    })
@@ -102,8 +102,8 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         //let result = JSON.parse(d)
-			let result = JSON.parse(d.toString())
-			console.log(d.toString())
+			let result = JSON.parse(String(d))
+			console.log(String(d))
 		        console.log(result)
 		        console.log(`\n签到结果：【${result.msg}】`);
 		        msg += `\n签到结果：【${result.msg}】`
