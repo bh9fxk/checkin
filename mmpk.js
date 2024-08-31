@@ -105,10 +105,10 @@ class UserInfo {
 			eval('('+d+')')
                         //let result = JSON.parse(aa)
 			//let result = String(d)
-			console.log(String(d))
+			//console.log(String(d))
 		        //console.log(result)
 		        //console.log(`\n签到结果：【${result.msg}】`);
-		        msg += `\n签到结果：【${result.msg}】`
+		        //msg += `\n签到结果：【${result.msg}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
