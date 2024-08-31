@@ -16,6 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -27,8 +28,8 @@ class UserInfo {
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
     async user_info() {
         try {
@@ -99,9 +100,10 @@ class UserInfo {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
-                        process.stdout.write(d)
+                        //process.stdout.write(d)
                         //let result = JSON.parse(d)
 			let result = JSON.parse(d.toString())
+			console.log(d.toString())
 		        console.log(result)
 		        console.log(`\n签到结果：【${result.msg}】`);
 		        msg += `\n签到结果：【${result.msg}】`
