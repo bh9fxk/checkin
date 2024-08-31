@@ -100,7 +100,8 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-                        let result = JSON.parse(d)
+                        //let result = JSON.parse(d)
+			let result = JSON.stringify(d)
 		        console.log(result)
 		        console.log(`\n签到结果：【${result.msg}】`);
 		        msg += `\n签到结果：【${result.msg}】`
