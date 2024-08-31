@@ -29,6 +29,8 @@ class UserInfo {
 	await $.wait(3000);
 	await this.user_point();
 	await $.wait(3000);
+	await this.user_point(); //获取签到后的积分
+	await $.wait(3000);
 	await SendMsg(msg);
     }
     async user_point() {
@@ -100,8 +102,10 @@ class UserInfo {
 		        res.on('data', d => {
 			    const jieguo = JSON.parse(d)
 			    console.log(jieguo)
-		            console.log(`\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`);
-			    msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
+		            //console.log(`\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`)
+			    //msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
+			    console.log(`\n签到成功.`)
+			    msg += `\n签到成功.`
 		        })
 		    } else {
 			res.on('data', d => {
