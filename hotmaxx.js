@@ -120,8 +120,8 @@ class UserInfo {
 				console.log(`\n已经签到过了！`);
 				msg += `\n已经签到过了！`
 			    } else {
-			        console.log(`\n签到成功，获得【${result.growValue}】`)
-				msg += `\n签到成功，获得【${result.growValue}】`
+			        console.log(`\n签到成功，获得【${result.data.growValue}】`)
+				msg += `\n签到成功，获得【${result.data.growValue}】`
 			    }
 		        })
 		    } else {
