@@ -102,9 +102,10 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
 			console.log(eval("("+d+")"))
-                        let result = JSON.parse(d)
-		        console.log(result)
-			console.log(JSON.parse(result.data))
+			console.log(d.data)
+                        //let result = JSON.parse(d)
+		        //console.log(result)
+			//console.log(JSON.parse(result.data))
 		        //console.log(`\n签到结果：【${result.msg}】`);
 		        //msg += `\n签到结果：【${result.msg}】`
 		    })
