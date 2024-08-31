@@ -3,14 +3,14 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:mmpk_ck
- * 变量值:抓包body中Token的值
+ * 变量值:抓包authori-zation的值
  * scriptVersionNow = "0.0.1";
  */
 
-const $ = new Env("金地广场签到");
+const $ = new Env("MoMoPark签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; // 1开启通知
-let ckName = "jdgc_ck";
+let ckName = "mmpk_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
@@ -33,28 +33,17 @@ class UserInfo {
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 11471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.69.1.JDJT.G.12"
-		    }
-		}
-            })
+	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'momopark.kelimx.com',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
+		path: '/api/sign/user',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'authori-zation': 'Bearer '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -64,10 +53,12 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
+		        console.log(`\n登录状态：【${result.msg}】`)
+			console.log(`\n现总积分：【${result.data.integral}】`)
+			console.log(`\n已签到【${result.data.sign_num}】天`)
+		        msg += `\n用户名称：【${result.msg}】`
+			msg += `\n现总积分：【${result.data.integral}】`
+			msg += `\n已签到【${result.data.sign_num}】天`
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
@@ -91,28 +82,17 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 11471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.69.1.JDJT.G.12"
-		    }
-		}
-            })
+	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'momopark.kelimx.com',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
+		path: '/api/sign/integral',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    authori-zation': 'Bearer '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -122,8 +102,8 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+		        console.log(`\n签到结果：【${result.msg}】`);
+		        msg += `\n签到结果：【${result.msg}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
