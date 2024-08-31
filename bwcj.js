@@ -154,8 +154,8 @@ class UserInfo {
 */
 
 async function start() {
-const tasks = userList.map(user => user.main());
-await Promise.all(tasks);
+    const tasks = userList.map(user => user.main());
+    await Promise.all(tasks);
 
     /*let taskall = [];
     for (let user of userList) {
