@@ -26,11 +26,11 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	//await this.point_info();
+	await this.point_info();
 	await $.wait(3000);
         await this.signIn();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await SendMsg(msg);
     }
 
     async point_info() {
@@ -97,7 +97,7 @@ class UserInfo {
 	    const data = JSON.stringify({
 		"activityId": "947079313798000641",
 		"storeId": 49006,
-		"timestamp": "1725074610429",
+		"timestamp": Date.now(),
 		"signature": "89F1442E5325824B9779C70195F7EB76",
 		"appid": "wxafec6f8422cb357b",
 		"store_id": 49006
