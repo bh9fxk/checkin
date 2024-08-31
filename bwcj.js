@@ -1,5 +1,5 @@
 /**
- * cron 21 0 * * *  hotmaxx.js
+ * cron 21 0 * * *  bwcj.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:bwcj_ck,&分隔两个参数
@@ -20,35 +20,34 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.userId = str.split(strSplitor)[1];
+	//this.userId = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.user_info();
-	await $.wait(3000);
-        await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	await this.point_info();
+	//await $.wait(3000);
+        //await this.signIn();
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
 
-    async user_info() {
+    async point_info() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                 "userId": this.userId,
-		 "gradeDetailflag": 0
+		"appid": "wxafec6f8422cb357b"
 	    })
 	    const options = {
-		hostname: 'openapi-gateway.hotmaxx.cn',
+		hostname: 'webapi2.qmai.cn',
 		port: 443,
-		path: '/member/member/grade/queryByUserId',
+		path: '/web/mall-apiserver/integral/user/points-info',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': this.ck
+		    'qm-user-token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -58,10 +57,10 @@ class UserInfo {
 			    //process.stdout.write(d)
 			    const result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n成长值：【${result.data.growValue}】`)
-			    console.log(`\n等级：【${result.data.gradeName}】`)
-		            msg += `\n成长值：【${result.data.growValue}】`
-			    msg += `\n等级：【${result.data.gradeName}】`
+		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
+			    console.log(`\n查询信息：【${result.message}】`)
+		            msg += `\n现总积分：【${result.data.totalPoints}】`
+			    msg += `\n查询信息：【${result.message}】`
 		        })
 		    } else {
 			res.on('data', d => {
@@ -90,6 +89,7 @@ class UserInfo {
         }
     }
 
+/*	
     async signIn() {
         try {
 	    const https = require('https')
@@ -104,7 +104,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': this.ck
+		    'qm-user-token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -151,7 +151,7 @@ class UserInfo {
         }
     }
 }
-
+*/
 
 async function start() {
 const tasks = userList.map(user => user.main());
