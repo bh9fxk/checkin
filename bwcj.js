@@ -122,15 +122,8 @@ class UserInfo {
 			    //process.stdout.write(d)
 			    const result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到结果：【${result.msg}】`);
-			    msg += `\n签到结果：【${result.msg}】`
-			    if (result.code == 10001){
-				console.log(`\n已经签到过了！`);
-				msg += `\n已经签到过了！`
-			    } else {
-			        console.log(`\n签到成功，获得【${result.data.growValue}】`)
-				msg += `\n签到成功，获得【${result.data.growValue}】`
-			    }
+		            console.log(`\n签到结果：【${result.message}】`);
+			    msg += `\n签到结果：【${result.message}】`
 		        })
 		    } else {
 			res.on('data', d => {
