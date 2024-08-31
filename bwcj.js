@@ -93,6 +93,7 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
+	    console.log(Date.now())
 	    const data = JSON.stringify({
 		"activityId": "947079313798000641",
 		"storeId": 49006,
