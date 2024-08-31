@@ -27,8 +27,8 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
 
 	await this.point_info();
-	//await $.wait(3000);
-        //await this.signIn();
+	await $.wait(3000);
+        await this.signIn();
 	//await $.wait(3000);
 	//await SendMsg(msg);
     }
@@ -89,7 +89,7 @@ class UserInfo {
         }
     }
 
-/*	
+
     async signIn() {
         try {
 	    const https = require('https')
@@ -97,9 +97,9 @@ class UserInfo {
                  "userId": this.userId
 	    })
 	    const options = {
-		hostname: 'openapi-gateway.hotmaxx.cn',
+		hostname: 'webapi2.qmai.cn',
 		port: 443,
-		path: '/member/sign/signIn',
+		path: '/web/cmk-center/sign/takePartInSign',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ class UserInfo {
         }
     }
 }
-*/
+
 
 async function start() {
     const tasks = userList.map(user => user.main());
