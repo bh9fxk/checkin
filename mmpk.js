@@ -99,7 +99,7 @@ class UserInfo {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
-                        //process.stdout.write(d)
+                        process.stdout.write(d)
                         //let result = JSON.parse(d)
 			let result = JSON.parse(d.toString())
 		        console.log(result)
