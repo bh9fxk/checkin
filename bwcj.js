@@ -96,7 +96,7 @@ class UserInfo {
 	    const data = JSON.stringify({
 		"activityId": "947079313798000641",
 		"storeId": 49006,
-		"timestamp": +new Date(),
+		"timestamp": Date.now(),
 		"signature": "89F1442E5325824B9779C70195F7EB76",
 		"appid": "wxafec6f8422cb357b",
 		"store_id": 49006
