@@ -50,10 +50,10 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'app_id': 'api.app.member,
+		    'app_id': 'api.app.member',
 		    'buildingid': 8801,
-		    'app_sign': 'E66AFC584BD72F11F2B5B2854B098853'
-		    'Content-Length': data.length,
+		    'app_sign': 'E66AFC584BD72F11F2B5B2854B098853',
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
