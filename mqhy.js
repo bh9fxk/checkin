@@ -16,7 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
-let this.ck = '';
+let ck = '';
 
 class UserInfo {
     constructor(str) {
@@ -102,7 +102,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=customer_info',
+	        path: '/saas/action/apimanager/execmulti?token='+ck+'&methods=customer_info',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=wx_customer_signin_submit',
+		path: '/saas/action/apimanager/execmulti?token='+ck+'&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
