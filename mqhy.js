@@ -52,7 +52,7 @@ class UserInfo {
 		        console.log(result)
 		        if (result.needlogin == true) {
 			    console.log(`\n【${result.message}】`)
-		            msg += `\n用户手机：【${result.message}】
+		            msg += `\n用户手机：【${result.message}】`
 		        } else {
                             console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
 		            msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
