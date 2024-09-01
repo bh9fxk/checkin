@@ -101,7 +101,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': 'Bearer '+accesstoken
+		    'Authorization': 'Bearer '+atoken
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -150,7 +150,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': 'Bearer '+accesstoken
+		    'Authorization': 'Bearer '+atoken
 		}
 	    }
 	    const req = https.request(options, res => {
