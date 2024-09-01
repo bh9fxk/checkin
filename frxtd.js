@@ -28,27 +28,32 @@ class UserInfo {
 	await this.user_token();
 	await $.wait(3000);
         await this.user_info();
-	await $.wait(3000);
-	await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await this.signIn();
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
 
 
     async user_token() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"requestId": "v5.app.member.wechat",
+		"openId": this.ck
+	    })
 
 	    const options = {
 		hostname: 'scg.wtsg.ltd',
 		port: 28088,
-		path: '/api/VipInfo/QueryVipInfoAsync',
+		path: '/api/Token/WXVIPLogin',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'app_id': 'api.app.member,
+		    'buildingid': 8801,
+		    'app_sign': 'E66AFC584BD72F11F2B5B2854B098853'
 		    'Content-Length': data.length,
-		    'Authorization': 'Bearer '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -58,16 +63,13 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.data.member_surname}】`)
-			console.log(`\n用户手机：【${result.data.telephone}】`)
-			console.log(`\n现总积分：【${result.data.current_bonus}】`) 
-		        msg += `\n用户名称：【${result.data.member_surname}】`
-			msg += `\n用户手机：【${result.data.telephone}】`
-			msg += `\n现总积分：【${result.data.current_bonus}】`
+		        accesstoken = ${result.data.accesstoken}
+			console.log(`\nToken获取成功`)
+		        msg += `\nToken获取成功`
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\nToken获取失败！`)
+		    msg += `\nToken获取失败！`
                 }
 
 	    })
@@ -99,7 +101,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': 'Bearer '+this.ck
+		    'Authorization': 'Bearer '+accesstoken
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -148,7 +150,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': 'Bearer '+this.ck
+		    'Authorization': 'Bearer '+accesstoken
 		}
 	    }
 	    const req = https.request(options, res => {
