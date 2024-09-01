@@ -105,8 +105,8 @@ class UserInfo {
                         process.stdout.write(d)
 			//let result = JSON.parse(d)
 		        //console.log(result)
-		        console.log(`\n签到`);
-		        msg += `\n签到`
+		        console.log(`\n--执行签到--`);
+		        msg += `\n--执行签到--`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
