@@ -62,8 +62,8 @@ class UserInfo {
 		        let result = JSON.parse(d)
 		        console.log(result)
 		        if (result.success = true) {
-			    console.log(result.token)
-			    this.ck = result.token
+			    //console.log(result.token)
+			    ck = result.token
 			    console.log(`\nToken获取成功`)
 		            msg += `\nToken获取成功`
 		        } else {
@@ -99,6 +99,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({})
+	    console.log(ck)
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
