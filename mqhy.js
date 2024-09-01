@@ -17,16 +17,20 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 
-
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.ckStatus = true;
+        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.appid = str.split(strSplitor)[0];
+	this.appsecret = str.split(strSplitor)[1];
+	//this.ckStatus = true;
+	this.ck = '';
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
+        await this.user_token();
+	await $.wait(3000);
+	await this.user_info();
 	await $.wait(3000);
 	//if (this.ckStatus = true){
 	    await this.signIn();
@@ -43,11 +47,11 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=customer_info',
+	        path: '/saas/action/apimanager/gettoken?appid='+this.appid+'&appsecret='+this.this.appsecret+'&account_no=602',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    //'Content-Length': data.length,
+		    'Content-Length': data.length
 	        }
 	    }
 	    const req = https.request(options, res => {
@@ -57,14 +61,13 @@ class UserInfo {
 		    res.on('data', d => {
 		        let result = JSON.parse(d)
 		        console.log(result)
-		        if (result.needlogin = true) {
-			    //this.ckStatus = false
-			    console.log(`\n【${result.message}】`)
-		            msg += `\n【${result.message}】`
+		        if (result.success = true) {
+			    this.ck = result.token
+			    console.log(`\nToken获取成功`)
+		            msg += `\nToken获取成功`
 		        } else {
-			    console.log(`\n【${result.message}】`)
-                            console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
-		            msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
+			    console.log(`\nToken获取失败！`)
+		            msg += `\nToken获取失败！`
 		        }
 		    })
 	        } else {
@@ -117,7 +120,6 @@ class UserInfo {
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
 		        } else {
-			    console.log(`\n【${result.message}】`)
                             console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
 		            msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
 		        }
