@@ -101,11 +101,11 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			let aa = process.stdout.write(d)
+			//let aa = process.stdout.write(d)
 			//console.log(d)
 			//console.log(aa)
 			    
-                        let bb = JSON.stringify(aa)
+                        //let bb = JSON.stringify(d)
 			let result = JSON.parse(bb)
 		        console.log(result.msg)
 			//console.log(JSON.parse(result.data))
