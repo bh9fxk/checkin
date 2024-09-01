@@ -50,10 +50,16 @@ class UserInfo {
 		    res.on('data', d => {
 		    let result = JSON.parse(d)
 		    console.log(result)
-		    console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
-		    msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
-		    })
-	        }else{
+		    if (needlogin == true) {
+			console.log(`\n【${result.message}】`)
+		        msg += `\n用户手机：【${result.message}】
+		    } else {
+                        console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
+		        msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
+		    }
+
+		   })
+	        } else {
 		   console.log(`\n用户查询失败!`)
 		   msg += `\n用户查询失败!`
 	        }
