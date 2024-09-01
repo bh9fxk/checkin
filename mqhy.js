@@ -54,6 +54,7 @@ class UserInfo {
 		        let result = JSON.parse(d)
 		        console.log(result)
 		        if (result.needlogin = true) {
+			    this.ckStatus = false
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
 		        } else {
