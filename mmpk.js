@@ -52,8 +52,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			let aa = JSON.stringify(String(d)）
-                        let result = JSON.parse(aa)
+                        let result = JSON.parse(d)
 		        console.log(result)
 		        console.log(`\n登录状态：【${result.msg}】`)
 			console.log(`\n现总积分：【${result.data.integral}】`)
@@ -102,7 +101,6 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			//console.log(eval("("+d+")"))
 			console.log(d.data)
                         //let result = JSON.parse(d)
 		        //console.log(result)
