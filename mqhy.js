@@ -43,12 +43,12 @@ class UserInfo {
     async user_token() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    //const data = JSON.stringify({})
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
 	        path: '/saas/action/apimanager/gettoken?appid='+this.appid+'&appsecret='+this.appsecret+'&account_no=602',
-	        method: 'POST',
+	        method: 'GET',
 	        headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length
