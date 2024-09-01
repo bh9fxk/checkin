@@ -43,7 +43,7 @@ class UserInfo {
     async user_token() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({ })
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
