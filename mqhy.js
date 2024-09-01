@@ -53,7 +53,7 @@ class UserInfo {
 		    res.on('data', d => {
 		        let result = JSON.parse(d)
 		        console.log(result)
-		        if (esult.needlogin = true) {
+		        if (result.needlogin = true) {
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
 		        } else {
