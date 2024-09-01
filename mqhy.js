@@ -16,6 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let this.ck = '';
 
 class UserInfo {
     constructor(str) {
@@ -24,7 +25,6 @@ class UserInfo {
 	this.appid = str.split(strSplitor)[0];
 	this.appsecret = str.split(strSplitor)[1];
 	//this.ckStatus = true;
-	this.ck = '';
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
