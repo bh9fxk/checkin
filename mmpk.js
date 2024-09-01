@@ -103,10 +103,10 @@ class UserInfo {
                         //process.stdout.write(d)
 			let aa = process.stdout.write(d)
 			//console.log(d)
-			console.log(aa)
+			//console.log(aa)
 			    
-                        //let result = JSON.stringify(d)
-		        //console.log(result)
+                        let result = JSON.parse(aa)
+		        console.log(result)
 			//console.log(JSON.parse(result.data))
 		        //console.log(`\n签到结果：【${result.msg}】`);
 		        //msg += `\n签到结果：【${result.msg}】`
