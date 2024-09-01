@@ -102,7 +102,7 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
 			let aa = process.stdout.write(d)
-			console.log(d)
+			//console.log(d)
 			console.log(aa)
 			    
                         //let result = JSON.stringify(d)
