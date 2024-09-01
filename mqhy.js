@@ -28,15 +28,15 @@ class UserInfo {
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
-        await this.user_token();
-	await $.wait(3000);
+        //await this.user_token();
+	//await $.wait(3000);
 	await this.user_info();
 	await $.wait(3000);
 	//if (this.ckStatus = true){
 	    await this.signIn();
 	//}
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await SendMsg(msg);
     }
 
 /*
