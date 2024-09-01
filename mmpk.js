@@ -28,8 +28,10 @@ class UserInfo {
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await this.user_info();
+	await $.wait(3000);
+	await SendMsg(msg);
     }
     async user_info() {
         try {
@@ -101,16 +103,10 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			let aa = process.stdout.write(d)
-			//console.log(d)
-			//console.log(typeof aa)
-			
-                        let bb = String(aa)
-			let result = JSON.parse(bb)
+			let result = JSON.parse(d)
 		        console.log(result)
-			//console.log(JSON.parse(result.data))
-		        //console.log(`\n签到结果：【${result.msg}】`);
-		        //msg += `\n签到结果：【${result.msg}】`
+		        console.log(`\n签到`);
+		        msg += `\n签到`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
