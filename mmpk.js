@@ -105,7 +105,7 @@ class UserInfo {
 			//console.log(d)
 			//console.log(aa)
 			    
-                        //let bb = JSON.stringify(d)
+                        let bb = JSON.stringify(d)
 			let result = JSON.parse(bb)
 		        console.log(result.msg)
 			//console.log(JSON.parse(result.data))
