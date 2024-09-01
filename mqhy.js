@@ -44,8 +44,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    console.log(this.appid)
-	    console.log(this.appsecret)
+	    console.log(this.aid)
+	    console.log(this.asecret)
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
