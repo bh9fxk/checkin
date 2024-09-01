@@ -16,6 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let accesstoken = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -24,12 +25,66 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
+	await this.user_token();
+	await $.wait(3000);
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+
+
+    async user_token() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({})
+
+	    const options = {
+		hostname: 'scg.wtsg.ltd',
+		port: 28088,
+		path: '/api/VipInfo/QueryVipInfoAsync',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Authorization': 'Bearer '+this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`\n用户名称：【${result.data.member_surname}】`)
+			console.log(`\n用户手机：【${result.data.telephone}】`)
+			console.log(`\n现总积分：【${result.data.current_bonus}】`) 
+		        msg += `\n用户名称：【${result.data.member_surname}】`
+			msg += `\n用户手机：【${result.data.telephone}】`
+			msg += `\n现总积分：【${result.data.current_bonus}】`
+		    })
+                } else {
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
 
     async user_info() {
         try {
