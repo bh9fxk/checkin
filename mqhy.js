@@ -21,22 +21,22 @@ let ck = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.appid = str.split(strSplitor)[0];
-	this.appsecret = str.split(strSplitor)[1];
+        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.aid = str.split(strSplitor)[0];
+	this.asecret = str.split(strSplitor)[1];
 	//this.ckStatus = true;
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
-        //await this.user_token();
-	//await $.wait(3000);
+        await this.user_token();
+	await $.wait(3000);
 	await this.user_info();
 	await $.wait(3000);
 	//if (this.ckStatus = true){
 	    await this.signIn();
 	//}
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
 
 
@@ -49,7 +49,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/gettoken?appid='+this.appid+'&appsecret='+this.appsecret+'&account_no=602',
+	        path: '/saas/action/apimanager/gettoken?appid='+this.aid+'&appsecret='+this.asecret+'&account_no=602',
 	        method: 'GET',
 	        headers: {
 		    'Content-Type': 'application/json',
