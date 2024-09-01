@@ -50,7 +50,7 @@ class UserInfo {
 		    res.on('data', d => {
 		        let result = JSON.parse(d)
 		        console.log(result)
-			let aa = ''+result
+			let aa = console.log(result)
 			console.log(aa)
 		        if (aa = "{ message: '会话信息无效', needlogin: true }") {
 			    console.log(`\n【${result.message}】`)
