@@ -20,12 +20,15 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.ckStatus = true;
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
         await this.user_info();
 	await $.wait(3000);
-	await this.signIn();
+	if (this.ckStatus = true){
+	    await this.signIn();
+	}
 	await $.wait(3000);
 	await SendMsg(msg);
     }
