@@ -47,7 +47,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/gettoken?appid='+this.appid+'&appsecret='+this.this.appsecret+'&account_no=602',
+	        path: '/saas/action/apimanager/gettoken?appid='+this.appid+'&appsecret='+this.appsecret+'&account_no=602',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
