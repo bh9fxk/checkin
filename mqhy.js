@@ -43,7 +43,7 @@ class UserInfo {
     async user_token() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({ })
+	    const data = JSON.stringify({})
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
@@ -51,7 +51,7 @@ class UserInfo {
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length
+		    //'Content-Length': data.length
 	        }
 	    }
 	    const req = https.request(options, res => {
