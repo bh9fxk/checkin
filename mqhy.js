@@ -26,9 +26,9 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
         await this.user_info();
 	await $.wait(3000);
-	if (this.ckStatus = true){
+	//if (this.ckStatus = true){
 	    await this.signIn();
-	}
+	//}
 	await $.wait(3000);
 	await SendMsg(msg);
     }
@@ -54,7 +54,7 @@ class UserInfo {
 		        let result = JSON.parse(d)
 		        console.log(result)
 		        if (result.needlogin = true) {
-			    this.ckStatus = false
+			    //this.ckStatus = false
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
 		        } else {
@@ -110,14 +110,15 @@ class UserInfo {
 		        let result = JSON.parse(d)
 			console.log(result)
 			if (result.success == true){
-			console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
-		        msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
-			} else {
+			    console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
+		            msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
+			} else if (result.needlogin = true) {
+			    console.log(`\n【${result.message}】`)
+		            msg += `\n【${result.message}】`
+		        } else {
 			    console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
 		            msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
 			}
-		        
-
 		    })
 		} else {
 		    console.log(`\n签到失败!`)
