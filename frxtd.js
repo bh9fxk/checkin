@@ -34,7 +34,6 @@ class UserInfo {
 	await SendMsg(msg);
     }
 
-
     async user_token() {
         try {
 	    const https = require('https')
@@ -85,8 +84,6 @@ class UserInfo {
             console.log(e);
         }
     }
-
-
 
     async user_info() {
         try {
