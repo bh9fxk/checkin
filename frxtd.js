@@ -16,7 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
-let accesstoken = '';
+let atoken = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -63,7 +63,7 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        accesstoken = ${result.data.accesstoken}
+		        atoken = result.data.accesstoken
 			console.log(`\nToken获取成功`)
 		        msg += `\nToken获取成功`
 		    })
