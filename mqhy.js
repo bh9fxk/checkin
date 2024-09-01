@@ -16,6 +16,8 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -32,6 +34,63 @@ class UserInfo {
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+
+	
+    async user_token() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({})
+	    const options = {
+	        hostname: 'vip.maky.com.cn',
+	        port: 443,
+	        path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=customer_info',
+	        method: 'POST',
+	        headers: {
+		    'Content-Type': 'application/json',
+		    //'Content-Length': data.length,
+	        }
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		
+		if (`${res.statusCode}` == 200) {
+		    res.on('data', d => {
+		        let result = JSON.parse(d)
+		        console.log(result)
+		        if (result.needlogin = true) {
+			    //this.ckStatus = false
+			    console.log(`\n【${result.message}】`)
+		            msg += `\n【${result.message}】`
+		        } else {
+			    console.log(`\n【${result.message}】`)
+                            console.log(`\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`)
+		            msg += `\n用户手机：【${result.customer_info.customer.MOBILEPHONE}】`
+		        }
+		    })
+	        } else {
+		   console.log(`\n用户查询失败!`)
+		   msg += `\n用户查询失败!`
+	        }
+
+		//res.on('data', d => {
+		    //process.stdout.write(d)
+		    //let result = JSON.parse(d)
+		    //console.log(result)
+		    //console.log(result.customer_info.customer.MOBILEPHONE)
+		//})
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+	    req.end()
+	
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+	
     async user_info() {
         try {
 	    const https = require('https')
