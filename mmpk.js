@@ -106,7 +106,7 @@ class UserInfo {
 			//console.log(aa)
 			    
                         //let bb = JSON.stringify(aa)
-			let result = JSON.parse(JSON.stringify(d))
+			let result = JSON.parse(JSON.stringify(aa))
 		        console.log(result)
 			//console.log(JSON.parse(result.data))
 		        //console.log(`\n签到结果：【${result.msg}】`);
