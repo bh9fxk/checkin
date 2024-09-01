@@ -62,6 +62,7 @@ class UserInfo {
 		        let result = JSON.parse(d)
 		        console.log(result)
 		        if (result.success = true) {
+			    console.log(result.token)
 			    this.ck = result.token
 			    console.log(`\nToken获取成功`)
 		            msg += `\nToken获取成功`
