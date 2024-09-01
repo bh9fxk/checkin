@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:frxtd_ck
- * 变量值:抓包authorization的值
+ * 变量值:抓包openId的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -28,10 +28,10 @@ class UserInfo {
 	await this.user_token();
 	await $.wait(3000);
         await this.user_info();
-	//await $.wait(3000);
-	//await this.signIn();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await this.signIn();
+	await $.wait(3000);
+	await SendMsg(msg);
     }
 
 
