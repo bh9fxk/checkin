@@ -52,7 +52,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			let aa = JSON.stringify(d）
+			let aa = JSON.stringify(String(d)）
                         let result = JSON.parse(aa)
 		        console.log(result)
 		        console.log(`\n登录状态：【${result.msg}】`)
