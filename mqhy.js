@@ -174,7 +174,7 @@ class UserInfo {
 		        //process.stdout.write(d)
 		        let result = JSON.parse(d)
 			console.log(result)
-			if (result.success == true){
+			if (result.wx_customer_signin_submit.success == true){
 			    console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
 		            msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
 			} else if (result.needlogin == true) {
