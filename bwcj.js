@@ -30,6 +30,8 @@ class UserInfo {
 	await $.wait(3000);
         await this.signIn();
 	await $.wait(3000);
+	await this.point_info(); //执行完以后再次查询积分
+	await $.wait(3000);
 	await SendMsg(msg);
     }
 
