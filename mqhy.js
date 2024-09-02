@@ -119,7 +119,7 @@ class UserInfo {
 		    res.on('data', d => {
 		        let result = JSON.parse(d)
 		        console.log(result)
-		        if (result.needlogin = true) {
+		        if (result.needlogin == true) {
 			    //this.ckStatus = false
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
@@ -177,7 +177,7 @@ class UserInfo {
 			if (result.success == true){
 			    console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
 		            msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
-			} else if (result.needlogin = true) {
+			} else if (result.needlogin == true) {
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
 		        } else {
