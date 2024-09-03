@@ -102,15 +102,15 @@ class UserInfo {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
-                        //process.stdout.write(d)
-			let result = JSON.parse(d)
-		        console.log(result)
+                        process.stdout.write(d)
+			//let result = JSON.parse(d)
+		        //console.log(result)
 		        console.log(`\n--执行签到--`);
 		        msg += `\n--执行签到--`
-			if (result.status == 200) {
+			/*if (result.status == 200) {
 			    console.log(`签到结果：【result.msg】`)
 			    msg += `签到结果：【result.msg】`
-			}
+			}*/
 		    })
                 } else {
                     console.log(`\n签到失败！`)
