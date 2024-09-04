@@ -21,15 +21,15 @@ let ck = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.aid = str.split(strSplitor)[0];
-	this.asecret = str.split(strSplitor)[1];
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	//this.aid = str.split(strSplitor)[0];
+	//this.asecret = str.split(strSplitor)[1];
 	//this.ckStatus = true;
     }
     async main() {
 	msg += `\n开始第${this.index}个账号`
-        await this.user_token();
-	await $.wait(3000);
+        //await this.user_token();
+	//await $.wait(3000);
 	await this.user_info();
 	await $.wait(3000);
 	//if (this.ckStatus = true){
@@ -39,7 +39,7 @@ class UserInfo {
 	await SendMsg(msg);
     }
 
-
+/*
     async user_token() {
         try {
 	    const https = require('https')
@@ -54,14 +54,7 @@ class UserInfo {
 	        headers: {
 		    'xweb_xhr': 1,
 		    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191',
-		    'content-type': 'application/json',
-		    'accept': '*/*',
-		    'sec-fetch-site': 'cross-site',
-		    'sec-fetch-mode': 'cors',
-		    'sec-fetch-dest': 'empty',
-		    'referer': 'https://servicewechat.com/wx7909de7d8e9fd215/73/page-frame.html',
-		    'accept-encoding': 'gzip, deflate, br',
-		    'accept-language': 'zh-CN,zh;q=0.9'
+		    'content-type': 'application/json'
 	        }
 	    }
 	    const req = https.request(options, res => {
@@ -104,7 +97,7 @@ class UserInfo {
         }
     }
 
-
+*/
     async user_info() {
         try {
 	    const https = require('https')
@@ -114,7 +107,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/execmulti?token='+ck+'&methods=customer_info',
+	        path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=customer_info',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
@@ -168,7 +161,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti?token='+ck+'&methods=wx_customer_signin_submit',
+		path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
