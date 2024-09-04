@@ -52,9 +52,16 @@ class UserInfo {
 	        path: '/saas/action/apimanager/gettoken?appid='+this.aid+'&appsecret='+this.asecret+'&account_no=602',
 	        method: 'GET',
 	        headers: {
-		    'Content-Type': 'application/json',
-		    'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191',
-		    //'Content-Length': data.length
+		    'xweb_xhr': 1,
+		    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191',
+		    'content-type': 'application/json',
+		    'accept': '*/*',
+		    'sec-fetch-site': 'cross-site',
+		    'sec-fetch-mode': 'cors',
+		    'sec-fetch-dest': 'empty',
+		    'referer': 'https://servicewechat.com/wx7909de7d8e9fd215/73/page-frame.html',
+		    'accept-encoding': 'gzip, deflate, br',
+		    'accept-language': 'zh-CN,zh;q=0.9'
 	        }
 	    }
 	    const req = https.request(options, res => {
