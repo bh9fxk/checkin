@@ -21,7 +21,7 @@ let ck = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.aid = str.split(strSplitor)[0];
 	this.asecret = str.split(strSplitor)[1];
 	//this.ckStatus = true;
