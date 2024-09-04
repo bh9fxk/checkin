@@ -54,7 +54,7 @@ class UserInfo {
 	        headers: {
 		    'Content-Type': 'application/json',
 		    'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.7(0x13080710) XWEB/1191',
-		    'Content-Length': data.length
+		    //'Content-Length': data.length
 	        }
 	    }
 	    const req = https.request(options, res => {
