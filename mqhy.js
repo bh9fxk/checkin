@@ -174,12 +174,12 @@ class UserInfo {
 		        //process.stdout.write(d)
 		        let result = JSON.parse(d)
 			console.log(result)
-			if (result.wx_customer_signin_submit.success == true){
-			    console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
-		            msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
-			} else if (result.needlogin == true) {
+			if (result.needlogin == true) {
 			    console.log(`\n【${result.message}】`)
 		            msg += `\n【${result.message}】`
+			} else if (result.wx_customer_signin_submit.success == true) {
+			    console.log(`\n已签到【${result.wx_customer_signin_submit.days}】天`);
+		            msg += `\n已签到【${result.wx_customer_signin_submit.days}】天`
 		        } else {
 			    console.log(`\n签到结果：【${result.wx_customer_signin_submit.message}】`);
 		            msg += `\n签到结果：【${result.wx_customer_signin_submit.message}】`
