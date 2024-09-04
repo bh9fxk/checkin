@@ -101,8 +101,8 @@ class UserInfo {
     async user_info() {
         try {
 	    const https = require('https')
-	    console.log(`ck值。。。。。。。。。。。。。。。`)
-	    console.log(ck)
+	    //console.log(`ck值。。。。。。。。。。。。。。。`)
+	    //console.log(ck)
 	    const data = JSON.stringify({})
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
