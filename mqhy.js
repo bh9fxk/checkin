@@ -22,8 +22,8 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	//this.aid = str.split(strSplitor)[0];
-	//this.asecret = str.split(strSplitor)[1];
+	this.aid = str.split(strSplitor)[0];
+	this.asecret = str.split(strSplitor)[1];
 	//this.ckStatus = true;
     }
     async main() {
@@ -39,7 +39,7 @@ class UserInfo {
 	await SendMsg(msg);
     }
 
-/*
+
     async user_token() {
         try {
 	    const https = require('https')
@@ -97,7 +97,7 @@ class UserInfo {
         }
     }
 
-*/	
+
     async user_info() {
         try {
 	    const https = require('https')
@@ -105,7 +105,7 @@ class UserInfo {
 	    const options = {
 	        hostname: 'vip.maky.com.cn',
 	        port: 443,
-	        path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=customer_info',
+	        path: '/saas/action/apimanager/execmulti?token='+ck+'&methods=customer_info',
 	        method: 'POST',
 	        headers: {
 		    'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'vip.maky.com.cn',
 		port: 443,
-		path: '/saas/action/apimanager/execmulti?token='+this.ck+'&methods=wx_customer_signin_submit',
+		path: '/saas/action/apimanager/execmulti?token='+ck+'&methods=wx_customer_signin_submit',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
