@@ -112,11 +112,11 @@ class UserInfo {
 			    console.log(result)
 			    if (result.success == true) {
 				console.log(`\n签到结果：【${result.msg}】`)
-				console.log(`\n获得【${result.data.integralAmount}】积分`)
-				console.log(`\n现总积分：【${result.data.count}】积分`)
+				//console.log(`\n获得【${result.data.integralAmount}】积分`)
+				//console.log(`\n现总积分：【${result.data.count}】积分`)
 			        msg += `\n签到结果：【${result.msg}】`
-				msg += `\n获得【${result.data.integralAmount}】积分`
-				msg += `\n获得【${result.data.count}】积分`    
+				//msg += `\n获得【${result.data.integralAmount}】积分`
+				//msg += `\n获得【${result.data.count}】积分`    
 			    } else {
 				console.log(`\n签到结果：【${result.msg}】`)
 				msg += `\n签到结果：【${result.msg}】`
