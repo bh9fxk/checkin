@@ -138,7 +138,7 @@ class UserInfo {
         } catch (e) {
             console.log(e);
         }
-    }
+
 }
 
 
