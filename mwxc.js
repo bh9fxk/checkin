@@ -121,7 +121,11 @@ class UserInfo {
 				console.log(`\n签到结果：【${result.msg}】`)
 				msg += `\n签到结果：【${result.msg}】`
 			    }
-	            })
+			} else {
+			    console.log(`\n签到失败！`)
+			    msg += `\n签到失败！`
+			}
+	    })
 		
 	    req.on('error', error => {
 		console.error(error)
@@ -129,7 +133,6 @@ class UserInfo {
 
 	    req.write(data)
 	    req.end()
-         )}
 		
         } catch (e) {
             console.log(e);
