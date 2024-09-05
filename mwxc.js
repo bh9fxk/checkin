@@ -121,10 +121,10 @@ class UserInfo {
 				console.log(`\n签到结果：【${result.msg}】`)
 				msg += `\n签到结果：【${result.msg}】`
 			    }
-			} else {
-			    console.log(`\n签到失败！`)
-			    msg += `\n签到失败！`
-			}
+		    } else {
+			console.log(`\n签到失败！`)
+			msg += `\n签到失败！`
+		    }
 	    })
 		
 	    req.on('error', error => {
