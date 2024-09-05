@@ -147,7 +147,7 @@ class UserInfo {
         }
     }
 
-
+}
 async function start() {
 const tasks = userList.map(user => user.main());
 await Promise.all(tasks);
