@@ -131,11 +131,7 @@ class UserInfo {
 		            console.log(`\n签到失败！`)
 			    msg += `\n签到失败！`
 		        })
-		    }
-		    
-		//res.on('data', d => {
-		    //process.stdout.write(d)
-		//})
+		    }	    
 	    })
 		
 	    req.on('error', error => {
