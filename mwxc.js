@@ -1,5 +1,5 @@
 /**
- * cron 28 0 * * *  mwxc.js
+ * cron 28 0,6 * * *  mwxc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:mwxc_ck,&分隔两个参数
@@ -16,6 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let token = ''; //token
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -26,29 +27,28 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.user_info();
+	await this.user_token();
 	await $.wait(3000);
         await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
 
-    async user_info() {
+    async user_token() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                 "userId": this.userId,
-		 "gradeDetailflag": 0
+                "userId": this.ck,
+		"type": 0
 	    })
 	    const options = {
-		hostname: 'openapi-gateway.hotmaxx.cn',
+		hostname: 'main-api.snail-tech.cn',
 		port: 443,
-		path: '/member/member/grade/queryByUserId',
+		path: '/v1/alipay/refreshToken',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -58,17 +58,17 @@ class UserInfo {
 			    //process.stdout.write(d)
 			    const result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n成长值：【${result.data.growValue}】`)
-			    console.log(`\n等级：【${result.data.gradeName}】`)
-		            msg += `\n成长值：【${result.data.growValue}】`
-			    msg += `\n等级：【${result.data.gradeName}】`
+			    console.log(`【${result.msg}】`)
+			    msg += `【${result.msg}】`
+			    console.log(`Token【${result.data}】`)
+			    token = result.data
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n用户信息查询失败！`);
-			    msg += `\n用户信息失败！`
+		            console.log(`\n用户Token获取失败！`);
+			    msg += `\n用户Token获取失败！`
 		        })
 		    }
 		    
@@ -93,18 +93,14 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-                 "userId": this.userId
-	    })
 	    const options = {
-		hostname: 'openapi-gateway.hotmaxx.cn',
+		hostname: 'main-api.snail-tech.cn',
 		port: 443,
-		path: '/member/sign/signIn',
-		method: 'POST',
+		path: '/v1/user/integral/getSigin',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'Authorization': this.ck
+		    'authorization': token
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -114,29 +110,18 @@ class UserInfo {
 			    //process.stdout.write(d)
 			    const result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到结果：【${result.msg}】`);
-			    msg += `\n签到结果：【${result.msg}】`
-			    if (result.code == 10001){
-				console.log(`\n已经签到过了！`);
-				msg += `\n已经签到过了！`
+			    if (result.success == true) {
+				console.log(`\n签到结果：【${result.msg}】`)
+				console.log(`\n获得【${result.data.integralAmount}】积分`)
+				console.log(`\n现总积分：【${result.data.count}】积分`)
+			        msg += `\n签到结果：【${result.msg}】`
+				msg += `\n获得【${result.data.integralAmount}】积分`
+				msg += `\n获得【${result.data.count}】积分`    
 			    } else {
-			        console.log(`\n签到成功，获得【${result.data.growValue}】积分`)
-				msg += `\n签到成功，获得【${result.data.growValue}】积分`
+				console.log(`\n签到结果：【${result.msg}】`)
+				msg += `\n签到结果：【${result.msg}】`
 			    }
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到失败！`);
-			    msg += `\n签到失败！`
-		        })
-		    }
-		    
-		//res.on('data', d => {
-		    //process.stdout.write(d)
-		//})
-	    })
+	            })
 		
 	    req.on('error', error => {
 		console.error(error)
