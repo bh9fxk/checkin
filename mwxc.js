@@ -129,7 +129,7 @@ class UserInfo {
 
 	    req.write(data)
 	    req.end()
-
+         )}
 		
         } catch (e) {
             console.log(e);
