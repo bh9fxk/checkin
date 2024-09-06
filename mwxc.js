@@ -120,8 +120,8 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
-	    req.end()
+	    //req.write(data)
+	    //req.end()
 
         } catch (e) {
             console.log(e);
