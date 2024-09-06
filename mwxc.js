@@ -113,8 +113,6 @@ class UserInfo {
 			    msg += `\n签到获得：【${result.data.integralAmount}】积分`
 			    msg += `\n现总积分：【${result.data.count}】积分`
 			}
-		        console.log(`\n签到结果：【${result.msg}】`);
-		        msg += `\n签到结果：【${result.msg}】`
 		    })
                 } else {
                     console.log(`\n签到失败！`)
