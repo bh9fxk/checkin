@@ -38,9 +38,10 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-                "userId": this.ck,
+		"userId": this.ck,
 		"type": 0
 	    })
+
 	    const options = {
 		hostname: 'main-api.snail-tech.cn',
 		port: 443,
@@ -48,33 +49,26 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		    if (`${res.statusCode}` == 200) {
-		        res.on('data', d => {
-			    //process.stdout.write(d)
-			    const result = JSON.parse(d)
-			    console.log(result)
-			    console.log(`【${result.msg}】`)
-			    msg += `【${result.msg}】`
-			    console.log(`Token【${result.data}】`)
-			    token = result.data
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n用户Token获取失败！`);
-			    msg += `\n用户Token获取失败！`
-		        })
-		    }
-		    
-		//res.on('data', d => {
-		    //process.stdout.write(d)
-		//})
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`【${result.msg}】`)
+			msg += `【${result.msg}】`
+			console.log(`Token【${result.data}】`)
+			token = result.data
+		    })
+                } else {
+                    console.log(`\nToken获取失败！`)
+		    msg += `\nToken获取失败！`
+                }
+
 	    })
 		
 	    req.on('error', error => {
@@ -84,16 +78,16 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
-		
         } catch (e) {
             console.log(e);
         }
     }
 
-
-    async signIn {
+    async signIn() {
         try {
 	    const https = require('https')
+	    //const data = JSON.stringify({})
+
 	    const options = {
 		hostname: 'main-api.snail-tech.cn',
 		port: 443,
@@ -101,37 +95,25 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
+		    //'Content-Length': data.length,
 		    'authorization': token
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		    if (`${res.statusCode}` == 200) {
-		        res.on('data', d => {
-			    //process.stdout.write(d)
-			    const result = JSON.parse(d)
-			    console.log(result)
-			    if (result.success == true) {
-				console.log(`\n签到结果：【${result.msg}】`)
-				console.log(`\n获得【${result.data.integralAmount}】积分`)
-				console.log(`\n现总积分：【${result.data.count}】积分`)
-			        msg += `\n签到结果：【${result.msg}】`
-				msg += `\n获得【${result.data.integralAmount}】积分`
-				msg += `\n获得【${result.data.count}】积分`    
-			    } else {
-				console.log(`\n签到结果：【${result.msg}】`)
-				msg += `\n签到结果：【${result.msg}】`
-			    }
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`\n签到结果：【${result.msg}】`);
+		        msg += `\n签到结果：【${result.msg}】`
+		    })
+                } else {
+                    console.log(`\n签到失败！`)
+		    msg += `\n签到失败！`
+                }
 
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到失败！`)
-			    msg += `\n签到失败！`
-		        })
-		    }	    
 	    })
 		
 	    req.on('error', error => {
@@ -141,16 +123,16 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
-		
         } catch (e) {
             console.log(e);
         }
     }
-
 }
+
+
 async function start() {
-const tasks = userList.map(user => user.main());
-await Promise.all(tasks);
+    const tasks = userList.map(user => user.main());
+    await Promise.all(tasks);
 
     /*let taskall = [];
     for (let user of userList) {
