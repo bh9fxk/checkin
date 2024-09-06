@@ -59,9 +59,9 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`【${result.msg}】`)
-			msg += `【${result.msg}】`
-			console.log(`Token【${result.data}】`)
+		        console.log(`\n【${result.msg}】`)
+			msg += `\n【${result.msg}】`
+			console.log(`\nToken【${result.data}】`)
 			token = result.data
 		    })
                 } else {
@@ -95,7 +95,6 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    //'Content-Length': data.length,
 		    'authorization': token
 		}
 	    }
@@ -106,6 +105,14 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
+			if (result.success == true) {
+			    console.log(`\n签到结果：【${result.msg}】`)
+			    console.log(`\n签到获得：【${result.data.integralAmount}】积分`)
+			    console.log(`\n现总积分：【${result.data.count}】积分`)
+		            msg += `\n签到结果：【${result.msg}】`
+			    msg += `\n签到获得：【${result.data.integralAmount}】积分`
+			    msg += `\n现总积分：【${result.data.count}】积分`
+			}
 		        console.log(`\n签到结果：【${result.msg}】`);
 		        msg += `\n签到结果：【${result.msg}】`
 		    })
@@ -121,7 +128,7 @@ class UserInfo {
 	    })
 
 	    //req.write(data)
-	    //req.end()
+	    req.end()
 
         } catch (e) {
             console.log(e);
