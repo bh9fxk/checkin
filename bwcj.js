@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:bwcj_ck,&分隔两个参数
- * 变量值:抓包authorization和userId的值
+ * 变量值:抓包qm-user-token和appid的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -20,7 +20,7 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	//this.userId = str.split(strSplitor)[1];
+	this.appid = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -39,7 +39,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxafec6f8422cb357b"
+		"appid": appid
 	    })
 	    const options = {
 		hostname: 'webapi2.qmai.cn',
@@ -101,7 +101,7 @@ class UserInfo {
 		"storeId": 49006,
 		"timestamp": "1725074610429",
 		"signature": "89F1442E5325824B9779C70195F7EB76",
-		"appid": "wxafec6f8422cb357b",
+		"appid": appid,
 		"store_id": 49006
 	    })
 	    const options = {
