@@ -39,7 +39,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": appid
+		"appid": this.appid
 	    })
 	    const options = {
 		hostname: 'webapi2.qmai.cn',
@@ -101,7 +101,7 @@ class UserInfo {
 		"storeId": 49006,
 		"timestamp": "1725074610429",
 		"signature": "89F1442E5325824B9779C70195F7EB76",
-		"appid": appid,
+		"appid": this.appid,
 		"store_id": 49006
 	    })
 	    const options = {
