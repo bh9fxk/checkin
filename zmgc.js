@@ -24,71 +24,13 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        //await this.user_info();
-	//await $.wait(3000);
+	    
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-/*	
-    async user_info() {
-        try {
-	    const https = require('https')
-	    const data = JSON.stringify({
-                "MallID": 10471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-		    "model": "Mac14,2",
-		    "SDKVersion": "3.3.5",
-		    "system": "Mac OS X 14.6.1",
-		    "version": "3.8.7",
-		    "miniVersion": "DZ.2.5.64.6.LCG.11"
-		    }
-		}
-            })
 
-	    const options = {
-		hostname: 'm.mallcoo.cn',
-		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
-		method: 'POST',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
-		    })
-                } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
-                }
-
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-*/
+	
     async signIn() {
         try {
 	    const https = require('https')
@@ -97,7 +39,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'a.zhimatech.com',
 		port: 443,
-		path: '/restful/mall/3785/checkInRecord',
+		path: '/restful/mall/3624/checkInRecord',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
