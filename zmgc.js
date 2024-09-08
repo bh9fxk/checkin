@@ -24,12 +24,67 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-	    
+	
+	await this.user_point()
+	await $.wait(3000)
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
 
+	
+    async user_point() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'a.zhimatech.com',
+		port: 443,
+		path: '/restful/mall/3624/items/count',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Authorization': 'Bearer '+this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+
+			if (result.code == 200) {
+			    console.log(`\n积分查询结果：【${result.msg}】`)
+			    console.log(`\n现总积分：【${result.data.end}】`)
+			    msg += `\n积分查询结果：【${result.msg}】`
+		            msg += `\n现总积分：【${result.data.end}】`
+			} else {
+			    console.log(`\n查询结果：【${result.msg}】`);
+			    console.log(`\n状态码：【${result.code}】`);
+			    msg += `\n查询结果：【${result.msg}】`
+			    msg += `\n状态码：【${result.code}】`
+			}
+		    })
+                } else {
+                    console.log(`\n签到失败！`)
+		    msg += `\n签到失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 	
     async signIn() {
         try {
