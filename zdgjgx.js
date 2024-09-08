@@ -100,7 +100,7 @@ class UserInfo {
 		    "SDKVersion": "3.3.5",
 		    "system": "Mac OS X 14.6.1",
 		    "version": "3.8.7",
-		    "miniVersion": "DZ.2.5.64.6.LCG.11"
+		    "miniVersion": "DZ.2.69.1.ZDGJ.9"
 		    }
 		}
             })
