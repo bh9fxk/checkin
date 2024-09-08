@@ -2,7 +2,7 @@
  * cron 35 0 * * *  zdgjgx.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
- * 变量名:zdgjgx_ck
+ * 变量名:zdgj_ck
  * 变量值:抓包body中Token的值
  * scriptVersionNow = "0.0.1";
  */
@@ -10,7 +10,7 @@
 const $ = new Env("中大国际高新");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; // 1开启通知
-let ckName = "zdgjgx_ck";
+let ckName = "zdgj_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
