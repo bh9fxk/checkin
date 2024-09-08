@@ -119,7 +119,7 @@ class UserInfo {
 			    console.log(`\n现总积分：【${result.data.total_point}】`)
 			    msg += `\n已签到【${result.data.num}】天`
 		            msg += `\n今日获得【${result.data.point_total}】积分`
-			    msg += `\n现总积分：【${result.data.total_point}】`
+			    //msg += `\n现总积分：【${result.data.total_point}】`
 			}
 		    })
                 } else {
