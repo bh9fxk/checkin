@@ -56,12 +56,17 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n登录状态：【${result.msg}】`)
-			console.log(`\n现总积分：【${result.data.integral}】`)
-			console.log(`\n已签到【${result.data.sign_num}】天`)
-		        msg += `\n登录状态：【${result.msg}】`
-			msg += `\n现总积分：【${result.data.integral}】`
-			msg += `\n已签到【${result.data.sign_num}】天`
+			if (result.status == 200) {
+			    console.log(`\n登录状态：【${result.msg}】`)
+			    console.log(`\n现总积分：【${result.data.integral}】`)
+			    console.log(`\n已签到【${result.data.sign_num}】天`)
+		            msg += `\n登录状态：【${result.msg}】`
+			    msg += `\n现总积分：【${result.data.integral}】`
+			    msg += `\n已签到【${result.data.sign_num}】天`
+			} else {
+			    console.log(`\n登录状态：【${result.msg}】`)
+		            msg += `\n登录状态：【${result.msg}】`
+			}
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
