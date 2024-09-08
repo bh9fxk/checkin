@@ -10,7 +10,7 @@
 const $ = new Env("中大国际高新");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; // 1开启通知
-let ckName = "zgjgx_ck";
+let ckName = "zdgjgx_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
