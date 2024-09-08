@@ -57,9 +57,9 @@ class UserInfo {
 
 			if (result.code == 200) {
 			    console.log(`\n积分查询结果：【${result.msg}】`)
-			    console.log(`\n现总积分：【${result.data.end}】`)
+			    console.log(`\n现总积分：【${result.data[0].end}】`)
 			    msg += `\n积分查询结果：【${result.msg}】`
-		            msg += `\n现总积分：【${result.data.end}】`
+		            msg += `\n现总积分：【${result.data[0].end}】`
 			} else {
 			    console.log(`\n查询结果：【${result.msg}】`);
 			    console.log(`\n状态码：【${result.code}】`);
