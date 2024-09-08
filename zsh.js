@@ -29,8 +29,10 @@ class UserInfo {
        	await this.user_point();
 	await $.wait(3000);
 	await this.signIn();
+	console.log(`\n-----查询签到后积分-----`)
+	msg += `\n-----查询签到后积分-----`
 	await $.wait(3000);
-	await this.user_point(); //获取签到后的积分
+	await this.user_point();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
