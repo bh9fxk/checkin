@@ -1,5 +1,5 @@
 /**
- * cron 31 0 * * *  jdgc.js
+ * cron 31 0 * * *  jtc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:jtc_ck
