@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:jtc_ck
- * 变量值:抓包body中Token的值
+ * 变量值:抓包body中userId和token的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -19,38 +19,30 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+        this.userid = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.ck = str.split(strSplitor)[0];
     }
+
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
+        await this.user_point();
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-    async user_info() {
+    async user_point() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 11471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.69.1.JDJT.G.12"
-		    }
-		}
+		"userId": this.userid
             })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'sytgate.jslife.com.cn',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
+		path: '/base-gateway/integral/v2/balance/query',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -64,14 +56,17 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
+			if (result.success == true) {
+			    console.log(`\n现总积分：【${result.data.accountAmt}】`)
+			    msg += `\n现总积分：【${result.data.accountAmt}】`
+			} else {
+			    console.log(`\n积分查询结果：【${result.message}】`)
+			    msg += `\n现总积分：【${result.message}】`
+			}
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\n积分查询失败！`)
+		    msg += `\n积分查询失败！`
                 }
 
 	    })
@@ -92,23 +87,17 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 11471,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.69.1.JDJT.G.12"
-		    }
-		}
+		"userId": this.userid,
+		"taskNo": "T00",
+		"reqSource": "WX_XCX_JTC",
+		"platformType": "WX_XCX_JTC",
+		"osType": "ANDROID",
             })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'sytgate.jslife.com.cn',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
+		path: '/base-gateway/integral/v2/task/receive',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -122,8 +111,13 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+			if (result.success == true) {
+			    console.log(`\n签到获得：【${result.data}】积分`)
+		            msg += `\n签到结果：【${result.data}】积分'
+			} else {
+                            console.log(`\n签到结果：【${result.message}】`);
+		            msg += `\n签到结果：【${result.message}】`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
