@@ -113,9 +113,9 @@ class UserInfo {
 		        console.log(result)
 			if (result.success == true) {
 			    console.log(`\n签到获得：【${result.data}】积分`)
-		            msg += `\n签到结果：【${result.data}】积分'
+		            msg += `\n签到结果：【${result.data}】积分`
 			} else {
-                            console.log(`\n签到结果：【${result.message}】`);
+                            console.log(`\n签到结果：【${result.message}】`)
 		            msg += `\n签到结果：【${result.message}】`
 			}
 		    })
