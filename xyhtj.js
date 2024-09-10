@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:xyhtj_ck
- * 变量值:抓包X-Gaia-Api-Key、token、X-GAIA-API-KEY的值
+ * 变量值:抓包gw2c-hw-open.longfor.com中X-Gaia-Api-Key、token的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -21,35 +21,36 @@ class UserInfo {
         this.index = ++userIdx;
         this.api1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1];
-	this.api2 = str.split(strSplitor)[2];
+	//this.api2 = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_point();
+        await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
 	//await $.wait(3000);
 	//await SendMsg(msg);
     }
-    async user_point() {
+    async user_info() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"token": this.token,
-		"channel": "C2",
-		"bu_code": "C20400"
+		"data": {
+		    "projectId": "876BD8DE-295C-E311-8D79-0050568001F7"
+		}
             })
 
 	    const options = {
 		hostname: 'longzhu-api.longfor.com',
 		port: 443,
-		path: '/lmember-member-open-api-prod/api/member/v1/balance',
+		path: '/riyuehu-miniapp-prod/service/ryh/user/info',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'X-Gaia-Api-Key': this.api1
+		    'X-Gaia-Api-Key': this.api1,
+		    'token': this.token
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -59,9 +60,12 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        
-			console.log(`\n现总积分：【${result.data.balance}】`)
-			msg += `\n现总积分：【${result.data.balance}】`
+			console.log(`\n用户名称：【${result.data.nickName}】`)
+			console.log(`\n用户手机：【${result.data.mobile}】`)
+			console.log(`\n现总积分：【${result.data.lzBalance}】`)
+			msg += `\n用户名称：【${result.data.nickName}】`
+			msg += `\n用户手机：【${result.data.mobile}】`
+			msg += `\n现总积分：【${result.data.lzBalance}】`
 		    })
                 } else {
                     console.log(`\n积分查询失败！`)
@@ -98,7 +102,7 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'X-LF-UserToken': this.token,
-		    'X-GAIA-API-KEY': this.api2,
+		    'X-GAIA-API-KEY': this.api1,
 		    'X-LF-Bu-Code': 'C20400',
 		    'X-LF-DXRisk-Source': 5,
 		    'X-LF-Channel': 'C2'
@@ -111,8 +115,13 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        //console.log(`\n签到结果：【${result.d.Msg}】`);
-		        //msg += `\n签到结果：【${result.d.Msg}】`
+			if (result.data.is_popup == 1) {
+			    console.log(`\n签到获得【${result.data.reward_info[0].reward_num}】成长值`)
+		            msg += `\n签到获得【${result.data.reward_info[0].reward_num}】成长值`
+			} else {
+			    console.log(`\n请检查签到结果！`)
+			    msg += `\n请检查签到结果！`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
