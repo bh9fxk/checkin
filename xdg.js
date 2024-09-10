@@ -126,7 +126,7 @@ class UserInfo {
 			    msg += `\n现总积分：【${result.data.totalIntegral}】积分`
 			} else {
 			    console.log(`\n签到结果：【${result.msg}】`)
-			    msg += `签到结果：【${result.msg}】`
+			    msg += `\n签到结果：【${result.msg}】`
 			}
 		    })
                 } else {
