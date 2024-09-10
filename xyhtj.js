@@ -21,7 +21,7 @@ class UserInfo {
         this.index = ++userIdx;
         this.api1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1];
-	//this.api2 = str.split(strSplitor)[2];
+	this.api2 = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -102,7 +102,7 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'X-LF-UserToken': this.token,
-		    'X-GAIA-API-KEY': this.api1,
+		    'X-GAIA-API-KEY': this.api2,
 		    'X-LF-Bu-Code': 'C20400',
 		    'X-LF-DXRisk-Source': 5,
 		    'X-LF-Channel': 'C2'
