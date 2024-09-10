@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:xdg_ck
- * 变量值:抓包gw2c-hw-open.longfor.com中X-Gaia-Api-Key、token的值
+ * 变量值:抓包body中openid、cardNo、mobile的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -19,19 +19,21 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.api1 = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.token = str.split(strSplitor)[1];
-	this.api2 = str.split(strSplitor)[2];
+        this.openid = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.cardno = str.split(strSplitor)[1];
+	this.mobile = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
-	await $.wait(3000);
+        //await this.user_info();
+	//await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+
+/*
     async user_info() {
         try {
 	    const https = require('https')
@@ -85,27 +87,27 @@ class UserInfo {
             console.log(e);
         }
     }
+*/
 
     async signIn() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activity_no": "11111111111686241863606037740000"
+		"openid": this.openid,
+		"marketId": "13020",
+		"cardNo": this.cardno,
+		"mobile": this.mobile,
+		"channelId": 1089
             })
 
 	    const options = {
-		hostname: 'gw2c-hw-open.longfor.com',
+		hostname: 'appsmall.rtmap.com',
 		port: 443,
-		path: '/lmarketing-task-api-mvc-prod/openapi/task/v1/signature/clock',
+		path: '/sign/signRecord',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-LF-UserToken': this.token,
-		    'X-GAIA-API-KEY': this.api2,
-		    'X-LF-Bu-Code': 'C20400',
-		    'X-LF-DXRisk-Source': 5,
-		    'X-LF-Channel': 'C2'
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -115,12 +117,16 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.data.is_popup == 1) {
-			    console.log(`\n签到获得【${result.data.reward_info[0].reward_num}】成长值`)
-		            msg += `\n签到获得【${result.data.reward_info[0].reward_num}】成长值`
+			if (result.code == 200) {
+			    console.log(`\n签到结果:【${result.msg}】【${result.data.today}】`)
+			    console.log(`\n签到获得【${result.data.todayIntegral}】积分`)
+			    console.log(`\n现总积分：【${result.data.totalIntegral}】积分`)
+		            msg += `\n签到结果:【${result.msg}】【${result.data.today}】`
+			    msg += `\n签到获得【${result.data.todayIntegral}】积分`
+			    msg += `\n现总积分：【${result.data.totalIntegral}】积分`
 			} else {
-			    console.log(`\n请检查签到结果！`)
-			    msg += `\n请检查签到结果！`
+			    console.log(`\n签到结果：【${result.msg}】`)
+			    msg += `签到结果：【${result.msg}】`
 			}
 		    })
                 } else {
