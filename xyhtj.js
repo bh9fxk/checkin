@@ -42,7 +42,7 @@ class UserInfo {
             })
 
 	    const options = {
-		hostname: 'longzhu-api.longfor.com',
+		hostname: 'gw2c-hw-open.longfor.com',
 		port: 443,
 		path: '/riyuehu-miniapp-prod/service/ryh/user/info',
 		method: 'POST',
