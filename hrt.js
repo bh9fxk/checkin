@@ -36,8 +36,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		this.ck1+
-		}
+		this.ck1
             })
 
 	    const options = {
