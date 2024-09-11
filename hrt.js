@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:hrt_ck
- * 变量值:抓包gw2c-hw-open.longfor.com中X-Gaia-Api-Key、token的值
+ * 变量值:抓包body全部的值
  * scriptVersionNow = "0.0.1";
  */
 
