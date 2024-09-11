@@ -19,40 +19,35 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.api1 = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.token = str.split(strSplitor)[1];
-	this.api2 = str.split(strSplitor)[2];
-	this.risktoken = str.split(strSplitor)[3];
-	this.risktoken1 = str.split(strSplitor)[4];
+        this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.ck2 = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
-	await $.wait(3000);
+        // 先签后查分
 	await this.signIn();
+	await $.wait(3000);
+	await this.user_point();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-    async user_info() {
+    async user_point() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"data": {
-		    "projectId": "876BD8DE-295C-E311-8D79-0050568001F7"
+		this.ck1
 		}
             })
 
 	    const options = {
-		hostname: 'gw2c-hw-open.longfor.com',
+		hostname: 'mid.huaruntong.cn',
 		port: 443,
-		path: '/riyuehu-miniapp-prod/service/ryh/user/info',
+		path: '/api/points/querySummary',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-Gaia-Api-Key': this.api1,
-		    'token': this.token
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -62,12 +57,17 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			console.log(`\n用户名称：【${result.data.nickName}】`)
-			console.log(`\n用户手机：【${result.data.mobile}】`)
-			console.log(`\n现总积分：【${result.data.lzBalance}】`)
-			msg += `\n用户名称：【${result.data.nickName}】`
-			msg += `\n用户手机：【${result.data.mobile}】`
-			msg += `\n现总积分：【${result.data.lzBalance}】`
+			if (result.code == 'S0A00000') {
+			    console.log(`\n查询结果：【${result.msg}】`)
+			    console.log(`\n现总积分：【${result.data.data.cPoints.points}】`)
+			    console.log(`\n现可用积分：【${result.data.data.cPoints.availablePoints}】`)
+			    msg += `\n查询结果：【${result.msg}】`
+			    msg += `\n查询结果：【${result.data.data.cPoints.points}】`
+			    msg += `\n查询结果：【${result.data.data.cPoints.availablePoints}】`
+			} else {
+			    console.log(`\n查询结果：【${result.msg}】`)
+			    msg += `\n查询结果：【${result.msg}】`
+			}
 		    })
                 } else {
                     console.log(`\n积分查询失败！`)
@@ -92,24 +92,17 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activity_no": "11111111111686241863606037740000"
+		this.ck2
             })
 
 	    const options = {
-		hostname: 'gw2c-hw-open.longfor.com',
+		hostname: 'mid.huaruntong.cn',
 		port: 443,
-		path: '/lmarketing-task-api-mvc-prod/openapi/task/v1/signature/clock',
+		path: '/api/points/saveQuestionSignin',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-LF-UserToken': this.token,
-		    'X-GAIA-API-KEY': this.api2,
-		    'X-LF-Bu-Code': 'C20400',
-		    'X-LF-DXRisk-Source': 5,
-		    'X-LF-Channel': 'C2',
-		    'X-LF-DXRisk-Token': this.risktoken,
-		    'X-LF-DXRisk-Captcha-Token': this.risktoken1
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -119,12 +112,12 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.data.is_popup == 1) {
-			    console.log(`\n签到获得【${result.data.reward_info[0].reward_num}】成长值`)
-		            msg += `\n签到获得【${result.data.reward_info[0].reward_num}】成长值`
+			if (result.code == 'S0A00000') {
+			    console.log(`\n签到获得【${result.data.point}】积分`)
+		            msg += `\n签到获得【${result.data.point}】积分`
 			} else {
-			    console.log(`\n请检查签到结果！`)
-			    msg += `\n请检查签到结果！`
+			    console.log(`\n签到结果：【${result.msg}】`)
+			    msg += `\n签到结果：【${result.msg}】`
 			}
 		    })
                 } else {
