@@ -22,6 +22,7 @@ class UserInfo {
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1];
     }
+
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
@@ -32,6 +33,8 @@ class UserInfo {
 	await $.wait(3000);
 	console.log(`\n-----查询签到后积分-----`)
 	msg += `\n-----查询签到后积分-----`
+	await this.signIn_day();
+	await $.wait(3000);
 	await this.user_point();
 	await $.wait(3000);
 	await SendMsg(msg);
@@ -79,6 +82,7 @@ class UserInfo {
         }
     }
 
+
     async signIn() {
         try {
 	    const https = require('https')
@@ -109,6 +113,65 @@ class UserInfo {
 			    //msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
 			    console.log(`\n签到成功.`)
 			    msg += `\n签到成功.`
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到失败：【${result.error}】`);
+			    msg += `\n签到失败：【${result.error}】`
+		        })
+		    }
+		    
+		//res.on('data', d => {
+		    //process.stdout.write(d)
+		//})
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+		
+        } catch (e) {
+            console.log(e);
+        }
+    }
+	
+    async signIn_day() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+                "campaignId": "2799365216249249792"
+	    })
+	    const options = {
+		hostname: 'activity-prd.saas.cmsk1979.com',
+		port: 443,
+		path: '/api/marketing/campaign/v1/info',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Cookie': this.token
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		    if (`${res.statusCode}` == 200) {
+		        res.on('data', d => {
+			    process.stdout.write(d)
+			    const jieguo = JSON.parse(d)
+			    console.log(jieguo)
+			    //if (jieguo.success == true) {
+				//console.log(`\n已签到【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】`)
+			    //}
+		            //console.log(`\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`)
+			    //msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
+			    //console.log(`\n签到成功.`)
+			    //msg += `\n签到成功.`
 		        })
 		    } else {
 			res.on('data', d => {
