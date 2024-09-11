@@ -1,5 +1,5 @@
 /**
- * cron 27 0 * * *  zsh.js
+ * cron 31 0 * * *  zsh.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:zsh_ck,&分隔两个参数
