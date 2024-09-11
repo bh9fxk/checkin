@@ -1,5 +1,5 @@
 /**
- * cron 36 0 * * *  zdgjndj.js
+ * cron 29 0 * * *  zdgjndj.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:zdgj_ck
