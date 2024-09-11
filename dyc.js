@@ -1,5 +1,5 @@
 /**
- * cron 45 0 * * *  dyc.js
+ * cron 36 0 * * *  dyc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:dyc_ck
