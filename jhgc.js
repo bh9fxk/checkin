@@ -1,5 +1,5 @@
 /**
- * cron 53 0 * * *  jhgc.js
+ * cron 19 0 * * *  jhgc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:jhgc_ck
