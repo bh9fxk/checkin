@@ -1,5 +1,5 @@
 /**
- * cron 39 0 * * *  mqhy.js
+ * cron 23 0 * * *  mqhy.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:mqhy_ck
