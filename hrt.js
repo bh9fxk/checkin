@@ -21,6 +21,7 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.ck2 = str.split(strSplitor)[1];
+	this.ck3 = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -35,7 +36,19 @@ class UserInfo {
     async user_point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify(${this.ck1})
+	    const data = JSON.stringify({
+		"auth": {
+		    "appid": "API_AUTH_H5",
+		    "nonce": "af6c130a-d3fd-465c-af1d-b518eb34c256",
+		    "timestamp": 1726021210022,
+		    "signature": "13f1a76b8fbe4f832520924336a61f7d"
+		},
+		"channelId": "APP",
+		"sysId": "T0000001",
+		"transactionUuid": "6f4a166e-13c2-40c2-9dbb-9d2e3a2d3794",
+		"pointsType": "100000",
+		"token": this.ck1
+	    })
 
 	    const options = {
 		hostname: 'mid.huaruntong.cn',
@@ -89,7 +102,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		this.ck2
+		'key': this.ck2,
+		'data': this.ck3
             })
 
 	    const options = {
