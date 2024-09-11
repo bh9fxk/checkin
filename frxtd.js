@@ -1,5 +1,5 @@
 /**
- * cron 57 0 * * *  frxtd.js
+ * cron 37 0 * * *  frxtd.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:frxtd_ck
