@@ -35,9 +35,7 @@ class UserInfo {
     async user_point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		+this.ck1+
-            })
+	    const data = JSON.stringify({+this.ck1+})
 
 	    const options = {
 		hostname: 'mid.huaruntong.cn',
