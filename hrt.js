@@ -115,7 +115,7 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'X-Hrt-Mid-Appid': 'API_AUTH_WEB',
-		    'X-HRT-MID-NEWRISK': newRisk
+		    'X-HRT-MID-NEWRISK': 'newRisk'
 		}
 	    }
 	    const req = https.request(options, res => {
