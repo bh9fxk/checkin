@@ -121,8 +121,8 @@ class UserInfo {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到失败：【${result.error}】`);
-			    msg += `\n签到失败：【${result.error}】`
+		            console.log(`\n签到结果：【${result.error}】`);
+			    msg += `\n签到结果：【${result.error}】`
 		        })
 		    }
 		    
@@ -169,8 +169,8 @@ class UserInfo {
 			    const jieguo = JSON.parse(d)
 			    console.log(jieguo)
 			    if (jieguo.success == true) {
-				console.log(`\n已签到【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】`)
-				msg += `\n已签到【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】`
+				console.log(`\n已连续签到：【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】天`)
+				msg += `\n已连续签到：【${jieguo.result.campaignCapabilities[0].signNumConsecutive}天】`
 			    }
 		        })
 		    } else {
