@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:yhczz_ck
- * 变量值:抓包body全部的值
+ * 变量值:抓包jysessionid、access_token的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -28,8 +28,8 @@ class UserInfo {
         // 先签后查分
 	await this.signIn();
 	await $.wait(3000);
-	await this.user_point();
-	await $.wait(3000);
+	//await this.user_point();
+	//await $.wait(3000);
 	await SendMsg(msg);
     }
 /*
@@ -103,20 +103,19 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		'key': this.ck2,
-		'data': this.ck3
+		"taskId": 930,
+		"shopId": "9367",
+		"taskCode": "9yue-HYRW-24"
             })
 
 	    const options = {
-		hostname: 'mid.huaruntong.cn',
+		hostname: 'api.yonghuivip.com',
 		port: 443,
-		path: '/api/points/saveQuestionSignin',
+		path: 'web/member/task/doTask?platform=wechatminiprogram&jysessionid='+this.ck1+'&access_token='+this.ck2,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-Hrt-Mid-Appid': 'API_AUTH_WEB',
-		    'X-HRT-MID-NEWRISK': 'newRisk'
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -126,12 +125,14 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.code == 'S0A00000') {
-			    console.log(`\n签到获得【${result.data.point}】积分`)
-		            msg += `\n签到获得【${result.data.point}】积分`
+			if (result.code == 100000) {
+			    console.log(`\n签到结果：【${result.message}】`)
+			    //console.log(`\n签到获得【${result.data.point}】积分`)
+		            msg += `\n签到结果：【${result.message}】`
+			    
 			} else {
-			    console.log(`\n签到结果：【${result.msg}】`)
-			    msg += `\n签到结果：【${result.msg}】`
+			    console.log(`\n签到结果：【${result.message}】`)
+			    msg += `\n签到结果：【${result.message}】`
 			}
 		    })
                 } else {
