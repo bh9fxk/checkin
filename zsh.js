@@ -39,6 +39,7 @@ class UserInfo {
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+
     async user_point() {
         try {
 	    const https = require('https')
@@ -111,10 +112,10 @@ class UserInfo {
 			    process.stdout.write(d)
 			    const jieguo = JSON.parse(d)
 			    console.log(jieguo)
-		            //console.log(`\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`)
-			    //msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
-			    console.log(`\n签到成功.`)
-			    msg += `\n签到成功.`
+		            console.log(`\n签到成功，获得【${jieguo.result.actionList[0].resultList[0].prizeName}】`)
+			    msg += `\n签到成功，获得【${jieguo.result.actionList[0].resultList[0].prizeName}】`
+			    //console.log(`\n签到成功.`)
+			    //msg += `\n签到成功.`
 		        })
 		    } else {
 			res.on('data', d => {
@@ -167,13 +168,10 @@ class UserInfo {
 			    process.stdout.write(d)
 			    const jieguo = JSON.parse(d)
 			    console.log(jieguo)
-			    //if (jieguo.success == true) {
-				//console.log(`\n已签到【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】`)
-			    //}
-		            //console.log(`\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`)
-			    //msg += `\n签到成功，获得【${jieguo.result.actionList.resultList.prizeName}】`
-			    //console.log(`\n签到成功.`)
-			    //msg += `\n签到成功.`
+			    if (jieguo.success == true) {
+				console.log(`\n已签到【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】`)
+				msg += `\n已签到【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】`
+			    }
 		        })
 		    } else {
 			res.on('data', d => {
