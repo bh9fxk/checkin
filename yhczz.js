@@ -111,7 +111,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'api.yonghuivip.com',
 		port: 443,
-		path: 'web/member/task/doTask?platform=wechatminiprogram&jysessionid='+this.ck1+'&access_token='+this.ck2,
+		path: '/web/member/task/doTask?platform=wechatminiprogram&jysessionid='+this.ck1+'&access_token='+this.ck2,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
