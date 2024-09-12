@@ -21,7 +21,6 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.ck2 = str.split(strSplitor)[1];
-	this.ck3 = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -33,6 +32,7 @@ class UserInfo {
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+/*
     async user_point() {
         try {
 	    const https = require('https')
@@ -98,6 +98,7 @@ class UserInfo {
         }
     }
 
+*/
     async signIn() {
         try {
 	    const https = require('https')
