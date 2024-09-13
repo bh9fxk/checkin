@@ -20,7 +20,6 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	//this.token = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -35,15 +34,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 10895,
+		"MallId": 12023,
 		"Header": {
 		    "Token": this.ck,
 		    "systemInfo": {
 			"model": "Mac14,2",
 			"SDKVersion": "3.3.5",
 			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
+			"version": "3.8.8",
+			"miniVersion": "2.69.1"
 		    }
 		}
             })
@@ -93,15 +92,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 10895,
+		"MallId": 12023,
 		"Header": {
 		    "Token": this.ck,
 		    "systemInfo": {
 			"model": "Mac14,2",
 			"SDKVersion": "3.3.5",
 			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
+			"version": "3.8.8",
+			"miniVersion": "2.69.1"
 		    }
 		}
             })
