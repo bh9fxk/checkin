@@ -187,8 +187,8 @@ class UserInfo {
 			msg += `\n签到获得总积分：【${result.d.CheckinBonusSum}】`
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\n签到信息查询失败！`)
+		    msg += `\n签到信息查询失败！`
                 }
 
 	    })
