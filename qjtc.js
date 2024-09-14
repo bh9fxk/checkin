@@ -69,6 +69,7 @@ class UserInfo {
 			    
 			    days = jieguo.result.days //获取签到天数
 			    ++days
+			
 			} else {
 			    console.log(`\n签到信息查询：【${jieguo.message}】`)
 			    msg += `\n签到信息查询：【${jieguo.message}】`
@@ -120,7 +121,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-                        let result = JSON.parse(d)
+                        let jieguo = JSON.parse(d)
 		        console.log(jieguo)
 			if (jieguo.code == 0) {
 			    console.log(`\n签到结果：【${jieguo.message}】`)
