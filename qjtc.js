@@ -16,45 +16,37 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let days = ''; //签到天数
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.userid = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
+        await this.signin_info();
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
-    async user_info() {
+	
+    async signin_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 12023,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.8",
-			"miniVersion": "2.69.1"
-		    }
-		}
-            })
+	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'admin.qujiangparking.cn',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
+		path: '/onet-app/vip/sign/query?userId='+this.userid,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'authKey': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -62,16 +54,25 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
+                        let jieguo = JSON.parse(d)
+		        console.log(jieguo)
+			if (result.code == 0) {
+			    
+			    console.log(`\n签到信息查询：【${jieguo.message}】`)
+			    console.log(`\n已签到：【${jieguo.result.days}】天`)
+			    msg += `\n签到信息查询：【${jieguo.message}】`
+			    msg += `\n已签到：【${jieguo.result.days}】天`
+			    
+			    days = jieguo.result.days //获取签到天数
+			    ++days
+			} else {
+			    console.log(`\n签到信息查询：【${jieguo.message}】`)
+			    msg += `\n签到信息查询：【${jieguo.message}】`
+			}
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\n签到信息查询失败！`)
+		    msg += `\n签到信息查询失败！`
                 }
 
 	    })
@@ -91,28 +92,23 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
+	    console.log(days)
 	    const data = JSON.stringify({
-		"MallId": 12023,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.8",
-			"miniVersion": "2.69.1"
-		    }
-		}
+		"userId": this.userid,
+		"days": days,
+		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
+		"openFlag": true
             })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'admin.qujiangparking.cn',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
+		path: '/onet-app/vip/sign/action',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'authKey': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -121,9 +117,14 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+		        console.log(jieguo)
+			if (jieguo.code == 0) {
+			    console.log(`\n签到结果：【${jieguo.message}】`)
+			    msg += `\n签到结果：【${jieguo.message}】`
+			} else {
+			    console.log(`\n请检查签到结果！`)
+			    msg += `\n请检查签到结果！`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
