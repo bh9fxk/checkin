@@ -167,7 +167,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'm.mallcoo.cn',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
+		path: '/api/user/User/GetCheckinDetail',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
