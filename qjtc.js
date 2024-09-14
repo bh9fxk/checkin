@@ -100,10 +100,11 @@ class UserInfo {
 	    console.log(days)
 	    const data = JSON.stringify({
 		"userId": this.userid,
-		"days": +days,
+		"days": days,
 		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
 		"openFlag": true
             })
+	    console.log(data)
 
 	    const options = {
 		hostname: 'admin.qujiangparking.cn',
