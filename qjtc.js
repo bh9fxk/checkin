@@ -68,7 +68,7 @@ class UserInfo {
 			    msg += `\n已签到：【${jieguo.result.days}】天`
 			    
 			    days = jieguo.result.days //获取签到天数
-			    days = ++days
+			    ++days
 			
 			} else {
 			    console.log(`\n签到信息查询：【${jieguo.message}】`)
@@ -100,9 +100,9 @@ class UserInfo {
 	    console.log(days)
 	    const data = JSON.stringify({
 		"userId": this.userid,
-		"days": days,
-		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
-		"openFlag": true
+		"days": days
+		//"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
+		//"openFlag": true
             })
 	    console.log(data)
 
