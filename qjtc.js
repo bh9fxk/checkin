@@ -100,8 +100,8 @@ class UserInfo {
 	    console.log(days)
 	    const data = JSON.stringify({
 		"userId": this.userid,
-		"days": days,
-		"signConfig": '"{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}"',
+		"days": console.log(days),
+		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
 		"openFlag": true
             })
 
