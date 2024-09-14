@@ -17,6 +17,7 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 let days = ''; //签到天数
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -59,7 +60,7 @@ class UserInfo {
                         //process.stdout.write(d)
                         let jieguo = JSON.parse(d)
 		        console.log(jieguo)
-			if (result.code == 0) {
+			if (jieguo.code == 0) {
 			    
 			    console.log(`\n签到信息查询：【${jieguo.message}】`)
 			    console.log(`\n已签到：【${jieguo.result.days}】天`)
