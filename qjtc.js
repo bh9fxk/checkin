@@ -33,8 +33,8 @@ class UserInfo {
 	await $.wait(3000);
 	console.log(`\n-----再次获取签到信息-----\n`)
 	await this.signin_info();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await SendMsg(msg);
     }
 	
     async signin_info() {
@@ -97,14 +97,14 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    console.log(days)
+	    //console.log(days)
 	    const data = JSON.stringify({
 		"userId": this.userid,
 		"days": days
 		//"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
 		//"openFlag": true
             })
-	    console.log(data)
+	    //console.log(data)
 
 	    const options = {
 		hostname: 'admin.qujiangparking.cn',
