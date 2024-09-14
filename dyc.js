@@ -20,7 +20,6 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	//this.token = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -29,8 +28,11 @@ class UserInfo {
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
+	await $.wait(3000);
+	await signin_info();
 	await SendMsg(msg);
     }
+	
     async user_info() {
         try {
 	    const https = require('https')
@@ -144,8 +146,65 @@ class UserInfo {
             console.log(e);
         }
     }
-}
 
+    async signin_info() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"MallId": 10895,
+		"Header": {
+		    "Token": this.ck,
+		    "systemInfo": {
+			"model": "Mac14,2",
+			"SDKVersion": "3.3.5",
+			"system": "Mac OS X 14.6.1",
+			"version": "3.8.7",
+			"miniVersion": "DZ.2.66.7.XADYC.13"
+		    }
+		}
+            })
+
+	    const options = {
+		hostname: 'm.mallcoo.cn',
+		port: 443,
+		path: '/api/user/user/GetUserAndMallCard',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`\n已连续签到：【${result.d.ContinueDay}】`)
+			console.log(`\n签到获得总积分：【${result.d.CheckinBonusSum}】`)
+		        msg += `\n已连续签到：【${result.d.ContinueDay}】`
+			msg += `\n签到获得总积分：【${result.d.CheckinBonusSum}】`
+		    })
+                } else {
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
 
 async function start() {
 const tasks = userList.map(user => user.main());
