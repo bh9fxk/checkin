@@ -128,8 +128,8 @@ class UserInfo {
 			    console.log(`\n签到结果：【${jieguo.message}】`)
 			    msg += `\n签到结果：【${jieguo.message}】`
 			} else {
-			    console.log(`\n请检查签到结果！`)
-			    msg += `\n请检查签到结果！`
+			    console.log(`\n请检查签到结果！结果码：${jieguo.code}】`)
+			    msg += `\n请检查签到结果！结果码：【${jieguo.code}】`
 			}
 		    })
                 } else {
