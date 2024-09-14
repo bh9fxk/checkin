@@ -28,6 +28,8 @@ class UserInfo {
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
+	await signin_info();
+	await $.wait(3000);
 	await SendMsg(msg);
     }
     async user_info() {
