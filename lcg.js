@@ -181,10 +181,10 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 			
-		        console.log(`\n已连续签到：【${result.d.ContinueDay}】`)
-			console.log(`\n签到获得总积分：【${result.d.CheckinBonusSum}】`)
-		        msg += `\n已连续签到：【${result.d.ContinueDay}】`
-			msg += `\n签到获得总积分：【${result.d.CheckinBonusSum}】`
+		        console.log(`\n已连续签到：【${result.d.ContinueDay}】天`)
+			console.log(`\n签到总积分：【${result.d.CheckinBonusSum}】`)
+		        msg += `\n已连续签到：【${result.d.ContinueDay}】天`
+			msg += `\n签到总积分：【${result.d.CheckinBonusSum}】`
 		    })
                 } else {
                     console.log(`\n签到信息查询失败！`)
