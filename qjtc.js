@@ -72,11 +72,11 @@ class UserInfo {
 			    console.log(`\n信息查询：【${jieguo.message}】`)
 			    console.log(`\n登录名称：【${jieguo.result.dlmc}】`)
 			    console.log(`\n现成长值：【${jieguo.result.xyjf}】`)
-			    console.log(`\n现总积分：【${jieguo.result.vipScores}/10】`)
+			    console.log(`\n现总积分：【${jieguo.result.vipScores} / 10】`)
 			    msg += `\n信息查询：【${jieguo.message}】`
 			    msg += `\n登录名称：【${jieguo.result.dlmc}】`
 			    msg += `\n现成长值：【${jieguo.result.xyjf}】`
-			    msg += `\n现总积分：【${jieguo.result.vipScores}/10】`
+			    msg += `\n现总积分：【`${jieguo.result.vipScores} / 10`】`
 			} else {
 			    console.log(`\n签到信息查询：【${jieguo.message}】`)
 			    msg += `\n签到信息查询：【${jieguo.message}】`
