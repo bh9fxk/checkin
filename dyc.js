@@ -29,7 +29,7 @@ class UserInfo {
 	await this.signIn();
 	await $.wait(3000);
 	await $.wait(3000);
-	await signin_info();
+	await this.signin_info();
 	await SendMsg(msg);
     }
 	
