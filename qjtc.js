@@ -23,11 +23,14 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.userid = str.split(strSplitor)[1];
+	this.sjh = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.signin_info();
+        await this.user_info();
+	await $.wait(3000);
+	await this.signin_info();
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
@@ -35,6 +38,67 @@ class UserInfo {
 	await this.signin_info();
 	await $.wait(3000);
 	await SendMsg(msg);
+    }
+	
+    async user_info() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"parameter": {
+		    "sjh": this.sjh
+		}
+	    })
+
+	    const options = {
+		hostname: 'admin.qujiangparking.cn',
+		port: 443,
+		path: '/onet-app/userMember/getUserMember',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'authKey': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let jieguo = JSON.parse(d)
+		        console.log(jieguo)
+			if (jieguo.code == 0) {
+			    
+			    console.log(`\n信息查询：【${jieguo.message}】`)
+			    console.log(`\n登录名称：【${jieguo.result.dlmc}】`)
+			    console.log(`\n现成长值：【${jieguo.result.xyjf}】`)
+			    console.log(`\n现总积分：【${jieguo.result.vipScores} / 10】`)
+			    msg += `\n信息查询：【${jieguo.message}】`
+			    msg += `\n登录名称：【${jieguo.result.dlmc}】`
+			    msg += `\n现成长值：【${jieguo.result.xyjf}】`
+			    msg += `\n现总积分：【${jieguo.result.vipScores} / 10】`
+			} else {
+			    console.log(`\n签到信息查询：【${jieguo.message}】`)
+			    msg += `\n签到信息查询：【${jieguo.message}】`
+			}
+		    })
+                } else {
+                    console.log(`\n签到信息查询失败！`)
+		    msg += `\n签到信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
     }
 	
     async signin_info() {
