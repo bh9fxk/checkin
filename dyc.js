@@ -181,7 +181,7 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n已连续签到：【${result.d.ContinueDay}】`)
+		        console.log(`\n已连续签到：【${result.d.ContinueDay}】天`)
 			console.log(`\n签到总积分：【${result.d.CheckinBonusSum}】`)
 		        msg += `\n已连续签到：【${result.d.ContinueDay}】天`
 			msg += `\n签到总积分：【${result.d.CheckinBonusSum}】`
