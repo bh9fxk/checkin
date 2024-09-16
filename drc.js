@@ -56,12 +56,12 @@ class UserInfo {
 		        console.log(result)
 
 			if (result.success = true) {
-			    console.log(`\n用户名称：【${result.member_surname}】`)
-			    console.log(`\n用户手机：【${result.telephone}】`)
-			    console.log(`\n现总积分：【${result.current_bonus}】`)
-			    msg += `\n用户名称：【${result.member_surname}】`
-		            msg += `\n用户手机：【${result.telephone}】`
-			    msg += `\n现总积分：【${result.current_bonus}】`
+			    console.log(`\n用户名称：【${result.data.member_surname}】`)
+			    console.log(`\n用户手机：【${result.data.telephone}】`)
+			    console.log(`\n现总积分：【${result.data.current_bonus}】`)
+			    msg += `\n用户名称：【${result.data.member_surname}】`
+		            msg += `\n用户手机：【${result.data.telephone}】`
+			    msg += `\n现总积分：【${result.data.current_bonus}】`
 			} else {
 			    console.log(`\n查询结果：【${result.msg}】`);
 			    msg += `\n查询结果：【${result.msg}】`
@@ -92,9 +92,9 @@ class UserInfo {
 	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'a.zhimatech.com',
-		port: 443,
-		path: '/restful/mall/3624/checkInRecord',
+		hostname: 'member.imixpark.com',
+		port: 48889,
+		path: '/api/Sign/SignIn',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
