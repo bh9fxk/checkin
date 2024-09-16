@@ -132,10 +132,13 @@ class UserInfo {
 			    console.log(`\n已签到：【${jieguo.result.days}】天`)
 			    msg += `\n签到信息查询：【${jieguo.message}】`
 			    msg += `\n已签到：【${jieguo.result.days}】天`
-			    
-			    days = jieguo.result.days //获取签到天数
-			    ++days
-			
+
+			    if (jieguo.result.days == null) {
+				days = 1
+			    } else {
+				days = jieguo.result.days //获取签到天数
+				++days
+			    }
 			} else {
 			    console.log(`\n签到信息查询：【${jieguo.message}】`)
 			    msg += `\n签到信息查询：【${jieguo.message}】`
