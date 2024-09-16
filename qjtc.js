@@ -72,7 +72,7 @@ class UserInfo {
 			    console.log(`\n信息查询：【${jieguo.message}】`)
 			    console.log(`\n登录名称：【${jieguo.result.dlmc}】`)
 			    console.log(`\n现成长值：【${jieguo.result.xyjf}】`)
-			    let a = jieguo.result.vipScores} / 10
+			    let a = jieguo.result.vipScores / 10
 			    console.log(`\n现总积分：【${a}】`)
 			    //console.log(`\n现总积分：【${jieguo.result.vipScores} / 10】`)
 			    msg += `\n信息查询：【${jieguo.message}】`
