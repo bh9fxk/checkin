@@ -16,22 +16,25 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.userid = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.ck = str.split(strSplitor)[0];
+	//this.ck = str.split(strSplitor)[0];
     }
 
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
+
         await this.user_point();
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
+
     async user_point() {
         try {
 	    const https = require('https')
