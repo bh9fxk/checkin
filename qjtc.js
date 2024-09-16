@@ -36,8 +36,8 @@ class UserInfo {
 	await $.wait(3000);
 	console.log(`\n-----再次获取签到信息-----\n`)
 	await this.signin_info();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
 	
     async user_info() {
@@ -72,7 +72,9 @@ class UserInfo {
 			    console.log(`\n信息查询：【${jieguo.message}】`)
 			    console.log(`\n登录名称：【${jieguo.result.dlmc}】`)
 			    console.log(`\n现成长值：【${jieguo.result.xyjf}】`)
-			    console.log(`\n现总积分：【${jieguo.result.vipScores} / 10】`)
+			    let a = jieguo.result.vipScores} / 10
+			    console.log(`\n现总积分：【${a}】`)
+			    //console.log(`\n现总积分：【${jieguo.result.vipScores} / 10】`)
 			    msg += `\n信息查询：【${jieguo.message}】`
 			    msg += `\n登录名称：【${jieguo.result.dlmc}】`
 			    msg += `\n现成长值：【${jieguo.result.xyjf}】`
