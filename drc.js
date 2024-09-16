@@ -24,24 +24,24 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-	
+
+	await this.user_info()
+	await $.wait(3000)
 	await this.signIn();
 	await $.wait(3000);
-	await this.user_point()
-	await $.wait(3000)
 	await SendMsg(msg);
     }
-
 	
-    async user_point() {
+    async user_info() {
         try {
 	    const https = require('https')
-
+	    const data = JSON.stringify({})
+		
 	    const options = {
-		hostname: 'a.zhimatech.com',
-		port: 443,
-		path: '/restful/mall/3624/items/count',
-		method: 'GET',
+		hostname: 'member.imixpark.com',
+		port: 48889,
+		path: '/api/VipInfo/QueryVipInfoAsync',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Authorization': 'Bearer '+this.ck
@@ -55,21 +55,21 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 
-			if (result.code == 200) {
-			    console.log(`\n积分查询结果：【${result.msg}】`)
-			    console.log(`\n现总积分：【${result.data[0].end}】`)
-			    msg += `\n积分查询结果：【${result.msg}】`
-		            msg += `\n现总积分：【${result.data[0].end}】`
+			if (result.success = true) {
+			    console.log(`\n用户名称：【${result.member_surname}】`)
+			    console.log(`\n用户手机：【${result.telephone}】`)
+			    console.log(`\n现总积分：【${result.current_bonus}】`)
+			    msg += `\n用户名称：【${result.member_surname}】`
+		            msg += `\n用户手机：【${result.telephone}】`
+			    msg += `\n现总积分：【${result.current_bonus}】`
 			} else {
 			    console.log(`\n查询结果：【${result.msg}】`);
-			    console.log(`\n状态码：【${result.code}】`);
 			    msg += `\n查询结果：【${result.msg}】`
-			    msg += `\n状态码：【${result.code}】`
 			}
 		    })
                 } else {
-                    console.log(`\n签到失败！`)
-		    msg += `\n签到失败！`
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
                 }
 
 	    })
@@ -78,7 +78,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -99,6 +99,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'buildingid': 80008,
 		    'Authorization': 'Bearer '+this.ck
 		}
 	    }
@@ -109,17 +110,13 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.msg}】`);
-			console.log(`\n状态码：【${result.code}】`);
-		        msg += `\n签到结果：【${result.msg}】`
-			msg += `\n状态码：【${result.code}】`
-			if (result.code == 200) {
-			    console.log(`\n已签到【${result.data.num}】天`)
-			    console.log(`\n今日获得【${result.data.point_total}】积分`)
-			    console.log(`\n现总积分：【${result.data.total_point}】`)
-			    msg += `\n已签到【${result.data.num}】天`
-		            msg += `\n今日获得【${result.data.point_total}】积分`
-			    //msg += `\n现总积分：【${result.data.total_point}】`
+		        
+			if (result.success = true) {
+			    console.log(`\n签到获得【${result.data.iftmsg}】`)
+			    msg += `\n签到获得【${result.data.iftmsg}】`
+			} else {
+			    console.log(`\n签到结果：【${result.msg}】`)
+			    msg += `\n签到结果：【${result.msg}】`
 			}
 		    })
                 } else {
