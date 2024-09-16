@@ -55,7 +55,7 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 
-			if (result.success = true) {
+			if (result.success == true) {
 			    console.log(`\n用户名称：【${result.data.member_surname}】`)
 			    console.log(`\n用户手机：【${result.data.telephone}】`)
 			    console.log(`\n现总积分：【${result.data.current_bonus}】`)
@@ -111,7 +111,7 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 		        
-			if (result.success = true) {
+			if (result.success == true) {
 			    console.log(`\n签到获得【${result.data.iftmsg}】`)
 			    msg += `\n签到获得【${result.data.iftmsg}】`
 			} else {
