@@ -68,8 +68,8 @@ class UserInfo {
 			}
 		    })
                 } else {
-                    console.log(`\n签到失败！`)
-		    msg += `\n签到失败！`
+                    console.log(`\n用户信息失败！`)
+		    msg += `\n用户信息失败！`
                 }
 
 	    })
