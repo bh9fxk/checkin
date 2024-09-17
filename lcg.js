@@ -66,10 +66,12 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
+		        console.log(`\n用户名称：【${result.d.NickName}】`)
+			//console.log(`\n总积分：【${result.d.TotalBonus}】`)
+			console.log(`\n可用积分：【${result.d.Bonus}】`)
 		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
+			//msg += `\n现总积分：【${result.d.TotalBonus}】`
+			msg += `\n可用积分：【${result.d.Bonus}】`
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
@@ -182,9 +184,9 @@ class UserInfo {
 		        console.log(result)
 			
 		        console.log(`\n已连续签到：【${result.d.ContinueDay}】天`)
-			console.log(`\n签到总积分：【${result.d.CheckinBonusSum}】`)
+			console.log(`\n签到获得总积分：【${result.d.CheckinBonusSum}】`)
 		        msg += `\n已连续签到：【${result.d.ContinueDay}】天`
-			msg += `\n签到总积分：【${result.d.CheckinBonusSum}】`
+			msg += `\n签到获得总积分：【${result.d.CheckinBonusSum}】`
 		    })
                 } else {
                     console.log(`\n签到信息查询失败！`)
