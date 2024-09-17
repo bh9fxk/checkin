@@ -112,8 +112,8 @@ class UserInfo {
 		        console.log(result)
 		        
 			if (result.success == true) {
-			    console.log(`\n签到获得【${result.data.iftmsg}】`)
-			    msg += `\n签到获得【${result.data.iftmsg}】`
+			    console.log(`\n签到获得【${result.data.giftmsg}】`)
+			    msg += `\n签到获得【${result.data.giftmsg}】`
 			} else {
 			    console.log(`\n签到结果：【${result.msg}】`)
 			    msg += `\n签到结果：【${result.msg}】`
