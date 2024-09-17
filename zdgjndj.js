@@ -67,10 +67,12 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`);
-			console.log(`\n现总积分：【${result.d.TotalBonus}】`);    
+		        console.log(`\n用户名称：【${result.d.NickName}】`)
+			//console.log(`\n总积分：【${result.d.TotalBonus}】`)
+			console.log(`\n可用积分：【${result.d.Bonus}】`)
 		        msg += `\n用户名称：【${result.d.NickName}】`
-			msg += `\n现总积分：【${result.d.TotalBonus}】`
+			//msg += `\n现总积分：【${result.d.TotalBonus}】`
+			msg += `\n可用积分：【${result.d.Bonus}】`
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
