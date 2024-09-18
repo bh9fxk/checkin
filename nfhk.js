@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:nfhk_ck
- * 变量值:抓包body中Token的值
+ * 变量值:抓包sessionid(certNo)&certno-encrypt的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -19,7 +19,19 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+        this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.ck2 = str.split(strSplitor)[1];
+	this.openid = str.split(strSplitor)[2];
+	this.unionid = str.split(strSplitor)[3]
+	this.userinfo = str.split(strSplitor)[4]
+        this.wx_openId = str.split(strSplitor)[5]
+	this.cookiesession1 = str.split(strSplitor)[6]
+	this.gs1 = str.split(strSplitor)[7]
+        this.token = str.split(strSplitor)[8]
+        this.cs = str.split(strSplitor)[9]
+        this.sign_user_token = str.split(strSplitor)[10]
+        this.gs2 = str.split(strSplitor)[11]
+	this.code = str.split(strSplitor)[12]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -28,36 +40,24 @@ class UserInfo {
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
-	await this.signin_info();
-	await $.wait(3000);
 	await SendMsg(msg);
     }
 	
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 10895,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
-		    }
-		}
-            })
+	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'wxapi.csair.com',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
+		path: '/mini/api/member/getUserInfoByCerdNo?certNo='+this.ck1+'&appid=wx729238547ac7a14c&wxchannel=wxopen&envVersion=release',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'sessionid': this.ck1,
+		    'certno-encrypt': this.ck2
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -67,12 +67,14 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`)
-			//console.log(`\n总积分：【${result.d.TotalBonus}】`)
-			console.log(`\n可用积分：【${result.d.Bonus}】`)
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			//msg += `\n现总积分：【${result.d.TotalBonus}】`
-			msg += `\n可用积分：【${result.d.Bonus}】`
+			if (result.responseCode == 00) {
+			    console.log(`\n用户手机：【${result.memberContactInfo.mobilePhone[0].moblie}】`)
+			    console.log(`\n可消费里程：【${result.memberAccrualInfo.canUseMileage}】`)
+			    console.log(`\n本年度升级里程：【${result.memberAccrualInfo.currentUpgradeMileage}】`)
+                            msg += `\n用户手机：【${result.memberContactInfo.mobilePhone[0].moblie}】`
+			    msg += `\n可消费里程：【${result.memberAccrualInfo.canUseMileage}】`
+			    msg += `\n本年度升级里程：【${result.memberAccrualInfo.currentUpgradeMileage}】`
+			}
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
@@ -97,27 +99,34 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 10895,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
-		    }
-		}
+		"activityType": "sign",
+		"channel": "mini",
+		"entrance": 1,
+		"shareInviteCode": this.code
             })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'wxapi.csair.com',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
+		path: '/marketing-tools/activity/join?type=APPTYPE&chanel=ss&lang=zh',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
+		    'cookie': 'channel=csair',
+		    'cookie': 'csmbplogintype=5',
+		    'cookie': this.openid,
+		    'cookie': this.unionid,
+		    'cookie': this.userinfo,
+		    'cookie': this.wx_openId,
+		    'cookie': this.cookiesession1,
+		    'cookie': this.gs1,
+		    'cookie': '_gscbrs_1826610132=1',
+		    'cookie': 'isSign=true',
+		    'cookie': this.token,
+		    'cookie': this.cs,
+		    'cookie': this.sign_user_token,
+		    'cookie': this.gs2
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -127,70 +136,17 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+			if (result.respCode == 0000) {
+			    console.log(`\n签到结果：【${result.respMsg}】【${result.data.result}】`)
+			    msg += `\n签到结果：【${result.respMsg}】【${result.data.result}】`
+			} else {
+			    console.log(`\n签到结果：【${result.respMsg}】`)
+			    msg += `\n签到结果：【${result.respMsg}】`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
 		    msg += `\n签到失败！`
-                }
-
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async signin_info() {
-        try {
-	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 10895,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
-		    }
-		}
-            })
-
-	    const options = {
-		hostname: 'm.mallcoo.cn',
-		port: 443,
-		path: '/api/user/User/GetCheckinDetail',
-		method: 'POST',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n已连续签到：【${result.d.ContinueDay}】天`)
-			console.log(`\n签到总积分：【${result.d.CheckinBonusSum}】`)
-		        msg += `\n已连续签到：【${result.d.ContinueDay}】天`
-			msg += `\n签到总积分：【${result.d.CheckinBonusSum}】`
-		    })
-                } else {
-                    console.log(`\n签到信息查询失败！`)
-		    msg += `\n签到信息查询失败！`
                 }
 
 	    })
