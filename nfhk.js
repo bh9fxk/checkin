@@ -33,8 +33,8 @@ class UserInfo {
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
 	
     async user_info() {
@@ -54,7 +54,6 @@ class UserInfo {
 		    'certno-encrypt': this.ck2
 		}
 	    }
-	    console.log(headers)
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
@@ -124,6 +123,7 @@ class UserInfo {
 		    'cookie': '_gscs_1826610132=t26555737twahuw12|pv:5'
 		}
 	    }
+	    console.log(headers)
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
