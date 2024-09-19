@@ -176,8 +176,8 @@ class UserInfo {
 		"days": days,
 		"createTime": null,
 		"signToday": true,
-		"signConfig": "\{"signType":2,"signDays":"7","cumType":1,"name":"用户签到"\}",
-		"openFlag": true
+		"openFlag": true,
+		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}"
             })
 	    console.log(data)
 
