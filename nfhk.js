@@ -22,16 +22,16 @@ class UserInfo {
         this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.ck2 = str.split(strSplitor)[1];
 	this.openid = str.split(strSplitor)[2];
-	this.unionid = str.split(strSplitor)[3]
-	this.userinfo = str.split(strSplitor)[4]
-        this.wx_openId = str.split(strSplitor)[5]
-	this.cookiesession1 = str.split(strSplitor)[6]
-	this.gs1 = str.split(strSplitor)[7]
-        this.token = str.split(strSplitor)[8]
-        this.cs = str.split(strSplitor)[9]
-        this.sign_user_token = str.split(strSplitor)[10]
-        this.gs2 = str.split(strSplitor)[11]
-	this.code = str.split(strSplitor)[12]
+	this.unionid = str.split(strSplitor)[3];
+	this.userinfo = str.split(strSplitor)[4];
+        this.wx_openId = str.split(strSplitor)[5];
+	this.cookiesession1 = str.split(strSplitor)[6];
+	this.gs1 = str.split(strSplitor)[7];
+        this.token = str.split(strSplitor)[8];
+        this.cs = str.split(strSplitor)[9];
+        this.sign_user_token = str.split(strSplitor)[10];
+        this.gs2 = str.split(strSplitor)[11];
+	this.code = str.split(strSplitor)[12];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
