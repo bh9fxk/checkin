@@ -67,7 +67,7 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.responseCode == 00) {
+			if (result.responseCode == '00') {
 			    console.log(`\n用户手机：【${result.memberContactInfo.mobilePhone[0].moblie}】`)
 			    console.log(`\n可消费里程：【${result.memberAccrualInfo.canUseMileage}】`)
 			    console.log(`\n本年度升级里程：【${result.memberAccrualInfo.currentUpgradeMileage}】`)
@@ -136,7 +136,7 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.respCode == 0000) {
+			if (result.respCode == '0000') {
 			    console.log(`\n签到结果：【${result.respMsg}】【${result.data.result}】`)
 			    msg += `\n签到结果：【${result.respMsg}】【${result.data.result}】`
 			} else {
