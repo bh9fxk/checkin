@@ -36,8 +36,8 @@ class UserInfo {
 	await $.wait(5000);
 	console.log(`\n-----再次获取签到信息-----\n`)
 	await this.signin_info();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await SendMsg(msg);
     }
 	
     async user_info() {
