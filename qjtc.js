@@ -78,7 +78,7 @@ class UserInfo {
 			    msg += `\n信息查询：【${jieguo.message}】`
 			    msg += `\n登录名称：【${jieguo.result.dlmc}】`
 			    msg += `\n现成长值：【${jieguo.result.xyjf}】`
-			    msg += `\n现总积分：【${jieguo.result.vipScores} / 10】`
+			    msg += `\n现总积分：【${a】`
 			} else {
 			    console.log(`\n用户信息查询：【${jieguo.message}】`)
 			    msg += `\n用户信息查询：【${jieguo.message}】`
