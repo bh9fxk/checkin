@@ -22,10 +22,10 @@ class UserInfo {
         this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.ck2 = str.split(strSplitor)[1];
 	this.cookiesession1 = str.split(strSplitor)[2];
-        this.token = str.split(strSplitor)[8];
-        this.cs = str.split(strSplitor)[9];
-        this.sign_user_token = str.split(strSplitor)[10];
-	this.code = str.split(strSplitor)[12];
+        this.token = str.split(strSplitor)[3];
+        this.cs = str.split(strSplitor)[4];
+        this.sign_user_token = str.split(strSplitor)[5];
+	this.code = str.split(strSplitor)[6];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -45,7 +45,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'wxapi.csair.com',
 		port: 443,
-		path: '/mini/api/member/getUserInfoByCerdNo?certNo='+this.ck1+'&appid=wx729238547ac7a14c&wxchannel=wxopen&envVersion=release',
+		path: '/mini/api/member/getUserInfoByCerdNo?certNo='+this.ck2+'&appid=wx729238547ac7a14c&wxchannel=wxopen&envVersion=release',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -117,9 +117,9 @@ class UserInfo {
 		    'cookie': 'wx_openId=oer35PqWbWfLDKSI6nKYS-0AHylw',
 		    'cookie': this.cookiesession1,
 		    'cookie': '_gscu_1826610132=263228864ht42d12',
-		    'cookie': 'TOKEN='+this.token,
-		    'cookie': 'cs1246643sso='+this.token,
-		    'cookie': 'sign_user_token='+this.token,
+		    'cookie': this.token,
+		    'cookie': this.cs,
+		    'cookie': this.sign_user_token,
 		    'cookie': '_gscs_1826610132=t26555737twahuw12|pv:5'
 		}
 	    }
