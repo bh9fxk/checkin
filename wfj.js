@@ -82,7 +82,6 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
 
 	    const options = {
 		hostname: 'api.online.wfj.com.cn',
