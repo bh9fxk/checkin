@@ -21,16 +21,10 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.ck2 = str.split(strSplitor)[1];
-	this.openid = str.split(strSplitor)[2];
-	this.unionid = str.split(strSplitor)[3];
-	this.userinfo = str.split(strSplitor)[4];
-        this.wx_openid = str.split(strSplitor)[5];
-	this.cookiesession1 = str.split(strSplitor)[6];
-	this.gs1 = str.split(strSplitor)[7];
+	this.cookiesession1 = str.split(strSplitor)[2];
         this.token = str.split(strSplitor)[8];
         this.cs = str.split(strSplitor)[9];
         this.sign_user_token = str.split(strSplitor)[10];
-        this.gs2 = str.split(strSplitor)[11];
 	this.code = str.split(strSplitor)[12];
     }
     async main() {
@@ -117,16 +111,16 @@ class UserInfo {
 		    'cookie': 'csmbplogintype=5',
 		    'cookie': '_gscbrs_1826610132=1',
 		    'cookie': 'isSign=true',
-		    'cookie': this.openid,
-		    'cookie': this.unionid,
-		    'cookie': this.userinfo,
-		    'cookie': this.wx_openid,
+		    'cookie': 'openid=oer35PqWbWfLDKSI6nKYS-0AHylw',
+		    'cookie': 'unionId=oqyAus9YhumU0-v9WbyTyOaRAw7Y',
+		    'cookie': 'userInfo=%7B%22openid%22%3A%22oer35PqWbWfLDKSI6nKYS-0AHylw%22%2C%22nickname%22%3A%22%E5%B4%94%E5%B9%BF%E6%AF%85+%7C+%E8%8B%B1%E5%8D%9A%E5%BE%8B%E5%B8%88%22%2C%22sex%22%3A0%2C%22language%22%3A%22%22%2C%22city%22%3A%22%22%2C%22province%22%3A%22%22%2C%22country%22%3A%22%22%2C%22headimgurl%22%3A%22https%3A%5C%2F%5C%2Fthirdwx.qlogo.cn%5C%2Fmmopen%5C%2Fvi_32%5C%2FQ0j4TwGTfTKibl45KctpGvCfj8ibEED0UJaWtcLfSZ5Oyg9oIbsKMxqLs7ZQfYia5PTQyUVnu6cBcAlLJYJ00Bvew%5C%2F132%22%2C%22privilege%22%3A%5B%5D%2C%22unionid%22%3A%22oqyAus9YhumU0-v9WbyTyOaRAw7Y%22%7D',
+		    'cookie': 'wx_openId=oer35PqWbWfLDKSI6nKYS-0AHylw',
 		    'cookie': this.cookiesession1,
-		    'cookie': this.gs1,
-		    'cookie': this.token,
-		    'cookie': this.cs,
-		    'cookie': this.sign_user_token,
-		    'cookie': this.gs2
+		    'cookie': '_gscu_1826610132=263228864ht42d12',
+		    'cookie': 'TOKEN='+this.token,
+		    'cookie': 'cs1246643sso='+this.token,
+		    'cookie': 'sign_user_token='+this.token,
+		    'cookie': '_gscs_1826610132=t26555737twahuw12|pv:5'
 		}
 	    }
 	    const req = https.request(options, res => {
