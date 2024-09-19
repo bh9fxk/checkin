@@ -24,7 +24,7 @@ class UserInfo {
 	this.openid = str.split(strSplitor)[2];
 	this.unionid = str.split(strSplitor)[3];
 	this.userinfo = str.split(strSplitor)[4];
-        this.wx_openId = str.split(strSplitor)[5];
+        this.wx_openid = str.split(strSplitor)[5];
 	this.cookiesession1 = str.split(strSplitor)[6];
 	this.gs1 = str.split(strSplitor)[7];
         this.token = str.split(strSplitor)[8];
@@ -120,7 +120,7 @@ class UserInfo {
 		    'cookie': this.openid,
 		    'cookie': this.unionid,
 		    'cookie': this.userinfo,
-		    'cookie': this.wx_openId,
+		    'cookie': this.wx_openid,
 		    'cookie': this.cookiesession1,
 		    'cookie': this.gs1,
 		    'cookie': this.token,
