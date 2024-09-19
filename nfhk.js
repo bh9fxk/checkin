@@ -122,7 +122,7 @@ class UserInfo {
 		    'cookie': this.sign_user_token,
 		    'cookie': '_gscs_1826610132=t26555737twahuw12|pv:5'
 		}
-		console.log(headers)
+		console.log(${headers})
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
