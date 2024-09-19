@@ -16,6 +16,7 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let token = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -25,14 +26,14 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.user_info()
+	await this.user_token()
 	await $.wait(3000)
 	await this.signIn();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
 	
-    async user_info() {
+    async user_token() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({})
@@ -40,11 +41,13 @@ class UserInfo {
 	    const options = {
 		hostname: 'member.imixpark.com',
 		port: 48889,
-		path: '/api/VipInfo/QueryVipInfoAsync',
+		path: '/api/Token/WXVIPLogin',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Authorization': 'Bearer '+this.ck
+		    'app_id': 'api.app.member',
+		    'buildingid': 80008,
+		    'app_sign': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -56,20 +59,20 @@ class UserInfo {
 		        console.log(result)
 
 			if (result.success == true) {
-			    console.log(`\n用户名称：【${result.data.member_surname}】`)
-			    console.log(`\n用户手机：【${result.data.telephone}】`)
-			    console.log(`\n现总积分：【${result.data.current_bonus}】`)
-			    msg += `\n用户名称：【${result.data.member_surname}】`
-		            msg += `\n用户手机：【${result.data.telephone}】`
-			    msg += `\n现总积分：【${result.data.current_bonus}】`
+			    console.log(`\n【Token获取成功】`)
+			    msg += `\n【Token获取成功】`
+			    token = result.data.accesstoken
+			    let a = result.data.expiresin / 3600
+			    console.log(`\nToken过期时间：【${a}】小时`)
+			    msg += `\nToken过期时间：【${a}】小时`
 			} else {
-			    console.log(`\n查询结果：【${result.msg}】`);
-			    msg += `\n查询结果：【${result.msg}】`
+			    console.log(`\nToken查询结果：【${result.msg}】`);
+			    msg += `\nToken查询结果：【${result.msg}】`
 			}
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\nToken查询失败！`)
+		    msg += `\nToken查询失败！`
                 }
 
 	    })
@@ -100,7 +103,7 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'buildingid': 80008,
-		    'Authorization': 'Bearer '+this.ck
+		    'Authorization': 'Bearer '+token
 		}
 	    }
 	    const req = https.request(options, res => {
