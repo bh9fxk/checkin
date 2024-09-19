@@ -28,36 +28,21 @@ class UserInfo {
 	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
-	await this.signin_info();
-	await $.wait(3000);
 	await SendMsg(msg);
     }
 	
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 11984,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.8",
-			"miniVersion": "2.69.1"
-		    }
-		}
-            })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'api.online.wfj.com.cn',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
-		method: 'POST',
+		path: '/zanmall_user/user/user_info',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    'authorization': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -67,16 +52,17 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`)
-			//console.log(`\n总积分：【${result.d.TotalBonus}】`)
-			console.log(`\n可用积分：【${result.d.Bonus}】`)
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			//msg += `\n现总积分：【${result.d.TotalBonus}】`
-			msg += `\n可用积分：【${result.d.Bonus}】`
+			if (result.success == true) {
+			    console.log(`\n现有积分：【${result.data.score}】`)
+			    msg += `\n现有积分：【${result.data.score}】`
+			} else {
+			    console.log(`\n积分查询结果：【${result.msg}】`)
+			    msg += `\n积分查询结果：【${result.msg}】`
+			}
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\n用户积分查询失败！`)
+		    msg += `\n用户积分查询失败！`
                 }
 
 	    })
@@ -85,7 +71,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -97,27 +83,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"MallId": 11984,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.8",
-			"miniVersion": "2.69.1"
-		    }
-		}
-            })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'api.online.wfj.com.cn',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
-		method: 'POST',
+		path: '/zanmall_user/score/sign?type=0&shopId=56',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    'authorization': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -127,8 +101,13 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+			if (result.success == true) {
+			    console.log(`\n签到结果：【${result.data}】`);
+			    msg += `\n签到结果：【${result.data}】`
+			} else {
+			    console.log(`\n签到结果：【${result.msg}】`);
+		            msg += `\n签到结果：【${result.msg}】`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
@@ -141,65 +120,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async signin_info() {
-        try {
-	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 11984,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.8",
-			"miniVersion": "2.69.1"
-		    }
-		}
-            })
-
-	    const options = {
-		hostname: 'm.mallcoo.cn',
-		port: 443,
-		path: '/api/user/User/GetCheckinDetail',
-		method: 'POST',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n已连续签到：【${result.d.ContinueDay}】天`)
-			console.log(`\n签到总积分：【${result.d.CheckinBonusSum}】`)
-		        msg += `\n已连续签到：【${result.d.ContinueDay}】天`
-			msg += `\n签到总积分：【${result.d.CheckinBonusSum}】`
-		    })
-                } else {
-                    console.log(`\n签到信息查询失败！`)
-		    msg += `\n签到信息查询失败！`
-                }
-
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
