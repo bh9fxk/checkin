@@ -170,15 +170,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //console.log(days)
-	    const data = JSON.stringify({
+	    const data = {
 		"id": 1098,
 		"userId": this.userid,
 		"days": days,
 		"createTime": null,
 		"signToday": true,
 		"openFlag": true,
-		"signConfig": "%7b\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"%7d"
-            })
+		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}"
+            }
 	    console.log(data)
 
 	    const options = {
