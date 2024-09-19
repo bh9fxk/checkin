@@ -19,13 +19,8 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck1 = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.ck2 = str.split(strSplitor)[1];
-	this.cookiesession1 = str.split(strSplitor)[2];
-        this.token = str.split(strSplitor)[3];
-        this.cs = str.split(strSplitor)[4];
-        this.sign_user_token = str.split(strSplitor)[5];
-	this.code = str.split(strSplitor)[6];
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.code = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -36,7 +31,7 @@ class UserInfo {
 	//await $.wait(3000);
 	//await SendMsg(msg);
     }
-	
+/*	
     async user_info() {
         try {
 	    const https = require('https')
@@ -88,7 +83,7 @@ class UserInfo {
             console.log(e);
         }
     }
-
+*/
     async signIn() {
         try {
 	    const https = require('https')
@@ -107,7 +102,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'cookie': 'channel=csair;csmbplogintype=5;_gscbrs_1826610132=1;isSign=true;openid=oer35PqWbWfLDKSI6nKYS-0AHylw;unionId=oqyAus9YhumU0-v9WbyTyOaRAw7Y;userInfo=%7B%22openid%22%3A%22oer35PqWbWfLDKSI6nKYS-0AHylw%22%2C%22nickname%22%3A%22%E5%B4%94%E5%B9%BF%E6%AF%85+%7C+%E8%8B%B1%E5%8D%9A%E5%BE%8B%E5%B8%88%22%2C%22sex%22%3A0%2C%22language%22%3A%22%22%2C%22city%22%3A%22%22%2C%22province%22%3A%22%22%2C%22country%22%3A%22%22%2C%22headimgurl%22%3A%22https%3A%5C%2F%5C%2Fthirdwx.qlogo.cn%5C%2Fmmopen%5C%2Fvi_32%5C%2FQ0j4TwGTfTKibl45KctpGvCfj8ibEED0UJaWtcLfSZ5Oyg9oIbsKMxqLs7ZQfYia5PTQyUVnu6cBcAlLJYJ00Bvew%5C%2F132%22%2C%22privilege%22%3A%5B%5D%2C%22unionid%22%3A%22oqyAus9YhumU0-v9WbyTyOaRAw7Y%22%7D;wx_openId=oer35PqWbWfLDKSI6nKYS-0AHylw;_gscu_1826610132=263228864ht42d12;_gscs_1826610132=t26555737twahuw12|pv:5;'+this.cookiesession1+';'+this.token+';'+this.cs+';'+this.sign_user_token
+		    'cookie': this.ck
 		}
 	    }
 	    console.log(options)
