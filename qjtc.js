@@ -174,10 +174,10 @@ class UserInfo {
 		"id": 1098,
 		"userId": this.userid,
 		"days": days,
-		"createTime": null,
-		"signToday": true,
+		"createTime": 'null',
+		"signToday": 'true',
 		"signConfig": "{\"signType\":2,\"signDays\":\"7\",\"cumType\":1,\"name\":\"用户签到\"}",
-		"openFlag": true
+		"openFlag": 'true'
             })
 	    //console.log(data)
 
