@@ -54,6 +54,7 @@ class UserInfo {
 		    'certno-encrypt': this.ck2
 		}
 	    }
+	    console.log(headers)
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
