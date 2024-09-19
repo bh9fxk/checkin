@@ -36,7 +36,10 @@ class UserInfo {
     async user_token() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"requestId": "v5.app.member.wechat",
+		"openId": "oa59e5Z7XOotdGZrQf87E0aSsh8o"
+	    })
 		
 	    const options = {
 		hostname: 'member.imixpark.com',
@@ -45,6 +48,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
 		    'app_id': 'api.app.member',
 		    'buildingid': 80008,
 		    'app_sign': this.ck
