@@ -86,7 +86,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'api.online.wfj.com.cn',
 		port: 443,
-		path: '/zanmall_user/score/sign?type=0&shopId=56',
+		path: '/zanmall_user/score/sign?type=0&shopId=58',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
