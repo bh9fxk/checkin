@@ -108,11 +108,11 @@ class UserInfo {
 		        console.log(result)
 			if (result.success == true) {
 			    console.log(`\n现有金豆：【${result.data.integralVoucher}】`)
-			    console.log(`\n过期金豆：【${result.data.integralVoucher}】`)
-			    console.log(`\n积分过期时间：【${result.data.xpireTime}】`)
+			    console.log(`\n过期金豆：【${result.data.deadlineExpireNum}】`)
+			    console.log(`\n积分过期时间：【${result.data.expireTime}】`)
 			    msg += `\n现有金豆：【${result.data.integralVoucher}】`
-			    msg += `\n过期金豆：【${result.data.integralVoucher}】`
-			    msg += `\n金豆过期时间：【${result.data.xpireTime}】`
+			    msg += `\n过期金豆：【${result.data.deadlineExpireNum}】`
+			    msg += `\n金豆过期时间：【${result.data.expireTime}】`
 			} else {
 			    console.log(`\n积分查询结果：【${result.message}】`)
 			    msg += `\n积分查询结果：【${result.message}】`
