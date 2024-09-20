@@ -24,40 +24,29 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
-	await $.wait(3000);
-	await this.signIn();
-	await $.wait(3000);
-	await this.signin_info();
-	await $.wait(3000);
-	await SendMsg(msg);
+        await this.user_info()
+	await $.wait(3000)
+	await this.signIn()
+	await $.wait(3000)
+	await this.signin_days()
+	await $.wait(3000)
+	await this.user_point()
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 	
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 10895,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
-		    }
-		}
-            })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'm.jlc.com',
 		port: 443,
-		path: '/api/user/user/GetUserAndMallCard',
-		method: 'POST',
+		path: '/api/appPlatform/center/setting/selectPersonalInfo',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    'x-jlc-accesstoken': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -67,12 +56,15 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n用户名称：【${result.d.NickName}】`)
-			//console.log(`\n总积分：【${result.d.TotalBonus}】`)
-			console.log(`\n可用积分：【${result.d.Bonus}】`)
-		        msg += `\n用户名称：【${result.d.NickName}】`
-			//msg += `\n现总积分：【${result.d.TotalBonus}】`
-			msg += `\n可用积分：【${result.d.Bonus}】`
+			if (result.success == true) {
+			    console.log(`\n用户编号：【${result.data.customerCode}】`)
+			    console.log(`\n用户名称：【${result.data.customerLinkMan}】`)
+			    msg += `\n用户编号：【${result.data.customerCode}】`
+			    msg += `\n用户名称：【${result.data.customerLinkMan}】`
+			} else {
+			    console.log(`\n查询结果：【${result.message}】`)
+			    msg += `\n查询结果：【${result.message}】`
+			}
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
@@ -85,7 +77,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -93,31 +85,18 @@ class UserInfo {
         }
     }
 
-    async signIn() {
+    async user_point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 10895,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
-		    }
-		}
-            })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'm.jlc.com',
 		port: 443,
-		path: '/api/user/User/CheckinV2',
-		method: 'POST',
+		path: '/api/activity/front/getCustomerIntegral',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    'x-jlc-accesstoken': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -127,8 +106,65 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n签到结果：【${result.d.Msg}】`);
-		        msg += `\n签到结果：【${result.d.Msg}】`
+			if (result.success == true) {
+			    console.log(`\n现有金豆：【${result.data.integralVoucher}】`)
+			    console.log(`\n过期金豆：【${result.data.integralVoucher}】`)
+			    console.log(`\n积分过期时间：【${result.data.xpireTime}】`)
+			    msg += `\n现有金豆：【${result.data.integralVoucher}】`
+			    msg += `\n过期金豆：【${result.data.integralVoucher}】`
+			    msg += `\n金豆过期时间：【${result.data.xpireTime}】`
+			} else {
+			    console.log(`\n积分查询结果：【${result.message}】`)
+			    msg += `\n积分查询结果：【${result.message}】`
+			}
+		    })
+                } else {
+                    console.log(`\n积分信息查询失败！`)
+		    msg += `\n积分信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+	
+    async signIn() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'm.jlc.com',
+		port: 443,
+		path: '/api/activity/sign/signIn?source=2',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'x-jlc-accesstoken': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+			if (result.success == true) {
+			    console.log(`\n签到获得【${result.data.gainNum}】金豆`);
+			    msg += `\n签到获得【${result.data.gainNum}】金豆`
+			} else {
+			    console.log(`\n签到结果：【${result.message}】`);
+		            msg += `\n签到结果：【${result.message}】`
+			}
 		    })
                 } else {
                     console.log(`\n签到失败！`)
@@ -141,7 +177,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -149,31 +185,18 @@ class UserInfo {
         }
     }
 
-    async signin_info() {
+    async signin_days() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"MallId": 10895,
-		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-			"model": "Mac14,2",
-			"SDKVersion": "3.3.5",
-			"system": "Mac OS X 14.6.1",
-			"version": "3.8.7",
-			"miniVersion": "DZ.2.66.7.XADYC.13"
-		    }
-		}
-            })
 
 	    const options = {
-		hostname: 'm.mallcoo.cn',
+		hostname: 'm.jlc.com',
 		port: 443,
-		path: '/api/user/User/GetCheckinDetail',
-		method: 'POST',
+		path: '/api/activity/sign/getCurrentUserSignInConfig,
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
+		    'x-jlc-accesstoken': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -183,14 +206,17 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n已连续签到：【${result.d.ContinueDay}】天`)
-			console.log(`\n签到总积分：【${result.d.CheckinBonusSum}】`)
-		        msg += `\n已连续签到：【${result.d.ContinueDay}】天`
-			msg += `\n签到总积分：【${result.d.CheckinBonusSum}】`
+			if (result.success == true) {
+			    console.log(`\n已签到【${result.data.day}】天`)
+			    msg += `\n已签到【${result.data.day}】天`
+			} else {
+			    console.log(`\n签到天数查询结果：【${result.message}】`);
+		            msg += `\n签到天数查询结果：【${result.message}】`
+			}
 		    })
                 } else {
-                    console.log(`\n签到信息查询失败！`)
-		    msg += `\n签到信息查询失败！`
+                    console.log(`\n签到天数信息查询失败！`)
+		    msg += `\n签到天数信息查询失败！`
                 }
 
 	    })
@@ -199,7 +225,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
