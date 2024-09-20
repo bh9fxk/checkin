@@ -192,7 +192,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'm.jlc.com',
 		port: 443,
-		path: '/api/activity/sign/getCurrentUserSignInConfig,
+		path: '/api/activity/sign/getCurrentUserSignInConfig',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
