@@ -120,8 +120,8 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 			if (result.data.is_popup == 1) {
-			    console.log(`\n签到获得【${result.data.reward_info[0].reward_num}】成长值`)
-		            msg += `\n签到获得【${result.data.reward_info[0].reward_num}】成长值`
+			    console.log(`\n签到获得：【${result.data.reward_info[0].reward_num}】成长值`)
+		            msg += `\n签到获得：【${result.data.reward_info[0].reward_num}】成长值`
 			} else {
 			    console.log(`\n请检查签到结果！`)
 			    msg += `\n请检查签到结果！`
