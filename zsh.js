@@ -61,8 +61,8 @@ class UserInfo {
 			//process.stdout.write(d)
 		        let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n现有【${result}】荟豆`)
-		        msg += `\n现有【${result}】荟豆`
+		        console.log(`\n现有荟豆：【${result}】`)
+		        msg += `\n现有荟豆：【${result}】`
 		    })
 	        } else {
 		    console.log(`\n荟豆查询失败!`)
@@ -112,8 +112,8 @@ class UserInfo {
 			    process.stdout.write(d)
 			    const jieguo = JSON.parse(d)
 			    console.log(jieguo)
-		            console.log(`\n签到成功，获得【${jieguo.result.actionList[0].resultList[0].prizeName}】`)
-			    msg += `\n签到成功，获得【${jieguo.result.actionList[0].resultList[0].prizeName}】`
+		            console.log(`\n签到获得：【${jieguo.result.actionList[0].resultList[0].prizeName}】`)
+			    msg += `\n签到获得：【${jieguo.result.actionList[0].resultList[0].prizeName}】`
 			    //console.log(`\n签到成功.`)
 			    //msg += `\n签到成功.`
 		        })
@@ -169,8 +169,8 @@ class UserInfo {
 			    const jieguo = JSON.parse(d)
 			    console.log(jieguo)
 			    if (jieguo.success == true) {
-				console.log(`\n已连续签到：【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】天`)
-				msg += `\n已连续签到：【${jieguo.result.campaignCapabilities[0].signNumConsecutive}天】`
+				console.log(`\n连续签到：【${jieguo.result.campaignCapabilities[0].signNumConsecutive}】天`)
+				msg += `\n连续签到：【${jieguo.result.campaignCapabilities[0].signNumConsecutive}天】`
 			    }
 		        })
 		    } else {
