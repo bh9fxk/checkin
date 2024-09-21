@@ -35,6 +35,7 @@ class UserInfo {
 	await this.signIn();
 	await $.wait(5000);
 	console.log(`\n-----再次获取签到信息-----\n`)
+	msg += `\n-----再次获取签到信息-----\n`
 	await this.signin_info();
 	await $.wait(3000);
 	await SendMsg(msg);
@@ -128,12 +129,12 @@ class UserInfo {
 		        console.log(jieguo)
 			if (jieguo.code == 0) {
 			    
-			    console.log(`\n签到信息查询：【${jieguo.message}】`)
-			    console.log(`\n已签到：【${jieguo.result.days}】天`)
+			    console.log(`\n签到查询：【${jieguo.message}】`)
+			    console.log(`\n已经签到：【${jieguo.result.days}】天`)
 			    let a = jieguo.result.todaySignScore / 10
 			    console.log(`\n签到获得：【${a}】积分`)
-			    msg += `\n签到信息查询：【${jieguo.message}】`
-			    msg += `\n已签到：【${jieguo.result.days}】天`
+			    msg += `\n签到查询：【${jieguo.message}】`
+			    msg += `\n已经签到：【${jieguo.result.days}】天`
 			    msg += `\n签到获得：【${a}】积分`
 
 			    if (jieguo.result.days == null) {
