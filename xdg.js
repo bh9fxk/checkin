@@ -119,10 +119,10 @@ class UserInfo {
 		        console.log(result)
 			if (result.code == 200) {
 			    console.log(`\n签到结果:【${result.msg}】【${result.data.today}】`)
-			    console.log(`\n签到获得【${result.data.todayIntegral}】积分`)
+			    console.log(`\n签到获得：【${result.data.todayIntegral}】积分`)
 			    //console.log(`\n现总积分：【${result.data.totalIntegral}】积分`)
 		            msg += `\n签到结果:【${result.msg}】【${result.data.today}】`
-			    msg += `\n签到获得【${result.data.todayIntegral}】积分`
+			    msg += `\n签到获得：【${result.data.todayIntegral}】积分`
 			    //msg += `\n现总积分：【${result.data.totalIntegral}】积分`
 			} else {
 			    console.log(`\n签到结果：【${result.msg}】`)
