@@ -111,14 +111,14 @@ class UserInfo {
 		        console.log(result)
 
 			console.log(`\n签到获得：【${result.eward_rule.asset_rewards[0].value}${result.eward_rule.asset_rewards[0].name}】`)
-			console.log(`\n签到tip：【${result.tip}${result.tip}】`)
+			console.log(`\n签到tip：【${result.tip}】`)
 			msg += `\n签到获得：【${result.eward_rule.asset_rewards[0].value}${result.eward_rule.asset_rewards[0].name}】`
-			msg += `\n签到tip：【${result.tip}${result.tip}】`
+			msg += `\n签到tip：【${result.tip}】`
 
 		    })
                 } else {
-                    console.log(`\n签到失败！`)
-		    msg += `\n签到失败！`
+                    console.log(`\n签到失败！【${result.err_code}】【${result.err_msg}】`)
+		    msg += `\n签到失败！【${result.err_code}】【${result.err_msg}】`
                 }
 
 	    })
