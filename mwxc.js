@@ -59,8 +59,8 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-		        console.log(`\n获取Token：【${result.msg}】`)
-			msg += `\n获取Token：【${result.msg}】`
+		        console.log(`\n读Token：【${result.msg}】`)
+			msg += `\n读Token：【${result.msg}】`
 			
 			console.log(`\nToken【${result.data}】`)
 			token = result.data
