@@ -99,7 +99,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'authorization': this.ck
+		    'userSession': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
