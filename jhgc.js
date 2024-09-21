@@ -68,7 +68,7 @@ class UserInfo {
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息失败！`
+		    msg += `\n用户信息查询失败！`
                 }
 
 	    })
@@ -114,10 +114,10 @@ class UserInfo {
 		        msg += `\n签到结果：【${result.msg}】`
 			msg += `\n状态码：【${result.code}】`
 			if (result.code == 200) {
-			    console.log(`\n已经签到【${result.data.num}】天`)
+			    console.log(`\n已经签到：【${result.data.num}】天`)
 			    console.log(`\n今日获得：【${result.data.point_total}】积分`)
 			    console.log(`\n现总积分：【${result.data.total_point}】`)
-			    msg += `\n已经签到【${result.data.num}】天`
+			    msg += `\n已经签到：【${result.data.num}】天`
 		            msg += `\n今日获得：【${result.data.point_total}】积分`
 			    //msg += `\n现总积分：【${result.data.total_point}】`
 			}
