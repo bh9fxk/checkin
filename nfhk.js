@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:nfhk_ck
- * 变量值:抓包sessionid(certNo)&certno-encrypt的值
+ * 变量值:只需要更新跟TOKEN一样的参数的值
  * scriptVersionNow = "0.0.1";
  */
 
