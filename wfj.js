@@ -117,10 +117,14 @@ class UserInfo {
 
 		    })
                 } else {
-                    console.log(`\n签到失败！【${result.err_code}】【${result.err_msg}】`)
-		    msg += `\n签到失败！【${result.err_code}】【${result.err_msg}】`
+		    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+                        console.log(`\n签到失败！【${result.err_code}】【${result.err_msg}】`)
+		        msg += `\n签到失败！【${result.err_code}】【${result.err_msg}】`
+		    })
                 }
-
 	    })
 		
 	    req.on('error', error => {
