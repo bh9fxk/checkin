@@ -3,7 +3,7 @@
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: wfj_ck
- * 变量值: 抓包body中Token的值
+ * 变量值: 抓包userSession的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -20,15 +20,19 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.id = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info();
-	await $.wait(3000);
-	await this.signIn();
-	await $.wait(3000);
-	await SendMsg(msg);
+        await this.user_info()
+	await $.wait(3000)
+	await this.signIn()
+	await $.wait(3000)
+	await this.sigin_days()
+	await $.wait(3000)
+	await this.user_point()
+	await SendMsg(msg)
     }
 	
     async user_info() {
@@ -36,13 +40,13 @@ class UserInfo {
 	    const https = require('https')
 
 	    const options = {
-		hostname: 'api.online.wfj.com.cn',
+		hostname: 'wfj-restapi.wfj.com.cn',
 		port: 443,
-		path: '/zanmall_user/user/user_info',
+		path: '/MAGIC-MEMBER-V2/front/members/base',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'authorization': this.ck
+		    'userSession': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -52,17 +56,19 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.success == true) {
-			    console.log(`\n现有积分：【${result.data.score}】`)
-			    msg += `\n现有积分：【${result.data.score}】`
-			} else {
-			    console.log(`\n积分查询结果：【${result.msg}】`)
-			    msg += `\n积分查询结果：【${result.msg}】`
-			}
+			
+			console.log(`\n用户编号：【${result.id}】`)
+			console.log(`\n用户名称：【${result.nick_name}】`)
+			console.log(`\n用户手机：【${result.mobile}】`)
+			console.log(`\n用户等级：【${result.member_grade}】`)
+			msg += `\n用户编号：【${result.id}】`
+			msg += `\n用户名称：【${result.nick_name}】`
+			msg += `\n用户手机：【${result.mobile}】`
+			msg += `\n用户等级：【${result.member_grade}】`
 		    })
                 } else {
-                    console.log(`\n用户积分查询失败！`)
-		    msg += `\n用户积分查询失败！`
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
                 }
 
 	    })
@@ -82,12 +88,15 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-
+	    const data = JSON.stringify({
+		    "activity_id": 284067,
+		    "subsite_id": this.id
+            })
 	    const options = {
-		hostname: 'api.online.wfj.com.cn',
+		hostname: 'wfj-restapi.wfj.com.cn',
 		port: 443,
-		path: '/zanmall_user/score/sign?type=0&shopId=58',
-		method: 'GET',
+		path: '/AFFILIATE-MARKETING/front/checkin/records',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'authorization': this.ck
@@ -100,17 +109,63 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			if (result.success == true) {
-			    console.log(`\n签到结果：【${result.data}】`);
-			    msg += `\n签到结果：【${result.data}】`
-			} else {
-			    console.log(`\n签到结果：【${result.msg}】`);
-		            msg += `\n签到结果：【${result.msg}】`
-			}
+
+			console.log(`\n签到获得：【${result.eward_rule.asset_rewards[0].value}${result.eward_rule.asset_rewards[0].name}】`)
+			console.log(`\n签到tip：【${result.tip}${result.tip}】`)
+			msg += `\n签到获得：【${result.eward_rule.asset_rewards[0].value}${result.eward_rule.asset_rewards[0].name}】`
+			msg += `\n签到tip：【${result.tip}${result.tip}】`
+
 		    })
                 } else {
                     console.log(`\n签到失败！`)
 		    msg += `\n签到失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+	
+    async signin_days() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'wfj-restapi.wfj.com.cn',
+		port: 443,
+		path: '/AFFILIATE-MARKETING/front/checkin/records?activity_id=284067&subsite_id='+this.id,
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'userSession': this.ck,
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+			
+			console.log(`\n连续签到：【${result.continuous_checkin_count}】`)
+			console.log(`\n总共签到：【${result.total_count}】`)
+			msg += `\n连续签到：【${result.continuous_checkin_count}】`
+			msg += `\n总共签到：【${result.total_count}】`
+		    })
+                } else {
+                    console.log(`\n签到天数查询失败！`)
+		    msg += `\n签到天数查询失败！`
                 }
 
 	    })
@@ -126,7 +181,53 @@ class UserInfo {
             console.log(e);
         }
     }
-}
+
+    async user_point() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'wfj-restapi.wfj.com.cn',
+		port: 443,
+		path: '/MAGIC-MEMBER/front/point_accounts/mine/point_account',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'userSession': this.ck,
+		    'subsiteId': this.id
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+			
+			console.log(`\n现有积分：【${result.point_account_balance}】`)
+			console.log(`\n可用积分：【${result.point_account_available}】`)
+			msg += `\n现有积分：【${result.point_account_balance}】`
+			msg += `\n可用积分：【${result.point_account_available}】`
+		    })
+                } else {
+                    console.log(`\n用户积分查询失败！`)
+		    msg += `\n用户积分查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
 async function start() {
 const tasks = userList.map(user => user.main());
