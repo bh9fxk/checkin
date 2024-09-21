@@ -99,6 +99,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
 		    'userSession': this.ck
 		}
 	    }
