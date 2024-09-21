@@ -63,12 +63,12 @@ class UserInfo {
 		        console.log(result)
 
 			if (result.success == true) {
-			    console.log(`\n【Token获取成功】`)
-			    msg += `\n【Token获取成功】`
+			    console.log(`\n-----【Token获取成功】-----`)
+			    msg += `\n-----【Token获取成功】-----`
 			    token = result.data.accesstoken
 			    let a = result.data.expiresin / 3600
-			    console.log(`\nToken过期时间：【${a}】小时`)
-			    msg += `\nToken过期时间：【${a}】小时`
+			    console.log(`\nToken过期：【${a}】小时`)
+			    msg += `\nToken过期：【${a}】小时`
 			} else {
 			    console.log(`\nToken查询结果：【${result.msg}】`);
 			    msg += `\nToken查询结果：【${result.msg}】`
@@ -119,8 +119,8 @@ class UserInfo {
 		        console.log(result)
 		        
 			if (result.success == true) {
-			    console.log(`\n签到获得【${result.data.giftmsg}】`)
-			    msg += `\n签到获得【${result.data.giftmsg}】`
+			    console.log(`\n签到获得：【${result.data.giftmsg}】`)
+			    msg += `\n签到获得：【${result.data.giftmsg}】`
 			} else {
 			    console.log(`\n签到结果：【${result.msg}】`)
 			    msg += `\n签到结果：【${result.msg}】`
