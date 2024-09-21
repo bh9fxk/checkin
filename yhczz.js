@@ -127,9 +127,9 @@ class UserInfo {
 		        console.log(result)
 			if (result.code == 0) {
 			    console.log(`\n签到结果：【${result.message}】`)
-			    console.log(`\n签到获得【${result.data}】成长值`)
+			    console.log(`\n签到获得：【${result.data}】成长值`)
 		            msg += `\n签到结果：【${result.message}】`
-			    msg += `\n签到获得【${result.data}】成长值`
+			    msg += `\n签到获得：【${result.data}】成长值`
 			} else {
 			    console.log(`\n签到结果：【${result.message}】`)
 			    msg += `\n签到结果：【${result.message}】`
