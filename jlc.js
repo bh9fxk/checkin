@@ -208,7 +208,7 @@ class UserInfo {
 		        console.log(result)
 			if (result.success == true) {
 			    console.log(`\n已经签到：【${result.data.day}】天`)
-			    msg += `\n已经签到【${result.data.day}】天`
+			    msg += `\n已经签到：【${result.data.day}】天`
 			} else {
 			    console.log(`\n签到天数查询结果：【${result.message}】`);
 		            msg += `\n签到天数查询结果：【${result.message}】`
