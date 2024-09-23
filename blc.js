@@ -39,7 +39,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'a.zhimatech.com',
 		port: 443,
-		path: '/restful/mall/3785/items/count',
+		path: '/restful/mall/3836/items/count',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'a.zhimatech.com',
 		port: 443,
-		path: '/restful/mall/3785/checkInRecord',
+		path: '/restful/mall/3836/checkInRecord',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
