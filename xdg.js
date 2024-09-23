@@ -39,7 +39,7 @@ class UserInfo {
 	    const https = require('https')
 
 	    const options = {
-		hostname: 'https://appsmall.rtmap.com',
+		hostname: 'appsmall.rtmap.com',
 		port: 443,
 		path: '/sign/signRecord/get?openid='+this.openid+'&marketId=13020&cid=96ea16740498499a98e733ca309e4f90&signMonth=null',
 		method: 'GET',
