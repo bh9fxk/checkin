@@ -21,6 +21,7 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.id = str.split(strSplitor)[1];
+	this.id = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -40,13 +41,17 @@ class UserInfo {
 	    const https = require('https')
 
 	    const options = {
-		hostname: 'wfj-restapi.wfj.com.cn',
+		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: '/MAGIC-MEMBER-V2/front/members/base',
+		path: '/yinli-minapp/api/v1/member?phoneNumber=15129211358',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'userSession': this.ck
+		    'token': this.ck,
+		    'orgcode': 'G001Z006Q0098',
+		    'phonenumber': this.phonenumber,
+		    'memberid': this.memberid,
+		    'apptype': 0	
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -56,15 +61,20 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-			
-			console.log(`\n用户编号：【${result.id}】`)
-			console.log(`\n用户名称：【${result.nick_name}】`)
-			console.log(`\n用户手机：【${result.mobile}】`)
-			console.log(`\n用户等级：【${result.member_grade}】`)
-			msg += `\n用户编号：【${result.id}】`
-			msg += `\n用户名称：【${result.nick_name}】`
-			msg += `\n用户手机：【${result.mobile}】`
-			msg += `\n用户等级：【${result.member_grade}】`
+			if (result.status == 200) {
+			    console.log(`\n查询结果：【${result.message}】`)
+			    console.log(`\n用户昵称：【${result.data.nickName}】`)
+			    console.log(`\n现总积分：【${result.data.points}】`)
+			    console.log(`\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
+       【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`)
+			    msg += `\n用户编号：【${result.id}】`
+			    msg += `\n用户编号：【${result.id}】`
+			    msg += `\n用户编号：【${result.id}】`
+			    msg += `\n用户编号：【${result.id}】`
+			} else {
+			    console.log(`\n信息查询结果：【${result.message}】`)
+			    msg += `\n信息查询结果：【${result.message}】`
+			}
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
