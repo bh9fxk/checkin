@@ -20,8 +20,8 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.id = str.split(strSplitor)[1];
-	this.id = str.split(strSplitor)[2];
+	this.phonenumber = str.split(strSplitor)[1];
+	this.memberid = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -43,7 +43,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: '/yinli-minapp/api/v1/member?phoneNumber=15129211358',
+		path: '/yinli-minapp/api/v1/member?phoneNumber='+this.phonenumber,
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -98,42 +98,46 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		    "activity_id": 284067,
-		    "subsite_id": this.id
-            })
+	    const data = JSON.stringify({})
 	    const options = {
-		hostname: 'wfj-restapi.wfj.com.cn',
+		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: '/AFFILIATE-MARKETING/front/checkin/records',
+		path: '/yinli-minapp/api/v1/signDay/sign?memberId='this.memberid+'&phoneNumber='+this.phonenumber,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'userSession': this.ck
+		    'token': this.ck,
+		    'orgcode': 'G001Z006Q0098',
+		    'phonenumber': this.phonenumber,
+		    'memberid': this.memberid,
+		    'apptype': 0
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 201) {
+		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
 
-			console.log(`\n签到获得：【${result.reward_rule.asset_rewards[0].value}${result.reward_rule.asset_rewards[0].name}】`)
-			console.log(`\n签到tip：【${result.tip}】`)
-			msg += `\n签到获得：【${result.reward_rule.asset_rewards[0].value}${result.reward_rule.asset_rewards[0].name}】`
-			msg += `\n签到tip：【${result.tip}】`
-
+			if (result.status == 200) {
+			    console.log(`\n签到状态：【${result.data}】`)
+			    console.log(`\n签到消息：【${result.message}】`)
+			    msg += `\n签到状态：【${result.data}】`
+			    msg += `\n签到状态：【${result.message}】`
+			}
+			console.log(`\n签到状态：【${result.message}】`)
+			msg += `\n签到状态：【${result.message}】`
 		    })
                 } else {
 		    res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-                        console.log(`\n签到失败！【${result.err_code}】【${result.err_msg}】`)
-		        msg += `\n签到失败！【${result.err_code}】【${result.err_msg}】`
+                        console.log(`\n签到失败！【${result.message}】`)
+		        msg += `\n签到失败！【${result.message}】`
 		    })
                 }
 	    })
@@ -143,99 +147,6 @@ class UserInfo {
 	    })
 
 	    req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async signin_days() {
-        try {
-	    const https = require('https')
-
-	    const options = {
-		hostname: 'wfj-restapi.wfj.com.cn',
-		port: 443,
-		path: '/AFFILIATE-MARKETING/front/checkin/records?activity_id=284067&subsite_id='+this.id,
-		method: 'GET',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'userSession': this.ck,
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-			
-			console.log(`\n连续签到：【${result.continuous_checkin_count}】天`)
-			console.log(`\n总共签到：【${result.total_count}】天`)
-			msg += `\n连续签到：【${result.continuous_checkin_count}】天`
-			msg += `\n总共签到：【${result.total_count}】天`
-		    })
-                } else {
-                    console.log(`\n签到天数查询失败！`)
-		    msg += `\n签到天数查询失败！`
-                }
-
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    //req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async user_point() {
-        try {
-	    const https = require('https')
-
-	    const options = {
-		hostname: 'wfj-restapi.wfj.com.cn',
-		port: 443,
-		path: '/MAGIC-MEMBER/front/point_accounts/mine/point_account',
-		method: 'GET',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'userSession': this.ck,
-		    'subsiteId': this.id
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-			
-			console.log(`\n现有积分：【${result.point_account_balance}】`)
-			console.log(`\n可用积分：【${result.point_account_available}】`)
-			msg += `\n现有积分：【${result.point_account_balance}】`
-			msg += `\n可用积分：【${result.point_account_available}】`
-		    })
-                } else {
-                    console.log(`\n用户积分查询失败！`)
-		    msg += `\n用户积分查询失败！`
-                }
-
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    //req.write(data)
 	    req.end()
 
         } catch (e) {
