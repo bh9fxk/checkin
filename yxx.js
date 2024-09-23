@@ -57,7 +57,7 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
 			setTimeout(() => {
-			    console.log(等待。。。。。。。。。。。。)	// 这里是函数代码
+			    console.log('等待。。。。。。。。。。。。')	// 这里是函数代码
 			}, 10000);
                         let result = JSON.parse(d)
 		        console.log(result)
