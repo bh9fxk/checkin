@@ -111,9 +111,9 @@ class UserInfo {
                         let result = JSON.parse(d)
 		        console.log(result)
 
-			console.log(`\n签到获得：【${result.eward_rule.asset_rewards[0].value}${result.eward_rule.asset_rewards[0].name}】`)
+			console.log(`\n签到获得：【${result.reward_rule.asset_rewards[0].value}${result.reward_rule.asset_rewards[0].name}】`)
 			console.log(`\n签到tip：【${result.tip}】`)
-			msg += `\n签到获得：【${result.eward_rule.asset_rewards[0].value}${result.eward_rule.asset_rewards[0].name}】`
+			msg += `\n签到获得：【${result.reward_rule.asset_rewards[0].value}${result.reward_rule.asset_rewards[0].name}】`
 			msg += `\n签到tip：【${result.tip}】`
 
 		    })
