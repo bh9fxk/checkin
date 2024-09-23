@@ -29,8 +29,8 @@ class UserInfo {
         await this.user_info()
 	await $.wait(5000)
 	await this.signIn()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 	
     async user_info() {
@@ -56,7 +56,7 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			$.wait(10000)
+			$.wait(30000)
                         let result = JSON.parse(d)
 		        console.log(result)
 			if (result.status == 200) {
