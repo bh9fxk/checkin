@@ -40,7 +40,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: '/yinli-minapp/api/v1/member?phoneNumber='+this.phonenumber,
+		path: '/yinli-minapp/api/v1/index?phoneNumber='+this.phonenumber,
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -64,14 +64,18 @@ class UserInfo {
 			if (result.status == 200) {
 			    console.log(`\n查询结果：【${result.message}】`)
 			    console.log(`\n用户昵称：【${result.data.nickName}】`)
-			    console.log(`\n现总积分：【${result.data.points}】`)
+			    console.log(`\n现总积分：【${result.data.nowIntegral}】【星贝：${result.data.nowXingBeiIntegral}】【积分：${result.data.nowPointIntegral}】`)
 			    console.log(`\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
        【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`)
+			    console.log(`\n获得积分：【${result.data.totalGetPoints}】`)
+			    console.log(`\n使用积分：【${result.data.totalUsePoints}】`)
 			    msg += `\n查询结果：【${result.message}】`
 			    msg += `\n用户昵称：【${result.data.nickName}】`
-			    msg += `\n现总积分：【${result.data.points}】`
+			    msg += `\n现总积分：【${result.data.nowIntegral}】【星贝：${result.data.nowXingBeiIntegral}】【积分：${result.data.nowPointIntegral}】`
 			    msg += `\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
        【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`
+			    msg += `\n获得积分：【${result.data.totalGetPoints}】`
+			    msg += `\n使用积分：【${result.data.totalUsePoints}】`
 			} else {
 			    console.log(`\n信息查询结果：【${result.message}】`)
 			    msg += `\n信息查询结果：【${result.message}】`
