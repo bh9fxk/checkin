@@ -32,6 +32,7 @@ class UserInfo {
 	await this.signin_days()
 	await $.wait(3000)
 	await this.user_point()
+	await $.wait(3000)
 	await SendMsg(msg)
     }
 	
