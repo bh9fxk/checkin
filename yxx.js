@@ -102,7 +102,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: '/yinli-minapp/api/v1/signDay/sign?memberId='this.memberid+'&phoneNumber='+this.phonenumber,
+		path: '/yinli-minapp/api/v1/signDay/sign?memberId='+this.memberid+'&phoneNumber='+this.phonenumber,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
