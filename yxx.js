@@ -56,8 +56,8 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
+			$.wait(10000)
                         let result = JSON.parse(d)
-			$.wait(5000)
 		        console.log(result)
 			if (result.status == 200) {
 			    console.log(`\n查询结果：【${result.message}】`)
