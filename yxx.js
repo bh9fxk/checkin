@@ -57,9 +57,9 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
 			setTimeout(() => {
-			    let result = JSON.parse(d)	// 这里是函数代码
+			    console.log(等待。。。。。。。。。。。。)	// 这里是函数代码
 			}, 10000);
-                        //let result = JSON.parse(d)
+                        let result = JSON.parse(d)
 		        console.log(result)
 			if (result.status == 200) {
 			    console.log(`\n查询结果：【${result.message}】`)
