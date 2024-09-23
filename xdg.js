@@ -26,33 +26,25 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        //await this.user_info();
-	//await $.wait(3000);
+        
 	await this.signIn();
+	await $.wait(3000);
+	await this.sigin_days();
 	await $.wait(3000);
 	await SendMsg(msg);
     }
 
-/*
-    async user_info() {
+    async signin_days() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"data": {
-		    "projectId": "876BD8DE-295C-E311-8D79-0050568001F7"
-		}
-            })
 
 	    const options = {
-		hostname: 'gw2c-hw-open.longfor.com',
+		hostname: 'https://appsmall.rtmap.com',
 		port: 443,
-		path: '/riyuehu-miniapp-prod/service/ryh/user/info',
-		method: 'POST',
+		path: '/sign/signRecord/get?openid='+this.openid+'&marketId=13020&cid=96ea16740498499a98e733ca309e4f90&signMonth=null',
+		method: 'GET',
 		headers: {
-		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-Gaia-Api-Key': this.api1,
-		    'token': this.token
+		    'Content-Type': 'application/json'
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -61,17 +53,22 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
-		        console.log(result)
-			console.log(`\n用户名称：【${result.data.nickName}】`)
-			console.log(`\n用户手机：【${result.data.mobile}】`)
-			console.log(`\n现总积分：【${result.data.lzBalance}】`)
-			msg += `\n用户名称：【${result.data.nickName}】`
-			msg += `\n用户手机：【${result.data.mobile}】`
-			msg += `\n现总积分：【${result.data.lzBalance}】`
+			if (result.code == 200) {
+			    console.log(`\n签到天数：【${result.msg}】`)
+			    console.log(`\n连续签到：【${result.data.serialSignDays}】天`)
+			    console.log(`\n总共签到：【${result.data.addSignDays}】天`)
+			    msg += `\n签到天数：【${result.msg}】`
+			    msg += `\n连续签到：【${result.data.serialSignDays}】天`
+			    msg += `\n总共签到：【${result.data.addSignDays}】天`
+			    
+			} else {
+			    console.log(`\n签到天数查询：【${result.msg}】`)
+			    msg += `\n签到天数查询：【${result.msg}】`
+			}
 		    })
                 } else {
-                    console.log(`\n积分查询失败！`)
-		    msg += `\n积分查询失败！`
+                    console.log(`\n天数查询失败！`)
+		    msg += `\n天数查询失败！`
                 }
 
 	    })
@@ -87,7 +84,6 @@ class UserInfo {
             console.log(e);
         }
     }
-*/
 
     async signIn() {
         try {
