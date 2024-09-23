@@ -64,10 +64,11 @@ class UserInfo {
 			    console.log(`\n现总积分：【${result.data.points}】`)
 			    console.log(`\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
        【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`)
-			    msg += `\n用户编号：【${result.id}】`
-			    msg += `\n用户编号：【${result.id}】`
-			    msg += `\n用户编号：【${result.id}】`
-			    msg += `\n用户编号：【${result.id}】`
+			    msg += `\n查询结果：【${result.message}】`
+			    msg += `\n用户昵称：【${result.data.nickName}】`
+			    msg += `\n现总积分：【${result.data.points}】`
+			    msg += `\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
+       【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`
 			} else {
 			    console.log(`\n信息查询结果：【${result.message}】`)
 			    msg += `\n信息查询结果：【${result.message}】`
@@ -123,7 +124,7 @@ class UserInfo {
 			    console.log(`\n签到状态：【${result.data}】`)
 			    console.log(`\n签到消息：【${result.message}】`)
 			    msg += `\n签到状态：【${result.data}】`
-			    msg += `\n签到状态：【${result.message}】`
+			    msg += `\n签到消息：【${result.message}】`
 			}
 			console.log(`\n签到状态：【${result.message}】`)
 			msg += `\n签到状态：【${result.message}】`
