@@ -56,9 +56,6 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			setTimeout(() => {
-			    console.log('等待。。。。。。。。。。。。')	// 这里是函数代码
-			}, 10000);
                         let result = JSON.parse(d)
 		        console.log(result)
 			if (result.status == 200) {
