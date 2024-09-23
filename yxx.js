@@ -57,7 +57,7 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
-			await delay(5);
+			await $.wait(5000)
 		        console.log(result)
 			if (result.status == 200) {
 			    console.log(`\n查询结果：【${result.message}】`)
