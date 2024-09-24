@@ -26,20 +26,20 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        //await this.user_info()
+        await this.user_info()
+	await $.wait(3000)
+	//await this.user_point()
 	//await $.wait(3000)
-	await this.user_point()
-	await $.wait(3000)
 	await this.signIn()
-	await $.wait(3000)
-	console.log(`\n-----签到后再次查询积分-----`)
-	msg += `\n-----签到后再次查询积分-----`
-	await this.user_point()
+	//await $.wait(3000)
+	//console.log(`\n-----签到后再次查询积分-----`)
+	//msg += `\n-----签到后再次查询积分-----`
+	//await this.user_point()
 	//await $.wait(3000)
 	//await SendMsg(msg)
     }
 
-/*   //转换格式时经常出错，暂时停用
+   //转换格式时经常出错，暂时停用
     async user_info() {
         try {
 	    const https = require('https')
@@ -61,10 +61,13 @@ class UserInfo {
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
+		    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
 			if (result.status == 200) {
 			    console.log(`\n查询结果：【${result.message}】`)
 			    console.log(`\n用户昵称：【${result.data.nickName}】`)
@@ -84,81 +87,15 @@ class UserInfo {
 			    console.log(`\n信息查询结果：【${result.message}】`)
 			    msg += `\n信息查询结果：【${result.message}】`
 			}
+			
 		    })
+			
                 } else {
                     console.log(`\n用户信息查询失败！`)
 		    msg += `\n用户信息查询失败！`
                 }
-
 	    })
 		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    //req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-*/
-
-    async user_point() {
-        try {
-	    const https = require('https')
-
-	    const options = {
-		hostname: 'crm.scpgroup.com.cn',
-		port: 443,
-		path: '/yinli-minapp/api/v1/member/integrals?memberId='+this.memberid+'&pageIndex=1&pageSize=10&tenantId=10000',
-		method: 'GET',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'token': this.ck,
-		    'orgcode': 'G001Z006Q0098',
-		    'phonenumber': this.phonenumber,
-		    'memberid': this.memberid,
-		    'apptype': 0	
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-		    let str = ''
-                    /*res.on('data', d => {
-                        process.stdout.write(d)
-			    
-                        let result = JSON.parse(d)
-			    
-		        console.log(result)
-			if (result.status == 200) {
-			    console.log(`\n查询结果：【${result.message}】`)
-			    console.log(`\n现总积分：【${result.data.list[0].pointBalance}】`)
-			    msg += `\n查询结果：【${result.message}】`
-			    msg += `\n现总积分：现总积分：【${result.data.list[0].pointBalance}】`
-			} else {
-			    console.log(`\n信息查询结果：【${result.message}】`)
-			    msg += `\n信息查询结果：【${result.message}】`
-			}
-			
-		    })*/
-		    //res.setEncoding(‘utf8’);
-		    res.on('data', function (chunk) {
-			str += chunk;
-		    });
-		    res.on('end', function(){
-			console.log(JSON.parse(str))
-			//success(res,JSON.parse(str));
-		    });
-		
-                } else {
-                    console.log(`\n积分信息查询失败！`)
-		    msg += `\n积分信息查询失败！`
-                }
-
-	    })
 	    req.on('error', error => {
 		console.error(error)
 	    })
