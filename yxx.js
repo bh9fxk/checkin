@@ -34,8 +34,8 @@ class UserInfo {
 	await $.wait(3000)
 	console.log('-----签到后再次查询积分-----')
 	await this.user_point()
-	//await $.wait(3000)
-	//await SendMsg(msg)
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 
 /*   //转换格式时经常出错，暂时停用
