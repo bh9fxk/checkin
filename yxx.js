@@ -126,10 +126,11 @@ class UserInfo {
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
+		    let data = ''
+                    /*res.on('data', d => {
                         process.stdout.write(d)
 			    
-                        let result += JSON.parse(d)
+                        let result = JSON.parse(d)
 			    
 		        console.log(result)
 			if (result.status == 200) {
@@ -141,14 +142,22 @@ class UserInfo {
 			    console.log(`\n信息查询结果：【${result.message}】`)
 			    msg += `\n信息查询结果：【${result.message}】`
 			}
+			
+		    })*/
+		    response.on('data', function (chunk) {
+			console.log(chunk);
+			data += chunk;
+		    });
+		    res.on('end', function(){
+			callback(data);
 		    })
+		
                 } else {
                     console.log(`\n积分信息查询失败！`)
 		    msg += `\n积分信息查询失败！`
                 }
 
 	    })
-		
 	    req.on('error', error => {
 		console.error(error)
 	    })
