@@ -144,7 +144,7 @@ class UserInfo {
 			}
 			
 		    })*/
-		    res.setEncoding(‘utf8’);
+		    //res.setEncoding(‘utf8’);
 		    res.on(‘data’, function (chunk) {
 			str += chunk;
 		    });
