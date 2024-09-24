@@ -144,12 +144,12 @@ class UserInfo {
 			}
 			
 		    })*/
-		    response.setEncoding(‘utf8’);
-		    response.on(‘data’, function (chunk) {
+		    res.setEncoding(‘utf8’);
+		    res.on(‘data’, function (chunk) {
 			str += chunk;
 		    });
-		    response.on(‘end’, function(){
-			success(response,JSON.parse(str));
+		    res.on(‘end’, function(){
+			success(res,JSON.parse(str));
 		    });
 		
                 } else {
