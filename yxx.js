@@ -149,7 +149,8 @@ class UserInfo {
 			str += chunk;
 		    });
 		    res.on('end', function(){
-			success(res,JSON.parse(str));
+			console.log(JSON.parse(str))
+			//success(res,JSON.parse(str));
 		    });
 		
                 } else {
