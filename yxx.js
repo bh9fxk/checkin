@@ -34,8 +34,8 @@ class UserInfo {
 	await $.wait(3000)
 	console.log('-----签到后再次查询积分-----')
 	await this.user_point()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
 /*   //转换格式时经常出错，暂时停用
@@ -111,7 +111,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: 'v1/member/integrals?memberId='+this.memberid+'&pageIndex=1&pageSize=10&tenantId=10000',
+		path: '/yinli-minapp/api/v1/member/integrals?memberId='+this.memberid+'&pageIndex=1&pageSize=10&tenantId=10000',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -140,8 +140,8 @@ class UserInfo {
 			}
 		    })
                 } else {
-                    console.log(`\n用户信息查询失败！`)
-		    msg += `\n用户信息查询失败！`
+                    console.log(`\n积分信息查询失败！`)
+		    msg += `\n积分信息查询失败！`
                 }
 
 	    })
