@@ -129,7 +129,7 @@ class UserInfo {
                     res.on('data', d => {
                         process.stdout.write(d)
 			    
-                        let result = JSON.parse(d)
+                        let result += JSON.parse(d)
 			    
 		        console.log(result)
 			if (result.status == 200) {
