@@ -28,18 +28,11 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
         await this.user_info()
 	await $.wait(3000)
-	//await this.user_point()
-	//await $.wait(3000)
 	await this.signIn()
-	//await $.wait(3000)
-	//console.log(`\n-----签到后再次查询积分-----`)
-	//msg += `\n-----签到后再次查询积分-----`
-	//await this.user_point()
-	//await $.wait(3000)
-	//await SendMsg(msg)
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 
-   //转换格式时经常出错，暂时停用
     async user_info() {
         try {
 	    const https = require('https')
@@ -87,9 +80,7 @@ class UserInfo {
 			    console.log(`\n信息查询结果：【${result.message}】`)
 			    msg += `\n信息查询结果：【${result.message}】`
 			}
-			
 		    })
-			
                 } else {
                     console.log(`\n用户信息查询失败！`)
 		    msg += `\n用户信息查询失败！`
