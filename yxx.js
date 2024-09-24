@@ -128,9 +128,11 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
-			setTimeout(function(){
-			    console.log("等待时间");
-			}, 10000)
+			function greeting(){
+			    console.log("Hello World");
+			}
+			setTimeout(greeting, 10000);
+			    
                         let result = JSON.parse(d)
 		        console.log(result)
 			if (result.status == 200) {
