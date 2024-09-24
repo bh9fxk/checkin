@@ -111,7 +111,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: 'v1/member/integrals?memberId='+this.memberid+'&pageIndex=1&pageSize=10&tenantId=10000,
+		path: 'v1/member/integrals?memberId='+this.memberid+'&pageIndex=1&pageSize=10&tenantId=10000',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
