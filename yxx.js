@@ -144,7 +144,7 @@ class UserInfo {
 			}
 			
 		    })*/
-		    response.on('data', function (chunk) {
+		    res.on('data', function (chunk) {
 			console.log(chunk);
 			data += chunk;
 		    });
