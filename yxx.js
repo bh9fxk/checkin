@@ -32,10 +32,11 @@ class UserInfo {
 	await $.wait(3000)
 	await this.signIn()
 	await $.wait(3000)
-	console.log('-----签到后再次查询积分-----')
+	console.log(`\n-----签到后再次查询积分-----`)
+	msg += `\n-----签到后再次查询积分-----`
 	await this.user_point()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
 /*   //转换格式时经常出错，暂时停用
@@ -127,6 +128,9 @@ class UserInfo {
 		if (`${res.statusCode}` == 200) {
                     res.on('data', d => {
                         //process.stdout.write(d)
+			setTimeout(function(){
+			    console.log("等待时间");
+			}, 10000)
                         let result = JSON.parse(d)
 		        console.log(result)
 			if (result.status == 200) {
@@ -157,6 +161,7 @@ class UserInfo {
             console.log(e);
         }
     }
+
     async signIn() {
         try {
 	    const https = require('https')
