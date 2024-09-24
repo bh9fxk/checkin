@@ -126,7 +126,7 @@ class UserInfo {
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
-		    let data = ''
+		    let str = ''
                     /*res.on('data', d => {
                         process.stdout.write(d)
 			    
@@ -144,13 +144,13 @@ class UserInfo {
 			}
 			
 		    })*/
-		    res.on('data', function (chunk) {
-			console.log(chunk);
-			data += chunk;
+		    response.setEncoding(‘utf8’);
+		    response.on(‘data’, function (chunk) {
+			str += chunk;
 		    });
-		    res.on('end', function(){
-			callback(data);
-		    })
+		    response.on(‘end’, function(){
+			success(response,JSON.parse(str));
+		    });
 		
                 } else {
                     console.log(`\n积分信息查询失败！`)
