@@ -145,10 +145,10 @@ class UserInfo {
 			
 		    })*/
 		    //res.setEncoding(‘utf8’);
-		    res.on(‘data’, function (chunk) {
+		    res.on('data', function (chunk) {
 			str += chunk;
 		    });
-		    res.on(‘end’, function(){
+		    res.on('end', function(){
 			success(res,JSON.parse(str));
 		    });
 		
