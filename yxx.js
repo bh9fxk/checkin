@@ -134,9 +134,10 @@ class UserInfo {
 			    console.log(`\n签到消息：【${result.message}】`)
 			    msg += `\n签到状态：【${result.data}】`
 			    msg += `\n签到消息：【${result.message}】`
+			} else {
+			    console.log(`\n签到状态：【${result.message}】`)
+			    msg += `\n签到状态：【${result.message}】`
 			}
-			console.log(`\n签到状态：【${result.message}】`)
-			msg += `\n签到状态：【${result.message}】`
 		    })
                 } else {
 		    res.on('data', d => {
