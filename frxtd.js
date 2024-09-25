@@ -108,7 +108,6 @@ class UserInfo {
 			str += chunk
 		    })
                     res.on('end', function(){
-                        let result = JSON.parse(d)
 			let result = JSON.parse(str)
 			console.log(result)
 			
