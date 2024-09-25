@@ -112,7 +112,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'token': this.ck,
+		    'X-token': this.ck,
 		    'tenantId': 10159618,
 		    'orgId': 429605,
 		    'poiId': 0,
