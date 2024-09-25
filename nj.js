@@ -20,8 +20,6 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.phonenumber = str.split(strSplitor)[1];
-	this.memberid = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -36,19 +34,21 @@ class UserInfo {
     async user_info() {
         try {
 	    const https = require('https')
-
+	    const data = JSON.stringify({
+		"styleType": "1",
+		"cardId": "2708936676", //卡号不影响结果
+		"restaurantViewId": "126269"
+	    })
 	    const options = {
-		hostname: 'crm.scpgroup.com.cn',
+		hostname: 'rms.meituan.com',
 		port: 443,
-		path: '/yinli-minapp/api/v1/index?phoneNumber='+this.phonenumber,
-		method: 'GET',
+		path: '/api/v1/rmsmina/c/comp/member/membercard',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'token': this.ck,
-		    'orgcode': 'G001Z006Q0098',
-		    'phonenumber': this.phonenumber,
-		    'memberid': this.memberid,
-		    'apptype': 0	
+		    'Content-Length': data.length,
+		    'X-token': this.ck,
+		    'tenantId': 10159618
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -61,26 +61,20 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == 200) {
-			    console.log(`\n查询结果：【${result.message}】`)
-			    console.log(`\n用户昵称：【${result.data.nickName}】`)
-			    console.log(`\n现总积分：【${result.data.nowIntegral}】`)
-			    console.log(`\n积分明细：【${result.data.nowXingBeiIntegral}星贝 / ${result.data.nowPointIntegral}积分】`)
-			    console.log(`\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
-       【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`)
-			    console.log(`\n获得积分：【${result.data.totalGetPoints}】`)
-			    console.log(`\n使用积分：【${result.data.totalUsePoints}】`)
-			    msg += `\n查询结果：【${result.message}】`
-			    msg += `\n用户昵称：【${result.data.nickName}】`
-			    msg += `\n现总积分：【${result.data.nowIntegral}】`
-			    msg += `\n积分明细：【${result.data.nowXingBeiIntegral}星贝 / ${result.data.nowPointIntegral}积分】`
-			    msg += `\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
-       【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`
-			    msg += `\n获得积分：【${result.data.totalGetPoints}】`
-			    msg += `\n使用积分：【${result.data.totalUsePoints}】`
+			if (result.code == 200) {
+			    console.log(`\n用户昵称：【${result.data.memberInfo.nickName}】`)
+			    console.log(`\n用户会员：【${result.data.memberInfo.mbCards[0].title}】`)
+			    console.log(`\n现总积分：【${result.data.memberInfo.mbCards[0].point}】`)
+			    console.log(`\n优惠券数：【${result.data.memberInfo.mbCards[0].couponCount}】`)
+			    console.log(`\n现成长值：【${result.data.memberInfo.mbCards[0].memberGradeRight.currentNum}】【${result.data.memberInfo.mbCards[0].memberGradeRight.prompt}】`)
+			    msg += `\n用户昵称：【${result.data.memberInfo.nickName}】`
+			    msg += `\n用户会员：【${result.data.memberInfo.mbCards[0].title}】`
+			    msg += `\n现总积分：【${result.data.memberInfo.mbCards[0].point}】`
+			    msg += `\n优惠券数：【${result.data.memberInfo.mbCards[0].couponCount}】`
+			    msg += `\n现成长值：【${result.data.memberInfo.mbCards[0].memberGradeRight.currentNum}】【${result.data.memberInfo.mbCards[0].memberGradeRight.prompt}】`
 			} else {
-			    console.log(`\n信息查询结果：【${result.message}】`)
-			    msg += `\n信息查询结果：【${result.message}】`
+			    console.log(`\n用户查询结果：【${result.message}】`)
+			    msg += `\n用户查询结果：【${result.message}】`
 			}
 		    })
                 } else {
@@ -93,7 +87,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -104,39 +98,49 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"campaignId": "1006187217",
+		"cardId": 2708936676,
+		"couponDisplayScene": 44,
+		"styleVersion": 2
+	    })
 	    const options = {
-		hostname: 'crm.scpgroup.com.cn',
+		hostname: 'pos.meituan.com',
 		port: 443,
-		path: '/yinli-minapp/api/v1/signDay/sign?memberId='+this.memberid+'&phoneNumber='+this.phonenumber,
+		path: '/api/v1/crm/frontend/campaign/sign-in/participate',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'token': this.ck,
-		    'orgcode': 'G001Z006Q0098',
-		    'phonenumber': this.phonenumber,
-		    'memberid': this.memberid,
-		    'apptype': 0,
-		    'plazacode': 'G001Z006Q0098'
+		    'tenantId': 10159618,
+		    'orgId': 429605,
+		    'poiId': 0,
+		    'poiType': 1
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-
-			if (result.status == 200) {
-			    console.log(`\n签到状态：【${result.data}】`)
-			    console.log(`\n签到消息：【${result.message}】`)
-			    msg += `\n签到状态：【${result.data}】`
-			    msg += `\n签到消息：【${result.message}】`
+                    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.success == true) {
+			    console.log(`\n签到消息：【${result.msg}】`)
+			    console.log(`\n得优惠券：【${result.issuedCouponNum}】`)
+			    console.log(`\n获得积分：【${result.issuedPointAmount}】`)
+			    console.log(`\n下次签到：【${result.nextStepIncentives.nextStepIncentivesContentPrefix}：${result.nextStepIncentives.toIssuePointAmount}积分/${result.nextStepIncentives.toIssueCouponNum}券】`)
+			    msg += `\n签到消息：【${result.msg}】`
+			    msg += `\n得优惠券：【${result.issuedCouponNum}】`
+			    msg += `\n获得积分：【${result.issuedPointAmount}】`
+			    msg += `\n下次签到：【${result.nextStepIncentives.nextStepIncentivesContentPrefix}：${result.nextStepIncentives.toIssuePointAmount}积分/${result.nextStepIncentives.toIssueCouponNum}券】`
 			} else {
-			    console.log(`\n签到状态：【${result.message}】`)
-			    msg += `\n签到状态：【${result.message}】`
+			    console.log(`\n签到状态：【${result.msg}】`)
+			    msg += `\n签到状态：【${result.msg}】`
 			}
 		    })
                 } else {
