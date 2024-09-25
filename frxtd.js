@@ -104,13 +104,13 @@ class UserInfo {
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
+		    let str = ''
 		    res.on('data', function (chunk) {
 			str += chunk
 		    })
                     res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			
 		        console.log(`\n用户名称：【${result.data.member_surname}】`)
 			console.log(`\n用户手机：【${result.data.telephone}】`)
 			console.log(`\n现总积分：【${result.data.current_bonus}】`) 
