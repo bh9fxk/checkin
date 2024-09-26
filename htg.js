@@ -34,21 +34,16 @@ class UserInfo {
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"styleType": "1",
-		"cardId": "2708936676", //卡号不影响结果
-		"restaurantViewId": "126269"
-	    })
+	    const data = JSON.stringify({})
+
 	    const options = {
-		hostname: 'rms.meituan.com',
+		hostname: 'shop.hitgoo.net',
 		port: 443,
-		path: '/api/v1/rmsmina/c/comp/member/membercard',
+		path: '/b2ch5/getMemCatList?vendorId=17&account=17xcx&_xcx_='+this.ck,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-token': this.ck,
-		    'tenantId': 10159618
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -61,20 +56,16 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 200) {
-			    console.log(`\n用户昵称：【${result.data.memberInfo.nickName}】`)
-			    console.log(`\n用户会员：【${result.data.memberInfo.mbCards[0].title}】`)
-			    console.log(`\n现总积分：【${result.data.memberInfo.mbCards[0].point}】`)
-			    console.log(`\n优惠券数：【${result.data.memberInfo.mbCards[0].couponCount}】`)
-			    console.log(`\n现成长值：【${result.data.memberInfo.mbCards[0].memberGradeRight.currentNum}】【${result.data.memberInfo.mbCards[0].memberGradeRight.prompt}】`)
-			    msg += `\n用户昵称：【${result.data.memberInfo.nickName}】`
-			    msg += `\n用户会员：【${result.data.memberInfo.mbCards[0].title}】`
-			    msg += `\n现总积分：【${result.data.memberInfo.mbCards[0].point}】`
-			    msg += `\n优惠券数：【${result.data.memberInfo.mbCards[0].couponCount}】`
-			    msg += `\n现成长值：【${result.data.memberInfo.mbCards[0].memberGradeRight.currentNum}】【${result.data.memberInfo.mbCards[0].memberGradeRight.prompt}】`
+			if (result.status == 1) {
+			    console.log(`\n用户查询：【${result.message}】`)
+			    console.log(`\n用户名称：【${result.dataValue.member.memName}】`)
+			    console.log(`\n现总积分：【${result.dataValue.member.memPoint}】`)
+			    msg += `\n用户查询：【${result.message}】`
+			    msg += `\n用户名称：【${result.dataValue.member.memName}】`
+			    msg += `\n现总积分：【${result.dataValue.member.memPoint}】`
 			} else {
-			    console.log(`\n用户查询结果：【${result.message}】`)
-			    msg += `\n用户查询结果：【${result.message}】`
+			    console.log(`\n用户查询：【${result.message}】`)
+			    msg += `\n用户查询：【${result.message}】`
 			}
 		    })
                 } else {
@@ -98,25 +89,16 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"campaignId": "1006187217",
-		"cardId": 2708936676,
-		"couponDisplayScene": 44,
-		"styleVersion": 2
-	    })
+	    const data = JSON.stringify({})
+
 	    const options = {
-		hostname: 'pos.meituan.com',
+		hostname: 'shop.hitgoo.net/',
 		port: 443,
-		path: '/api/v1/crm/frontend/campaign/sign-in/participate',
+		path: 't/b2ch5/memSignInPoints?memNo=12134164&vendorId=17&_xcx_='+this.ck,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-token': this.ck,
-		    'tenantId': 10159618,
-		    'orgId': 429605,
-		    'poiId': 0,
-		    'poiType': 1
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -129,15 +111,11 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.success == true) {
-			    console.log(`\n签到消息：【${result.msg}】`)
-			    console.log(`\n得优惠券：【${result.issuedCouponNum}】`)
-			    console.log(`\n获得积分：【${result.issuedPointAmount}】`)
-			    console.log(`\n下次签到：【${result.nextStepIncentives.nextStepIncentivesContentPrefix}：${result.nextStepIncentives.toIssuePointAmount}积分/${result.nextStepIncentives.toIssueCouponNum}券】`)
-			    msg += `\n签到消息：【${result.msg}】`
-			    msg += `\n得优惠券：【${result.issuedCouponNum}】`
-			    msg += `\n获得积分：【${result.issuedPointAmount}】`
-			    msg += `\n下次签到：【${result.nextStepIncentives.nextStepIncentivesContentPrefix}：${result.nextStepIncentives.toIssuePointAmount}积分/${result.nextStepIncentives.toIssueCouponNum}券】`
+			if (result.status == 1) {
+			    console.log(`\n签到消息：【${result.message}】`)
+			    console.log(`\n获得积分：【${result.dataValue}】`)
+			    msg += `\n签到消息：【${result.message}】`
+			    msg += `\n获得积分：【${result.dataValue}】`
 			} else {
 			    console.log(`\n签到状态：【${result.msg}】`)
 			    msg += `\n签到状态：【${result.msg}】`
