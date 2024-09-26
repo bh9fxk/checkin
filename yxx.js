@@ -3,7 +3,7 @@
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: yxx_ck
- * 变量值: 抓包userSession的值
+ * 变量值: 抓包token的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -24,7 +24,6 @@ class UserInfo {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.phonenumber = str.split(strSplitor)[1];
-	//this.memberid = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -34,8 +33,8 @@ class UserInfo {
         await this.user_info()
 	await $.wait(3000)
 	await this.signIn()
-	//await $.wait(3000)
-	//await SendMsg(msg)
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 
     async user_token() {
@@ -69,8 +68,8 @@ class UserInfo {
 			    memberid = result.data.memberId
 			    msg += `\n延长Token：【${result.message}】`
 			} else {
-			    console.log(`\nToken查询结果：【${result.message}】`)
-			    msg += `\nToken查询结果：【${result.message}】`
+			    console.log(`\nToken查询：【${result.message}】`)
+			    msg += `\nToken查询：【${result.message}】`
 			}
 		    })
                 } else {
