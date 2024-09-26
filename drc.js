@@ -17,6 +17,7 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 let token = '';
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -27,6 +28,8 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
 
 	await this.user_token()
+	await $.wait(3000)
+	await this.user_info()
 	await $.wait(3000)
 	await this.signIn();
 	await $.wait(3000);
