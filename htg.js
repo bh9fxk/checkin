@@ -92,9 +92,9 @@ class UserInfo {
 	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'shop.hitgoo.net/',
+		hostname: 'shop.hitgoo.net',
 		port: 443,
-		path: 't/b2ch5/memSignInPoints?memNo=12134164&vendorId=17&_xcx_='+this.ck,
+		path: '/b2ch5/memSignInPoints?memNo=12134164&vendorId=17&_xcx_='+this.ck,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
