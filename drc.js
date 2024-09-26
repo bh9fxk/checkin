@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:drc_ck
- * 变量值:抓包Authorization的值,不要Bearer
+ * 变量值:抓包app_sign的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -63,15 +63,15 @@ class UserInfo {
 		        console.log(result)
 
 			if (result.success == true) {
-			    console.log(`\n-----【Token获取成功】-----`)
-			    msg += `\n-----【Token获取成功】-----`
+			    console.log(`\n---【Token获取成功】---`)
+			    msg += `\n---【Token获取成功】---`
 			    token = result.data.accesstoken
 			    let a = result.data.expiresin / 3600
 			    console.log(`\nToken过期：【${a}】小时`)
 			    msg += `\nToken过期：【${a}】小时`
 			} else {
-			    console.log(`\nToken查询结果：【${result.msg}】`);
-			    msg += `\nToken查询结果：【${result.msg}】`
+			    console.log(`\nToken查询：【${result.msg}】`);
+			    msg += `\nToken查询：【${result.msg}】`
 			}
 		    })
                 } else {
@@ -93,6 +93,62 @@ class UserInfo {
         }
     }
 	
+    async user_info() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({})
+		
+	    const options = {
+		hostname: 'member.imixpark.com',
+		port: 48889,
+		path: '/api/VipInfo/QueryVipInfoAsync',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Authorization': 'Bearer '+token
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.success == true) {
+			    console.log(`\n用户名称：【${result.data.member_surname}】`)
+			    console.log(`\n现有积分：【${result.data.current_bonus}】`)
+			    msg += `\n用户名称：【${result.data.member_surname}】`
+			    msg += `\n现有积分：【${result.data.current_bonus}】`
+
+			} else {
+			    console.log(`\n用户信息查询：【${result.msg}】`);
+			    msg += `\n用户信息查询：【${result.msg}】`
+			}
+		    })
+                } else {
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async signIn() {
         try {
 	    const https = require('https')
