@@ -29,6 +29,8 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
+	await this.user_token()
+	await $.wait(3000)
         await this.user_info()
 	await $.wait(3000)
 	await this.signIn()
@@ -63,8 +65,8 @@ class UserInfo {
 			console.log(result)
 			if (result.status == 200) {
 			    console.log(`\n延长Token：【${result.message}】`)
-			    token = ${result.data.token}
-			    memberid = ${result.data.134680196363898648}
+			    token = result.data.token
+			    memberid = result.data.memberId
 			    msg += `\n延长Token：【${result.message}】`
 			} else {
 			    console.log(`\nToken查询结果：【${result.message}】`)
