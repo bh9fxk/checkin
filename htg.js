@@ -16,6 +16,8 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let memno = ''
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -57,6 +59,7 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.status == 1) {
+			    memno = result.dataValue.member.memNo
 			    console.log(`\n用户查询：【${result.message}】`)
 			    console.log(`\n用户名称：【${result.dataValue.member.memName}】`)
 			    console.log(`\n现总积分：【${result.dataValue.member.memPoint}】`)
@@ -94,7 +97,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'shop.hitgoo.net',
 		port: 443,
-		path: '/b2ch5/memSignInPoints?memNo=12134164&vendorId=17&_xcx_='+this.ck,
+		path: '/b2ch5/memSignInPoints?memNo='+memno+'&vendorId=17&_xcx_='+this.ck,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
