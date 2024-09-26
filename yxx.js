@@ -34,8 +34,8 @@ class UserInfo {
         await this.user_info()
 	await $.wait(3000)
 	await this.signIn()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user_token() {
