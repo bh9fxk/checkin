@@ -113,7 +113,7 @@ class UserInfo {
 		        console.log(result)
 
 			console.log(`\n签到获得：【${result.reward_rule.asset_rewards[0].value}${result.reward_rule.asset_rewards[0].name}】`)
-			console.log(`\n签到tip：【${result.tip}】`)
+			console.log(`\n签到tips：【${result.tip}】`)
 			msg += `\n签到获得：【${result.reward_rule.asset_rewards[0].value}${result.reward_rule.asset_rewards[0].name}】`
 			msg += `\n签到tip：【${result.tip}】`
 
