@@ -16,12 +16,15 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let token = ''
+let memberid =''
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.phonenumber = str.split(strSplitor)[1];
-	this.memberid = str.split(strSplitor)[2];
+	//this.memberid = str.split(strSplitor)[2];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -33,6 +36,59 @@ class UserInfo {
 	await SendMsg(msg)
     }
 
+    async user_token() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'crm.scpgroup.com.cn',
+		port: 443,
+		path: '/yinli-minapp/api/v1/login/extendToken',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'token': this.ck,
+		    'apptype': 0
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.status == 200) {
+			    console.log(`\n延长Token：【${result.message}】`)
+			    token = ${result.data.token}
+			    memberid = ${result.data.134680196363898648}
+			    msg += `\n延长Token：【${result.message}】`
+			} else {
+			    console.log(`\nToken查询结果：【${result.message}】`)
+			    msg += `\nToken查询结果：【${result.message}】`
+			}
+		    })
+                } else {
+                    console.log(`\nToken查询失败！`)
+		    msg += `\nToken查询失败！`
+                }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+	
     async user_info() {
         try {
 	    const https = require('https')
@@ -47,7 +103,7 @@ class UserInfo {
 		    'token': this.ck,
 		    'orgcode': 'G001Z006Q0098',
 		    'phonenumber': this.phonenumber,
-		    'memberid': this.memberid,
+		    'memberid': memberid,
 		    'apptype': 0	
 		}
 	    }
@@ -108,7 +164,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'crm.scpgroup.com.cn',
 		port: 443,
-		path: '/yinli-minapp/api/v1/signDay/sign?memberId='+this.memberid+'&phoneNumber='+this.phonenumber,
+		path: '/yinli-minapp/api/v1/signDay/sign?memberId='+memberid+'&phoneNumber='+this.phonenumber,
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -116,7 +172,7 @@ class UserInfo {
 		    'token': this.ck,
 		    'orgcode': 'G001Z006Q0098',
 		    'phonenumber': this.phonenumber,
-		    'memberid': this.memberid,
+		    'memberid': memberid,
 		    'apptype': 0,
 		    'plazacode': 'G001Z006Q0098'
 		}
