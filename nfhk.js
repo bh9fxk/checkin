@@ -31,8 +31,8 @@ class UserInfo {
         await this.user_info();
 	await $.wait(3000);
 	await this.signIn();
-	//await $.wait(3000);
-	//await SendMsg(msg);
+	await $.wait(3000);
+	await SendMsg(msg);
     }
 
     async user_info() {
@@ -107,7 +107,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'wxapi.csair.com',
 		port: 443,
-		path: '/marketing-tools/activity/join?type=APPTYPE&chanel=ss&lang=zh',
+		path: '/marketing-tools/activity/join',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
