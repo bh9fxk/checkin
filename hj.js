@@ -30,22 +30,27 @@ class UserInfo {
 	await $.wait(3000)
 	await this.signIn()
 	await $.wait(3000)
+	await this.signIn_info()
+	await $.wait(3000)
 	await SendMsg(msg)
     }
 
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"source": "WXMAPP"
+	    })
 
 	    const options = {
-		hostname: 'shop.hitgoo.net',
+		hostname: 't.flowerplus.cn',
 		port: 443,
-		path: '/b2ch5/getMemCatList?vendorId=17&account=17xcx&_xcx_='+this.ck,
+		path: '/mall/customer/center_v2',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length
+		    'Content-Length': data.length,
+		    'token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -58,17 +63,18 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == 1) {
+			if (result.status == 0) {
 			    memno = result.dataValue.member.memNo
-			    console.log(`\n用户查询：【${result.message}】`)
-			    console.log(`\n用户名称：【${result.dataValue.member.memName}】`)
-			    console.log(`\n现总积分：【${result.dataValue.member.memPoint}】`)
-			    msg += `\n用户查询：【${result.message}】`
-			    msg += `\n用户名称：【${result.dataValue.member.memName}】`
-			    msg += `\n现总积分：【${result.dataValue.member.memPoint}】`
+
+			    console.log(`\n用户名称：【${result.data.UserInfo.nickname}】`)
+			    console.log(`\n用户等级：【${result.data.level_name}】`)
+			    console.log(`\n现总花币：【${result.integral_number}】`)
+			    msg += `\n用户名称：【${result.data.UserInfo.nickname}】`
+			    msg += `\n用户等级：【${result.data.level_name}】`
+			    msg += `\n现总花币：【${result.integral_number}】`
 			} else {
-			    console.log(`\n用户查询：【${result.message}】`)
-			    msg += `\n用户查询：【${result.message}】`
+			    console.log(`\n用户查询：【${result.errmsg}】`)
+			    msg += `\n用户查询：【${result.errmsg}】`
 			}
 		    })
                 } else {
@@ -92,16 +98,19 @@ class UserInfo {
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"source": "WXMAPP"
+	    })
 
 	    const options = {
-		hostname: 'shop.hitgoo.net',
+		hostname: 't.flowerplus.cn',
 		port: 443,
-		path: '/b2ch5/memSignInPoints?memNo='+memno+'&vendorId=17&_xcx_='+this.ck,
+		path: '/integral/signin/signin',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length
+		    'Content-Length': data.length,
+		    'token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -114,23 +123,74 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == 1) {
-			    console.log(`\n签到消息：【${result.message}】`)
-			    console.log(`\n获得积分：【${result.dataValue}】`)
-			    msg += `\n签到消息：【${result.message}】`
-			    msg += `\n获得积分：【${result.dataValue}】`
+			if (result.code == 0) {
+			    console.log(`\n已经签到：【${result.data.now_sign_times}】天`)
+			    console.log(`\n获得积分：【${result.data.integral}】花币`)
+			    msg += `\n已经签到：【${result.data.now_sign_times}】天`
+			    msg += `\n今日获得：【${result.data.integral}】花币`
 			} else {
-			    console.log(`\n签到状态：【${result.msg}】`)
-			    msg += `\n签到状态：【${result.msg}】`
+			    console.log(`\n签到状态：【${result.errmsg}】`)
+			    msg += `\n签到状态：【${result.errmsg}】`
 			}
 		    })
                 } else {
-		    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-                        console.log(`\n签到失败！【${result.message}】`)
-		        msg += `\n签到失败！【${result.message}】`
+                        console.log(`\n签到失败！`)
+		        msg += `\n签到失败！`
+		    })
+                }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async signIn_info() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"source": "WXMAPP"
+	    })
+
+	    const options = {
+		hostname: 't.flowerplus.cn',
+		port: 443,
+		path: '/integral/signin/getSigninStatus',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'token': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == 0) {
+			    console.log(`\n签到信息：【${result.data.button}】`)
+			    msg += `\n签到信息：【${result.data.button}】`
+			} else {
+			    console.log(`\n签到信息：【${result.errmsg}】`)
+			    msg += `\n签到信息：【${result.errmsg}】`
+			}
+		    })
+                } else {
+                        console.log(`\n签到信息查询失败！`)
+		        msg += `\n签到信息查询失败！`
 		    })
                 }
 	    })
