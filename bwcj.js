@@ -26,13 +26,11 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point_info();
-	await $.wait(3000);
-        await this.signIn();
-	await $.wait(3000);
-	await this.point_info(); //执行完以后再次查询积分
-	await $.wait(3000);
-	await SendMsg(msg);
+	await this.point_info()
+	await $.wait(3000)
+        await this.signIn()
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 
     async point_info() {
