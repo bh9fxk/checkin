@@ -28,32 +28,22 @@ class UserInfo {
         // 先签后查分
 	await this.signIn();
 	await $.wait(3000);
-	//await this.user_point();
+	await this.user_point();
 	//await $.wait(3000);
-	await SendMsg(msg);
+	//await SendMsg(msg);
     }
-/*
+
     async user_point() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"auth": {
-		    "appid": "API_AUTH_H5",
-		    "nonce": "af6c130a-d3fd-465c-af1d-b518eb34c256",
-		    "timestamp": 1726021210022,
-		    "signature": "13f1a76b8fbe4f832520924336a61f7d"
-		},
-		"channelId": "APP",
-		"sysId": "T0000001",
-		"transactionUuid": "6f4a166e-13c2-40c2-9dbb-9d2e3a2d3794",
-		"pointsType": "100000",
-		"token": this.ck1
+		"businessCode": "membershipSystem"
 	    })
 
 	    const options = {
-		hostname: 'mid.huaruntong.cn',
+		hostname: 'api.yonghuivip.com',
 		port: 443,
-		path: '/api/points/querySummary',
+		path: '/web/member/level/benefit/queryMemberGrowthValueProcess',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -63,25 +53,24 @@ class UserInfo {
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-			if (result.code == 'S0A00000') {
-			    console.log(`\n查询结果：【${result.msg}】`)
-			    console.log(`\n现总积分：【${result.data.data.cPoints.points}】`)
-			    console.log(`\n现可用积分：【${result.data.data.cPoints.availablePoints}】`)
-			    msg += `\n查询结果：【${result.msg}】`
-			    msg += `\n查询结果：【${result.data.data.cPoints.points}】`
-			    msg += `\n查询结果：【${result.data.data.cPoints.availablePoints}】`
+                    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == 0) {
+			    console.log(`\n现成长值：【${result.data.currentTotalGrowthValue}】`)
+			    msg += `\n现成长值：【${result.data.currentTotalGrowthValue}】`
 			} else {
-			    console.log(`\n查询结果：【${result.msg}】`)
-			    msg += `\n查询结果：【${result.msg}】`
+			    console.log(`\n成长值查询结果：【${result.message}】`)
+			    msg += `\n成长值查询结果：【${result.message}】`
 			}
 		    })
                 } else {
-                    console.log(`\n积分查询失败！`)
-		    msg += `\n积分查询失败！`
+                    console.log(`\n成长值查询失败！`)
+		    msg += `\n成长值查询失败！`
                 }
 
 	    })
@@ -98,7 +87,6 @@ class UserInfo {
         }
     }
 
-*/
     async signIn() {
         try {
 	    const https = require('https')
