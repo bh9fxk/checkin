@@ -54,15 +54,27 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		    if (`${res.statusCode}` == 200) {
-		        res.on('data', d => {
-			    //process.stdout.write(d)
-			    const result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == 0) {
 			    console.log(`\n查询信息：【${result.message}】`)
-		            msg += `\n现总积分：【${result.data.totalPoints}】`
+		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
+			    console.log(`\n过期积分：【${result.data.soonExpiredPoints}】`)
+			    console.log(`\n过期时间：【${result.data.expiredTime}】`)
+		            msg += `\n查询信息：【${result.message}】`
+			    msg += `\n现总积分：【${result.data.totalPoints}】`
+			    msg += `\n过期积分：【${result.data.soonExpiredPoints}】`
+			    msg += `\n过期时间：【${result.data.expiredTime}】`
+			} else {
+			    console.log(`\n查询信息：【${result.message}】`)
 			    msg += `\n查询信息：【${result.message}】`
+			}
 		        })
 		    } else {
 			res.on('data', d => {
@@ -72,10 +84,6 @@ class UserInfo {
 			    msg += `\n用户信息失败！`
 		        })
 		    }
-		    
-		//res.on('data', d => {
-		    //process.stdout.write(d)
-		//})
 	    })
 		
 	    req.on('error', error => {
@@ -91,11 +99,9 @@ class UserInfo {
         }
     }
 
-
     async signIn() {
         try {
 	    const https = require('https')
-	    console.log(Date.now())
 	    const data = JSON.stringify({
 		"activityId": "947079313798000641",
 		"storeId": 49006,
@@ -121,26 +127,32 @@ class UserInfo {
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
-		    if (`${res.statusCode}` == 200) {
-		        res.on('data', d => {
-			    process.stdout.write(d)
-			    const result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到结果：【${result.message}】`);
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == 0) {
+		            console.log(`\n签到结果：【${result.message}】`)
+			    console.log(`\n获得积分：【${result.data.sendNum}】`)
 			    msg += `\n签到结果：【${result.message}】`
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到失败！`);
-			    msg += `\n签到失败！`
-		        })
-		    }
-		    
-		//res.on('data', d => {
-		    //process.stdout.write(d)
-		//})
+			    msg += `\n签到结果：【${result.data.sendNum}】`
+			} else {
+			    console.log(`\n签到结果：【${result.message}】`)
+			    msg += `\n签到结果：【${result.message}】`
+			}
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n签到失败！`);
+			msg += `\n签到失败！`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -156,7 +168,6 @@ class UserInfo {
         }
     }
 }
-
 
 async function start() {
     const tasks = userList.map(user => user.main());
