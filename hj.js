@@ -136,7 +136,6 @@ class UserInfo {
                 } else {
                         console.log(`\n签到失败！`)
 		        msg += `\n签到失败！`
-		    })
                 }
 	    })
 		
