@@ -108,18 +108,24 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
-		        console.log(result)
-		        console.log(`\n签到结果：【${result.msg}】`);
-			console.log(`\n状 态 码：【${result.code}】`);
-		        msg += `\n签到结果：【${result.msg}】`
-			msg += `\n状态码：【${result.code}】`
+		        
 			if (result.code == 200) {
+			    console.log(`\n签到结果：【${result.msg}】`);
+			    console.log(`\n状 态 码：【${result.code}】`);
 			    console.log(`\n已经签到：【${result.data.num}】天`)
 			    console.log(`\n今日获得：【${result.data.point_total}】积分`)
-			    console.log(`\n现总积分：【${result.data.total_point}】`)
+			    console.log(`\n签到积分：【${result.data.total_point}】`)
+			    msg += `\n签到结果：【${result.msg}】`
+			    msg += `\n状态码：【${result.code}】`
 			    msg += `\n已经签到：【${result.data.num}】天`
 		            msg += `\n今日获得：【${result.data.point_total}】积分`
-			    //msg += `\n现总积分：【${result.data.total_point}】`
+			    msg += `\n签到积分：【${result.data.total_point}】`
+			} else {
+			    console.log(result)
+		            console.log(`\n签到结果：【${result.msg}】`);
+			    console.log(`\n状 态 码：【${result.code}】`);
+		            msg += `\n签到结果：【${result.msg}】`
+			    msg += `\n状态码：【${result.code}】`
 			}
 		    })
                 } else {
