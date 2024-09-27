@@ -63,7 +63,11 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			//if (result.responseCode == '00') {
+			if (result.code == 'W00000') {
+			    console.log(`\n查询结果：【${result.message}】`)
+			    msg += `\n查询结果：【${result.message}】`
+			    
+			} else {
 			    console.log(`\n用户名称：【${result.cnFullName}】`)
 			    console.log(`\n可用里程：【${result.canUseMileage}】`)
 			    console.log(`\n升级里程：【${result.upgradeMileage}】`)
@@ -73,7 +77,7 @@ class UserInfo {
 			    msg += `\n升级里程：【${result.upgradeMileage}】`
 			    msg += `\n升级航段：【${result.upgradeSegment}】`
 			    sign_user_token = result.token
-			//}
+			}
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
