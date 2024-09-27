@@ -190,7 +190,6 @@ class UserInfo {
                 } else {
                         console.log(`\n签到信息查询失败！`)
 		        msg += `\n签到信息查询失败！`
-		    })
                 }
 	    })
 		
