@@ -67,10 +67,10 @@ class UserInfo {
 
 			    console.log(`\n用户名称：【${result.data.UserInfo.nickname}】`)
 			    console.log(`\n用户等级：【${result.data.level_name}】`)
-			    console.log(`\n现总花币：【${result.integral_number}】`)
+			    console.log(`\n现总花币：【${result.data.integral_number}】`)
 			    msg += `\n用户名称：【${result.data.UserInfo.nickname}】`
 			    msg += `\n用户等级：【${result.data.level_name}】`
-			    msg += `\n现总花币：【${result.integral_number}】`
+			    msg += `\n现总花币：【${result.data.integral_number}】`
 			} else {
 			    console.log(`\n用户查询：【${result.errmsg}】`)
 			    msg += `\n用户查询：【${result.errmsg}】`
