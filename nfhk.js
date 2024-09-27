@@ -50,7 +50,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'sessionid': tthis.sessionid
+		    'sessionid': this.sessionid
 		}
 	    }
 	    const req = https.request(options, res => {
