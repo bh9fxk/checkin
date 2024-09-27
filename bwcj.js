@@ -60,7 +60,7 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
+			if (result.status == true) {
 			    console.log(`\n查询信息：【${result.message}】`)
 		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
 			    console.log(`\n过期积分：【${result.data.soonExpiredPoints}】`)
@@ -133,7 +133,7 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
+			if (result.status == true) {
 		            console.log(`\n签到结果：【${result.message}】`)
 			    console.log(`\n获得积分：【${result.data.sendNum}】`)
 			    msg += `\n签到结果：【${result.message}】`
