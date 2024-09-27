@@ -31,8 +31,8 @@ class UserInfo {
 	await this.signIn()
 	await $.wait(3000)
 	await this.signIn_info()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user_info() {
@@ -63,8 +63,7 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == 0) {
-			    memno = result.dataValue.member.memNo
+			if (result.code == 0) {
 
 			    console.log(`\n用户名称：【${result.data.UserInfo.nickname}】`)
 			    console.log(`\n用户等级：【${result.data.level_name}】`)
