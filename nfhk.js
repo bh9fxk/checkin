@@ -16,54 +16,64 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let sign_user_token = ''
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.code = str.split(strSplitor)[1];
+        this.ssokey = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.sessionid = str.split(strSplitor)[1]
+	this.code = str.split(strSplitor)[2]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        //await this.user_info();
-	//await $.wait(3000);
-	await this.signIn();
+        await this.user_info();
 	await $.wait(3000);
-	await SendMsg(msg);
+	await this.signIn();
+	//await $.wait(3000);
+	//await SendMsg(msg);
     }
-/*	
+
     async user_info() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"ssoKey": this.ssokey
+	    })
 
 	    const options = {
 		hostname: 'wxapi.csair.com',
 		port: 443,
-		path: '/mini/api/member/getUserInfoByCerdNo?certNo='+this.ck2+'&appid=wx729238547ac7a14c&wxchannel=wxopen&envVersion=release',
+		path: '/mini/api/login/isLogin',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'sessionid': this.ck1,
-		    'certno-encrypt': this.ck2
+		    'sessionid': tthis.sessionid
 		}
 	    }
 	    const req = https.request(options, res => {
 		console.log(`\n状态码: ${res.statusCode}`)
 		if (`${res.statusCode}` == 200) {
-                    res.on('data', d => {
-                        //process.stdout.write(d)
-                        let result = JSON.parse(d)
-		        console.log(result)
-			if (result.responseCode == '00') {
-			    console.log(`\n用户手机：【${result.memberContactInfo.mobilePhone[0].moblie}】`)
-			    console.log(`\n可消费里程：【${result.memberAccrualInfo.canUseMileage}】`)
-			    console.log(`\n本年度升级里程：【${result.memberAccrualInfo.currentUpgradeMileage}】`)
-                            msg += `\n用户手机：【${result.memberContactInfo.mobilePhone[0].moblie}】`
-			    msg += `\n可消费里程：【${result.memberAccrualInfo.canUseMileage}】`
-			    msg += `\n本年度升级里程：【${result.memberAccrualInfo.currentUpgradeMileage}】`
-			}
+                    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			//if (result.responseCode == '00') {
+			    console.log(`\n用户名称：【${result.cnFullName}】`)
+			    console.log(`\n可用里程：【${result.canUseMileage}】`)
+			    console.log(`\n升级里程：【${result.upgradeMileage}】`)
+			    console.log(`\n升级航段：【${result.upgradeSegment}】`)
+                            msg += `\n用户名称：【${result.cnFullName}】`
+			    msg += `\n可用里程：【${result.canUseMileage}】`
+			    msg += `\n升级里程：【${result.upgradeMileage}】`
+			    msg += `\n升级航段：【${result.upgradeSegment}】`
+			    sign_user_token = result.token
+			//}
 		    })
                 } else {
                     console.log(`\n用户信息查询失败！`)
@@ -83,7 +93,7 @@ class UserInfo {
             console.log(e);
         }
     }
-*/
+
     async signIn() {
         try {
 	    const https = require('https')
@@ -102,7 +112,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'cookie': this.ck
+		    'cookie': 'sign_user_token='+sign_user_token
 		}
 	    }
 	    console.log(options)
