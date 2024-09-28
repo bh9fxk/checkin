@@ -135,9 +135,9 @@ class UserInfo {
 			console.log(result)
 			if (result.status == true) {
 		            console.log(`\n签到结果：【${result.message}】`)
-			    console.log(`\n获得积分：【${result.data.sendNum}】`)
+			    console.log(`\n获得积分：【${result.data.rewardDetailList[0].sendNum}】`)
 			    msg += `\n签到结果：【${result.message}】`
-			    msg += `\n签到结果：【${result.data.sendNum}】`
+			    msg += `\n获得积分：【${result.data.rewardDetailList[0].sendNum}】`
 			} else {
 			    console.log(`\n签到结果：【${result.message}】`)
 			    msg += `\n签到结果：【${result.message}】`
