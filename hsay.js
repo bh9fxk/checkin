@@ -26,21 +26,21 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point_info()
+	await this.point()
 	await $.wait(3000)
         await this.signIn()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async point_info() {
+    async point() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
 		"appid": this.appid
 	    })
 	    const options = {
-		hostname: 'webapi2.qmai.cn',
+		hostname: 'webapi.qmai.cn',
 		port: 443,
 		path: '/web/mall-apiserver/integral/user/points-info',
 		method: 'POST',
@@ -101,24 +101,20 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activityId": "947079313798000641",
-		"storeId": 49006,
-		"timestamp": "1725074610429",
-		"signature": "89F1442E5325824B9779C70195F7EB76",
-		"appid": this.appid,
-		"store_id": 49006
+		"activityId": "1004435002421583872",
+		"storeId": 201424,
+		"timestamp": "1727781232389",
+		"signature": "A948807D9297BBED96317B02F02FE36B",
+		"appid": this.appid
 	    })
 	    const options = {
-		hostname: 'webapi2.qmai.cn',
+		hostname: 'webapi.qmai.c',
 		port: 443,
 		path: '/web/cmk-center/sign/takePartInSign',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'User-Agent': 'PostmanRuntime/7.41.2',
 		    'qm-from': 'wechat',
-		    'accept': 'v=1.0',
-		    'qm-from-type': 'catering',
 		    'Content-Length': data.length,
 		    'qm-user-token': this.ck
 		}
