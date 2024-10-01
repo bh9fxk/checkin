@@ -19,8 +19,10 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.id = str.split(strSplitor)[1];
+        this.ck = str.split(strSplitor)[0]  //单账号多变量分隔
+	this.activity_id = str.split(strSplitor)[1]
+	this.subsite_id = str.split(strSplitor)[2]
+	
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -90,8 +92,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		    "activity_id": 284067,
-		    "subsite_id": this.id
+		    "activity_id": this.activity_id,
+		    "subsite_id": this.subsite_id
             })
 	    const options = {
 		hostname: 'wfj-restapi.wfj.com.cn',
@@ -148,7 +150,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'wfj-restapi.wfj.com.cn',
 		port: 443,
-		path: '/AFFILIATE-MARKETING/front/checkin/records?activity_id=284067&subsite_id='+this.id,
+		path: '/AFFILIATE-MARKETING/front/checkin/records?activity_id='+this.activity_id+'&subsite_id='+this.subsite_id,
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -199,7 +201,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'userSession': this.ck,
-		    'subsiteId': this.id
+		    'subsiteId': this.subsite_id
 		}
 	    }
 	    const req = https.request(options, res => {
