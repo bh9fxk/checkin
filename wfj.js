@@ -166,9 +166,9 @@ class UserInfo {
 		        console.log(result)
 			
 			console.log(`\n连续签到：【${result.continuous_checkin_count}】天`)
-			console.log(`\n总共签到：【${result.total_count}】天`)
+			console.log(`\n本月签到：【${result.total_count}】天`)
 			msg += `\n连续签到：【${result.continuous_checkin_count}】天`
-			msg += `\n总共签到：【${result.total_count}】天`
+			msg += `\n本月签到：【${result.total_count}】天`
 		    })
                 } else {
                     console.log(`\n签到天数查询失败！`)
