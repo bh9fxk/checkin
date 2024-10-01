@@ -108,7 +108,7 @@ class UserInfo {
 		"appid": this.appid
 	    })
 	    const options = {
-		hostname: 'webapi.qmai.c',
+		hostname: 'webapi.qmai.cn',
 		port: 443,
 		path: '/web/cmk-center/sign/takePartInSign',
 		method: 'POST',
