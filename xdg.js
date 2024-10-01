@@ -56,10 +56,10 @@ class UserInfo {
 			if (result.code == 200) {
 			    console.log(`\n签到天数：【${result.msg}】`)
 			    console.log(`\n连续签到：【${result.data.serialSignDays}】天`)
-			    console.log(`\n总共签到：【${result.data.addSignDays}】天`)
+			    console.log(`\n本月签到：【${result.data.addSignDays}】天`)
 			    msg += `\n签到天数：【${result.msg}】`
 			    msg += `\n连续签到：【${result.data.serialSignDays}】天`
-			    msg += `\n总共签到：【${result.data.addSignDays}】天`
+			    msg += `\n本月签到：【${result.data.addSignDays}】天`
 			    
 			} else {
 			    console.log(`\n签到天数查询：【${result.msg}】`)
