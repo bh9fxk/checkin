@@ -89,16 +89,23 @@ class UserInfo {
             console.log(e);
         }
     }
+
 // 写入文件
-const fs = require('fs')
-fs.writeFile('yxx.txt', token, 'utf8', (err) => {
-    if (err) {
-        console.error(err)
-    } else {
-	console.log('文件写入成功')
+    async user_token() {
+        try {
+	    const fs = require('fs')
+	    fs.writeFile('yxx.txt', token, 'utf8', (err) => {
+	        if (err) {
+		    console.error(err)
+	        } else {
+		    console.log('文件写入成功')
+		}
+	    })
+        } catch (e) {
+            console.log(e);
+        }
     }
-})
-	
+
     async user_info() {
         try {
 	    const https = require('https')
