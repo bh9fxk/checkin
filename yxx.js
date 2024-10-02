@@ -187,10 +187,10 @@ class UserInfo {
 		        console.log(result)
 
 			if (result.status == 200) {
-			    console.log(`\n签到状态：【${result.data}】`)
 			    console.log(`\n签到消息：【${result.message}】`)
-			    msg += `\n签到状态：【${result.data}】`
+			    console.log(`\n签到状态：【${result.data}】`)
 			    msg += `\n签到消息：【${result.message}】`
+			    msg += `\n签到状态：【${result.data}】`
 			} else {
 			    console.log(`\n签到状态：【${result.message}】`)
 			    msg += `\n签到状态：【${result.message}】`
