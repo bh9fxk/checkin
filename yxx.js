@@ -17,7 +17,7 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 let token = ''
-//let token1 = ''
+let token1 = ''
 let memberid =''
 
 class UserInfo {
@@ -47,7 +47,7 @@ class UserInfo {
 		    return;
 		}
 		//console.log(data.toString());
-		token1 = JSON.parse(data.toString())
+		token1 = JSON.parse(data)
 		console.log(token1);
 	    });
 
