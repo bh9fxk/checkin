@@ -31,8 +31,6 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
 	await this.user_token()
 	await $.wait(3000)
-	await this.change_token()
-	await $.wait(3000)
         await this.user_info()
 	await $.wait(3000)
 	await this.signIn()
@@ -49,7 +47,7 @@ class UserInfo {
 		    return;
 		}
 		//console.log(data.toString());
-		token1 = data.toString()
+		token1 = data
 		console.log(token1);
 	    });
 
