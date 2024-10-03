@@ -30,7 +30,7 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
 	await this.user_token()
 	await $.wait(3000)
-	await this.token()
+	await this.change_token()
 	await $.wait(3000)
         await this.user_info()
 	await $.wait(3000)
@@ -102,7 +102,7 @@ class UserInfo {
     }
 
 // 写入文件
-    async token() {
+    async change_token() {
         try {
 	    const fs = require('fs')
 	    fs.writeFile('yxx.txt', token, 'utf8', (err) => {
