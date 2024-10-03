@@ -22,7 +22,7 @@ let memberid =''
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.phonenumber = str.split(strSplitor)[1];
     }
     async main() {
