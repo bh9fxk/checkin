@@ -17,13 +17,12 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 let token = ''
-let token1 = ''
 let memberid =''
 
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.phonenumber = str.split(strSplitor)[1];
     }
     async main() {
@@ -34,23 +33,12 @@ class UserInfo {
         await this.user_info()
 	await $.wait(3000)
 	await this.signIn()
-	//await $.wait(3000)
-	//await SendMsg(msg)
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 
     async user_token() {
         try {
-	    const fs = require('fs');
-	    fs.readFile('yxx.txt', 'utf8', (err, data) => {
-		if (err) {
-		    console.error(err);
-		    return;
-		}
-		//console.log(data.toString());
-		token1 = data
-		console.log(token1);
-	    });
-
 	    const https = require('https')
 
 	    const options = {
@@ -60,7 +48,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'token': token1,
+		    'token': this.ck,
 		    'apptype': 0
 		}
 	    }
@@ -77,15 +65,6 @@ class UserInfo {
 			if (result.status == 200) {
 			    console.log(`\n延长Token：【${result.message}】`)
 			    token = result.data.token
-			    // 储存token
-			    const fs = require('fs')
-			    fs.writeFile('yxx.txt', token, 'utf8', (err) => {
-				if (err) {
-				    console.error(err)
-				} else {
-				    console.log('文件写入成功')
-				}
-			    })
 			    memberid = result.data.memberId
 			    msg += `\n延长Token：【${result.message}】`
 			} else {
