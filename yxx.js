@@ -47,7 +47,7 @@ class UserInfo {
 		    console.error(err);
 		    return;
 		}
-		console.log(data);
+		console.log(data.toString());
 	    });
 
 	    const https = require('https')
