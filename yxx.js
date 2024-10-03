@@ -22,7 +22,7 @@ let memberid =''
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+        //this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.phonenumber = str.split(strSplitor)[1];
     }
     async main() {
@@ -41,6 +41,15 @@ class UserInfo {
 
     async user_token() {
         try {
+	    const fs = require('fs');
+	    fs.readFile('yxx.txt', 'utf8', (err, data) => {
+		if (err) {
+		    console.error(err);
+		    return;
+		}
+		console.log(data);
+	    });
+
 	    const https = require('https')
 
 	    const options = {
