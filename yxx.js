@@ -17,6 +17,7 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 let token = ''
+let token1 = ''
 let memberid =''
 
 class UserInfo {
@@ -48,8 +49,8 @@ class UserInfo {
 		    return;
 		}
 		//console.log(data.toString());
-		this.ck = data.toString()
-		console.log(this.ck);
+		token1 = data.toString()
+		console.log(token1);
 	    });
 
 	    const https = require('https')
@@ -61,7 +62,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'token': this.ck,
+		    'token': token1,
 		    'apptype': 0
 		}
 	    }
