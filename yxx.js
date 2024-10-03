@@ -17,7 +17,7 @@ let userIdx = 0;
 let userList = [];
 let msg = '';
 let token = ''
-let token1 = ''
+//let token1 = ''
 let memberid =''
 
 class UserInfo {
@@ -122,11 +122,11 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'token': this.ck,
+		    'token': token,
 		    'orgcode': 'G001Z006Q0098',
 		    'phonenumber': this.phonenumber,
 		    'memberid': memberid,
-		    'apptype': 0	
+		    'apptype': 0
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -191,7 +191,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'token': this.ck,
+		    'token': token,
 		    'orgcode': 'G001Z006Q0098',
 		    'phonenumber': this.phonenumber,
 		    'memberid': memberid,
