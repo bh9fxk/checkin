@@ -47,7 +47,7 @@ class UserInfo {
 		    return;
 		}
 		//console.log(data.toString());
-		token1 = JSON.parse(data)
+		token1 = JSON.parse(data.toString())
 		console.log(token1);
 	    });
 
