@@ -126,9 +126,9 @@ class UserInfo {
 			console.log(result)
 			if (result.code == 200) {
 			    
-			    console.log(`\n连续签到：【${result.data.continuousDay}】`)
+			    console.log(`\n连续签到：【${result.data.continuousDay}】天`)
 		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
-		            msg += `\n积分查询：【${result.data.continuousDay}】`
+		            msg += `\n连续签到：【${result.data.continuousDay}】天`
 			    msg += `\n现总积分：【${result.data.totalPoints}】`
 			} else {
 			    console.log(`\n积分查询：【${result.msg}】`)
