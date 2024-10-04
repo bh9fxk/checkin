@@ -184,11 +184,11 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.data.success == true) {
-		            console.log(`\n签到结果：【${result.message}】`)
-			    msg += `\n签到结果：【${result.message}】`
+		            console.log(`\n签到结果：【${result.data.message}】`)
+			    msg += `\n签到结果：【${result.data.message}】`
 			} else {
-			    console.log(`\n签到结果：【${result.message}】`)
-			    msg += `\n签到结果：【${result.message}】`
+			    console.log(`\n签到结果：【${result.data.message}】`)
+			    msg += `\n签到结果：【${result.data.message}】`
 			}
 		    })
 		} else {
