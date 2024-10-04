@@ -99,7 +99,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"campaignId": "1006187217",
+		"campaignId": "1006191245",
 		"cardId": 2708936676,
 		"couponDisplayScene": 44,
 		"styleVersion": 2
