@@ -16,38 +16,43 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let token = ''
+
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.appid = str.split(strSplitor)[1];
+        this.code = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.openid = str.split(strSplitor)[1];
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point_info()
+	await this.token()
+	await $.wait(3000)
+	await this.point()
 	await $.wait(3000)
         await this.signIn()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async point_info() {
+
+    async token() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": this.appid
+		"code": this.code,
+		"openid": this.openid
 	    })
 	    const options = {
-		hostname: 'webapi2.qmai.cn',
+		hostname: 'community.bwcj.com',
 		port: 443,
-		path: '/web/mall-apiserver/integral/user/points-info',
+		path: '/api/user/wechatLogin',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'qm-user-token': this.ck
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -60,26 +65,20 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true) {
-			    console.log(`\n查询信息：【${result.message}】`)
-		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
-			    console.log(`\n过期积分：【${result.data.soonExpiredPoints}】`)
-			    console.log(`\n过期时间：【${result.data.expiredTime}】`)
-		            msg += `\n查询信息：【${result.message}】`
-			    msg += `\n现总积分：【${result.data.totalPoints}】`
-			    msg += `\n过期积分：【${result.data.soonExpiredPoints}】`
-			    msg += `\n过期时间：【${result.data.expiredTime}】`
+			if (result.code == 200) {
+			    console.log(`\n【---获取Token成功---】`)
+		            msg += `\n【---获取Token成功---】`
 			} else {
-			    console.log(`\n查询信息：【${result.message}】`)
-			    msg += `\n查询信息：【${result.message}】`
+			    console.log(`\nToken信息：【${result.msg}】`)
+			    msg += `\nToken信息：【${result.msg}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n用户信息查询失败！`);
-			    msg += `\n用户信息失败！`
+		            console.log(`\nToken获取失败！`);
+			    msg += `\nToken获取失败！`
 		        })
 		    }
 	    })
@@ -96,31 +95,19 @@ class UserInfo {
             console.log(e);
         }
     }
-
-    async signIn() {
+	
+    async point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"activityId": "947079313798000641",
-		"storeId": 49006,
-		"timestamp": "1725074610429",
-		"signature": "89F1442E5325824B9779C70195F7EB76",
-		"appid": this.appid,
-		"store_id": 49006
-	    })
+		
 	    const options = {
-		hostname: 'webapi2.qmai.cn',
+		hostname: 'community.bwcj.com',
 		port: 443,
-		path: '/web/cmk-center/sign/takePartInSign',
-		method: 'POST',
+		path: 'https://community.bwcj.com/api/activity/applet-sign-in/calendar',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'User-Agent': 'PostmanRuntime/7.41.2',
-		    'qm-from': 'wechat',
-		    'accept': 'v=1.0',
-		    'qm-from-type': 'catering',
-		    'Content-Length': data.length,
-		    'qm-user-token': this.ck
+		    'Authorization': 'Bearer '+token
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -133,11 +120,68 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true) {
+			if (result.code == 200) {
+			    
+			    console.log(`\n连续签到：【${result.data.continuousDay}】`)
+		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
+		            msg += `\n积分查询：【${result.data.continuousDay}】`
+			    msg += `\n现总积分：【${result.data.totalPoints}】`
+			} else {
+			    console.log(`\n积分查询：【${result.msg}】`)
+			    msg += `\n积分查询：【${result.msg}】`
+			}
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n积分查询失败！`);
+			    msg += `\n积分查询失败！`
+		        })
+		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async signIn() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({})
+	
+	    const options = {
+		hostname: 'community.bwcj.com',
+		port: 443,
+		path: '/api/activity/applet-sign-in/do-sign',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Authorization': 'Bearer '+token
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.data.success == true) {
 		            console.log(`\n签到结果：【${result.message}】`)
-			    console.log(`\n获得积分：【${result.data.rewardDetailList[0].sendNum}】`)
 			    msg += `\n签到结果：【${result.message}】`
-			    msg += `\n获得积分：【${result.data.rewardDetailList[0].sendNum}】`
 			} else {
 			    console.log(`\n签到结果：【${result.message}】`)
 			    msg += `\n签到结果：【${result.message}】`
