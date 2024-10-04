@@ -68,7 +68,7 @@ class UserInfo {
 			if (result.code == 200) {
 			    token = result.data.access_token
 			    console.log(`\n【---获取Token成功---】`)
-			    let a = result.msg.expires_in / 60
+			    let a = result.data.expires_in / 60
 			    console.log(`\nToken过期：【${a}】分钟`)
 		            msg += `\n【---获取Token成功---】`
 			    msg += `\nToken过期：【${a}】分钟`
