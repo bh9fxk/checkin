@@ -40,7 +40,7 @@ class UserInfo {
 		"appid": this.appid
 	    })
 	    const options = {
-		hostname: 'webapi2.qmai.cn',
+		hostname: 'webapi.qmai.cn',
 		port: 443,
 		path: '/web/catering2-apiserver/crm/customer-center?appid='+this.appid,
 		method: 'GET',
