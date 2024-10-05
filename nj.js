@@ -242,31 +242,6 @@ async function checkEnv() {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-function httpRequest(options) {
-    if (!options["method"]) {
-        return console.log(`请求方法不存在`);
-    }
-    if (!options["fn"]) {
-        console.log(`函数名不存在`);
-    }
-    return new Promise((resolve) => {
-        $[options.method](options, (err, resp, data) => {
-            try {
-                if (err) {
-                    $.logErr(err);
-                } else {
-                    try {
-                        data = JSON.parse(data);
-                    } catch (error) { }
-                }
-            } catch (e) {
-                $.logErr(e, resp);
-            } finally {
-                resolve(data);
-            }
-        });
-    });
-}
 
 function Env(t, e) {
   class s {
