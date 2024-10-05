@@ -125,7 +125,6 @@ class UserInfo {
                     console.log(`\n优惠券信息查询失败！`)
 		    msg += `\n优惠券信息查询失败！`
                 }
-
 	    })
 		
 	    req.on('error', error => {
