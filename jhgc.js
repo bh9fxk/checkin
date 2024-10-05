@@ -85,6 +85,59 @@ class UserInfo {
         }
     }
 
+    async coupon() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'a.zhimatech.com',
+		port: 443,
+		path: '/restful/mall/3785/member/23575647/coupons',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Authorization': 'Bearer '+this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+
+			if (result.code == 200) {
+			    console.log(`\n优惠券查询：【${result.msg}】`)
+			    console.log(`\n现有优惠券：【${result.meta。total}】张`)
+			    msg += `\n优惠券查询：【${result.msg}】`
+		            msg += `\n现有优惠券：【${result.meta。total}】张`
+			} else {
+			    console.log(`\n查询结果：【${result.msg}】`);
+			    console.log(`\n状态码：【${result.code}】`);
+			    msg += `\n查询结果：【${result.msg}】`
+			    msg += `\n状态码：【${result.code}】`
+			}
+		    })
+                } else {
+                    console.log(`\n优惠券信息查询失败！`)
+		    msg += `\n优惠券信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async signIn() {
         try {
 	    const https = require('https')
@@ -147,7 +200,6 @@ class UserInfo {
         }
     }
 }
-
 
 async function start() {
 const tasks = userList.map(user => user.main());
