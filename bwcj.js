@@ -26,7 +26,7 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point_info()
+	await this.user_info()
 	await $.wait(3000)
         await this.signIn()
 	await $.wait(3000)
