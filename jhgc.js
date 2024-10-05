@@ -85,7 +85,6 @@ class UserInfo {
         }
     }
 
-
     async signIn() {
         try {
 	    const https = require('https')
@@ -108,7 +107,8 @@ class UserInfo {
                     res.on('data', d => {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
-		        
+		        console.log(result)
+
 			if (result.code == 200) {
 			    console.log(`\n签到结果：【${result.msg}】`);
 			    console.log(`\n状 态 码：【${result.code}】`);
