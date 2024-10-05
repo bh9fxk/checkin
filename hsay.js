@@ -65,7 +65,6 @@ class UserInfo {
 			    console.log(`\n现优惠券：【${result.data.customerAssertInfo.coupon}】张`)
 		            msg += `\n查询信息：【${result.message}】`
 			    msg += `\n现总积分：【${result.data.customerAssertInfo.integral}】`
-			    msg += `\n过期积分：【${result.data.soonExpiredPoints}】`
 			    msg += `\n现优惠券：【${result.data.customerAssertInfo.coupon}】张`
 			} else {
 			    console.log(`\n查询信息：【${result.message}】`)
