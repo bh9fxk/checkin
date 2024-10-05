@@ -26,6 +26,8 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
         await this.user_info();
 	await $.wait(3000);
+	await this.coupon();
+	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await this.signin_info();
