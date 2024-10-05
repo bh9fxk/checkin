@@ -176,7 +176,6 @@ class UserInfo {
 		            msg += `\n今日获得：【${result.data.point_total}】积分`
 			    msg += `\n签到积分：【${result.data.total_point}】`
 			} else {
-			    console.log(result)
 		            console.log(`\n签到结果：【${result.msg}】`);
 			    console.log(`\n状 态 码：【${result.code}】`);
 		            msg += `\n签到结果：【${result.msg}】`
@@ -278,31 +277,6 @@ async function checkEnv() {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-function httpRequest(options) {
-    if (!options["method"]) {
-        return console.log(`请求方法不存在`);
-    }
-    if (!options["fn"]) {
-        console.log(`函数名不存在`);
-    }
-    return new Promise((resolve) => {
-        $[options.method](options, (err, resp, data) => {
-            try {
-                if (err) {
-                    $.logErr(err);
-                } else {
-                    try {
-                        data = JSON.parse(data);
-                    } catch (error) { }
-                }
-            } catch (e) {
-                $.logErr(e, resp);
-            } finally {
-                resolve(data);
-            }
-        });
-    });
-}
 
 function Env(t, e) {
   class s {
