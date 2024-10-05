@@ -122,6 +122,7 @@ class UserInfo {
 			    console.log(`\n查询结果：【${result.message}】`)
 			    console.log(`\n用户昵称：【${result.data.nickName}】`)
 			    console.log(`\n现总积分：【${result.data.nowIntegral}】`)
+			    console.log(`\n现优惠券：【${result.data.isHavaPendingEquityCoupon}】张`)
 			    console.log(`\n积分明细：【${result.data.nowXingBeiIntegral}星贝 / ${result.data.nowPointIntegral}积分】`)
 			    console.log(`\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
        【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`)
@@ -130,6 +131,7 @@ class UserInfo {
 			    msg += `\n查询结果：【${result.message}】`
 			    msg += `\n用户昵称：【${result.data.nickName}】`
 			    msg += `\n现总积分：【${result.data.nowIntegral}】`
+			    msg += `\n现优惠券：【${result.data.isHavaPendingEquityCoupon}】张`
 			    msg += `\n积分明细：【${result.data.nowXingBeiIntegral}星贝 / ${result.data.nowPointIntegral}积分】`
 			    msg += `\n即将过期：【${result.data.invalidPointResp[0].willFailPoint} / ${result.data.invalidPointResp[0].willFailTime}】
        【${result.data.invalidPointResp[1].willFailPoint} / ${result.data.invalidPointResp[1].willFailTime}】`
