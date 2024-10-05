@@ -35,6 +35,8 @@ class UserInfo {
 	await $.wait(3000)
 	await this.user_point()
 	await $.wait(3000)
+	await this.coupon()
+	await $.wait(3000)
 	await SendMsg(msg)
     }
 	
@@ -220,6 +222,54 @@ class UserInfo {
                 } else {
                     console.log(`\n用户积分查询失败！`)
 		    msg += `\n用户积分查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async coupon() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'wfj-restapi.wfj.com.cn',
+		port: 443,
+		path: '/MAGIC-COUPON/front/coupon_groups/mine',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'userSession': this.ck,
+		    'subsiteId': this.subsite_id
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			
+			console.log(`\n现优惠券：【${result.total_num}】张`)
+			msg += `\n现优惠券：【${result.total_num}】张`
+		    })
+                } else {
+                    console.log(`\n优惠券查询失败！`)
+		    msg += `\n优惠券查询失败！`
                 }
 
 	    })
