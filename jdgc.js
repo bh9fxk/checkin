@@ -78,9 +78,57 @@ class UserInfo {
                     console.log(`\n用户信息查询失败！`)
 		    msg += `\n用户信息查询失败！`
                 }
-
 	    })
 		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async coupon() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+                "MallID": 11471,
+		"SearchType": 1,
+		"Header": {
+		    "Token": this.ck
+		}
+            })
+
+	    const options = {
+		hostname: 'm.mallcoo.cn',
+		port: 443,
+		path: '/api/user/Coupon/GetMyCouponCount',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`\n优惠券数：【${result.d}】张`)
+		        msg += `\n优惠券数：【${result.d}】张`
+		    })
+                } else {
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
+                }
+	    })
+
 	    req.on('error', error => {
 		console.error(error)
 	    })
