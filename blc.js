@@ -29,6 +29,8 @@ class UserInfo {
 	await $.wait(3000);
 	await this.user_point();
 	await $.wait(3000);
+	await this.coupon();
+	await $.wait(3000);
 	await SendMsg(msg);
     }
 
@@ -85,6 +87,57 @@ class UserInfo {
         }
     }
 
+    async coupon() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'a.zhimatech.com',
+		port: 443,
+		path: '/restful/mall/3836/member/23575647/coupons',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Authorization': 'Bearer '+this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+
+			if (result.code == 200) {
+			    console.log(`\n优惠券查询：【${result.msg}】`)
+			    console.log(`\n现有优惠券：【${result.meta.total}】张`)
+			    msg += `\n优惠券查询：【${result.msg}】`
+		            msg += `\n现有优惠券：【${result.meta.total}】张`
+			} else {
+			    console.log(`\n查询结果：【${result.msg}】`);
+			    console.log(`\n状态码：【${result.code}】`);
+			    msg += `\n查询结果：【${result.msg}】`
+			    msg += `\n状态码：【${result.code}】`
+			}
+		    })
+                } else {
+                    console.log(`\n优惠券信息查询失败！`)
+		    msg += `\n优惠券信息查询失败！`
+                }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     async signIn() {
         try {
@@ -147,7 +200,6 @@ class UserInfo {
         }
     }
 }
-
 
 async function start() {
 const tasks = userList.map(user => user.main());
@@ -224,31 +276,6 @@ async function checkEnv() {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
-function httpRequest(options) {
-    if (!options["method"]) {
-        return console.log(`请求方法不存在`);
-    }
-    if (!options["fn"]) {
-        console.log(`函数名不存在`);
-    }
-    return new Promise((resolve) => {
-        $[options.method](options, (err, resp, data) => {
-            try {
-                if (err) {
-                    $.logErr(err);
-                } else {
-                    try {
-                        data = JSON.parse(data);
-                    } catch (error) { }
-                }
-            } catch (e) {
-                $.logErr(e, resp);
-            } finally {
-                resolve(data);
-            }
-        });
-    });
-}
 
 function Env(t, e) {
   class s {
