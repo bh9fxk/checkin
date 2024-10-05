@@ -86,7 +86,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
 		
