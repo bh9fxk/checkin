@@ -26,6 +26,8 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
         await this.user_info();
 	await $.wait(3000);
+	await this.coupon();
+	await $.wait(3000);
 	await this.signIn();
 	await $.wait(3000);
 	await this.signin_info();
@@ -93,6 +95,63 @@ class UserInfo {
         }
     }
 
+
+    async coupon() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+                "MallID": 10089,
+		"Header": {
+		    "Token": this.ck,
+		    "systemInfo": {
+		    "model": "Mac14,2",
+		    "SDKVersion": "3.3.5",
+		    "system": "Mac OS X 14.6.1",
+		    "version": "3.8.7",
+		    "miniVersion": "DZ.2.69.1.ZDGJ.9"
+		    }
+		}
+            })
+
+	    const options = {
+		hostname: 'm.mallcoo.cn',
+		port: 443,
+		path: '/api/user/Coupon/GetMyCouponCount',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+                    res.on('data', d => {
+                        //process.stdout.write(d)
+                        let result = JSON.parse(d)
+		        console.log(result)
+		        console.log(`\n优惠券数：【${result.d}】张`)
+		        msg += `\n优惠券数：【${result.d}】张`
+		    })
+                } else {
+                    console.log(`\n用户信息查询失败！`)
+		    msg += `\n用户信息查询失败！`
+                }
+
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+	
     async signIn() {
         try {
 	    const https = require('https')
@@ -208,7 +267,6 @@ class UserInfo {
     }
 
 }
-
 
 async function start() {
 const tasks = userList.map(user => user.main());
