@@ -100,15 +100,9 @@ class UserInfo {
 	    const https = require('https')
 	    const data = JSON.stringify({
                 "MallID": 10089,
+		"SearchType": 1,
 		"Header": {
-		    "Token": this.ck,
-		    "systemInfo": {
-		    "model": "Mac14,2",
-		    "SDKVersion": "3.3.5",
-		    "system": "Mac OS X 14.6.1",
-		    "version": "3.8.7",
-		    "miniVersion": "DZ.2.69.1.ZDGJ.9"
-		    }
+		    "Token": this.ck
 		}
             })
 
