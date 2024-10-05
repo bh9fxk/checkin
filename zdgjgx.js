@@ -95,7 +95,6 @@ class UserInfo {
         }
     }
 
-
     async coupon() {
         try {
 	    const https = require('https')
