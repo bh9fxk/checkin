@@ -33,7 +33,7 @@ class UserInfo {
 	await SendMsg(msg)
     }
 
-    async point_info() {
+    async user_info() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
@@ -42,11 +42,10 @@ class UserInfo {
 	    const options = {
 		hostname: 'webapi2.qmai.cn',
 		port: 443,
-		path: '/web/mall-apiserver/integral/user/points-info',
-		method: 'POST',
+		path: '/web/catering2-apiserver/crm/customer-center?appid='+this.appid,
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
 		    'qm-user-token': this.ck
 		}
 	    }
@@ -62,13 +61,12 @@ class UserInfo {
 			console.log(result)
 			if (result.status == true) {
 			    console.log(`\n查询信息：【${result.message}】`)
-		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
-			    console.log(`\n过期积分：【${result.data.soonExpiredPoints}】`)
-			    console.log(`\n过期时间：【${result.data.expiredTime}】`)
+		            console.log(`\n现总积分：【${result.data.customerAssertInfo.integral}】`)
+			    console.log(`\n现优惠券：【${result.data.customerAssertInfo.coupon}】张`)
 		            msg += `\n查询信息：【${result.message}】`
-			    msg += `\n现总积分：【${result.data.totalPoints}】`
+			    msg += `\n现总积分：【${result.data.customerAssertInfo.integral}】`
 			    msg += `\n过期积分：【${result.data.soonExpiredPoints}】`
-			    msg += `\n过期时间：【${result.data.expiredTime}】`
+			    msg += `\n现优惠券：【${result.data.customerAssertInfo.coupon}】张`
 			} else {
 			    console.log(`\n查询信息：【${result.message}】`)
 			    msg += `\n查询信息：【${result.message}】`
