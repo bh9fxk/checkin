@@ -111,9 +111,9 @@ class UserInfo {
 
 			if (result.code == 200) {
 			    console.log(`\n优惠券查询：【${result.msg}】`)
-			    console.log(`\n现有优惠券：【${result.meta。total}】张`)
+			    console.log(`\n现有优惠券：【${result.meta.total}】张`)
 			    msg += `\n优惠券查询：【${result.msg}】`
-		            msg += `\n现有优惠券：【${result.meta。total}】张`
+		            msg += `\n现有优惠券：【${result.meta.total}】张`
 			} else {
 			    console.log(`\n查询结果：【${result.msg}】`);
 			    console.log(`\n状态码：【${result.code}】`);
