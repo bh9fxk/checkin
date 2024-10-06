@@ -120,8 +120,8 @@ class UserInfo {
 			    console.log(`\n优惠券数：【${result.data.onlineCouponNum}】张`)
 			    msg += `\n优惠券数：【${result.data.onlineCouponNum}】张`
 			} else {
-			    console.log(`\n查询结果：【${result.message}】`)
-			    msg += `\n查询结果：【${result.message}】`
+			    console.log(`\n查询结果：【${result.msg}】`)
+			    msg += `\n查询结果：【${result.msg}】`
 			}
 		    })
                 } else {
