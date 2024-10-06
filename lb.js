@@ -29,6 +29,8 @@ class UserInfo {
 	msg += `\n开始第${this.index}个账号`
         await this.point()
 	await $.wait(3000)
+	await this.coupon()
+	await $.wait(3000)
 	await this.signIn()
 	//await $.wait(3000)
 	//await SendMsg(msg)
@@ -66,8 +68,8 @@ class UserInfo {
 			    msg += `\n用户名称：【${result.data.nickName}】`
 			    msg += `\n现有积分：【${result.data.integral}】`
 			} else {
-			    console.log(`\n查询结果：【${result.message}】`)
-			    msg += `\n查询结果：【${result.message}】`
+			    console.log(`\n查询结果：【${result.msg}】`)
+			    msg += `\n查询结果：【${result.msg}】`
 			}
 		    })
                 } else {
@@ -172,8 +174,8 @@ class UserInfo {
 			    msg += `\n签到状态：【${result.msg}】`
 			    msg += `\n签到消息：【${result.data.resultDesc}】`
 			} else {
-			    console.log(`\n签到积分：【${result.msg}】`)
-			    msg += `\n签到成长值：【${result.msg}】`
+			    console.log(`\n签到状态：【${result.msg}】`)
+			    msg += `\n签到状态：【${result.msg}】`
 			}
 		    })
                 } else {
@@ -181,8 +183,8 @@ class UserInfo {
                         //process.stdout.write(d)
                         let result = JSON.parse(d)
 		        console.log(result)
-                        console.log(`\n签到失败！【${result.msg}】`)
-		        msg += `\n签到失败！【${result.msg}】`
+                        console.log(`\n签到失败！【${result.error}】`)
+		        msg += `\n签到失败！【${result.error}】`
 		    })
                 }
 	    })
