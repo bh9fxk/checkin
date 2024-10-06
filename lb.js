@@ -45,7 +45,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'x-'+this.appid+'-token': this.ck,
+		    'x-wxc503ab22be5af334-token': this.ck,
 		    'appid': this.appid,
 		    'unionid': this.unionid
 		}
@@ -99,7 +99,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'x-'+this.appid+'-token': this.ck,
+		    'x-wxc503ab22be5af334-token': this.ck,
 		    'appid': this.appid,
 		    'unionid': this.unionid
 		}
@@ -151,7 +151,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'x-'+this.appid+'-token': this.ck,
+		    'x-wxc503ab22be5af334-token': this.ck,
 		    'appid': this.appid,
 		    'unionid': this.unionid
 		}
