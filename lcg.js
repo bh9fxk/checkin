@@ -10,7 +10,7 @@
 const $ = new Env("老城根签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; // 1开启通知
-let ckName = "zdgj_ck";
+let ckName = "lcg_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
