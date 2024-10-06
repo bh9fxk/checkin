@@ -107,9 +107,7 @@ class UserInfo {
 		    })
 		    res.on('end', function(){
 			let result = JSON.parse(str)
-			console.log('数据值')
-			console.log(result.data)
-			console.log('\{\}')
+			console.log(result)
 			if (result.data.dailySign == undefined) {
 			    console.log(`\n签到消息：【请检查签到状态！】`)
 			    msg += `\n签到消息：【请检查签到状态！】`
