@@ -2,7 +2,7 @@
  * cron 58 0 * * *  xbb.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
- * 变量名: xbb_ck
+ * 变量名: lb_ck
  * 变量值: 抓包x-???-token的值
  * scriptVersionNow = "0.0.1";
  */
@@ -47,8 +47,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'platformcode': 'XiaoBaiBai',
-		    'x-wxde54fd27cb59db51-token': this.ck,
-		    'appid': 'wxde54fd27cb59db51',
+		    'x-wxc503ab22be5af334-token': this.ck,
+		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
 		}
 	    }
@@ -102,8 +102,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'platformcode': 'XiaoBaiBai',
-		    'x-wxde54fd27cb59db51-token': this.ck,
-		    'appid': 'wxde54fd27cb59db51',
+		    'x-wxc503ab22be5af334-token': this.ck,
+		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
 		}
 	    }
@@ -155,8 +155,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'platformcode': 'XiaoBaiBai',
-		    'x-wxde54fd27cb59db51-token': this.ck,
-		    'appid': 'wxde54fd27cb59db51',
+		    'x-wxc503ab22be5af334-token': this.ck,
+		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
 		}
 	    }
