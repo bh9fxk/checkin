@@ -46,7 +46,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'platformcode': LiBy,
+		    'platformcode': 'LiBy',
 		    'x-wxc503ab22be5af334-token': this.ck,
 		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
@@ -101,6 +101,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'platformcode': 'LiBy',
 		    'x-wxc503ab22be5af334-token': this.ck,
 		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
@@ -153,6 +154,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'platformcode': 'LiBy',
 		    'x-wxc503ab22be5af334-token': this.ck,
 		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
