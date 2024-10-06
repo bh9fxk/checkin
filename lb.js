@@ -21,8 +21,7 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.appid = str.split(strSplitor)[1]
-	this.unionid = str.split(strSplitor)[2]
+	this.unionid = str.split(strSplitor)[1]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -47,8 +46,9 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'platformcode': LiBy,
 		    'x-wxc503ab22be5af334-token': this.ck,
-		    'appid': this.appid,
+		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
 		}
 	    }
@@ -102,7 +102,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'x-wxc503ab22be5af334-token': this.ck,
-		    'appid': this.appid,
+		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
 		}
 	    }
@@ -154,7 +154,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'x-wxc503ab22be5af334-token': this.ck,
-		    'appid': this.appid,
+		    'appid': 'wxc503ab22be5af334',
 		    'unionid': this.unionid
 		}
 	    }
