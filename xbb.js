@@ -10,7 +10,7 @@
 const $ = new Env("立白小白白签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; // 1开启通知
-let ckName = "xbb_ck";
+let ckName = "lb_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
@@ -46,9 +46,9 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'platformcode': 'LiBy',
-		    'x-wxc503ab22be5af334-token': this.ck,
-		    'appid': 'wxc503ab22be5af334',
+		    'platformcode': 'XiaoBaiBai',
+		    'x-wxde54fd27cb59db51-token': this.ck,
+		    'appid': 'wxde54fd27cb59db51',
 		    'unionid': this.unionid
 		}
 	    }
@@ -101,9 +101,9 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'platformcode': 'LiBy',
-		    'x-wxc503ab22be5af334-token': this.ck,
-		    'appid': 'wxc503ab22be5af334',
+		    'platformcode': 'XiaoBaiBai',
+		    'x-wxde54fd27cb59db51-token': this.ck,
+		    'appid': 'wxde54fd27cb59db51',
 		    'unionid': this.unionid
 		}
 	    }
@@ -150,13 +150,13 @@ class UserInfo {
 	    const options = {
 		hostname: 'clubwx.hm.liby.com.cn',
 		port: 443,
-		path: '/miniprogram/benefits/activity/sign/execute.htm?taskId=262',
+		path: '/miniprogram/benefits/activity/sign/execute.htm?taskId=158',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'platformcode': 'LiBy',
-		    'x-wxc503ab22be5af334-token': this.ck,
-		    'appid': 'wxc503ab22be5af334',
+		    'platformcode': 'XiaoBaiBai',
+		    'x-wxde54fd27cb59db51-token': this.ck,
+		    'appid': 'wxde54fd27cb59db51',
 		    'unionid': this.unionid
 		}
 	    }
