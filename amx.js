@@ -110,7 +110,7 @@ class UserInfo {
 			console.log('数据值')
 			console.log(result.data)
 			console.log('\{\}')
-			if (result.data == '\{\}') {
+			if (result.data.dailySign == undefined) {
 			    console.log(`\n签到消息：【请检查签到状态！】`)
 			    msg += `\n签到消息：【请检查签到状态！】`
 			} else {
