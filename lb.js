@@ -21,6 +21,8 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.appid = str.split(strSplitor)[1]
+	this.unionid = str.split(strSplitor)[2]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -37,13 +39,15 @@ class UserInfo {
 	    const https = require('https')
 
 	    const options = {
-		hostname: 'wx-amxshop.msxapi.digitalyili.com',
+		hostname: 'clubwx.hm.liby.com.cn',
 		port: 443,
-		path: '/api/order/getCount',
+		path: '/b2cMiniApi/me/getUserData.htm',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'accesstoken': this.ck
+		    'x-'+this.appid+'-token': this.ck,
+		    'appid': this.appid,
+		    'unionid': this.unionid
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -57,10 +61,62 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == 200) {
-			    console.log(`\n现有积分：【${result.data.integralCount}】`)
-			    console.log(`\n优惠券数：【${result.data.couponCount}】`)
-			    msg += `\n现有积分：【${result.data.integralCount}】`
-			    msg += `\n优惠券数：【${result.data.couponCount}】`
+			    console.log(`\n用户名称：【${result.data.nickName}】`)
+			    console.log(`\n现有积分：【${result.data.integral}】`)
+			    msg += `\n用户名称：【${result.data.nickName}】`
+			    msg += `\n现有积分：【${result.data.integral}】`
+			} else {
+			    console.log(`\n查询结果：【${result.message}】`)
+			    msg += `\n查询结果：【${result.message}】`
+			}
+		    })
+                } else {
+                    console.log(`\n信息查询失败！`)
+		    msg += `\n信息查询失败！`
+                }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async coupon() {
+        try {
+	    const https = require('https')
+
+	    const options = {
+		hostname: 'clubwx.hm.liby.com.cn',
+		port: 443,
+		path: '/b2cMiniApi/coupon/num/get.htm',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'x-'+this.appid+'-token': this.ck,
+		    'appid': this.appid,
+		    'unionid': this.unionid
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+                    res.on('data', function (chunk) {
+			str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == 200) {
+			    console.log(`\n优惠券数：【${result.data.onlineCouponNum}】张`)
+			    msg += `\n优惠券数：【${result.data.onlineCouponNum}】张`
 			} else {
 			    console.log(`\n查询结果：【${result.message}】`)
 			    msg += `\n查询结果：【${result.message}】`
@@ -91,11 +147,13 @@ class UserInfo {
 	    const options = {
 		hostname: 'wx-amxshop.msxapi.digitalyili.com',
 		port: 443,
-		path: '/api/user/daily/sign',
+		path: '/miniprogram/benefits/activity/sign/execute.htm?taskId=262',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'accesstoken': this.ck
+		    'x-'+this.appid+'-token': this.ck,
+		    'appid': this.appid,
+		    'unionid': this.unionid
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -108,12 +166,14 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.data.dailySign == undefined) {
-			    console.log(`\n签到消息：【请检查签到状态！】`)
-			    msg += `\n签到消息：【请检查签到状态！】`
+			if (result.code == 200) {
+			    console.log(`\n签到状态：【${result.msg}】`)
+			    console.log(`\n签到消息：【${result.data.resultDesc}】`)
+			    msg += `\n签到状态：【${result.msg}】`
+			    msg += `\n签到消息：【${result.data.resultDesc}】`
 			} else {
-			    console.log(`\n签到积分：【${result.data.dailySign.bonusPoints}】`)
-			    msg += `\n签到成长值：【${result.data.dailySign.bonusGrowths}】`
+			    console.log(`\n签到积分：【${result.msg}】`)
+			    msg += `\n签到成长值：【${result.msg}】`
 			}
 		    })
                 } else {
