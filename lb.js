@@ -148,7 +148,7 @@ class UserInfo {
 	    const https = require('https')
 
 	    const options = {
-		hostname: 'wx-amxshop.msxapi.digitalyili.com',
+		hostname: 'clubwx.hm.liby.com.cn',
 		port: 443,
 		path: '/miniprogram/benefits/activity/sign/execute.htm?taskId=262',
 		method: 'GET',
