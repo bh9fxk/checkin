@@ -28,8 +28,8 @@ class UserInfo {
         await this.point()
 	await $.wait(3000)
 	await this.signIn()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async point() {
@@ -107,7 +107,8 @@ class UserInfo {
 		    })
 		    res.on('end', function(){
 			let result = JSON.parse(str)
-			console.log(result)
+			console.log('数据值')
+			console.log(result.data)
 			if (result.data === 0) {
 			    console.log(`\n签到消息：【请检查签到状态！】`)
 			    msg += `\n签到消息：【请检查签到状态！】`
