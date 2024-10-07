@@ -1,5 +1,5 @@
 /**
- * cron 0 1 * * *  yl.js
+ * cron 0 1 * * *  ylnn.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:ylnn_ck,&分隔两个参数
@@ -16,43 +16,40 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
-let token = ''
 
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.code = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.openid = str.split(strSplitor)[1];
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.token()
+	await this.coupon()
 	await $.wait(3000)
 	await this.point()
 	await $.wait(3000)
         await this.signIn()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
 
-    async token() {
+    async coupon() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"code": this.code,
-		"openid": this.openid
-	    })
+	    const data = JSON.stringify({})
+
 	    const options = {
-		hostname: 'community.bwcj.com',
+		hostname: 'msmarket.msx.digitalyili.com,
 		port: 443,
-		path: '/api/user/wechatLogin',
+		path: '/gateway/api/sales/coupon/ticket/count',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length
+		    'Content-Length': data.length,
+		    'access-token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -65,24 +62,22 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 200) {
-			    token = result.data.access_token
-			    console.log(`\n【---获取Token成功---】`)
-			    let a = result.data.expires_in / 60
-			    console.log(`\nToken过期：【${a}】分钟`)
-		            msg += `\n【---获取Token成功---】`
-			    msg += `\nToken过期：【${a}】分钟`
+			if (result.status == true) {
+			    console.log(`\n优惠券数：【${result.data}】张`)
+			    console.log(`\n错误信息：【${result.error}】`)
+		            msg += `\n优惠券数：【${result.data}】张`
+			    msg += `\n错误信息：【${result.error}】`
 			} else {
-			    console.log(`\nToken信息：【${result.msg}】`)
-			    msg += `\nToken信息：【${result.msg}】`
+			    console.log(`\n优惠券信息：【${result.error}】`)
+			    msg += `\n优惠券信息：【${result.error}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\nToken获取失败！`);
-			    msg += `\nToken获取失败！`
+		            console.log(`\n优惠券获取失败！`);
+			    msg += `\n优惠券获取失败！`
 		        })
 		    }
 	    })
@@ -94,7 +89,6 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
-		
         } catch (e) {
             console.log(e);
         }
@@ -103,15 +97,16 @@ class UserInfo {
     async point() {
         try {
 	    const https = require('https')
-		
+	    const data = JSON.stringify({})
 	    const options = {
-		hostname: 'community.bwcj.com',
+		hostname: 'msmarket.msx.digitalyili.com',
 		port: 443,
-		path: 'https://community.bwcj.com/api/activity/applet-sign-in/calendar',
-		method: 'GET',
+		path: '/gateway/api/member/point/info',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Authorization': 'Bearer '+token
+		    'Content-Length': data.length,
+		    'access-token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -124,15 +119,14 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 200) {
-			    
-			    console.log(`\n连续签到：【${result.data.continuousDay}】天`)
-		            console.log(`\n现总积分：【${result.data.totalPoints}】`)
-		            msg += `\n连续签到：【${result.data.continuousDay}】天`
-			    msg += `\n现总积分：【${result.data.totalPoints}】`
+			if (result.status == true) {
+			    console.log(`\n现有积分：【${result.data.totalPoint}】`)
+			    console.log(`\n错误信息：【${result.error}】`)
+		            msg += `\n现有积分：【${result.data.totalPoint}】`
+			    msg += `\n错误信息：【${result.error}】`
 			} else {
-			    console.log(`\n积分查询：【${result.msg}】`)
-			    msg += `\n积分查询：【${result.msg}】`
+			    console.log(`\n积分查询：【${result.error}】`)
+			    msg += `\n积分查询：【${result.error}】`
 			}
 		        })
 		    } else {
@@ -149,7 +143,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -163,14 +157,14 @@ class UserInfo {
 	    const data = JSON.stringify({})
 	
 	    const options = {
-		hostname: 'community.bwcj.com',
+		hostname: 'msmarket.msx.digitalyili.com',
 		port: 443,
-		path: '/api/activity/applet-sign-in/do-sign',
+		path: '/gateway/api/member/daily/sign',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'Authorization': 'Bearer '+token
+		    'access-token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -183,12 +177,16 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.data.success == true) {
-		            console.log(`\n签到结果：【${result.data.message}】`)
-			    msg += `\n签到结果：【${result.data.message}】`
+			if (result.status == true) {
+		            console.log(`\n签到积分：【${result.data.dailySign.bonusPoint}】`)
+			    console.log(`\n连续签到：【${result.data.continuationSign}】`)
+			    console.log(`\n连续错误：【${result.error}】`)
+			    msg += `\n签到积分：【${result.data.dailySign.bonusPoint}】`
+			    msg += `\n连续签到：【${result.data.continuationSign}】`
+			    msg += `\n连续错误：【${result.error}】`
 			} else {
-			    console.log(`\n签到结果：【${result.data.message}】`)
-			    msg += `\n签到结果：【${result.data.message}】`
+			    console.log(`\n签到结果：【${result.error}】`)
+			    msg += `\n签到结果：【${result.error}】`
 			}
 		    })
 		} else {
@@ -208,7 +206,6 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
-		
         } catch (e) {
             console.log(e);
         }
