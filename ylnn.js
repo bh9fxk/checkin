@@ -35,7 +35,6 @@ class UserInfo {
 	//await SendMsg(msg)
     }
 
-
     async coupon() {
         try {
 	    const https = require('https')
@@ -97,15 +96,14 @@ class UserInfo {
     async point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    
 	    const options = {
 		hostname: 'msmarket.msx.digitalyili.com',
 		port: 443,
 		path: '/gateway/api/member/point/info',
-		method: 'POST',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
 		    'access-token': this.ck
 		}
 	    }
@@ -125,8 +123,8 @@ class UserInfo {
 		            msg += `\n现有积分：【${result.data.totalPoint}】`
 			    msg += `\n错误信息：【${result.error}】`
 			} else {
-			    console.log(`\n积分查询：【${result.error}】`)
-			    msg += `\n积分查询：【${result.error}】`
+			    console.log(`\n积分查询：【${result.error.msg}】`)
+			    msg += `\n积分查询：【${result.error.msg}】`
 			}
 		        })
 		    } else {
@@ -177,7 +175,7 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true) {
+			if (result.status == true && result.data.dailySign !== null) {
 		            console.log(`\n签到积分：【${result.data.dailySign.bonusPoint}】`)
 			    console.log(`\n连续签到：【${result.data.continuationSign}】`)
 			    console.log(`\n连续错误：【${result.error}】`)
