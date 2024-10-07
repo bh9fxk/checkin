@@ -42,7 +42,7 @@ class UserInfo {
 	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 'msmarket.msx.digitalyili.com,
+		hostname: 'msmarket.msx.digitalyili.com',
 		port: 443,
 		path: '/gateway/api/sales/coupon/ticket/count',
 		method: 'POST',
