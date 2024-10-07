@@ -113,6 +113,8 @@ class UserInfo {
 			    msg += `\n签到消息：【请检查签到状态！】`
 			} else {
 			    console.log(`\n签到积分：【${result.data.dailySign.bonusPoints}】`)
+			    console.log(`\n签到成长值：【${result.data.dailySign.bonusGrowths}】`)
+			    msg += `\n签到积分：【${result.data.dailySign.bonusPoints}】`
 			    msg += `\n签到成长值：【${result.data.dailySign.bonusGrowths}】`
 			}
 		    })
