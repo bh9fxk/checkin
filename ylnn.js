@@ -178,10 +178,10 @@ class UserInfo {
 			if (result.status == true && result.data.dailySign !== null) {
 		            console.log(`\n签到积分：【${result.data.dailySign.bonusPoint}】`)
 			    console.log(`\n连续签到：【${result.data.continuationSign}】`)
-			    console.log(`\n连续错误：【${result.error}】`)
+			    console.log(`\n错误信息：【${result.error}】`)
 			    msg += `\n签到积分：【${result.data.dailySign.bonusPoint}】`
 			    msg += `\n连续签到：【${result.data.continuationSign}】`
-			    msg += `\n连续错误：【${result.error}】`
+			    msg += `\n错误信息：【${result.error}】`
 			} else {
 			    console.log(`\n签到结果：【${result.error}】`)
 			    msg += `\n签到结果：【${result.error}】`
