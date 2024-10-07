@@ -1,5 +1,5 @@
 /**
- * cron 21 0 * * *  lcg.js
+ * cron 22 0 * * *  lcg.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:lcg_ck
