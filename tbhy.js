@@ -20,39 +20,42 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.uid = str.split(strSplitor)[1]
-	this.sukey = str.split(strSplitor)[2]
+        this.ss = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.userid = str.split(strSplitor)[1]
+	this.st = str.split(strSplitor)[2]
+	this.vuid = str.split(strSplitor)[3]
+	this.sr = str.split(strSplitor)[4]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.user()
+	await this.point()
 	await $.wait(3000)
         await this.signIn()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async user() {
+    async point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"restParams": {
-		    "brand": 1
-		}
-	    })
 
 	    const options = {
-		hostname: 'mcsp.midea.com',
+		hostname: 'wxa-tp.ezrpro.com',
 		port: 443,
-		path: '/api/cms_bff/mcsp-uc-mvip-bff/member/getMemberInfo.do',
-		method: 'POST',
+		path: '/myvip/Vip/Vip/GetWxaWeiPageVipAssets',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'ucAccessToken': this.ck
+		    'ezr-brand-id': 254,
+		    'ezr-cop-id': 143,
+		    'ezr-sv': 1,
+		    'ezr-source': weapp,
+		    'ezr-ss': this.ss,
+		    'ezr-userid': this.userid,
+		    'ezr-st': this.st,
+		    'ezr-vuid': this.vuid
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -65,32 +68,95 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == '000000') {
-			    console.log(`\n用户查询：【${result.msg}】`)
-			    console.log(`\n用户名称：【${result.data.name}】`)
-			    console.log(`\n会员等级：【${result.data.levelName}】`)
-			    console.log(`\n现有积分：【${result.data.vipPoint}】`)
-			    console.log(`\n过期积分：【${result.data.soonExpirePoint}】`)
-			    console.log(`\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`)
-		            msg += `\n用户查询：【${result.msg}`
-			    msg += `\n用户名称：【${result.data.name}】`
-			    msg += `\n会员等级：【${result.data.levelName}】`
-			    msg += `\n现有积分：【${result.data.vipPoint}】`
-			    msg += `\n过期积分：【${result.data.soonExpirePoint}】`
-			    msg += `\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`
+			if (result.Success == true) {
+			    console.log(`\n积分查询：【${result.Msg}】`)
+			    console.log(`\n现有积分：【${result.Result.Bonus}】`)
+			    console.log(`\n现优惠券：【${result.Result.CouponCount}】`)
+		            msg += `\n积分查询：【${result.Msg}】`
+			    msg += `\n现有积分：【${result.Result.Bonus}】`
+			    msg += `\n现优惠券：【${result.Result.CouponCount}】`
 			} else {
-			    console.log(`\n用户信息：【${result.message}】`)
-			    msg += `\n用户信息：【${result.message}】`
+			    console.log(`\n积分信息：【${result.Msg}】【${result.ErrMsg}】`)
+			    msg += `\n积分信息：【${result.Msg}】【${result.ErrMsg}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n用户信息获取失败！【${result.message}】`);
-			    msg += `\n用户信息获取失败！【${result.message}】`
+		            console.log(`\n积分信息获取失败！【${result.Msg}】【${result.ErrMsg}】`);
+			    msg += `\n积分信息获取失败！【${result.Msg}】【${result.ErrMsg}】`
 		        })
 		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async signIn() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"SecretReqeust": "vvlPX3doU4f4nMyoQElHCpUmtFbP54dRfPWzkYv3wRJajpTODbnSg09xY2C4tFWH"
+	    })
+	    const options = {
+		hostname: 'wxa-tp.ezrpro.com',
+		port: 443,
+		path: '/my/score/create_daily_score',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'ezr-brand-id': 254,
+		    'ezr-cop-id': 143,
+		    'ezr-sv': 1,
+		    'ezr-source': weapp,
+		    'ezr-ss': this.ss,
+		    'ezr-userid': this.userid,
+		    'ezr-st': this.st,
+		    'ezr-vuid': this.vuid
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			//str = str.replace(/[\r|\n|\t]/g,"")
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.Success == true) {
+		            console.log(`\n签到信息：【${result.Msg} 】`)
+			    console.log(`\n错误信息：【${result.errorMsg} 】`)
+			    msg += `\n签到信息：【${result.Msg} 】`
+			    msg += `\n错误信息：【${result.errorMsg} 】`
+			    
+			} else {
+			    console.log(`\n签到信息：【${result.Msg} 】`)
+			    console.log(`\n错误信息：【${result.errorMsg} 】`)
+			    msg += `\n签到信息：【${result.Msg} 】`
+			    msg += `\n错误信息：【${result.errorMsg} 】`
+			}
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n-----签到失败！-----`);
+			msg += `\n-----签到失败！-----`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -105,18 +171,25 @@ class UserInfo {
         }
     }
 
-    async signIn() {
+    async signin_info() {
         try {
 	    const https = require('https')
-	
+
 	    const options = {
-		hostname: 'mvip.midea.cn',
+		hostname: 'wxa-tp.ezrpro.com',
 		port: 443,
-		path: '/my/score/create_daily_score',
+		path: '/myvip/Vip/SignIn/GetSignInDtlInfo',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Cookie': 'uid='+this.uid+';sukey='+this.sukey
+		    'ezr-brand-id': 254,
+		    'ezr-cop-id': 143,
+		    'ezr-sv': 1,
+		    'ezr-source': weapp,
+		    'ezr-ss': this.ss,
+		    'ezr-userid': this.userid,
+		    'ezr-st': this.st,
+		    'ezr-vuid': this.vuid
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -127,25 +200,32 @@ class UserInfo {
 		    str += chunk
 		    })
 		    res.on('end', function(){
-			str = str.replace(/[\r|\n|\t]/g,"")
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-		            console.log(`\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】`)
-			    msg += `\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】】`
+			if (result.Success == true) {
+			    console.log(`\n签到查询：【${result.Msg}】`)
+			    console.log(`\n今日签到：【${result.Result.IsSigInToday}】`)
+			    console.log(`\n已经签到：【${result.Result.SignedDays}】天`)
+			    console.log(`\n本周期签到：【${result.Result.StepRoundSignDays}】天`)
+			    console.log(`\n周期数：【${result.Result.StepRound}】`)
+		            msg += `\n签到查询：【${result.Msg}】`
+			    msg += `\n今日签到：【${result.Result.IsSigInToday}】`
+			    msg += `\n已经签到：【${result.Result.SignedDays}】天`
+			    msg += `\n本周期签到：【${result.Result.StepRoundSignDays}】天``
+			    msg += `\n周期数：【${result.Result.StepRound}】`
 			} else {
-			    console.log(`\n签到结果：【${result.errmsg}】`)
-			    msg += `\n签到结果：【${result.errmsg}】`
+			    console.log(`\n签到信息：【${result.Msg}】【${result.ErrMsg}】`)
+			    msg += `\n签到信息：【${result.Msg}】【${result.ErrMsg}】`
 			}
-		    })
-		} else {
-		    res.on('data', d => {
-			let result = JSON.parse(d)
-			console.log(result)
-		        console.log(`\n-----签到失败！-----`);
-			msg += `\n-----签到失败！-----`
-		    })
-		}
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`);
+			    msg += `\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`
+		        })
+		    }
 	    })
 		
 	    req.on('error', error => {
