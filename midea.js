@@ -133,6 +133,7 @@ class UserInfo {
 		            console.log(`\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】`)
 			    msg += `\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】】`
 			} else {
+			    result = result.replace(/[\r|\n|\t]/g,"")
 			    console.log(`\n签到结果：【${result.errmsg}】`)
 			    msg += `\n签到结果：【${result.errmsg}】`
 			}
