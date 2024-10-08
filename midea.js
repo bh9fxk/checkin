@@ -68,13 +68,13 @@ class UserInfo {
 			if (result.code == '000000') {
 			    console.log(`\n用户查询：【${result.msg}】`)
 			    console.log(`\n用户名称：【${result.data.name}】`)
-			    console.log(`\n用户等级：【${result.data.levelName}】`)
+			    console.log(`\n会员等级：【${result.data.levelName}】`)
 			    console.log(`\n现有积分：【${result.data.vipPoint}】`)
 			    console.log(`\n过期积分：【${result.data.soonExpirePoint}】`)
 			    console.log(`\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`)
 		            msg += `\n用户查询：【${result.msg}`
 			    msg += `\n用户名称：【${result.data.name}】`
-			    msg += `\n用户等级：【${result.data.levelName}】`
+			    msg += `\n会员等级：【${result.data.levelName}】`
 			    msg += `\n现有积分：【${result.data.vipPoint}】`
 			    msg += `\n过期积分：【${result.data.soonExpirePoint}】`
 			    msg += `\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`
@@ -127,13 +127,13 @@ class UserInfo {
 		    str += chunk
 		    })
 		    res.on('end', function(){
+			let str = str.replace(/[\r|\n|\t]/g,"")
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.errcode == 0) {
 		            console.log(`\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】`)
 			    msg += `\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】】`
 			} else {
-			    result = result.replace(/[\r|\n|\t]/g,"")
 			    console.log(`\n签到结果：【${result.errmsg}】`)
 			    msg += `\n签到结果：【${result.errmsg}】`
 			}
