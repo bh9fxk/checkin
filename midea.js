@@ -31,8 +31,8 @@ class UserInfo {
 	await this.user()
 	await $.wait(3000)
         await this.signIn()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user() {
@@ -141,8 +141,8 @@ class UserInfo {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到失败！`);
-			msg += `\n签到失败！`
+		        console.log(`\n-----签到失败！-----`);
+			msg += `\n-----签到失败！-----`
 		    })
 		}
 	    })
@@ -151,7 +151,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
