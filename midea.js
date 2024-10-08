@@ -3,14 +3,14 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:midea_ck,&分隔两个参数
- * 变量值:抓包access-token的值
+ * 变量值:抓包ucAccessToken uid sukey的值
  * scriptVersionNow = "0.0.1";
  */
 
 const $ = new Env("美的会员签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
-let ckName = "ylnn_ck";
+let ckName = "midea_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
@@ -21,6 +21,8 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.uid = str.split(strSplitor)[1]
+	this.sukey = str.split(strSplitor)[2]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -35,20 +37,24 @@ class UserInfo {
 	await SendMsg(msg)
     }
 
-    async coupon() {
+    async user() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({
+		"restParams": {
+		    "brand": 1
+		}
+	    })
 
 	    const options = {
-		hostname: 'msmarket.msx.digitalyili.com',
+		hostname: 'mcsp.midea.com',
 		port: 443,
-		path: '/gateway/api/sales/coupon/ticket/count',
+		path: '/api/cms_bff/mcsp-uc-mvip-bff/member/getMemberInfo.do',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'access-token': this.ck
+		    'ucAccessToken': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -61,22 +67,30 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true) {
-			    console.log(`\n优惠券数：【${result.data}】张`)
-			    console.log(`\n错误信息：【${result.error}】`)
-		            msg += `\n优惠券数：【${result.data}】张`
-			    msg += `\n错误信息：【${result.error}】`
+			if (result.code == '000000') {
+			    console.log(`\n用户查询：【${result.msg}】`)
+			    console.log(`\n用户名称：【${result.data.name}】`)
+			    console.log(`\n用户等级：【${result.data.levelName}】`)
+			    console.log(`\n现有积分：【${result.data.vipPoint}】`)
+			    console.log(`\n过期积分：【${result.data.soonExpirePoint}】`)
+			    console.log(`\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`)
+		            msg += `\n用户查询：【${result.msg}`
+			    msg += `\n用户名称：【${result.data.name}】`
+			    msg += `\n用户等级：【${result.data.levelName}】`
+			    msg += `\n现有积分：【${result.data.vipPoint}】`
+			    msg += `\n过期积分：【${result.data.soonExpirePoint}】`
+			    msg += `\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`
 			} else {
-			    console.log(`\n优惠券信息：【${result.error}】`)
-			    msg += `\n优惠券信息：【${result.error}】`
+			    console.log(`\n用户信息：【${result.message}】`)
+			    msg += `\n用户信息：【${result.message}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n优惠券获取失败！`);
-			    msg += `\n优惠券获取失败！`
+		            console.log(`\n用户信息获取失败！【${result.message}】`);
+			    msg += `\n用户信息获取失败！【${result.message}】`
 		        })
 		    }
 	    })
@@ -92,77 +106,19 @@ class UserInfo {
             console.log(e);
         }
     }
-	
-    async point() {
-        try {
-	    const https = require('https')
-	    
-	    const options = {
-		hostname: 'msmarket.msx.digitalyili.com',
-		port: 443,
-		path: '/gateway/api/member/point/info',
-		method: 'GET',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'access-token': this.ck
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-		    let str = ''
-		    res.on('data', function (chunk) {
-		    str += chunk
-		    })
-		    res.on('end', function(){
-			let result = JSON.parse(str)
-			console.log(result)
-			if (result.status == true) {
-			    console.log(`\n现有积分：【${result.data.totalPoint}】`)
-			    console.log(`\n错误信息：【${result.error}】`)
-		            msg += `\n现有积分：【${result.data.totalPoint}】`
-			    msg += `\n错误信息：【${result.error}】`
-			} else {
-			    console.log(`\n积分查询：【${result.error.msg}】`)
-			    msg += `\n积分查询：【${result.error.msg}】`
-			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n积分查询失败！`);
-			    msg += `\n积分查询失败！`
-		        })
-		    }
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    //req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
     async signIn() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
 	
 	    const options = {
-		hostname: 'msmarket.msx.digitalyili.com',
+		hostname: 'mvip.midea.cn',
 		port: 443,
-		path: '/gateway/api/member/daily/sign',
-		method: 'POST',
+		path: '/my/score/create_daily_score',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'access-token': this.ck
+		    'Cookie': 'uid='+this.uid+';sukey='+this.sukey
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -175,16 +131,12 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true && result.data.dailySign !== null) {
-		            console.log(`\n签到积分：【${result.data.dailySign.bonusPoint}】`)
-			    console.log(`\n连续签到：【${result.data.continuationSign}】`)
-			    console.log(`\n错误信息：【${result.error}】`)
-			    msg += `\n签到积分：【${result.data.dailySign.bonusPoint}】`
-			    msg += `\n连续签到：【${result.data.continuationSign}】`
-			    msg += `\n错误信息：【${result.error}】`
+			if (result.errcode == 0) {
+		            console.log(`\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】`)
+			    msg += `\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】】`
 			} else {
-			    console.log(`\n签到结果：【${result.error}】`)
-			    msg += `\n签到结果：【${result.error}】`
+			    console.log(`\n签到结果：【${result.errmsg}】`)
+			    msg += `\n签到结果：【${result.errmsg}】`
 			}
 		    })
 		} else {
