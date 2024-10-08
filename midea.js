@@ -127,7 +127,7 @@ class UserInfo {
 		    str += chunk
 		    })
 		    res.on('end', function(){
-			let str = str.replace(/[\r|\n|\t]/g,"")
+			str = str.replace(/[\r|\n|\t]/g,"")
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.errcode == 0) {
