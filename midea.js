@@ -72,7 +72,7 @@ class UserInfo {
 			    console.log(`\n现有积分：【${result.data.vipPoint}】`)
 			    console.log(`\n过期积分：【${result.data.soonExpirePoint}】`)
 			    console.log(`\n现成长值：【${result.data.vipGrow} / ${result.data.nextLevelGrowValue}】`)
-		            msg += `\n用户查询：【${result.msg}`
+		            msg += `\n用户查询：【${result.msg}】`
 			    msg += `\n用户名称：【${result.data.name}】`
 			    msg += `\n会员等级：【${result.data.levelName}】`
 			    msg += `\n现有积分：【${result.data.vipPoint}】`
