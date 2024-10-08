@@ -50,6 +50,7 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
 		    'ezr-brand-id': 254,
 		    'ezr-cop-id': 143,
 		    'ezr-sv': 1,
