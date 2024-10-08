@@ -34,6 +34,8 @@ class UserInfo {
 	await $.wait(3000)
         await this.signIn()
 	await $.wait(3000)
+	await this.signin_info
+	await $.wait(3000)
 	await SendMsg(msg)
     }
 
@@ -106,7 +108,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"SecretReqeust": "vvlPX3doU4f4nMyoQElHCpUmtFbP54dRfPWzkYv3wRJajpTODbnSg09xY2C4tFWH"
+		"SecretReqeust": this.sr
 	    })
 	    const options = {
 		hostname: 'wxa-tp.ezrpro.com',
