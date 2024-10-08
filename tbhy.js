@@ -213,7 +213,7 @@ class UserInfo {
 		            msg += `\n签到查询：【${result.Msg}】`
 			    msg += `\n今日签到：【${result.Result.IsSigInToday}】`
 			    msg += `\n已经签到：【${result.Result.SignedDays}】天`
-			    msg += `\n本周期签到：【${result.Result.StepRoundSignDays}】天``
+			    msg += `\n本周期签到：【${result.Result.StepRoundSignDays}】天`
 			    msg += `\n周期数：【${result.Result.StepRound}】`
 			} else {
 			    console.log(`\n签到信息：【${result.Msg}】【${result.ErrMsg}】`)
