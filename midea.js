@@ -132,7 +132,7 @@ class UserInfo {
 			console.log(result)
 			if (result.errcode == 0) {
 		            console.log(`\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】`)
-			    msg += `\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】】`
+			    msg += `\n【---签到成功---】【${result.errmsg} / ${result.outReserve}】`
 			} else {
 			    console.log(`\n签到结果：【${result.errmsg}】`)
 			    msg += `\n签到结果：【${result.errmsg}】`
