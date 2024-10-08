@@ -113,7 +113,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'wxa-tp.ezrpro.com',
 		port: 443,
-		path: '/my/score/create_daily_score',
+		path: '/myvip/Vip/SignIn/SignIn',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
