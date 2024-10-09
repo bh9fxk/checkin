@@ -140,16 +140,16 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.Success == true) {
-		            console.log(`\n签到信息：【${result.Msg} 】`)
-			    console.log(`\n错误信息：【${result.errorMsg} 】`)
-			    msg += `\n签到信息：【${result.Msg} 】`
-			    msg += `\n错误信息：【${result.errorMsg} 】`
+		            console.log(`\n签到信息：【${result.Msg}】`)
+			    console.log(`\n错误信息：【${result.errorMsg}】`)
+			    msg += `\n签到信息：【${result.Msg}】`
+			    msg += `\n错误信息：【${result.errorMsg}】`
 			    
 			} else {
-			    console.log(`\n签到信息：【${result.Msg} 】`)
-			    console.log(`\n错误信息：【${result.errorMsg} 】`)
-			    msg += `\n签到信息：【${result.Msg} 】`
-			    msg += `\n错误信息：【${result.errorMsg} 】`
+			    console.log(`\n签到信息：【${result.Msg}】`)
+			    console.log(`\n错误信息：【${result.errorMsg}】`)
+			    msg += `\n签到信息：【${result.Msg}】`
+			    msg += `\n错误信息：【${result.errorMsg}】`
 			}
 		    })
 		} else {
