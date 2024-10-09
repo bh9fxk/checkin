@@ -210,12 +210,12 @@ class UserInfo {
 			    console.log(`\n今日签到：【${result.Result.VipSignInDtl.IsSigInToday}】`)
 			    console.log(`\n已经签到：【${result.Result.VipSignInDtl.SignedDays}】天`)
 			    console.log(`\n本周期签到：【${result.Result.VipSignInDtl.StepRoundSignDays}】天`)
-			    console.log(`\n周期数：【${result.Result.VipSignInDtl.StepRound}】`)
+			    console.log(`\n当前周期数：【${result.Result.VipSignInDtl.StepRound}】`)
 		            msg += `\n签到查询：【${result.Msg}】`
 			    msg += `\n今日签到：【${result.Result.VipSignInDtl.IsSigInToday}】`
 			    msg += `\n已经签到：【${result.Result.VipSignInDtl.SignedDays}】天`
 			    msg += `\n本周期签到：【${result.Result.VipSignInDtl.StepRoundSignDays}】天`
-			    msg += `\n周期数：【${result.Result.VipSignInDtl.StepRound}】`
+			    msg += `\n当前周期数：【${result.Result.VipSignInDtl.StepRound}】`
 			} else {
 			    console.log(`\n签到信息：【${result.Msg}】【${result.ErrMsg}】`)
 			    msg += `\n签到信息：【${result.Msg}】【${result.ErrMsg}】`
