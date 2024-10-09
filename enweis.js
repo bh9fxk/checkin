@@ -50,8 +50,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 254,
-		    'ezr-cop-id': 143,
+		    'ezr-brand-id': 224,
+		    'ezr-cop-id': 118,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -118,8 +118,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'ezr-brand-id': 254,
-		    'ezr-cop-id': 143,
+		    'ezr-brand-id': 224,
+		    'ezr-cop-id': 118,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -185,8 +185,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 254,
-		    'ezr-cop-id': 143,
+		    'ezr-brand-id': 224,
+		    'ezr-cop-id': 118,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
