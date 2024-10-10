@@ -3,7 +3,7 @@
 # -------------------------------
 # ✨✨✨ @Author CHERWIN✨✨✨
 # -------------------------------
-# cron "32 0,6 * * *" script-path=xxx.py,tag=匹配cron用
+# cron "58 0,7 * * *" script-path=xxx.py,tag=匹配cron用
 # const $ = new Env('EMS邮惠中心')
 
 import os
