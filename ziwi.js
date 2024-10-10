@@ -7,7 +7,7 @@
  * scriptVersionNow = "0.0.1";
  */
 
-const $ = new Env("ziwi签到");
+const $ = new Env("ZIWI签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
 let ckName = "ziwi_ck";
