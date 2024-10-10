@@ -1,5 +1,5 @@
 /**
- * cron 57 0 * * *  lb.js
+ * cron 36 7 * * *  lb.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: lb_ck
