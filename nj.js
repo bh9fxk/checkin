@@ -1,5 +1,5 @@
 /**
- * cron 51 0 * * *  nj.js
+ * cron 41 7 * * *  nj.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: nj_ck
