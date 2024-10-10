@@ -1,5 +1,5 @@
 /**
- * cron 52 0 * * *  htg.js
+ * cron 29 7 * * *  htg.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: htg_ck
