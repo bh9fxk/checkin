@@ -3,7 +3,7 @@
 # -------------------------------
 # @Author CHERWIN✨✨✨
 # -------------------------------
-# cron "35 0,6 * * *" script-path=xxx.py,tag=匹配cron用
+# cron "1 0,8 * * *" script-path=xxx.py,tag=匹配cron用
 # const $ = new Env('奈雪小程序')
 import datetime
 import json
