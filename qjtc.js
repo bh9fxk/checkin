@@ -1,5 +1,5 @@
 /**
- * cron 40 0 * * *  qjtc.js
+ * cron 42 7 * * *  qjtc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:qjtc_ck
