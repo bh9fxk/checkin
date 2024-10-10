@@ -1,5 +1,5 @@
 /**
- * cron 41 0 * * *  drc.js
+ * cron 20 7 * * *  drc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:drc_ck
