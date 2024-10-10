@@ -1,5 +1,5 @@
 /**
- * cron 25 0 * * *  xdg.js
+ * cron 47 7 * * *  xdg.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:xdg_ck
