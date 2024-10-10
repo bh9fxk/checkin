@@ -1,5 +1,5 @@
 /**
- * cron 21 0 * * *  bwcj.js
+ * cron 18 7 * * *  bwcj.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:bwcj_ck,&分隔两个参数
