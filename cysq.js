@@ -1,5 +1,5 @@
 /**
- * cron 56 0 * * *  cysq.js
+ * cron 19 7 * * *  cysq.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:cysq_ck,&分隔两个参数
