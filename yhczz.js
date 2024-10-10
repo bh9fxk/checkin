@@ -1,5 +1,5 @@
 /**
- * cron 39 0 * * *  yhczz.js
+ * cron 50 7 * * *  yhczz.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:yhczz_ck
