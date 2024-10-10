@@ -59,9 +59,11 @@ class UserInfo {
 			if (result.status == 200) {
 			    console.log(`\n登录状态：【${result.msg}】`)
 			    console.log(`\n现总积分：【${result.data.integral}】`)
+			    console.log(`\n现成长值：【${result.data.exp}】`)
 			    console.log(`\n已经签到：【${result.data.sign_num}】天`)
 		            msg += `\n登录状态：【${result.msg}】`
 			    msg += `\n现总积分：【${result.data.integral}】`
+			    msg += `\n现成长值：【${result.data.exp}】`
 			    msg += `\n已经签到：【${result.data.sign_num}】天`
 			} else {
 			    console.log(`\n登录状态：【${result.msg}】`)
