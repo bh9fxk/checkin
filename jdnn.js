@@ -1,5 +1,5 @@
 /**
- * cron 1 1 * * *  jdnn.js
+ * cron 32 7 * * *  jdnn.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:jdnn_ck,&分隔两个参数
