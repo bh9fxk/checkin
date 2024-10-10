@@ -1,5 +1,5 @@
 /**
- * cron 2 1 * * *  puma.js
+ * cron 2 8 * * *  puma.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:puma_ck,&分隔两个参数
@@ -50,8 +50,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 224,
-		    'ezr-cop-id': 118,
+		    'ezr-brand-id': 311,
+		    'ezr-cop-id': 186,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -118,8 +118,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'ezr-brand-id': 224,
-		    'ezr-cop-id': 118,
+		    'ezr-brand-id': 311,
+		    'ezr-cop-id': 186,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -185,8 +185,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 224,
-		    'ezr-cop-id': 118,
+		    'ezr-brand-id': 311,
+		    'ezr-cop-id': 186,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
