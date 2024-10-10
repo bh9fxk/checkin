@@ -1,5 +1,5 @@
 /**
- * cron 26 0 * * *  zdgjgx.js
+ * cron 53 7 * * *  zdgjgx.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:zdgj_ck
