@@ -1,5 +1,5 @@
 /**
- * cron 50 0 * * *  blc.js
+ * cron 17 7 * * *  blc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:blc_ck
