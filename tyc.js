@@ -1,5 +1,5 @@
 /**
- * cron 42 0 * * *  tyc.js
+ * cron 44 7 * * *  tyc.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:tyc_ck
