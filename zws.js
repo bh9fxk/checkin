@@ -1,5 +1,5 @@
 /**
- * cron 5 1 * * *  zws.js
+ * cron 57 7 * * *  zws.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:zws_ck,&分隔两个参数
