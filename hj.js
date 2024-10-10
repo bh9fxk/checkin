@@ -1,5 +1,5 @@
 /**
- * cron 53 0 * * *  hj.js
+ * cron 24 7 * * *  hj.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: hj_ck
