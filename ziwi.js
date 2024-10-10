@@ -26,27 +26,33 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.user_info()
+	await this.point()
 	await $.wait(3000)
         await this.signIn()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async user_info() {
+    async point() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": this.appid
+		"id": 1728571758328,
+		"jsonrpc": "2.0",
+		"method": "GetUserCreditStats",
+		"params": {
+		    "currency": "Z_Point"
+		}
 	    })
 	    const options = {
-		hostname: 'webapi.qmai.cn',
+		hostname: 'ziwi.gzcrm.cn',
 		port: 443,
-		path: '/web/catering2-apiserver/crm/customer-center?appid='+this.appid,
-		method: 'GET',
+		path: '/json-rpc',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'qm-user-token': this.ck
+		    'Content-Length': data.length,
+		    'authorization': 'Bearer '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -59,24 +65,17 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true) {
-			    console.log(`\n查询信息：【${result.message}】`)
-		            console.log(`\n现总积分：【${result.data.customerAssertInfo.integral}】`)
-			    console.log(`\n现优惠券：【${result.data.customerAssertInfo.coupon}】张`)
-		            msg += `\n查询信息：【${result.message}】`
-			    msg += `\n现总积分：【${result.data.customerAssertInfo.integral}】`
-			    msg += `\n现优惠券：【${result.data.customerAssertInfo.coupon}】张`
-			} else {
-			    console.log(`\n查询信息：【${result.message}】`)
-			    msg += `\n查询信息：【${result.message}】`
-			}
+			    console.log(`\n过期积分：【${result.result.expired}】`)
+		            console.log(`\n现总积分：【${result.result.total}】Z币`)
+		            msg += `\n过期积分：【${result.result.expired}】`
+			    msg += `\n现总积分：【${result.result.total}】Z币`
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n用户信息查询失败！`);
-			    msg += `\n用户信息失败！`
+		            console.log(`\n积分查询：【${result.message}】`);
+			    msg += `\n积分查询：【${result.message}】`
 		        })
 		    }
 	    })
@@ -85,7 +84,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
 	    req.end()
 
 		
@@ -98,22 +97,22 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activityId": "1004435002421583872",
-		"storeId": 201424,
-		"timestamp": "1727781232389",
-		"signature": "A948807D9297BBED96317B02F02FE36B",
-		"appid": this.appid
+		"id": 1728571382591,
+		"jsonrpc": "2.0",
+		"method": "DoCheckin",
+		"params": {
+		"activityId": "1"
+		}
 	    })
 	    const options = {
-		hostname: 'webapi.qmai.cn',
+		hostname: 'ziwi.gzcrm.cn',
 		port: 443,
-		path: '/web/cmk-center/sign/takePartInSign',
+		path: '/json-rpc',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'qm-from': 'wechat',
 		    'Content-Length': data.length,
-		    'qm-user-token': this.ck
+		    'authorization': 'Bearer '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -126,22 +125,21 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.status == true) {
-		            console.log(`\n签到结果：【${result.message}】`)
-			    console.log(`\n获得积分：【${result.data.rewardDetailList[0].sendNum}】`)
-			    msg += `\n签到结果：【${result.message}】`
-			    msg += `\n获得积分：【${result.data.rewardDetailList[0].sendNum}】`
-			} else {
-			    console.log(`\n签到结果：【${result.message}】`)
-			    msg += `\n签到结果：【${result.message}】`
-			}
+		            console.log(`\n签到时间：【${result.result.record.checkinDate}】`)
+			    console.log(`\n签到次数：【${result.result.record.checkinTimes}】`)
+			    console.log(`\n签到奖励：【${result.result.record.ziwiReward.amount}】Z币`)
+			    console.log(`\n重复签到：【${result.result.__showToast.title}】`)
+			    msg += `\n签到时间：【${result.result.record.checkinDate}】`
+			    msg += `\n签到次数：【${result.result.record.checkinTimes}】`
+			    msg += `\n签到奖励：【${result.result.record.ziwiReward.amount}】Z币`
+			    msg += `\n重复签到：【${result.result.__showToast.title}】`
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到失败！`);
-			msg += `\n签到失败！`
+		        console.log(`\n签到结果：【${result.message}】`);
+			msg += `\n签到结果：【${result.message}】`
 		    })
 		}
 	    })
@@ -153,7 +151,6 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
-		
         } catch (e) {
             console.log(e);
         }
