@@ -1,5 +1,5 @@
 /**
- * cron 44 0 * * *  wfj.js
+ * cron 45 7 * * *  wfj.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: wfj_ck
