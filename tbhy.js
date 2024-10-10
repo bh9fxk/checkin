@@ -1,5 +1,5 @@
 /**
- * cron 3 1 * * *  tbhy.js
+ * cron 43 7 * * *  tbhy.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:tbhy_ck,&分隔两个参数
