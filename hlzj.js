@@ -142,15 +142,15 @@ class UserInfo {
 			console.log(result)
 			if (result.Success == true) {
 		            console.log(`\n签到信息：【${result.Msg}】`)
-			    console.log(`\n错误信息：【${result.errorMsg}】`)
+			    console.log(`\n错误信息：【${result.ErrMsg}】`)
 			    msg += `\n签到信息：【${result.Msg}】`
-			    msg += `\n错误信息：【${result.errorMsg}】`
+			    msg += `\n错误信息：【${result.ErrMsg}】`
 			    
 			} else {
 			    console.log(`\n签到信息：【${result.Msg}】`)
-			    console.log(`\n错误信息：【${result.errorMsg}】`)
+			    console.log(`\n错误信息：【${result.ErrMsg}】`)
 			    msg += `\n签到信息：【${result.Msg}】`
-			    msg += `\n错误信息：【${result.errorMsg}】`
+			    msg += `\n错误信息：【${result.ErrMsg}】`
 			}
 		    })
 		} else {
