@@ -50,8 +50,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 5896,
-		    'ezr-cop-id': 5474,
+		    'ezr-brand-id': 289,
+		    'ezr-cop-id': 169,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -108,7 +108,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"ActId": 7,
+		"ActId": 767,
 		"ActRemindStatus": true
 	    })
 	    const options = {
@@ -119,8 +119,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'ezr-brand-id': 5896,
-		    'ezr-cop-id': 5474,
+		    'ezr-brand-id': 289,
+		    'ezr-cop-id': 169,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -186,8 +186,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 5896,
-		    'ezr-cop-id': 5474,
+		    'ezr-brand-id': 289,
+		    'ezr-cop-id': 169,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
