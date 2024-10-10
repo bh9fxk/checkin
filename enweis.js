@@ -1,5 +1,5 @@
 /**
- * cron 4 1 * * *  enweis.js
+ * cron 22 7 * * *  enweis.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:enweis_ck,&分隔两个参数
