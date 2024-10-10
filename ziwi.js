@@ -67,8 +67,10 @@ class UserInfo {
 			console.log(result)
 			    console.log(`\n过期积分：【${result.result.expired}】`)
 		            console.log(`\n现总积分：【${result.result.total}】Z币`)
+			    console.log(`\n有效积分：【${result.result.valid}】Z币`)
 		            msg += `\n过期积分：【${result.result.expired}】`
 			    msg += `\n现总积分：【${result.result.total}】Z币`
+			    msg += `\n有效积分：【${result.result.valid}】Z币`
 		        })
 		    } else {
 			res.on('data', d => {
@@ -86,7 +88,6 @@ class UserInfo {
 
 	    req.write(data)
 	    req.end()
-
 		
         } catch (e) {
             console.log(e);
@@ -131,10 +132,12 @@ class UserInfo {
 			} else {
 			    console.log(`\n签到时间：【${result.result.record.checkinDate}】`)
 			    console.log(`\n签到次数：【${result.result.record.checkinTimes}】`)
-			    console.log(`\n签到奖励：【${result.result.record.ziwiReward.amount}】Z币`)
+			    console.log(`\n签到积分：【${result.result.record.ziwiReward.amount}】Z币`)
+			    console.log(`\n签到奖励：【${result.result.record.awards}】`)
 			    msg += `\n签到时间：【${result.result.record.checkinDate}】`
 			    msg += `\n签到次数：【${result.result.record.checkinTimes}】`
-			    msg += `\n签到奖励：【${result.result.record.ziwiReward.amount}】Z币`
+			    msg += `\n签到积分：【${result.result.record.ziwiReward.amount}】Z币`
+			    msg += `\n签到奖励：【${result.result.record.awards}】`
 			}
 		    })
 		} else {
