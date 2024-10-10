@@ -125,14 +125,17 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-		            console.log(`\n签到时间：【${result.result.record.checkinDate}】`)
+			if (result.result.id == 3695767) {
+			    console.log(`\n重复签到：【${result.result.__showToast.title}】`)
+			    msg += `\n重复签到：【${result.result.__showToast.title}】`
+			} else {
+			    console.log(`\n签到时间：【${result.result.record.checkinDate}】`)
 			    console.log(`\n签到次数：【${result.result.record.checkinTimes}】`)
 			    console.log(`\n签到奖励：【${result.result.record.ziwiReward.amount}】Z币`)
-			    console.log(`\n重复签到：【${result.result.__showToast.title}】`)
 			    msg += `\n签到时间：【${result.result.record.checkinDate}】`
 			    msg += `\n签到次数：【${result.result.record.checkinTimes}】`
 			    msg += `\n签到奖励：【${result.result.record.ziwiReward.amount}】Z币`
-			    msg += `\n重复签到：【${result.result.__showToast.title}】`
+			}
 		    })
 		} else {
 		    res.on('data', d => {
