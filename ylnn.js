@@ -1,5 +1,5 @@
 /**
- * cron 0 1 * * *  ylnn.js
+ * cron 51 7 * * *  ylnn.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:ylnn_ck,&分隔两个参数
