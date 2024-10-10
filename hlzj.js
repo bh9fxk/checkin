@@ -24,7 +24,7 @@ class UserInfo {
 	this.userid = str.split(strSplitor)[1]
 	this.st = str.split(strSplitor)[2]
 	this.vuid = str.split(strSplitor)[3]
-	this.sr = str.split(strSplitor)[4]
+	//this.sr = str.split(strSplitor)[4]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -50,8 +50,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 376,
-		    'ezr-cop-id': 240,
+		    'ezr-brand-id': 5896,
+		    'ezr-cop-id': 5474,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -108,7 +108,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"SecretReqeust": this.sr
+		"ActId": 7,
+		"ActRemindStatus": true
 	    })
 	    const options = {
 		hostname: 'wxa-tp.ezrpro.com',
@@ -118,8 +119,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'ezr-brand-id': 376,
-		    'ezr-cop-id': 240,
+		    'ezr-brand-id': 5896,
+		    'ezr-cop-id': 5474,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -185,8 +186,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 376,
-		    'ezr-cop-id': 240,
+		    'ezr-brand-id': 5896,
+		    'ezr-cop-id': 5474,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
