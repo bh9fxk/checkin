@@ -1,5 +1,5 @@
 /**
- * cron 27 0 * * *  xyhtj.js
+ * cron 49 7 * * *  xyhtj.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:xyhtj_ck
