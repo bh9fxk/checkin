@@ -62,12 +62,12 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == 200) {
-			    console.log(`\n用户名称：【${result.content.basicInfo.dname}】`)
+			    console.log(`\n用户名称：【${result.content.basicInfo.name}】`)
 			    console.log(`\n现有积分：【${result.content.basicInfo.point}】`)
 			    console.log(`\n近7日获得：【${result.content.basicInfo.accountDay7Point}】`)
 			    console.log(`\n30日过期：【${result.content.basicInfo.expireDay30Point}】`)
 			    console.log(`\n已住夜间：【${result.content.standardLevelInfo.roomDay}】`)
-			    msg += `\n用户名称：【${result.content.basicInfo.dname}】`
+			    msg += `\n用户名称：【${result.content.basicInfo.name}】`
 			    msg += `\n现有积分：【${result.content.basicInfo.point}】`
 			    msg += `\n近7日获得：【${result.content.basicInfo.accountDay7Point}】`
 			    msg += `\n30日过期：【${result.content.basicInfo.expireDay30Point}】`
@@ -187,10 +187,10 @@ class UserInfo {
 			if (result.code == 200) {
 			    console.log(`\n任务名称：【${result.content.taskName}】`)
 			    console.log(`\n任务描述：【${result.content.subTaskDesc}】`)
-			    console.log(`\n任务进度：【${result.content.taskCurrentValue}/${result.content.taskTargetValue}】`)
+			    console.log(`\n任务进度：【${result.content.taskCurrentValue} / ${result.content.taskTargetValue}】`)
 			    msg += `\n任务名称：【${result.content.taskName}】`
 			    msg += `\n任务描述：【${result.content.subTaskDesc}】`
-			    msg += `\n任务进度：【${result.content.taskCurrentValue}/${result.content.taskTargetValue}】`
+			    msg += `\n任务进度：【${result.content.taskCurrentValue} / ${result.content.taskTargetValue}】`
 			} else {
 			    console.log(`\n签到信息：【${result.message}】`)
 			    msg += `\n签到信息：【${result.message}】`
