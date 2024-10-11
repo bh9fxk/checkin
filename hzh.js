@@ -103,7 +103,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'appgw.huazhu.com',
 		port: 443,
-		path: '/game/sign_in?date='+Date.now(),
+		path: '/game/sign_in?date='+Math.round(new Date().getTime()/1000).toString(), //时间戳为10位
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
