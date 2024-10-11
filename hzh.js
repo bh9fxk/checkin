@@ -71,7 +71,7 @@ class UserInfo {
 			    msg += `\n现有积分：【${result.content.basicInfo.point}】`
 			    msg += `\n近7日获得：【${result.content.basicInfo.accountDay7Point}】`
 			    msg += `\n30日过期：【${result.content.basicInfo.expireDay30Point}】`
-			    msg += `\n已住夜间：【${result.content.standardLevelInfo.roomDay}】】`
+			    msg += `\n已住夜间：【${result.content.standardLevelInfo.roomDay}】`
 			} else {
 			    console.log(`\n用户查询：【${result.message}】`)
 			    msg += `\n用户查询：【${result.message}】`
