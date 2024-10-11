@@ -103,7 +103,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'appgw.huazhu.com',
 		port: 443,
-		path: '/game/sign_in?date='+date.now(),
+		path: '/game/sign_in?date='+Date.now(),
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
@@ -185,10 +185,10 @@ class UserInfo {
 			if (result.code == 200) {
 			    console.log(`\n任务名称：【${result.content.taskName}】`)
 			    console.log(`\n任务描述：【${result.content.subTaskDesc}】`)
-			    console.log(`\n任务进度：【${result.content.taskCurrentValue} / ${result.content.taskTargetValue}】`)
+			    console.log(`\n任务进度：【 ${result.content.taskCurrentValue}/${result.content.taskTargetValue} 】`)
 			    msg += `\n任务名称：【${result.content.taskName}】`
 			    msg += `\n任务描述：【${result.content.subTaskDesc}】`
-			    msg += `\n任务进度：【${result.content.taskCurrentValue} / ${result.content.taskTargetValue}】`
+			    msg += `\n任务进度：【 ${result.content.taskCurrentValue}/${result.content.taskTargetValue} 】`
 			} else {
 			    console.log(`\n签到信息：【${result.message}】`)
 			    msg += `\n签到信息：【${result.message}】`
