@@ -1,5 +1,5 @@
 /**
- * cron 30 7 * * *  hj.js
+ * cron 30 7 * * *  hzh.js
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: hzh_ck
@@ -26,31 +26,29 @@ class UserInfo {
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
-        await this.user_info()
+        await this.user()
 	await $.wait(3000)
-	await this.signIn()
+	await this.signin()
 	await $.wait(3000)
-	await this.signIn_info()
+	await this.signin_info()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async user_info() {
+    async user() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"source": "WXMAPP"
-	    })
+	    const data = JSON.stringify({})
 
 	    const options = {
-		hostname: 't.flowerplus.cn',
+		hostname: 'hweb-personalcenter.huazhu.com',
 		port: 443,
-		path: '/mall/customer/center_v2',
+		path: '/personalCenter/rightAndInterest/getBriefInfo',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'token': this.ck
+		    'sid': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -63,17 +61,20 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-
-			    console.log(`\n用户名称：【${result.data.UserInfo.nickname}】`)
-			    console.log(`\n用户等级：【${result.data.level_name}】`)
-			    console.log(`\n现总花币：【${result.data.integral_number}】`)
-			    msg += `\n用户名称：【${result.data.UserInfo.nickname}】`
-			    msg += `\n用户等级：【${result.data.level_name}】`
-			    msg += `\n现总花币：【${result.data.integral_number}】`
+			if (result.code == 200) {
+			    console.log(`\n用户名称：【${result.content.basicInfo.dname}】`)
+			    console.log(`\n现有积分：【${result.content.basicInfo.point}】`)
+			    console.log(`\n近7日获得：【${result.content.basicInfo.accountDay7Point}】`)
+			    console.log(`\n30日过期：【${result.content.basicInfo.expireDay30Point}】`)
+			    console.log(`\n已住夜间：【${result.content.standardLevelInfo.roomDay}】`)
+			    msg += `\n用户名称：【${result.content.basicInfo.dname}】`
+			    msg += `\n现有积分：【${result.content.basicInfo.point}】`
+			    msg += `\n近7日获得：【${result.content.basicInfo.accountDay7Point}】`
+			    msg += `\n30日过期：【${result.content.basicInfo.expireDay30Point}】`
+			    msg += `\n已住夜间：【${result.content.standardLevelInfo.roomDay}】】`
 			} else {
-			    console.log(`\n用户查询：【${result.errmsg}】`)
-			    msg += `\n用户查询：【${result.errmsg}】`
+			    console.log(`\n用户查询：【${result.message}】`)
+			    msg += `\n用户查询：【${result.message}】`
 			}
 		    })
                 } else {
@@ -94,7 +95,7 @@ class UserInfo {
         }
     }
 
-    async signIn() {
+    async signin() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
@@ -102,14 +103,14 @@ class UserInfo {
 	    })
 
 	    const options = {
-		hostname: 't.flowerplus.cn',
+		hostname: 'appgw.huazhu.com',
 		port: 443,
-		path: '/integral/signin/signin',
+		path: '/game/sign_in?date='+data.now(),
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'token': this.ck
+		    'Cookie': 'userToken='+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -122,14 +123,17 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-			    console.log(`\n已经签到：【${result.data.now_sign_times}】天`)
-			    console.log(`\n获得积分：【${result.data.integral}】花币`)
-			    msg += `\n已经签到：【${result.data.now_sign_times}】天`
-			    msg += `\n今日获得：【${result.data.integral}】花币`
+			if (result.code == 200) {
+			    console.log(`\n签到结果：【${result.content.signResult}】`)
+			    console.log(`\n获得积分：【${result.content.point}】`)
+			    console.log(`\n获得活跃值：【${result.content.activityPoints}】`)
+			
+			    msg += `\n签到结果：【${result.content.signResult}】`
+			    msg += `\n获得积分：【${result.content.point}】`
+			    msg += `\n获得活跃值：【${result.content.activityPoints}】`
 			} else {
-			    console.log(`\n签到状态：【${result.errmsg}】`)
-			    msg += `\n签到状态：【${result.errmsg}】`
+			    console.log(`\n签到状态：【${result.message}】`)
+			    msg += `\n签到状态：【${result.message}】`
 			}
 		    })
                 } else {
@@ -150,22 +154,24 @@ class UserInfo {
         }
     }
 
-    async signIn_info() {
+    async signin_info() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"source": "WXMAPP"
+		"taskCode": "5d6bf2be4bb54d489bddffd07771b065",
+		"memberTaskProGressId": "345283353465270790",
+		"taskSource": "new"
 	    })
 
 	    const options = {
-		hostname: 't.flowerplus.cn',
+		hostname: 'appgw.huazhu.com',
 		port: 443,
-		path: '/integral/signin/getSigninStatus',
+		path: '/task/api/getTaskInfo',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'token': this.ck
+		    'Cookie': 'userToken='+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -178,12 +184,16 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-			    console.log(`\n签到信息：【${result.data.button}】`)
-			    msg += `\n签到信息：【${result.data.button}】`
+			if (result.code == 200) {
+			    console.log(`\n任务名称：【${result.content.taskName}】`)
+			    console.log(`\n任务描述：【${result.content.subTaskDesc}】`)
+			    console.log(`\n任务进度：【${result.content.taskCurrentValue}/${result.content.taskTargetValue}】`)
+			    msg += `\n任务名称：【${result.content.taskName}】`
+			    msg += `\n任务描述：【${result.content.subTaskDesc}】`
+			    msg += `\n任务进度：【${result.content.taskCurrentValue}/${result.content.taskTargetValue}】`
 			} else {
-			    console.log(`\n签到信息：【${result.errmsg}】`)
-			    msg += `\n签到信息：【${result.errmsg}】`
+			    console.log(`\n签到信息：【${result.message}】`)
+			    msg += `\n签到信息：【${result.message}】`
 			}
 		    })
                 } else {
