@@ -132,11 +132,11 @@ class UserInfo {
 			} else {
 			    console.log(`\n签到时间：【${result.result.record.checkinDate}】`)
 			    console.log(`\n签到次数：【${result.result.record.checkinTimes}】`)
-			    console.log(`\n签到积分：【${result.result.record.ziwiReward.amount}】Z币`)
+			    console.log(`\n签到积分：【${result.result.ziwiReward.amount}】Z币`)
 			    console.log(`\n签到奖励：【${result.result.record.awards}】`)
 			    msg += `\n签到时间：【${result.result.record.checkinDate}】`
 			    msg += `\n签到次数：【${result.result.record.checkinTimes}】`
-			    msg += `\n签到积分：【${result.result.record.ziwiReward.amount}】Z币`
+			    msg += `\n签到积分：【${result.result.ziwiReward.amount}】Z币`
 			    msg += `\n签到奖励：【${result.result.record.awards}】`
 			}
 		    })
