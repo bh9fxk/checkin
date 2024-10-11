@@ -31,8 +31,8 @@ class UserInfo {
 	await this.signin()
 	await $.wait(3000)
 	await this.signin_info()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user() {
@@ -98,15 +98,13 @@ class UserInfo {
     async signin() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"source": "WXMAPP"
-	    })
+	    //const data = JSON.stringify({})
 
 	    const options = {
 		hostname: 'appgw.huazhu.com',
 		port: 443,
-		path: '/game/sign_in?date='+data.now(),
-		method: 'POST',
+		path: '/game/sign_in?date='+date.now(),
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
@@ -146,7 +144,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
