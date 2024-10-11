@@ -124,11 +124,11 @@ class UserInfo {
 			if (result.code == 200) {
 			    console.log(`\n签到结果：【${result.content.signResult}】`)
 			    console.log(`\n获得积分：【${result.content.point}】`)
-			    console.log(`\n获得活跃值：【${result.content.activityPoints}】`)
+			    console.log(`\n获活跃值：【${result.content.activityPoints}】`)
 			
 			    msg += `\n签到结果：【${result.content.signResult}】`
 			    msg += `\n获得积分：【${result.content.point}】`
-			    msg += `\n获得活跃值：【${result.content.activityPoints}】`
+			    msg += `\n获活跃值：【${result.content.activityPoints}】`
 			} else {
 			    console.log(`\n签到状态：【${result.message}】`)
 			    msg += `\n签到状态：【${result.message}】`
