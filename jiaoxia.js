@@ -41,7 +41,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
-		path: '/wscuser/membercenter/stats.json',
+		path: '/wscuser/membercenter/init-data.json',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
