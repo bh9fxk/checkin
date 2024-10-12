@@ -109,7 +109,7 @@ class UserInfo {
 		    //'Content-Length': data.length,
 		    //'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000) NetType/WIFI MiniProgramEnv/Mac MacWechat/WMPF MacWechat/3.8.8(0x13080810) XWEB/1227',
 		    //'Accept-Encoding': 'gzip,compress,br,deflate', 
-		    'extra-data': '{"is_weapp":1,"sid":"YZ1294688889679880192YZCfA8sZ3F","client":"weapp","bizEnv":"wsc","uuid":"EelabJsDgc5LycN1728719483867","ftime":1728719483865}'
+		    'extra-data': '{"is_weapp":1,"sid":"YZ1294688889679880192YZCfA8sZ3F","uuid":"EelabJsDgc5LycN1728719483867","ftime":1728719483865}'
 		}
 	    }
 	    const req = https.request(options, res => {
