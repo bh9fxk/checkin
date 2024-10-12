@@ -65,7 +65,7 @@ class UserInfo {
 			    console.log(`\n现有卡片：【${result.data.stats.cards}】`)
 			    console.log(`\n现优惠卷：【${result.data.stats.coupons}】`)
 			    msg += `\n信息查询：【${result.msg}】`
-			    msg += `\n现有积分：【${result.data.stats.points}】】`
+			    msg += `\n现有积分：【${result.data.stats.points}】`
 			    msg += `\n现有卡片：【${result.data.stats.cards}】`
 			    msg += `\n现优惠卷：【${result.data.stats.coupons}】`
 			} else {
