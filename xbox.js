@@ -30,8 +30,8 @@ class UserInfo {
 	await this.user()
 	await $.wait(3000)
         await this.signin()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user() {
@@ -41,11 +41,12 @@ class UserInfo {
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
-		path: '/wscuser/membercenter/init-data.json',
+		path: '/wscuser/membercenter/stats.json',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
+		    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 MicroMessenger/6.8.0(0x16080000)'
 		    'extra-data': '{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
 		}
 	    }
