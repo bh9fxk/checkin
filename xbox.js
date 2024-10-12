@@ -3,7 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:xbox_ck,&分隔两个参数
- * 变量值:抓包qm-user-token和appid的值
+ * 变量值:抓包sid uuid checkinid的值
  * scriptVersionNow = "0.0.1";
  */
 
@@ -19,40 +19,34 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.appid = str.split(strSplitor)[1];
+        this.sid = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.uuid = str.split(strSplitor)[1]
+	this.checkinid = str.split(strSplitor)[2]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point()
+	await this.user()
 	await $.wait(3000)
-        await this.signIn()
+        await this.signin()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async point() {
+    async user() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"id": 1728571758328,
-		"jsonrpc": "2.0",
-		"method": "GetUserCreditStats",
-		"params": {
-		    "currency": "Z_Point"
-		}
-	    })
+	    //const data = JSON.stringify({})
 	    const options = {
-		hostname: 'ziwi.gzcrm.cn',
+		hostname: 'h5.youzan.com',
 		port: 443,
-		path: '/json-rpc',
-		method: 'POST',
+		path: '/wscuser/membercenter/init-data.json',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'authorization': 'Bearer '+this.ck
+		    //'Content-Length': data.length,
+		    'extra-data': '{"is_weapp":1,"sid":'+this,sid+',"uuid":'+this.uuid+'}'
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -65,19 +59,26 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			    console.log(`\n过期积分：【${result.result.expired}】`)
-		            console.log(`\n现总积分：【${result.result.total}】Z币`)
-			    console.log(`\n有效积分：【${result.result.valid}】Z币`)
-		            msg += `\n过期积分：【${result.result.expired}】`
-			    msg += `\n现总积分：【${result.result.total}】Z币`
-			    msg += `\n有效积分：【${result.result.valid}】Z币`
+			if (result.code == 0) {
+			    console.log(`\n信息查询：【${result.msg}】`)
+			    console.log(`\n现有积分：【${result.data.stats.points}】`)
+			    console.log(`\n现有卡片：【${result.data.stats.cards}】`)
+			    console.log(`\n现优惠卷：【${result.data.stats.coupons}】`)
+			    msg += `\n信息查询：【${result.msg}】`
+			    msg += `\n现有积分：【${result.data.stats.points}】】`
+			    msg += `\n现有卡片：【${result.data.stats.cards}】`
+			    msg += `\n现优惠卷：【${result.data.stats.coupons}】`
+			} else {
+			    console.log(`\n信息查询：【${result.msg}】`)
+			    msg += `\n信息查询：【${result.msg}】`
+			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n积分查询：【${result.message}】`);
-			    msg += `\n积分查询：【${result.message}】`
+		            console.log(`\n积分查询：【${result.msg}】`);
+			    msg += `\n积分查询：【${result.msg}】`
 		        })
 		    }
 	    })
@@ -86,7 +87,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 		
         } catch (e) {
@@ -94,26 +95,19 @@ class UserInfo {
         }
     }
 
-    async signIn() {
+    async signin() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"id": 1728571382591,
-		"jsonrpc": "2.0",
-		"method": "DoCheckin",
-		"params": {
-		"activityId": "1"
-		}
-	    })
+	    //const data = JSON.stringify({})
 	    const options = {
-		hostname: 'ziwi.gzcrm.cn',
+		hostname: 'h5.youzan.com',
 		port: 443,
-		path: '/json-rpc',
-		method: 'POST',
+		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid,
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'authorization': 'Bearer '+this.ck
+		    //'Content-Length': data.length,
+		    'extra-data': '{"is_weapp":1,"sid":'+this,sid+',"uuid":'+this.uuid+'}'
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -126,26 +120,24 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.result.id == 3695767) {
-			    console.log(`\n重复签到：【${result.result.__showToast.title}】`)
-			    msg += `\n重复签到：【${result.result.__showToast.title}】`
+			if (result.code == 0) {
+			    console.log(`\n签到信息：【${result.msg}】`)
+			    console.log(`\n今日签到：【${result.data.list[1].infos.title}】`)
+			    console.log(`\n已经签到：【${result.data.list[4].times】天`)
+			    msg += `\n签到信息：【${result.msg}】`
+			    msg += `\n今日签到：【${result.data.list[1].infos.title}】`
+			    msg += `\n已经签到：【${result.data.list[4].times】天`
 			} else {
-			    console.log(`\n签到时间：【${result.result.record.checkinDate}】`)
-			    console.log(`\n签到次数：【${result.result.record.checkinTimes}】`)
-			    console.log(`\n签到积分：【${result.result.ziwiReward.amount}】Z币`)
-			    console.log(`\n签到奖励：【${result.result.record.awards}】`)
-			    msg += `\n签到时间：【${result.result.record.checkinDate}】`
-			    msg += `\n签到次数：【${result.result.record.checkinTimes}】`
-			    msg += `\n签到积分：【${result.result.ziwiReward.amount}】Z币`
-			    msg += `\n签到奖励：【${result.result.record.awards}】`
+			    console.log(`\n签到信息：【${result.msg}】`)
+			    msg += `\n签到信息：【${result.msg}】`
 			}
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到结果：【${result.message}】`);
-			msg += `\n签到结果：【${result.message}】`
+		        console.log(`\n签到结果：【${result.msg}】`);
+			msg += `\n签到结果：【${result.msg}】`
 		    })
 		}
 	    })
@@ -154,7 +146,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 
         } catch (e) {
