@@ -99,7 +99,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    let json = JSON.stringify({"is_weapp":1,"sid":+this.sid+,"uuid":+this.uuid+})
+	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
 	    console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
