@@ -23,6 +23,8 @@ class UserInfo {
 	this.uuid = str.split(strSplitor)[1]
 	this.checkinid = str.split(strSplitor)[2]
     }
+    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+    //console.log(json)
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
@@ -41,12 +43,13 @@ class UserInfo {
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
-		path: '/wscuser/membercenter/init-data.json',
+		path: '/wscuser/membercenter/stats.json',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': '{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
+		    'extra-data': json
+			    //'{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -100,7 +103,7 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    //let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
 	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
