@@ -23,8 +23,6 @@ class UserInfo {
 	this.uuid = str.split(strSplitor)[1]
 	this.checkinid = str.split(strSplitor)[2]
     }
-    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
-    //console.log(json)
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
@@ -40,6 +38,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
+	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
