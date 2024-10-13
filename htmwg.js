@@ -27,6 +27,8 @@ class UserInfo {
 
 	await this.user()
 	await $.wait(3000)
+	await this.coupon()
+	await $.wait(3000)
         await this.signin()
 	await $.wait(3000)
 	await SendMsg(msg)
