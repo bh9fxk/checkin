@@ -1,5 +1,5 @@
 /**
- * cron 6 8 * * *  lancy.js
+ * cron 7 8 * * *  lancy.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:lancy_ck,&分隔两个参数
