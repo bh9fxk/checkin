@@ -3,7 +3,7 @@
  * Show: 每天运行一次
  * @author: https://github.com/bh9fxk/checkin
  * 变量名: hj_ck
- * 变量值: 抓包_xcx_的值
+ * 变量值: 抓包token的值
  * scriptVersionNow = "0.0.1";
  */
 
