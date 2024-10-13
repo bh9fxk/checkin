@@ -65,7 +65,7 @@ class UserInfo {
 			    console.log(`\n登录次数：【${result.login_count}】`)
 			    msg += `\n用户名称：【${result.uname}】`
 			    msg += `\n现有积分：【${result.consum_point}】`
-			    msg += `\n登录次数：【${result.login_count}`
+			    msg += `\n登录次数：【${result.login_count}】`
 		        })
 		    } else {
 			res.on('data', d => {
