@@ -128,8 +128,8 @@ class UserInfo {
 			console.log(result)
 			if (result.code == 0) {
 			    console.log(`\n签到信息：【${result.msg}】`)
-			    console.log(`\n今日签到：【${result.data.list[1].infos.title}】`)
-			    console.log(`\n已经签到：【${result.data.list[4].times}】天`)
+			    console.log(`\n今日签到：【${result.data.list[0].infos.title}】`)
+			    console.log(`\n已经签到：【${result.data.list[3].times}】天`)
 			    msg += `\n签到信息：【${result.msg}】`
 			    msg += `\n今日签到：【${result.data.list[1].infos.title}】`
 			    msg += `\n已经签到：【${result.data.list[4].times}】天`
