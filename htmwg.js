@@ -19,9 +19,7 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.sid = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.uuid = str.split(strSplitor)[1]
-	this.checkinid = str.split(strSplitor)[2]
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -38,18 +36,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
-	    //console.log(json)
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'cmallapi.haday.cn',
 		port: 443,
-		path: '/wscuser/membercenter/stats.json',
+		path: '/buyer-api/members',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': json
-			    //'{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
+		    'Authorization': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -62,26 +57,20 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-			    console.log(`\n信息查询：【${result.msg}】`)
-			    console.log(`\n现有积分：【${result.data.stats.points}】`)
-			    console.log(`\n现有卡片：【${result.data.stats.cards}】`)
-			    console.log(`\n现优惠卷：【${result.data.stats.coupons}】`)
-			    msg += `\n信息查询：【${result.msg}】`
-			    msg += `\n现有积分：【${result.data.stats.points}】`
-			    msg += `\n现有卡片：【${result.data.stats.cards}】`
-			    msg += `\n现优惠卷：【${result.data.stats.coupons}】`
-			} else {
-			    console.log(`\n信息查询：【${result.msg}】`)
-			    msg += `\n信息查询：【${result.msg}】`
-			}
+
+			    console.log(`\n用户名称：【${result.uname}】`)
+			    console.log(`\n现有积分：【${result.consum_point}】`)
+			    console.log(`\n登录次数：【${result.login_count}】`)
+			    msg += `\n用户名称：【${result.uname}】`
+			    msg += `\n现有积分：【${result.consum_point}】`
+			    msg += `\n登录次数：【${result.login_count}`
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n积分查询：【${result.msg}】`);
-			    msg += `\n积分查询：【${result.msg}】`
+		            console.log(`\n用户查询：【${result.message}】`);
+			    msg += `\n用户查询：【${result.message}】`
 		        })
 		    }
 	    })
@@ -98,22 +87,20 @@ class UserInfo {
         }
     }
 
-    async signin() {
+
+    async coupon() {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
-	    //console.log(json)
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'cmallapi.haday.cn',
 		port: 443,
-		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid,
+		path: '/buyer-api/members/coupon/num',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': json
+		    'Authorization': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -126,24 +113,75 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-			    console.log(`\n签到信息：【${result.msg}】`)
-			    console.log(`\n今日签到：【${result.data.list[0].infos.title}】`)
-			    console.log(`\n已经签到：【${result.data.times}】天`)
+			    console.log(`\n现有优惠券：【${result.un_use_num}】`)
+			    console.log(`\n可用优惠券：【${result.use_num}】`)
+			    console.log(`\n过期优惠券：【${result.expired_num}】`)
+			    console.log(`\n未用优惠券：【${result.allnot_use_num}】`)
+			    msg += `\n现有优惠券：【${result.un_use_num}】`
+			    msg += `\n可用优惠券：【${result.use_num}】`
+			    msg += `\n过期优惠券：【${result.expired_num}】`
+			    msg += `\n未用优惠券：【${result.allnot_use_num}】`
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n优惠券查询：【${result.message}】`);
+			    msg += `\n优惠券查询：【${result.message}】`
+		        })
+		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+		
+        } catch (e) {
+            console.log(e);
+        }
+    }
+	
+    async signin() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"activity_code": "202410"
+	    })
+	    const options = {
+		hostname: 'cmallapi.haday.cn',
+		port: 443,
+		path: '/buyer-api/sign/activity/sign',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Authorization': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			    console.log(`\n签到信息：【${result.is_sign}】`)
+			    console.log(`\n已经签到：【${result.sign_day_num}】天`)
 			    msg += `\n签到信息：【${result.msg}】`
-			    msg += `\n今日签到：【${result.data.list[0].infos.title}】`
-			    msg += `\n已经签到：【${result.data.times}】天`
-			} else {
-			    console.log(`\n签到信息：【${result.msg}】`)
-			    msg += `\n签到信息：【${result.msg}】`
-			}
+			    msg += `\n已经签到：【${result.sign_day_num}】天`
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到结果：【${result.msg}】`);
-			msg += `\n签到结果：【${result.msg}】`
+		        console.log(`\n签到结果：【${result.message}】`);
+			msg += `\n签到结果：【${result.message}】`
 		    })
 		}
 	    })
