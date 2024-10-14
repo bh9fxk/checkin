@@ -100,8 +100,8 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    //let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
-	    let json = JSON.parse({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    let json1 = JSON.parse(json)
 	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
@@ -111,7 +111,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': '{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
+		    'extra-data': json1
 		}
 	    }
 	    const req = https.request(options, res => {
