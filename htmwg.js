@@ -175,7 +175,7 @@ class UserInfo {
 			console.log(result)
 			    console.log(`\n签到信息：【${result.is_sign}】`)
 			    console.log(`\n已经签到：【${result.sign_day_num}】天`)
-			    msg += `\n签到信息：【${result.msg}】`
+			    msg += `\n签到信息：【${result.is_sign}】`
 			    msg += `\n已经签到：【${result.sign_day_num}】天`
 		    })
 		} else {
