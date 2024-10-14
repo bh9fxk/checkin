@@ -113,7 +113,7 @@ class UserInfo {
 	    console.log("--------------")
 	    console.log(jsons)
 	    const options = {
-		hostname: 'h5.youzan.com',s
+		hostname: 'h5.youzan.com',
 		port: 443,
 		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid+'&kdt_id=100464643',
 		method: 'GET',
