@@ -105,7 +105,7 @@ class UserInfo {
 	    //let json2 = JSON.parse(json1)
 	    console.log("--------------")
 	    console.log(json1)
-	    console.log(json2)
+	    //console.log(json2)
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
