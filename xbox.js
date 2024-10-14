@@ -101,7 +101,7 @@ class UserInfo {
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
 	    let json = JSON.stringify({"is_weapp": 1,"sid": this.sid,"uuid": this.uuid})
-	    let json1 = console.log({"is_weapp": 1,"sid": this.sid,"uuid": this.uuid})
+	    let json1 = console.log({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
 	    let json2 = JSON.parse(json1)
 	    console.log("--------------")
 	    console.log(json1)
