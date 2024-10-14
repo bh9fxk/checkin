@@ -111,7 +111,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'User-Agent': '',
+		    //'User-Agent': '',
 		    'extra-data': json
 		}
 	    }
