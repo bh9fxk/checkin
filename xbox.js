@@ -100,7 +100,7 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"version":"2.149.9.101","client":"weapp","bizEnv":"wsc","uuid":this.uuid,"ftime":1728719483865}')
+	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"version":"2.149.9.101","client":"weapp","bizEnv":"wsc","uuid":this.uuid,"ftime":1728719483865})
 	    //let json2 = JSON.parse(json1)
 	    console.log("--------------")
 	    console.log(json)
