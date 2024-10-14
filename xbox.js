@@ -114,7 +114,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': '{"is_weapp":1,"sid":"'+this.sid+'","uuid":"'+this.uuid+'"}'
+		    'extra-data': '{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -129,10 +129,10 @@ class UserInfo {
 			console.log(result)
 			if (result.code == 0) {
 			    console.log(`\n签到信息：【${result.msg}】`)
-			    console.log(`\n今日签到：【${result.data.list[0].infos[0].title}】`)
+			    console.log(`\n今日签到：【${result.data.list[0].infos.title}】`)
 			    console.log(`\n已经签到：【${result.data.times}】天`)
 			    msg += `\n签到信息：【${result.msg}】`
-			    msg += `\n今日签到：【${result.data.list[0].infos[0].title}】`
+			    msg += `\n今日签到：【${result.data.list[0].infos.title}】`
 			    msg += `\n已经签到：【${result.data.times}】天`
 			} else {
 			    console.log(`\n签到信息：【${result.msg}】`)
