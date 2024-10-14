@@ -100,19 +100,28 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let json = {"is_weapp":1,"sid":this.sid,"version":"2.149.9.101","client":"weapp","bizEnv":"wsc","uuid":this.uuid,"ftime":1728719483865}
+	    let jsons = JSON.stringify({
+		"is_weapp":1,
+		"sid":this.sid,
+		"version":"2.149.9.101",
+		"client":"weapp",
+		"bizEnv":"wsc",
+		"uuid":this.uuid,
+		"ftime":1728719483865
+	    })
+	    //{"is_weapp":1,"sid":this.sid,"version":"2.149.9.101","client":"weapp","bizEnv":"wsc","uuid":this.uuid,"ftime":1728719483865}
 	    console.log("--------------")
-	    console.log(json)
+	    console.log(jsons)
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'h5.youzan.com',s
 		port: 443,
-		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid+'&app_id=wx7f4f694622875202&kdt_id=100464643',
+		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid+'&kdt_id=100464643',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
 		    //'User-Agent': '',
-		    'extra-data': json
+		    'extra-data': jsons
 		}
 	    }
 	    const req = https.request(options, res => {
