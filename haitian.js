@@ -132,7 +132,7 @@ class UserInfo {
 			    console.log(`\n今日签到：【${result.data.desc}】`)
 			    //console.log(`\n已经签到：【${result.data.times}】天`)
 			    msg += `\n签到信息：【${result.msg}】`
-			    //msg += `\n今日签到：【${result.data.desc}】`
+			    msg += `\n今日签到：【${result.data.desc}】`
 			    //msg += `\n已经签到：【${result.data.times}】天`
 			} else {
 			    console.log(`\n签到信息：【${result.msg}】`)
