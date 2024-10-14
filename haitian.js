@@ -38,7 +38,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    let jsons = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
 	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
@@ -48,8 +48,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': json
-			    //'{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
+		    'extra-data': jsons
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -103,7 +102,7 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    let jsons = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
 	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
@@ -113,7 +112,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': json
+		    'extra-data': jsons
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -133,6 +132,7 @@ class UserInfo {
 			    //console.log(`\n已经签到：【${result.data.times}】天`)
 			    msg += `\n签到信息：【${result.msg}】`
 			    msg += `\n今日签到：【${result.data.desc}】`
+			    //msg += `\n今日签到：【${result.data.list[0].infos.title}】`
 			    //msg += `\n已经签到：【${result.data.times}】天`
 			} else {
 			    console.log(`\n签到信息：【${result.msg}】`)
