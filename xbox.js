@@ -108,7 +108,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
-		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid,
+		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid+'&app_id=wx7f4f694622875202&kdt_id=100464643',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
