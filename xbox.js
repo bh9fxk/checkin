@@ -30,8 +30,8 @@ class UserInfo {
 	await this.user()
 	await $.wait(3000)
         await this.signin()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user() {
@@ -102,7 +102,9 @@ class UserInfo {
 	    //转换一次后，数据运行正常
 	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
 	    let json1 = JSON.parse(json)
-	    //console.log(json)
+	    console.log("--------------")
+	    console.log(json1)
+	    console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
