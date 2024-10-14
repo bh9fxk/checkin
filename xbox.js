@@ -104,7 +104,7 @@ class UserInfo {
 	    let json1 = console.log(`{"is_weapp":1,"sid":this.sid,"uuid":this.uuid}`)
 	    //let json2 = JSON.parse(json1)
 	    console.log("--------------")
-	    console.log(json1)
+	    console.log(json)
 	    //console.log(json2)
 	    const options = {
 		hostname: 'h5.youzan.com',
