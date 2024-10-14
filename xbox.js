@@ -38,6 +38,10 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
+	    //转换一次后，数据运行正常
+	    let jsons = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid,"ftime":1728719483865})
+	    console.log("--------------")
+	    console.log(jsons)
 	    const options = {
 		hostname: 'h5.youzan.com',
 		port: 443,
@@ -46,7 +50,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': '{"is_weapp":1,"sid":'+this.sid+',"version":"3.136.6.101","clientType":"weapp-miniprogram","client":"weapp","bizEnv":"","uuid":'+this.uuid+',"ftime":1728903009473}'
+		    'extra-data': jsons
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -100,16 +104,7 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let jsons = JSON.stringify({
-		"is_weapp":1,
-		"sid":this.sid,
-		"version":"2.149.9.101",
-		"client":"weapp",
-		"bizEnv":"wsc",
-		"uuid":this.uuid,
-		"ftime":1728719483865
-	    })
-	    //{"is_weapp":1,"sid":this.sid,"version":"2.149.9.101","client":"weapp","bizEnv":"wsc","uuid":this.uuid,"ftime":1728719483865}
+	    let jsons = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid,"ftime":1728719483865})
 	    console.log("--------------")
 	    console.log(jsons)
 	    const options = {
