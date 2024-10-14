@@ -113,7 +113,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': json
+		    'extra-data': '{"is_weapp":1,"sid":'+this.sid+',"version":"2.149.9.101","client":"weapp","bizEnv":"wsc","uuid":'+this.uuid+',"ftime":1728719483865}'
+		    
 		}
 	    }
 	    const req = https.request(options, res => {
