@@ -113,7 +113,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data':'{'+json+'}'
+		    'extra-data': json
 		}
 	    }
 	    const req = https.request(options, res => {
