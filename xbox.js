@@ -100,7 +100,7 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp": 1,"sid": this.sid,"uuid": this.uuid})
+	    let json = JSON.stringify("is_weapp": 1,"sid": this.sid,"uuid": this.uuid)
 	    let json1 = console.log(`{"is_weapp":1,"sid":this.sid,"uuid":this.uuid}`)
 	    //let json2 = JSON.parse(json1)
 	    console.log("--------------")
@@ -114,8 +114,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'user-agent': '',
-		    'extra-data':'{"is_weapp":1,"sid":'+this.sid+',"version":"3.136.6.101","clientType":"weapp-miniprogram","client":"weapp","bizEnv":"","uuid":'+this.uuid+',"ftime":1728903009473}'
+		    'extra-data':'{'+json+'}'
 		}
 	    }
 	    const req = https.request(options, res => {
