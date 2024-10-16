@@ -38,7 +38,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid,"ftime":1728809060231})
 	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
@@ -103,7 +103,7 @@ class UserInfo {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
 	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
+	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid},"ftime":1728809060231)
 	    //console.log(json)
 	    const options = {
 		hostname: 'h5.youzan.com',
