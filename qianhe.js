@@ -7,7 +7,7 @@
  * scriptVersionNow = "0.0.1";
  */
 
-const $ = new Env("千禾商城签到");
+const $ = new Env("千禾积分商城签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
 let ckName = "qianhe_ck";
@@ -19,37 +19,48 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.sid = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.uuid = str.split(strSplitor)[1]
-	this.checkinid = str.split(strSplitor)[2]
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.user()
+	await this.point()
+	await $.wait(3000)
+	await this.coupon()
 	await $.wait(3000)
         await this.signin()
+	await $.wait(3000)
+	await this.signin_info()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async user() {
+    async point() {
         try {
 	    const https = require('https')
-	    //const data = JSON.stringify({})
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
-	    //console.log(json)
+	    const data = JSON.stringify({
+		"appid": "wx59fe466484ed8858",
+		"basicInfo": {
+		    "vid": 6016909036191,
+		    "bosId": 4022212123191,
+		    "productId": 1,
+		    "productInstanceId": 16618191191
+		},
+		"targetBasicInfo": {
+		    "productInstanceId": 16618153191
+		},
+		"request": {}
+	    })
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'xapi.weimob.com',
 		port: 443,
-		path: '/wscuser/membercenter/stats.json',
-		method: 'GET',
+		path: '/api3/onecrm/point/myPoint/getSimpleAccountInfo',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    //'Content-Length': data.length,
-		    'extra-data': json
-			    //'{"is_weapp":1,"sid":'+this.sid+',"uuid":'+this.uuid+'}'
+		    'Content-Length': data.length,
+		    'X-WX-Token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -62,26 +73,28 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-			    console.log(`\n信息查询：【${result.msg}】`)
-			    console.log(`\n现有积分：【${result.data.stats.points}】`)
-			    console.log(`\n现有卡片：【${result.data.stats.cards}】`)
-			    console.log(`\n现优惠卷：【${result.data.stats.coupons}】`)
-			    msg += `\n信息查询：【${result.msg}】`
-			    msg += `\n现有积分：【${result.data.stats.points}】`
-			    msg += `\n现有卡片：【${result.data.stats.cards}】`
-			    msg += `\n现优惠卷：【${result.data.stats.coupons}】`
+			if (result.errcode == 0) {
+			    console.log(`\n积分查询：【${result.errmsg}】`)
+			    console.log(`\n现有积分：【${result.data.totalPoint}】`)
+			    console.log(`\n有效积分：【${result.data.availablePoint}】`)
+			    console.log(`\n现总积分：【${result.data.sumTotalPoint}】`)
+			    console.log(`\n总有效分：【${result.data.sumAvailablePoint}】`)
+			    msg += `\n积分查询：【${result.errmsg}】`
+			    msg += `\n现有积分：【${result.data.totalPoint}】`
+			    msg += `\n有效积分：【${result.data.availablePoint}】`
+			    msg += `\n现总积分：【${result.data.sumTotalPoint}】`
+			    msg += `\n总有效分：【${result.data.sumAvailablePoint}】`
 			} else {
-			    console.log(`\n信息查询：【${result.msg}】`)
-			    msg += `\n信息查询：【${result.msg}】`
+			    console.log(`\n信息查询：【${result.errmsg}】`)
+			    msg += `\n信息查询：【${result.errmsg}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n积分查询：【${result.msg}】`);
-			    msg += `\n积分查询：【${result.msg}】`
+		            console.log(`\n积分查询：【${result.errmsg}】`);
+			    msg += `\n积分查询：【${result.errmsg}】`
 		        })
 		    }
 	    })
@@ -90,7 +103,76 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
+	    req.end()
+		
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async coupon() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"appid": "wx59fe466484ed8858",
+		"basicInfo": {
+		    "bosId": 4022212123191,
+		    "productId": 1,
+		    "productInstanceId": 16618191191
+		}
+	    })
+	    const options = {
+		hostname: 'xapi.weimob.com',
+		port: 443,
+		path: '/api3/onecrm/coupon/v1/custom/getUserCouponCount',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'X-WX-Token': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.errcode == 0) {
+			    console.log(`\n优惠券查询：【${result.errmsg}】`)
+			    console.log(`\n现有优惠券：【${result.data.count}】`)
+			    console.log(`\n已用优惠券：【${result.data.usedNum}】`)
+			    console.log(`\n过期优惠券：【${result.data.expiredNum}】`)
+			    msg += `\n优惠券查询：【${result.errmsg}】`
+			    msg += `\n现有优惠券：【${result.data.count}】`
+			    msg += `\n有效积分：【${result.data.availablePoint}】`
+			    msg += `\n已用优惠券：【${result.data.usedNum}】`
+			    msg += `\n过期优惠券：【${result.data.expiredNum}】`
+			} else {
+			    console.log(`\n优惠券信息查询：【${result.errmsg}】`)
+			    msg += `\n优惠券信息查询：【${result.errmsg}】`
+			}
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n优惠券查询：【${result.errmsg}】`);
+			    msg += `\n优惠券查询：【${result.errmsg}】`
+		        })
+		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
 	    req.end()
 		
         } catch (e) {
@@ -101,19 +183,28 @@ class UserInfo {
     async signin() {
         try {
 	    const https = require('https')
-	    //const data = JSON.stringify({})
-	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid})
-	    //console.log(json)
+	    const data = JSON.stringify({
+		"appid": "wx59fe466484ed8858",
+		"basicInfo": {
+		    "vid": 6016909036191
+		},
+		"extendInfo": {
+		    "source": 1
+		},
+		"customInfo": {
+		    "source": 0,
+		    "wid": 11336932289
+		}
+	    })
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'xapi.weimob.com',
 		port: 443,
-		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid,
-		method: 'GET',
+		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/core/c/sign,
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    //'Content-Length': data.length,
-		    'extra-data': json
+		    'Content-Length': data.length,
+		    'X-WX-Token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -126,16 +217,18 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.code == 0) {
-			    console.log(`\n签到信息：【${result.msg}】`)
-			    console.log(`\n今日签到：【${result.data.list[0].infos.title}】`)
-			    console.log(`\n已经签到：【${result.data.times}】天`)
-			    msg += `\n签到信息：【${result.msg}】`
-			    msg += `\n今日签到：【${result.data.list[0].infos.title}】`
-			    msg += `\n已经签到：【${result.data.times}】天`
+			if (result.errcode == 0) {
+			    console.log(`\n签到信息：【${result.errmsg}】`)
+			    console.log(`\n签到积分：【${result.data.fixedReward.points}】`)
+			    console.log(`\n获成长值：【${result.data.fixedReward.growth}】`)
+			    console.log(`\n获优惠券：【${result.data.fixedReward.couponCount}】`)
+			    msg += `\n签到信息：【${result.errmsg`
+			    msg += `\n签到积分：【${result.data.fixedReward.points}】`
+			    msg += `\n获成长值：【${result.data.fixedReward.growth}】`
+			    msg += `\n获优惠券：【${result.data.fixedReward.couponCount}】`
 			} else {
-			    console.log(`\n签到信息：【${result.msg}】`)
-			    msg += `\n签到信息：【${result.msg}】`
+			    console.log(`\n签到信息：【${result.errmsg}】`)
+			    msg += `\n签到信息：【${result.errmsg}】`
 			}
 		    })
 		} else {
@@ -152,7 +245,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
 	    req.end()
 
         } catch (e) {
@@ -160,6 +253,78 @@ class UserInfo {
         }
     }
 }
+
+    async signin_info() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"appid": "wx59fe466484ed8858",
+		"basicInfo": {
+		    "vid": 6016909036191
+		},
+		"extendInfo": {
+		    "source": 1
+		},
+		"customInfo": {}
+	    })
+	    const options = {
+		hostname: 'xapi.weimob.com',
+		port: 443,
+		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/c/signMainInfo',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'X-WX-Token': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.errcode == 0) {
+			    console.log(`\n签到查询：【${result.errmsg}】`)
+			    console.log(`\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`)
+			    console.log(`\n有效累计天数：【${result.data.activityCumulativeSignDays}】天`)
+			    console.log(`\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`)
+			    console.log(`\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`)
+			    msg += `\n签到查询：【${result.errmsg}】`
+			    msg += `\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`
+			    msg += `\n有效累计天数：【${result.data.activityCumulativeSignDays}】天`
+			    msg += `\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`
+			    msg += `\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`
+			} else {
+			    console.log(`\n签到信息查询：【${result.errmsg}】`)
+			    msg += `\n签到信息查询：【${result.errmsg}】`
+			}
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n签到信息查询：【${result.errmsg}】`);
+			    msg += `\n签到信息查询：【${result.errmsg}】`
+		        })
+		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+		
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
 async function start() {
     const tasks = userList.map(user => user.main());
