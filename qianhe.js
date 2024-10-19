@@ -199,7 +199,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'xapi.weimob.com',
 		port: 443,
-		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/core/c/sign,
+		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/core/c/sign',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
