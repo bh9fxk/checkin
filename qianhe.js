@@ -252,7 +252,6 @@ class UserInfo {
             console.log(e);
         }
     }
-}
 
     async signin_info() {
         try {
@@ -325,6 +324,7 @@ class UserInfo {
             console.log(e);
         }
     }
+}
 
 async function start() {
     const tasks = userList.map(user => user.main());
