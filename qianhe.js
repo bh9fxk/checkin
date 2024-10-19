@@ -222,7 +222,7 @@ class UserInfo {
 			    console.log(`\n签到积分：【${result.data.fixedReward.points}】`)
 			    console.log(`\n获成长值：【${result.data.fixedReward.growth}】`)
 			    console.log(`\n获优惠券：【${result.data.fixedReward.couponCount}】`)
-			    msg += `\n签到信息：【${result.errmsg`
+			    msg += `\n签到信息：【${result.errmsg}】`
 			    msg += `\n签到积分：【${result.data.fixedReward.points}】`
 			    msg += `\n获成长值：【${result.data.fixedReward.growth}】`
 			    msg += `\n获优惠券：【${result.data.fixedReward.couponCount}】`
