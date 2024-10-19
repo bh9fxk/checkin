@@ -150,7 +150,6 @@ class UserInfo {
 			    console.log(`\n过期优惠券：【${result.data.expiredNum}】`)
 			    msg += `\n优惠券查询：【${result.errmsg}】`
 			    msg += `\n现有优惠券：【${result.data.count}】`
-			    msg += `\n有效积分：【${result.data.availablePoint}】`
 			    msg += `\n已用优惠券：【${result.data.usedNum}】`
 			    msg += `\n过期优惠券：【${result.data.expiredNum}】`
 			} else {
@@ -290,12 +289,12 @@ class UserInfo {
 			if (result.errcode == 0) {
 			    console.log(`\n签到查询：【${result.errmsg}】`)
 			    console.log(`\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`)
-			    console.log(`\n有效累计天数：【${result.data.activityCumulativeSignDays}】天`)
+			    console.log(`\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`)
 			    console.log(`\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`)
 			    console.log(`\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`)
 			    msg += `\n签到查询：【${result.errmsg}】`
 			    msg += `\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`
-			    msg += `\n有效累计天数：【${result.data.activityCumulativeSignDays}】天`
+			    msg += `\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`
 			    msg += `\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`
 			    msg += `\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`
 			} else {
