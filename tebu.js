@@ -289,12 +289,12 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.errcode == 0) {
-			    console.log(`\n签到查询：【${result.errmsg}】`)
+			    console.log(`\n签到信息查询：【${result.errmsg}】`)
 			    console.log(`\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`)
 			    console.log(`\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`)
 			    console.log(`\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`)
 			    console.log(`\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`)
-			    msg += `\n签到查询：【${result.errmsg}】`
+			    msg += `\n签到信息查询：【${result.errmsg}】`
 			    msg += `\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`
 			    msg += `\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`
 			    msg += `\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`
