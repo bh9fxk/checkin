@@ -3,6 +3,8 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名: qianhe_ck,&分隔两个参数
+ * 修改/api3/onecrm/mactivity/sign/misc/sign/activity/c/signMainInfo中body中的
+ * appid vid bosId productInstanceId productInstanceId wid
  * 变量值: 抓包X-WX-Token的值
  * scriptVersionNow = "0.0.1";
  */
