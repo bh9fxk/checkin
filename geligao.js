@@ -19,9 +19,7 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.sid = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.uuid = str.split(strSplitor)[1]
-	this.checkinid = str.split(strSplitor)[2]
+        this.ck = str.split(strSplitor)[0]; //单账号多变量分隔
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -31,6 +29,8 @@ class UserInfo {
 	await $.wait(3000)
         await this.signin()
 	await $.wait(3000)
+        await this.lottery()
+	await $.wait(3000)
 	await SendMsg(msg)
     }
 
@@ -38,17 +38,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    //const data = JSON.stringify({})
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid,"ftime":1728808108352})
-	    //console.log(json)
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'crm.glico.cn',
 		port: 443,
-		path: '/wscuser/membercenter/stats.json',
+		path: '/miniapp/member/profile',
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
-		    'extra-data': json
+		    'X-Auth-Token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -62,14 +60,16 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == 0) {
-			    console.log(`\n信息查询：【${result.msg}】`)
-			    console.log(`\n现有积分：【${result.data.stats.points}】`)
-			    console.log(`\n现有卡片：【${result.data.stats.cards}】`)
-			    console.log(`\n现优惠卷：【${result.data.stats.coupons}】`)
-			    msg += `\n信息查询：【${result.msg}】`
-			    msg += `\n现有积分：【${result.data.stats.points}】`
-			    msg += `\n现有卡片：【${result.data.stats.cards}】`
-			    msg += `\n现优惠卷：【${result.data.stats.coupons}】`
+			    console.log(`\n用户名称：【${result.data.name}】`)
+			    console.log(`\n用户手机：【${result.data.mobile}】`)
+			    console.log(`\n现有积分：【${result.data.points}】`)
+			    console.log(`\n现成长值：【${result.data.growth}】`)
+			    console.log(`\n过期积分：【${result.data.expiringPoints}】`)
+			    msg += `\n用户名称：【${result.data.name}】`
+			    msg += `\n用户手机：【${result.data.mobile}】`
+			    msg += `\n现有积分：【${result.data.points}】`
+			    msg += `\n现成长值：【${result.data.growth}】`
+			    msg += `\n过期积分：【${result.data.expiringPoints}】`
 			} else {
 			    console.log(`\n信息查询：【${result.msg}】`)
 			    msg += `\n信息查询：【${result.msg}】`
@@ -79,8 +79,8 @@ class UserInfo {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n积分查询：【${result.msg}】`);
-			    msg += `\n积分查询：【${result.msg}】`
+		            console.log(`\n信息查询：【${result.msg}】`);
+			    msg += `\n信息查询：【${result.msg}】`
 		        })
 		    }
 	    })
@@ -100,19 +100,16 @@ class UserInfo {
     async signin() {
         try {
 	    const https = require('https')
-	    //const data = JSON.stringify({})
-	    //转换一次后，数据运行正常
-	    let json = JSON.stringify({"is_weapp":1,"sid":this.sid,"uuid":this.uuid,"ftime":1728808108352})
-	    //console.log(json)
+	    const data = JSON.stringify({})
 	    const options = {
-		hostname: 'h5.youzan.com',
+		hostname: 'crm.glico.cn',
 		port: 443,
-		path: '/wscump/checkin/checkinV2.json?checkinId='+this.checkinid,
-		method: 'GET',
+		path: '/miniapp/member/checkin',
+		method: 'PUT',
 		headers: {
 		    'Content-Type': 'application/json',
-		    //'Content-Length': data.length,
-		    'extra-data': json
+		    'Content-Length': data.length,
+		    'X-Auth-Token': this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -126,14 +123,16 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == 0) {
-			    console.log(`\n签到信息：【${result.msg}】`)
-			    //console.log(`\n今日签到：【${result.data.list[0].infos.title}】`)
-			    console.log(`\n今日签到：【${result.data.desc}】`)
-			    //console.log(`\n已经签到：【${result.data.times}】天`)
-			    msg += `\n签到信息：【${result.msg}】`
-			    //msg += `\n今日签到：【${result.data.list[0].infos.title}】`
-			    msg += `\n今日签到：【${result.data.desc}】`
-			    //msg += `\n已经签到：【${result.data.times}】天`
+			    console.log(`\n今日签到：【${result.isSignIn}】`)
+			    console.log(`\n签到积分：【${result.data.reward}】`)
+			    console.log(`\n连续签到：【${result.data.continuousDays}】天`)
+			    console.log(`\n连续奖励名称：【${result.data.continuousRewardName}】`)
+			    console.log(`\n连续签到奖励：【${result.data.continuousReward}】`)
+			    msg += `\n今日签到：【${result.isSignIn}】`
+			    msg += `\n签到积分：【${result.data.reward}】`
+			    msg += `\n连续签到：【${result.data.continuousDays}】天`
+			    msg += `\n连续奖励名称：【${result.data.continuousRewardName}】`
+			    msg += `\n连续签到奖励：【${result.data.continuousReward}】`
 			} else {
 			    console.log(`\n签到信息：【${result.msg}】`)
 			    msg += `\n签到信息：【${result.msg}】`
@@ -153,7 +152,64 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
+	    req.end()
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async lottery() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({})
+	    const options = {
+		hostname: 'crm.glico.cn',
+		port: 443,
+		path: '/miniapp/member/lotteries/submit/3024154',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'X-Auth-Token': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == 0) {
+			    console.log(`\n抽奖名称：【${result.data.lottery.name}】`)
+			    console.log(`\n奖品名称：【${result.data.lotteryItem.name}】`)
+			    msg += `\n抽奖名称：【${result.data.lottery.name}】`
+			    msg += `\n奖品名称：【${result.data.lotteryItem.name}】`
+			} else {
+			    console.log(`\n抽奖信息：【${result.msg}】`)
+			    msg += `\n抽奖信息：【${result.msg}】`
+			}
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n抽奖结果：【${result.msg}】`);
+			msg += `\n抽奖结果：【${result.msg}】`
+		    })
+		}
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
 	    req.end()
 
         } catch (e) {
