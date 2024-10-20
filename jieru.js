@@ -42,15 +42,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
+		"appid": "wx0c3bef8c4fb62d07",
 		"basicInfo": {
-		    "vid": 6013892423530,
-		    "bosId": 4020173000530,
+		    "vid": 6013537355137,
+		    "bosId": 4019966444137,
 		    "productId": 1,
-		    "productInstanceId": 2563263530
+		    "productInstanceId": 2075060137
 		},
 		"targetBasicInfo": {
-		    "productInstanceId": 2563229530
+		    "productInstanceId": 2075060137
 		},
 		"request": {}
 	    })
@@ -117,11 +117,11 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
+		"appid": "wx0c3bef8c4fb62d07",
 		"basicInfo": {
-		    "bosId": 4020173000530,
+		    "bosId": 4019966444137,
 		    "productId": 1,
-		    "productInstanceId": 2563263530
+		    "productInstanceId": 2075060137
 		}
 	    })
 	    const options = {
@@ -185,16 +185,16 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
+		"appid": "wx0c3bef8c4fb62d07",
 		"basicInfo": {
-		    "vid": 6013892423530
+		    "vid": 6013537355137
 		},
 		"extendInfo": {
 		    "source": 1
 		},
 		"customInfo": {
 		    "source": 0,
-		    "wid": 11329544971
+		    "wid": 11337663042
 		}
 	    })
 	    const options = {
@@ -258,9 +258,9 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
+		"appid": "wx0c3bef8c4fb62d07",
 		"basicInfo": {
-		    "vid": 6013892423530
+		    "vid": 6013537355137
 		},
 		"extendInfo": {
 		    "source": 1
