@@ -3,6 +3,8 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名: tebu_ck,&分隔两个参数
+ * 修改/api3/onecrm/mactivity/sign/misc/sign/activity/c/signMainInfo中body中的
+ * appid vid bosId productInstanceId productInstanceId wid
  * 变量值: 抓包X-WX-Token的值
  * scriptVersionNow = "0.0.1";
  */
@@ -40,15 +42,15 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wx59fe466484ed8858",
+		"appid": "wxb6201f95db35f963",
 		"basicInfo": {
-		    "vid": 6016909036191,
-		    "bosId": 4022212123191,
+		    "vid": 6013892423530,
+		    "bosId": 4020173000530,
 		    "productId": 1,
-		    "productInstanceId": 16618191191
+		    "productInstanceId": 2563263530
 		},
 		"targetBasicInfo": {
-		    "productInstanceId": 16618153191
+		    "productInstanceId": 2563229530
 		},
 		"request": {}
 	    })
@@ -115,11 +117,11 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wx59fe466484ed8858",
+		"appid": "wxb6201f95db35f963",
 		"basicInfo": {
-		    "bosId": 4022212123191,
+		    "bosId": 4020173000530,
 		    "productId": 1,
-		    "productInstanceId": 16618191191
+		    "productInstanceId": 2563263530
 		}
 	    })
 	    const options = {
@@ -183,16 +185,16 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wx59fe466484ed8858",
+		"appid": "wxb6201f95db35f963",
 		"basicInfo": {
-		    "vid": 6016909036191
+		    "vid": 6013892423530
 		},
 		"extendInfo": {
 		    "source": 1
 		},
 		"customInfo": {
 		    "source": 0,
-		    "wid": 11336932289
+		    "wid": 11329544971
 		}
 	    })
 	    const options = {
@@ -256,9 +258,9 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wx59fe466484ed8858",
+		"appid": "wxb6201f95db35f963",
 		"basicInfo": {
-		    "vid": 6016909036191
+		    "vid": 6013892423530
 		},
 		"extendInfo": {
 		    "source": 1
