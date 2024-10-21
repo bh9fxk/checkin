@@ -386,8 +386,8 @@ class UserInfo {
 			    } else {
 				console.log(`\n可领取奖品：【暂无奖品领取！】`)
 			    }
-			    console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`)
-			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
+			    console.log(`\n奖品信息查询：【${result.msg}】`)
+			    msg += `\n奖品信息查询：【${result.msg}】`
 			} else {
 			    console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`)
 			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
