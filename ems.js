@@ -309,13 +309,13 @@ class UserInfo {
 			    console.log(`\n签到信息查询：【${result.msg}】`)
 			    console.log(`\n有效连续签到：【${result.info.isContinueSign}】天`)
 			    console.log(`\n每日签到金币：【${result.info.dailySignInCoins}】`)
-			    console.log(`\n签到活动周期：【${result.info.activBeginTime} - ${result.info.activEndTime}】`)
-			    console.log(`\n签到循环周期：【${result.info.cycleBeginTime} - ${result.info.cycleEndTime}】`)
+			    console.log(`\n签到活动周期：【${result.info.activBeginTime}至${result.info.activEndTime}】`)
+			    console.log(`\n签到循环周期：【${result.info.cycleBeginTime}至${result.info.cycleEndTime}】`)
 			    msg += `\n签到信息查询：【${result.msg}】`
 			    msg += `\n有效连续签到：【${result.info.isContinueSign}】天`
 			    msg += `\n每日签到金币：【${result.info.dailySignInCoins}】`
-			    msg += `\n签到活动周期：【${result.info.activBeginTime} - ${result.info.activEndTime}】`
-			    msg += `\n签到循环周期：【${result.info.cycleBeginTime} - ${result.info.cycleEndTime}】`
+			    msg += `\n签到活动周期：【${result.info.activBeginTime}至${result.info.activEndTime}】`
+			    msg += `\n签到循环周期：【${result.info.cycleBeginTime}至${result.info.cycleEndTime}】`
 			} else {
 			    console.log(`\n签到信息查询：【${result.msg}】【${result.info}】`)
 			    msg += `\n签到信息查询：【${result.msg}】【${result.info}】`
@@ -371,23 +371,23 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == "000000") {
-			    if (result.signPrizeInfoList[0].prizeStatus == 1) {
-				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
-				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
-			    } else if (result.signPrizeInfoList[1].prizeStatus == 1) {
-				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
-				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
-			    } else if (result.signPrizeInfoList[2].prizeStatus == 1) {
-				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
-				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
-			    } else if (result.signPrizeInfoList[3].prizeStatus == 1) {
-				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
-				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
+			    if (result.info.signPrizeInfoList[0].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.sinfo.ignPrizeInfoList[0].simpleName}】`
+			    } else if (result.info.signPrizeInfoList[1].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`
+			    } else if (result.info.signPrizeInfoList[2].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`
+			    } else if (result.info.signPrizeInfoList[3].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.info.signPrizeInfoList[0].simpleName}】`
 			    } else {
 				console.log(`\n可领取奖品：【暂无奖品领取！】`)
 			    }
-			    console.log(`\n奖品信息查询：【${result.msg}】`)
-			    msg += `\n奖品信息查询：【${result.msg}】`
+			    console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`)
+			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
 			} else {
 			    console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`)
 			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
