@@ -129,23 +129,23 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == "000000") {
-			    console.log(`\n现可用积分：【${result.info.availableGoldsTotal}】`)
-			    console.log(`\n已过期积分：【${result.info.expiredGoldsTotal}】`)
-			    console.log(`\n将过期积分：【${result.info.expireSoonGoldsTotal}】`)
-			    msg += `\n现可用积分：【${result.info.availableGoldsTotal}】`
-			    msg += `\n已过期积分：【${result.info.expiredGoldsTotal}】`
-			    msg += `\n将过期积分：【${result.info.expireSoonGoldsTotal}】`
+			    console.log(`\n现可用金币：【${result.info.availableGoldsTotal}】`)
+			    console.log(`\n已过期金币：【${result.info.expiredGoldsTotal}】`)
+			    console.log(`\n将过期金币：【${result.info.expireSoonGoldsTotal}】`)
+			    msg += `\n现可用金币：【${result.info.availableGoldsTotal}】`
+			    msg += `\n已过期金币：【${result.info.expiredGoldsTotal}】`
+			    msg += `\n将过期金币：【${result.info.expireSoonGoldsTotal}】`
 			} else {
-			    console.log(`\n积分信息查询：【${result.msg}】【${result.info}】`)
-			    msg += `\n积分信息查询：【${result.msg}】【${result.info}】`
+			    console.log(`\n金币信息查询：【${result.msg}】【${result.info}】`)
+			    msg += `\n金币信息查询：【${result.msg}】【${result.info}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n积分信息查询：【${result.msg}】【${result.info}】`);
-			    msg += `\n积分信息查询：【${result.msg}】【${result.info}】`
+		            console.log(`\n金币信息查询：【${result.msg}】【${result.info}】`);
+			    msg += `\n金币信息查询：【${result.msg}】【${result.info}】`
 		        })
 		    }
 	    })
@@ -312,7 +312,7 @@ class UserInfo {
 			    console.log(`\n签到活动周期：【${result.info.activBeginTime} - ${result.info.activEndTime}】`)
 			    console.log(`\n签到循环周期：【${result.info.cycleBeginTime} - ${result.info.cycleEndTime}】`)
 			    msg += `\n签到信息查询：【${result.msg}】`
-			    msg += `\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`
+			    msg += `\n有效连续签到：【${result.info.isContinueSign}】天`
 			    msg += `\n每日签到金币：【${result.info.dailySignInCoins}】`
 			    msg += `\n签到活动周期：【${result.info.activBeginTime} - ${result.info.activEndTime}】`
 			    msg += `\n签到循环周期：【${result.info.cycleBeginTime} - ${result.info.cycleEndTime}】`
