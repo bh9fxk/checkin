@@ -127,7 +127,7 @@ class RUN:
                 "appId":"wx52872495fb375c4b",
                 "userId":self.memberId,
                 "openId":self.openId,
-                "activId":'c0c4a0a3ef8145f49f2e294741a3cd62'
+                "activId":'16f36f81f38f456a800ecafc85924700'
             }
             response = self.do_request('https://ump.ems.com.cn/activCenterApi/signActivInfo/sign',data=params)
             if response and response.get('code') == '000000':
@@ -170,7 +170,7 @@ class RUN:
         Log(f"\n====== {act_name} ======")
         try:
             params = {
-                "activId": "c0c4a0a3ef8145f49f2e294741a3cd62",
+                "activId": "16f36f81f38f456a800ecafc85924700",
                 "appId": "wx52872495fb375c4b",
                 "openId": self.openId,
                 "userId": self.memberId,
@@ -192,7 +192,7 @@ class RUN:
         Log(f"\n====== {act_name} ======")
         try:
             params = {
-                "activId": "c0c4a0a3ef8145f49f2e294741a3cd62",
+                "activId": "16f36f81f38f456a800ecafc85924700",
                 "appId": "wx52872495fb375c4b",
                 "openId": self.openId,
                 "userId": self.memberId
@@ -228,7 +228,7 @@ class RUN:
                 "appId": "wx52872495fb375c4b",
                 "userId": self.memberId,
                 "openId": self.openId,
-                "activId": 'c0c4a0a3ef8145f49f2e294741a3cd62'
+                "activId": '16f36f81f38f456a800ecafc85924700'
             }
             response = self.do_request('https://ump.ems.com.cn/activCenterApi/signActivInfo/querySignDetail',data=params)
             if response and response.get('code') == '000000':
