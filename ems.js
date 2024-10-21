@@ -22,7 +22,8 @@ class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
         this.openid = str.split(strSplitor)[0]; //单账号多变量分隔
-        this.appid = str.split(strSplitor)[0]
+        this.appid = str.split(strSplitor)[1]
+	this.activid = str.split(strSplitor)[2]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
@@ -224,7 +225,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activId": "16f36f81f38f456a800ecafc85924700"
+		"activId": this.activid
 	    })
 	    const options = {
 		hostname: 'ump.ems.com.cn',
@@ -281,7 +282,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activId": "16f36f81f38f456a800ecafc85924700"
+		"activId": this.activid
 	    })
 	    const options = {
 		hostname: 'ump.ems.com.cn',
@@ -346,7 +347,7 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activId": "16f36f81f38f456a800ecafc85924700"
+		"activId": this.activid
 	    })
 	    const options = {
 		hostname: 'ump.ems.com.cn',
@@ -391,15 +392,15 @@ class UserInfo {
 			    console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`)
 			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
 			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`);
-			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
-		        })
-		    }
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`);
+			msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
