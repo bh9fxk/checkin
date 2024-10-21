@@ -40,8 +40,8 @@ class UserInfo {
 	await this.signin_info()
 	await $.wait(3000)
 	await this.prizeInfo()
-	//await $.wait(3000)
-	//await SendMsg(msg)
+	await $.wait(3000)
+	await SendMsg(msg)
     }
 
     async mc_token() {
