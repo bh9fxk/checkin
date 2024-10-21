@@ -123,12 +123,12 @@ class UserInfo {
 			let result = JSON.parse(str)
 			console.log(result)
 			if (result.code == 0) {
-			    console.log(`\n今日签到：【${result.isSignIn}】`)
+			    console.log(`\n今日签到：【${result.data.isSignIn}】`)
 			    console.log(`\n签到积分：【${result.data.reward}】`)
 			    console.log(`\n连续签到：【${result.data.continuousDays}】天`)
 			    console.log(`\n连续奖励名称：【${result.data.continuousRewardName}】`)
 			    console.log(`\n连续签到奖励：【${result.data.continuousReward}】`)
-			    msg += `\n今日签到：【${result.isSignIn}】`
+			    msg += `\n今日签到：【${result.data.isSignIn}】`
 			    msg += `\n签到积分：【${result.data.reward}】`
 			    msg += `\n连续签到：【${result.data.continuousDays}】天`
 			    msg += `\n连续奖励名称：【${result.data.continuousRewardName}】`
