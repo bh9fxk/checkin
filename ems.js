@@ -1,5 +1,5 @@
 /**
- * cron 24 8 * * *  ems.js
+ * cron 25 8 * * *  ems.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名: ems_ck,&分隔两个参数
@@ -16,6 +16,8 @@ let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
 let userList = [];
 let msg = '';
+let mctoken = ''
+let atoken = ''
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
@@ -37,31 +39,22 @@ class UserInfo {
 	await SendMsg(msg)
     }
 
-    async point() {
+    async mc_token() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
-		"basicInfo": {
-		    "vid": 6013892423530,
-		    "bosId": 4020173000530,
-		    "productId": 1,
-		    "productInstanceId": 2563263530
-		},
-		"targetBasicInfo": {
-		    "productInstanceId": 2563229530
-		},
-		"request": {}
+		"appId": this.appid,
+		"openId": this.openid,
+		"source": "JD"
 	    })
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'ump.ems.com.cn',
 		port: 443,
-		path: '/api3/onecrm/point/myPoint/getSimpleAccountInfo',
+		path: '/memberCenterApiV2/member/findByOpenIdAppId',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    'Content-Length': data.length
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -74,28 +67,21 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n积分查询：【${result.errmsg}】`)
-			    console.log(`\n现有积分：【${result.data.totalPoint}】`)
-			    console.log(`\n有效积分：【${result.data.availablePoint}】`)
-			    console.log(`\n现总积分：【${result.data.sumTotalPoint}】`)
-			    console.log(`\n总有效分：【${result.data.sumAvailablePoint}】`)
-			    msg += `\n积分查询：【${result.errmsg}】`
-			    msg += `\n现有积分：【${result.data.totalPoint}】`
-			    msg += `\n有效积分：【${result.data.availablePoint}】`
-			    msg += `\n现总积分：【${result.data.sumTotalPoint}】`
-			    msg += `\n总有效分：【${result.data.sumAvailablePoint}】`
+			if (result.code == "000000") {
+			    console.log(`\n获取MC_token：【${result.msg}】`)
+			    mctoken = result.info.token
+			    msg += `\n获取MC_token：【${result.msg}】`
 			} else {
-			    console.log(`\n信息查询：【${result.errmsg}】`)
-			    msg += `\n信息查询：【${result.errmsg}】`
+			    console.log(`\n获取MC_token：【${result.msg}】【${result.info}】`)
+			    msg += `\n获取MC_token：【${result.msg}】【${result.info}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n积分查询：【${result.errmsg}】`);
-			    msg += `\n积分查询：【${result.errmsg}】`
+		            console.log(`\n获取MC_token：【${result.msg}】【${result.info}】`);
+			    msg += `\n获取MC_token：【${result.msg}】【${result.info}】`
 		        })
 		    }
 	    })
@@ -112,26 +98,19 @@ class UserInfo {
         }
     }
 
-    async coupon() {
+    async point() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
-		"basicInfo": {
-		    "bosId": 4020173000530,
-		    "productId": 1,
-		    "productInstanceId": 2563263530
-		}
-	    })
+	    const data = JSON.stringify({})
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'ump.ems.com.cn',
 		port: 443,
-		path: '/api3/onecrm/coupon/v1/custom/getUserCouponCount',
+		path: '/memberCenterApiV2/golds/memberGoldsInfo',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    'MC-TOKEN': mctoken
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -144,26 +123,24 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n优惠券查询：【${result.errmsg}】`)
-			    console.log(`\n现有优惠券：【${result.data.count}】`)
-			    console.log(`\n已用优惠券：【${result.data.usedNum}】`)
-			    console.log(`\n过期优惠券：【${result.data.expiredNum}】`)
-			    msg += `\n优惠券查询：【${result.errmsg}】`
-			    msg += `\n现有优惠券：【${result.data.count}】`
-			    msg += `\n已用优惠券：【${result.data.usedNum}】`
-			    msg += `\n过期优惠券：【${result.data.expiredNum}】`
+			if (result.code == "000000") {
+			    console.log(`\n现可用积分：【${result.info.availableGoldsTotal}】`)
+			    console.log(`\n已过期积分：【${result.info.expiredGoldsTotal}】`)
+			    console.log(`\n将过期积分：【${result.info.expireSoonGoldsTotal}】`)
+			    msg += `\n现可用积分：【${result.info.availableGoldsTotal}】`
+			    msg += `\n已过期积分：【${result.info.expiredGoldsTotal}】`
+			    msg += `\n将过期积分：【${result.info.expireSoonGoldsTotal}】`
 			} else {
-			    console.log(`\n优惠券信息查询：【${result.errmsg}】`)
-			    msg += `\n优惠券信息查询：【${result.errmsg}】`
+			    console.log(`\n积分信息查询：【${result.msg}】【${result.info}】`)
+			    msg += `\n积分信息查询：【${result.msg}】【${result.info}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n优惠券查询：【${result.errmsg}】`);
-			    msg += `\n优惠券查询：【${result.errmsg}】`
+		            console.log(`\n积分信息查询：【${result.msg}】【${result.info}】`);
+			    msg += `\n积分信息查询：【${result.msg}】【${result.info}】`
 		        })
 		    }
 	    })
@@ -175,6 +152,65 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 		
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async atoken() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"openId": this.openid,
+		"token": null,
+		"appId": this.appid
+	    })
+	    const options = {
+		hostname: 'ump.ems.com.cn',
+		port: 443,
+		path: '/activCenterApi/eac/pub/checkUserLoginStatus',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == "000000") {
+			    console.log(`\nAtoken信息：【${result.msg}】`)
+			    atoken = result.info.token
+			    msg += `\nAtoken信息：【${result.msg}】`
+			} else {
+			    console.log(`\nAtoken信息：【${result.msg}】【${result.info}】`)
+			    msg += `\nAtoken信息：【${result.msg}】【${result.info}】`
+			}
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\nAtoken信息：【${result.msg}】【${result.info}】`);
+			msg += `\nAtoken信息：【${result.msg}】【${result.info}】`
+		    })
+		}
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+
         } catch (e) {
             console.log(e);
         }
@@ -184,27 +220,17 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
-		"basicInfo": {
-		    "vid": 6013892423530
-		},
-		"extendInfo": {
-		    "source": 1
-		},
-		"customInfo": {
-		    "source": 0,
-		    "wid": 11329544971
-		}
+		"activId": "16f36f81f38f456a800ecafc85924700"
 	    })
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'ump.ems.com.cn',
 		port: 443,
-		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/core/c/sign',
+		path: '/activCenterApi/eac/api/sign/joinSign',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    'Atoken': atoken
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -217,26 +243,20 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n签到信息：【${result.errmsg}】`)
-			    console.log(`\n签到积分：【${result.data.fixedReward.points}】`)
-			    console.log(`\n获成长值：【${result.data.fixedReward.growth}】`)
-			    console.log(`\n获优惠券：【${result.data.fixedReward.couponCount}】`)
-			    msg += `\n签到信息：【${result.errmsg}】`
-			    msg += `\n签到积分：【${result.data.fixedReward.points}】`
-			    msg += `\n获成长值：【${result.data.fixedReward.growth}】`
-			    msg += `\n获优惠券：【${result.data.fixedReward.couponCount}】`
+			if (result.code == "000000") {
+			    console.log(`\n签到信息：【${result.msg}】`)
+			    msg += `\nAtoken信息：【${result.msg}】`
 			} else {
-			    console.log(`\n签到信息：【${result.errmsg}】`)
-			    msg += `\n签到信息：【${result.errmsg}】`
+			    console.log(`\n签到信息：【${result.msg}】【${result.info}】`)
+			    msg += `\n签到信息：【${result.msg}】【${result.info}】`
 			}
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到结果：【${result.msg}】`);
-			msg += `\n签到结果：【${result.msg}】`
+		        console.log(`\n签到信息：【${result.msg}】【${result.info}】`);
+			msg += `\n签到信息：【${result.msg}】【${result.info}】`
 		    })
 		}
 	    })
@@ -257,24 +277,17 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"appid": "wxb6201f95db35f963",
-		"basicInfo": {
-		    "vid": 6013892423530
-		},
-		"extendInfo": {
-		    "source": 1
-		},
-		"customInfo": {}
+		"activId": "16f36f81f38f456a800ecafc85924700"
 	    })
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'ump.ems.com.cn',
 		port: 443,
-		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/c/signMainInfo',
+		path: '/activCenterApi/eac/api/sign/querySignActivInfo',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    'Atoken': atoken
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -287,28 +300,100 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n签到信息查询：【${result.errmsg}】`)
-			    console.log(`\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`)
-			    console.log(`\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`)
-			    console.log(`\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`)
-			    console.log(`\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`)
-			    msg += `\n签到信息查询：【${result.errmsg}】`
+			if (result.code == "000000") {
+			    console.log(`\n签到信息查询：【${result.msg}】`)
+			    console.log(`\n有效连续签到：【${result.info.isContinueSign}】天`)
+			    console.log(`\n每日签到金币：【${result.info.dailySignInCoins}】`)
+			    console.log(`\n签到活动周期：【${result.info.activBeginTime} - ${result.info.activEndTime}】`)
+			    console.log(`\n签到循环周期：【${result.info.cycleBeginTime} - ${result.info.cycleEndTime}】`)
+			    msg += `\n签到信息查询：【${result.msg}】`
 			    msg += `\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`
-			    msg += `\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`
-			    msg += `\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`
-			    msg += `\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`
+			    msg += `\n每日签到金币：【${result.info.dailySignInCoins}】`
+			    msg += `\n签到活动周期：【${result.info.activBeginTime} - ${result.info.activEndTime}】`
+			    msg += `\n签到循环周期：【${result.info.cycleBeginTime} - ${result.info.cycleEndTime}】`
 			} else {
-			    console.log(`\n签到信息查询：【${result.errmsg}】`)
-			    msg += `\n签到信息查询：【${result.errmsg}】`
+			    console.log(`\n签到信息查询：【${result.msg}】【${result.info}】`)
+			    msg += `\n签到信息查询：【${result.msg}】【${result.info}】`
 			}
 		        })
 		    } else {
 			res.on('data', d => {
 			    let result = JSON.parse(d)
 			    console.log(result)
-		            console.log(`\n签到信息查询：【${result.errmsg}】`);
-			    msg += `\n签到信息查询：【${result.errmsg}】`
+		            console.log(`\n签到信息查询：【${result.msg}】【${result.info}】`);
+			    msg += `\n签到信息查询：【${result.msg}】【${result.info}】`
+		        })
+		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    req.write(data)
+	    req.end()
+		
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async prizeInfo() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({
+		"activId": "16f36f81f38f456a800ecafc85924700"
+	    })
+	    const options = {
+		hostname: 'ump.ems.com.cn',
+		port: 443,
+		path: '/activCenterApi/eac/api/sign/queryUserPrizeInfo',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'Atoken': atoken
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			if (result.code == "000000") {
+			    if (result.signPrizeInfoList[0].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
+			    } else if (result.signPrizeInfoList[1].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
+			    } else if (result.signPrizeInfoList[2].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
+			    } else if (result.signPrizeInfoList[3].prizeStatus == 1) {
+				console.log(`\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`)
+				msg += `\n可领取奖品：【${result.signPrizeInfoList[0].simpleName}】`
+			    } else {
+				console.log(`\n可领取奖品：【暂无奖品领取！】`)
+			    }
+			    console.log(`\n奖品信息查询：【${result.msg}】`)
+			    msg += `\n奖品信息查询：【${result.msg}】`
+			} else {
+			    console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`)
+			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
+			}
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n奖品信息查询：【${result.msg}】【${result.info}】`);
+			    msg += `\n奖品信息查询：【${result.msg}】【${result.info}】`
 		        })
 		    }
 	    })
