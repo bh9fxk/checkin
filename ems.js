@@ -28,15 +28,19 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
+	await this.mc_token()
+	await $.wait(3000)
 	await this.point()
 	await $.wait(3000)
-	await this.coupon()
+        await this.atoken()
 	await $.wait(3000)
-        await this.signin()
+	await this.signin()
 	await $.wait(3000)
 	await this.signin_info()
 	await $.wait(3000)
-	await SendMsg(msg)
+	await this.prizeInfo()
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async mc_token() {
