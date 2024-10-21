@@ -250,7 +250,11 @@ class UserInfo {
 			console.log(result)
 			if (result.code == "000000") {
 			    console.log(`\n签到信息：【${result.msg}】`)
-			    msg += `\nAtoken信息：【${result.msg}】`
+			    console.log(`\n签到金币：【${result.info.signCoins}】`)
+			    console.log(`\n签到奖励：【${result.info.signPrizeInfo}】`)
+			    msg += `\n签到信息：【${result.msg}】`
+			    msg += `\n签到金币：【${result.info.signCoins}】`
+			    msg += `\n签到奖励：【${result.info.signPrizeInfo}】`
 			} else {
 			    console.log(`\n签到信息：【${result.msg}】【${result.info}】`)
 			    msg += `\n签到信息：【${result.msg}】【${result.info}】`
