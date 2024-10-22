@@ -311,12 +311,12 @@ class UserInfo {
 			console.log(result)
 			if (result.code == "000000") {
 			    console.log(`\n签到信息查询：【${result.msg}】`)
-			    console.log(`\n有效连续签到：【${result.info.isContinueSign}】天`)
+			    console.log(`\n是否连续签到：【${result.info.isContinueSign}】`)
 			    console.log(`\n每日签到金币：【${result.info.dailySignInCoins}】`)
 			    console.log(`\n签到活动周期：【${result.info.activBeginTime}至${result.info.activEndTime}】`)
 			    console.log(`\n签到循环周期：【${result.info.cycleBeginTime}至${result.info.cycleEndTime}】`)
 			    msg += `\n签到信息查询：【${result.msg}】`
-			    msg += `\n有效连续签到：【${result.info.isContinueSign}】天`
+			    msg += `\n是否连续签到：【${result.info.isContinueSign}】`
 			    msg += `\n每日签到金币：【${result.info.dailySignInCoins}】`
 			    msg += `\n签到活动周期：【${result.info.activBeginTime}至${result.info.activEndTime}】`
 			    msg += `\n签到循环周期：【${result.info.cycleBeginTime}至${result.info.cycleEndTime}】`
