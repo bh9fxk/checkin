@@ -31,6 +31,8 @@ class UserInfo {
 	await $.wait(3000)
         await this.signin()
 	await $.wait(3000)
+	await this.lucky()
+	await $.wait(3000)
 	await SendMsg(msg)
     }
 
@@ -89,7 +91,6 @@ class UserInfo {
         }
     }
 
-
     async coupon() {
         try {
 	    const https = require('https')
@@ -115,23 +116,23 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			    console.log(`\n现有优惠券：【${result.un_use_num}】`)
-			    console.log(`\n可用优惠券：【${result.use_num}】`)
-			    console.log(`\n过期优惠券：【${result.expired_num}】`)
-			    console.log(`\n未用优惠券：【${result.allnot_use_num}】`)
-			    msg += `\n现有优惠券：【${result.un_use_num}】`
-			    msg += `\n可用优惠券：【${result.use_num}】`
-			    msg += `\n过期优惠券：【${result.expired_num}】`
-			    msg += `\n未用优惠券：【${result.allnot_use_num}】`
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n优惠券查询：【${result.message}】`);
-			    msg += `\n优惠券查询：【${result.message}】`
-		        })
-		    }
+			console.log(`\n现有优惠券：【${result.un_use_num}】`)
+			console.log(`\n可用优惠券：【${result.use_num}】`)
+			console.log(`\n过期优惠券：【${result.expired_num}】`)
+			console.log(`\n未用优惠券：【${result.allnot_use_num}】`)
+			msg += `\n现有优惠券：【${result.un_use_num}】`
+			msg += `\n可用优惠券：【${result.use_num}】`
+			msg += `\n过期优惠券：【${result.expired_num}】`
+			msg += `\n未用优惠券：【${result.allnot_use_num}】`
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n优惠券查询：【${result.message}】`);
+			msg += `\n优惠券查询：【${result.message}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -150,7 +151,8 @@ class UserInfo {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"activity_code": "202410"
+		"activity_code": "202410",
+		"fill_date": ""
 	    })
 	    const options = {
 		hostname: 'cmallapi.haday.cn',
@@ -195,6 +197,56 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async lucky() {
+        try {
+	    const https = require('https')
+	    //const data = JSON.stringify({})
+	    const options = {
+		hostname: 'cmallapi.haday.cn',
+		port: 443,
+		path: '/buyer-api/lucky/activity/extract?activityCode=jfcj0927',
+		method: 'GET',
+		headers: {
+		    'Content-Type': 'application/json',
+		    //'Content-Length': data.length,
+		    'Authorization': this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			console.log(`\n抽奖结果名称：【${result.lucky_record_vo.prize_name}】`)
+			msg += `\n抽奖结果名称：【${result.lucky_record_vo.prize_name}】`
+		        })
+		    } else {
+			res.on('data', d => {
+			    let result = JSON.parse(d)
+			    console.log(result)
+		            console.log(`\n抽奖结果：【${result.message}】`);
+			    msg += `\n抽奖结果：【${result.message}】`
+		        })
+		    }
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+		
         } catch (e) {
             console.log(e);
         }
