@@ -1,8 +1,8 @@
 /**
- * cron 24 8 * * *  jieru.js
+ * cron 24 8 * * *  jierou.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
- * 变量名: jieru_ck,&分隔两个参数
+ * 变量名: jierou_ck,&分隔两个参数
  * 修改/api3/onecrm/mactivity/sign/misc/sign/activity/c/signMainInfo中body中的
  * appid vid bosId productInstanceId productInstanceId wid
  * 变量值: 抓包X-WX-Token的值
@@ -12,7 +12,7 @@
 const $ = new Env("中顺洁柔签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
-let ckName = "jieru_ck";
+let ckName = "jierou_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
