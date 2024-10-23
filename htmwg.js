@@ -61,22 +61,21 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-
-			    console.log(`\n用户名称：【${result.uname}】`)
-			    console.log(`\n现有积分：【${result.consum_point}】`)
-			    console.log(`\n登录次数：【${result.login_count}】`)
-			    msg += `\n用户名称：【${result.uname}】`
-			    msg += `\n现有积分：【${result.consum_point}】`
-			    msg += `\n登录次数：【${result.login_count}】`
+			console.log(`\n用户名称：【${result.uname}】`)
+			console.log(`\n现有积分：【${result.consum_point}】`)
+			console.log(`\n登录次数：【${result.login_count}】`)
+			msg += `\n用户名称：【${result.uname}】`
+			msg += `\n现有积分：【${result.consum_point}】`
+			msg += `\n登录次数：【${result.login_count}】`
 		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n用户查询：【${result.message}】`);
-			    msg += `\n用户查询：【${result.message}】`
-		        })
-		    }
+		} else {
+		    res.on('data', d => {
+		        let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n用户查询：【${result.message}】`);
+			msg += `\n用户查询：【${result.message}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
