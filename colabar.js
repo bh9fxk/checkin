@@ -157,7 +157,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': 0,
+		    'Content-Length': data.length,
 		    'authorization': 'MP '+this.ck
 		}
 	    }
