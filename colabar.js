@@ -1,5 +1,5 @@
 /**
- * cron 25 8 * * *  colabar.js
+ * cron 26 8 * * *  colabar.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名: colabar_ck,&分隔两个参数
