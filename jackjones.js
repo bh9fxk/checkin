@@ -24,7 +24,8 @@ class UserInfo {
         this.bs-noncestr = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1]
 	this.bs-signature = str.split(strSplitor)[2]
-	this.phone = str.split(strSplitor)[3]
+	this.unionid = str.split(strSplitor)[3]
+	this.phone = str.split(strSplitor)[4]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
