@@ -3,6 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名:hodo_ck,&分隔两个参数
+ * 修改ezr-brand-id ezr-cop-id参数
  * 变量值: 抓包cookie中ezr-ss ezr-userid ezr-st ezr-vuid和body中SecretReqeust的值
  * scriptVersionNow = "0.0.1";
  */
