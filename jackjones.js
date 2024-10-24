@@ -72,12 +72,12 @@ class UserInfo {
 			if (result.code == 0) {
 			    console.log(`\n信息查询：【${result.msg}】`)
 			    console.log(`\n会员等级：【${result.data.level}】`)
-			    console.log(`\n会员名称：【${result.data.name】`)
+			    console.log(`\n会员名称：【${result.data.name}】`)
 			    console.log(`\n可用积分：【${result.data.availablepoints}】`)
 			    console.log(`\n现总积分：【${result.data.allpoints}】`)
 		            msg += `\n信息查询：【${result.msg}】`
 			    msg += `\n会员等级：【${result.data.level}】`
-			    msg += `\n会员名称：【${result.data.name】`
+			    msg += `\n会员名称：【${result.data.name}】`
 			    msg += `\n可用积分：【${result.data.availablepoints}】`
 			    msg += `\n现总积分：【${result.data.allpoints}】`
 			} else {
