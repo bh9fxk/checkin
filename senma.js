@@ -9,7 +9,7 @@
  * scriptVersionNow = "0.0.1";
  */
 
-const $ = new Env("曼妮芬签到");
+const $ = new Env("森马签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
 let ckName = "mannifen_ck";
@@ -52,8 +52,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 1069,
-		    'ezr-cop-id': 448,
+		    'ezr-brand-id': 628,
+		    'ezr-cop-id': 444,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -120,8 +120,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'ezr-brand-id': 1069,
-		    'ezr-cop-id': 448,
+		    'ezr-brand-id': 628,
+		    'ezr-cop-id': 444,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -187,8 +187,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 1069,
-		    'ezr-cop-id': 448,
+		    'ezr-brand-id': 628,
+		    'ezr-cop-id': 444,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
