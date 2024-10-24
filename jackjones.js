@@ -128,7 +128,7 @@ class UserInfo {
 		    //'bs-noncestr': this.noncestr,
 		    'token': this.token,
 		    'bs-signature': this.signature,
-		    'bs-timestamp': 1729780594329
+		    'bs-timestamp': 1729780954510
 		}
 	    }
 	    const req = https.request(options, res => {
