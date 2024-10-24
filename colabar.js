@@ -27,42 +27,30 @@ class UserInfo {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point()
+	await this.user()
 	await $.wait(3000)
 	await this.coupon()
 	await $.wait(3000)
-        await this.signin()
+        await this.checkin()
 	await $.wait(3000)
-	await this.signin_info()
+	await this.checkindays()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async point() {
+    async user() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"appid": "wx0c3bef8c4fb62d07",
-		"basicInfo": {
-		    "vid": 6013537355137,
-		    "bosId": 4019966444137,
-		    "productId": 1,
-		    "productInstanceId": 2075060137
-		},
-		"targetBasicInfo": {
-		    "productInstanceId": 2075060137
-		},
-		"request": {}
-	    })
+	    //const data = JSON.stringify({})
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'koplus.icoke.cn',
 		port: 443,
-		path: '/api3/onecrm/point/myPoint/getSimpleAccountInfo',
-		method: 'POST',
+		path: '/cre-bff/wechat/profile',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    //'Content-Length': data.length,
+		    'authorization': 'MP '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -75,37 +63,32 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n积分查询：【${result.errmsg}】`)
-			    console.log(`\n现有积分：【${result.data.totalPoint}】`)
-			    console.log(`\n有效积分：【${result.data.availablePoint}】`)
-			    console.log(`\n现总积分：【${result.data.sumTotalPoint}】`)
-			    console.log(`\n总有效分：【${result.data.sumAvailablePoint}】`)
-			    msg += `\n积分查询：【${result.errmsg}】`
-			    msg += `\n现有积分：【${result.data.totalPoint}】`
-			    msg += `\n有效积分：【${result.data.availablePoint}】`
-			    msg += `\n现总积分：【${result.data.sumTotalPoint}】`
-			    msg += `\n总有效分：【${result.data.sumAvailablePoint}】`
-			} else {
-			    console.log(`\n信息查询：【${result.errmsg}】`)
-			    msg += `\n信息查询：【${result.errmsg}】`
-			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n积分查询：【${result.errmsg}】`);
-			    msg += `\n积分查询：【${result.errmsg}】`
-		        })
-		    }
+			console.log(`\n用户昵称：【${result.data.nickName}】`)
+			let a = result.data.point / 10
+			console.log(`\n现有可乐瓶：【${a}】`)
+			console.log(`\n现有经验值：【${result.data.experience}】`)
+			let b = result.data.expiredPoint / 10
+			console.log(`\n过期可乐瓶：【${b}】`)
+			msg += `\n用户昵称：【${result.data.nickName}】`
+			msg += `\n现有可乐瓶：【${a}】`
+			msg += `\n现有经验值：【${result.data.experience}】`
+			msg += `\n过期可乐瓶：【${b}】`
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n积分查询：【${result.message}】`);
+			msg += `\n积分查询：【${result.message}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 		
         } catch (e) {
@@ -116,23 +99,16 @@ class UserInfo {
     async coupon() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"appid": "wx0c3bef8c4fb62d07",
-		"basicInfo": {
-		    "bosId": 4019966444137,
-		    "productId": 1,
-		    "productInstanceId": 2075060137
-		}
-	    })
+	    //const data = JSON.stringify({})
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'koplus.icoke.cn',
 		port: 443,
-		path: '/api3/onecrm/coupon/v1/custom/getUserCouponCount',
-		method: 'POST',
+		path: '/cre-bff/wechat/my-benefits/count',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    //'Content-Length': data.length,
+		    'authorization': 'MP '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -145,99 +121,70 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n优惠券查询：【${result.errmsg}】`)
-			    console.log(`\n现有优惠券：【${result.data.count}】`)
-			    console.log(`\n已用优惠券：【${result.data.usedNum}】`)
-			    console.log(`\n过期优惠券：【${result.data.expiredNum}】`)
-			    msg += `\n优惠券查询：【${result.errmsg}】`
-			    msg += `\n现有优惠券：【${result.data.count}】`
-			    msg += `\n已用优惠券：【${result.data.usedNum}】`
-			    msg += `\n过期优惠券：【${result.data.expiredNum}】`
-			} else {
-			    console.log(`\n优惠券信息查询：【${result.errmsg}】`)
-			    msg += `\n优惠券信息查询：【${result.errmsg}】`
-			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n优惠券查询：【${result.errmsg}】`);
-			    msg += `\n优惠券查询：【${result.errmsg}】`
-		        })
-		    }
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    req.write(data)
-	    req.end()
-		
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async signin() {
-        try {
-	    const https = require('https')
-	    const data = JSON.stringify({
-		"appid": "wx0c3bef8c4fb62d07",
-		"basicInfo": {
-		    "vid": 6013537355137
-		},
-		"extendInfo": {
-		    "source": 1
-		},
-		"customInfo": {
-		    "source": 0,
-		    "wid": 11337663042
-		}
-	    })
-	    const options = {
-		hostname: 'xapi.weimob.com',
-		port: 443,
-		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/core/c/sign',
-		method: 'POST',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-		    let str = ''
-		    res.on('data', function (chunk) {
-		    str += chunk
-		    })
-		    res.on('end', function(){
-			let result = JSON.parse(str)
-			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n签到信息：【${result.errmsg}】`)
-			    console.log(`\n签到积分：【${result.data.fixedReward.points}】`)
-			    console.log(`\n获成长值：【${result.data.fixedReward.growth}】`)
-			    console.log(`\n获优惠券：【${result.data.fixedReward.couponCount}】`)
-			    msg += `\n签到信息：【${result.errmsg}】`
-			    msg += `\n签到积分：【${result.data.fixedReward.points}】`
-			    msg += `\n获成长值：【${result.data.fixedReward.growth}】`
-			    msg += `\n获优惠券：【${result.data.fixedReward.couponCount}】`
-			} else {
-			    console.log(`\n签到信息：【${result.errmsg}】`)
-			    msg += `\n签到信息：【${result.errmsg}】`
-			}
+			console.log(`\n现有优惠券：【${result.data}】`)
+			msg += `\n现有优惠券：【${result.data}】`
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到结果：【${result.msg}】`);
-			msg += `\n签到结果：【${result.msg}】`
+		        console.log(`\n优惠券查询：【${result.errmsg}】`);
+			msg += `\n优惠券查询：【${result.errmsg}】`
+		    })
+		}
+	    })
+		
+	    req.on('error', error => {
+		console.error(error)
+	    })
+
+	    //req.write(data)
+	    req.end()
+		
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async checkin() {
+        try {
+	    const https = require('https')
+	    const data = JSON.stringify({})
+	    const options = {
+		hostname: 'koplus.icoke.cn',
+		port: 443,
+		path: '/cre-bff/wechat/checkin',
+		method: 'POST',
+		headers: {
+		    'Content-Type': 'application/json',
+		    'Content-Length': data.length,
+		    'authorization': 'MP '+this.ck
+		}
+	    }
+	    const req = https.request(options, res => {
+		console.log(`\n状态码: ${res.statusCode}`)
+		if (`${res.statusCode}` == 200) {
+		    let str = ''
+		    res.on('data', function (chunk) {
+		    str += chunk
+		    })
+		    res.on('end', function(){
+			let result = JSON.parse(str)
+			console.log(result)
+			let a = result.meta.transactionPoint /10
+			console.log(`\n签到可乐瓶：【${a}】`)
+			console.log(`\n可乐瓶延迟：【${result.meta.transactionDelayInDays}】天`)
+			console.log(`\n签到的错误：【${result.meta.errorCode}】`)
+			msg += `\n签到可乐瓶：【${a}】`
+			msg += `\n可乐瓶延迟：【${result.meta.transactionDelayInDays}】天`
+			msg += `\n签到的错误：【${result.meta.errorCode}】`
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n签到结果：【${result.message}】`);
+			msg += `\n签到结果：【${result.message}】`
 		    })
 		}
 	    })
@@ -254,28 +201,19 @@ class UserInfo {
         }
     }
 
-    async signin_info() {
+    async checkindays() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({
-		"appid": "wx0c3bef8c4fb62d07",
-		"basicInfo": {
-		    "vid": 6013537355137
-		},
-		"extendInfo": {
-		    "source": 1
-		},
-		"customInfo": {}
-	    })
+	    //const data = JSON.stringify({})
 	    const options = {
-		hostname: 'xapi.weimob.com',
+		hostname: 'koplus.icoke.cn',
 		port: 443,
-		path: '/api3/onecrm/mactivity/sign/misc/sign/activity/c/signMainInfo',
+		path: '/wechat/check-in/times',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'X-WX-Token': this.ck
+		    //'Content-Length': data.length,
+		    'authorization': 'MP '+this.ck
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -288,37 +226,24 @@ class UserInfo {
 		    res.on('end', function(){
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.errcode == 0) {
-			    console.log(`\n签到信息查询：【${result.errmsg}】`)
-			    console.log(`\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`)
-			    console.log(`\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`)
-			    console.log(`\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`)
-			    console.log(`\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`)
-			    msg += `\n签到信息查询：【${result.errmsg}】`
-			    msg += `\n有效连续签到：【${result.data.maxActivityContinueSignDays}】天`
-			    msg += `\n有效累计签到：【${result.data.activityCumulativeSignDays}】天`
-			    msg += `\n本月累计签到：【${result.data.monthCumulativeSignDays}】天`
-			    msg += `\n本年累计签到：【${result.data.yearCumulativeSignDays}】天`
-			} else {
-			    console.log(`\n签到信息查询：【${result.errmsg}】`)
-			    msg += `\n签到信息查询：【${result.errmsg}】`
-			}
+			console.log(`\n连续签到：【${result.data.consecutiveDays}】天`)
+			msg += `\n连续签到：【${result.data.consecutiveDays}】天`
 		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到信息查询：【${result.errmsg}】`);
-			    msg += `\n签到信息查询：【${result.errmsg}】`
-		        })
-		    }
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n签到信息查询：【${result.message}】`);
+			msg += `\n签到信息查询：【${result.message}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
 		console.error(error)
 	    })
 
-	    req.write(data)
+	    //req.write(data)
 	    req.end()
 		
         } catch (e) {
