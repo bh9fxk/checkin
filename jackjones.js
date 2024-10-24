@@ -57,7 +57,7 @@ class UserInfo {
 		    'bs-noncestr': this.noncestr,
 		    'token': this.token,
 		    'bs-signature': this.signature,
-		    'bs-timestamp': 1729780594329   
+		    'bs-timestamp': 1729780594329
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -90,7 +90,7 @@ class UserInfo {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n信息获取失败！【${result.msg}】`);
+		        console.log(`\n信息获取失败！【${result.msg}】`)
 			msg += `\n信息获取失败！【${result.msg}】`
 		    })
 		}
