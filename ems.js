@@ -80,15 +80,15 @@ class UserInfo {
 			    console.log(`\n获取MC_token：【${result.msg}】【${result.info}】`)
 			    msg += `\n获取MC_token：【${result.msg}】【${result.info}】`
 			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n获取MC_token：【${result.msg}】【${result.info}】`);
-			    msg += `\n获取MC_token：【${result.msg}】【${result.info}】`
-		        })
-		    }
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n获取MC_token：【${result.msg}】【${result.info}】`);
+			msg += `\n获取MC_token：【${result.msg}】【${result.info}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -139,15 +139,15 @@ class UserInfo {
 			    console.log(`\n金币信息查询：【${result.msg}】【${result.info}】`)
 			    msg += `\n金币信息查询：【${result.msg}】【${result.info}】`
 			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n金币信息查询：【${result.msg}】【${result.info}】`);
-			    msg += `\n金币信息查询：【${result.msg}】【${result.info}】`
-		        })
-		    }
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n金币信息查询：【${result.msg}】【${result.info}】`);
+			msg += `\n金币信息查询：【${result.msg}】【${result.info}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -324,15 +324,15 @@ class UserInfo {
 			    console.log(`\n签到信息查询：【${result.msg}】【${result.info}】`)
 			    msg += `\n签到信息查询：【${result.msg}】【${result.info}】`
 			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到信息查询：【${result.msg}】【${result.info}】`);
-			    msg += `\n签到信息查询：【${result.msg}】【${result.info}】`
-		        })
-		    }
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n签到信息查询：【${result.msg}】【${result.info}】`);
+			msg += `\n签到信息查询：【${result.msg}】【${result.info}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
