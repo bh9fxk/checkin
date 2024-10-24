@@ -21,112 +21,41 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ss = str.split(strSplitor)[0]; //单账号多变量分隔
-	this.userid = str.split(strSplitor)[1]
-	this.st = str.split(strSplitor)[2]
-	this.vuid = str.split(strSplitor)[3]
-	this.sr = str.split(strSplitor)[4]
+        this.bs-noncestr = str.split(strSplitor)[0]; //单账号多变量分隔
+	this.token = str.split(strSplitor)[1]
+	this.bs-signature = str.split(strSplitor)[2]
+	this.phone = str.split(strSplitor)[3]
     }
     async main() {
 	console.log(`\n开始第${this.index}个账号`)
 	msg += `\n开始第${this.index}个账号`
 
-	await this.point()
+	await this.user()
 	await $.wait(3000)
-        await this.signIn()
-	await $.wait(3000)
-	await this.signin_info()
+        await this.checkin()
 	await $.wait(3000)
 	await SendMsg(msg)
     }
 
-    async point() {
-        try {
-	    const https = require('https')
-
-	    const options = {
-		hostname: 'wxa-tp.ezrpro.com',
-		port: 443,
-		path: '/myvip/Vip/Vip/GetWxaWeiPageVipAssets',
-		method: 'GET',
-		headers: {
-		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 628,
-		    'ezr-cop-id': 444,
-		    'ezr-sv': 1,
-		    'ezr-source': 'weapp',
-		    'ezr-ss': this.ss,
-		    'ezr-userid': this.userid,
-		    'ezr-st': this.st,
-		    'ezr-vuid': this.vuid
-		}
-	    }
-	    const req = https.request(options, res => {
-		console.log(`\n状态码: ${res.statusCode}`)
-		if (`${res.statusCode}` == 200) {
-		    let str = ''
-		    res.on('data', function (chunk) {
-		    str += chunk
-		    })
-		    res.on('end', function(){
-			let result = JSON.parse(str)
-			console.log(result)
-			if (result.Success == true) {
-			    console.log(`\n积分查询：【${result.Msg}】`)
-			    console.log(`\n现有积分：【${result.Result.Bonus}】`)
-			    console.log(`\n现优惠券：【${result.Result.CouponCount}】`)
-		            msg += `\n积分查询：【${result.Msg}】`
-			    msg += `\n现有积分：【${result.Result.Bonus}】`
-			    msg += `\n现优惠券：【${result.Result.CouponCount}】`
-			} else {
-			    console.log(`\n积分信息：【${result.Msg}】【${result.ErrMsg}】`)
-			    msg += `\n积分信息：【${result.Msg}】【${result.ErrMsg}】`
-			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n积分信息获取失败！【${result.Msg}】【${result.ErrMsg}】`);
-			    msg += `\n积分信息获取失败！【${result.Msg}】【${result.ErrMsg}】`
-		        })
-		    }
-	    })
-		
-	    req.on('error', error => {
-		console.error(error)
-	    })
-
-	    //req.write(data)
-	    req.end()
-
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    async signIn() {
+    async user() {
         try {
 	    const https = require('https')
 	    const data = JSON.stringify({
-		"SecretReqeust": this.sr
+		"brand": 2,
+		"unionId": this.unionid
 	    })
 	    const options = {
-		hostname: 'wxa-tp.ezrpro.com',
+		hostname: 'minijj.bestseller.com.cn',
 		port: 443,
-		path: '/myvip/Vip/SignIn/SignIn',
+		path: '/rest/member/crmInfoGet',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'Content-Length': data.length,
-		    'ezr-brand-id': 628,
-		    'ezr-cop-id': 444,
-		    'ezr-sv': 1,
-		    'ezr-source': 'weapp',
-		    'ezr-ss': this.ss,
-		    'ezr-userid': this.userid,
-		    'ezr-st': this.st,
-		    'ezr-vuid': this.vuid
+		    'brand': JACKJONES,
+		    'bs-noncestr': this.bs-noncestr,
+		    'token': this.token,
+		    'bs-signature': this.bs-signature,
+		    'bs-timestamp': 1729780594329   
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -137,28 +66,30 @@ class UserInfo {
 		    str += chunk
 		    })
 		    res.on('end', function(){
-			//str = str.replace(/[\r|\n|\t]/g,"")
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.Success == true) {
-		            console.log(`\n签到信息：【${result.Msg}】`)
-			    console.log(`\n错误信息：【${result.errorMsg}】`)
-			    msg += `\n签到信息：【${result.Msg}】`
-			    msg += `\n错误信息：【${result.errorMsg}】`
-			    
+			if (result.code == 0) {
+			    console.log(`\n信息查询：【${result.msg}】`)
+			    console.log(`\n会员等级：【${result.data.level}】`)
+			    console.log(`\n会员名称：【${result.data.name】`)
+			    console.log(`\n可用积分：【${result.data.availablepoints}】`)
+			    console.log(`\n现总积分：【${result.data.allpoints}】`)
+		            msg += `\n信息查询：【${result.msg}】`
+			    msg += `\n会员等级：【${result.data.level}】`
+			    msg += `\n会员名称：【${result.data.name】`
+			    msg += `\n可用积分：【${result.data.availablepoints}】`
+			    msg += `\n现总积分：【${result.data.allpoints}】`
 			} else {
-			    console.log(`\n签到信息：【${result.Msg}】`)
-			    console.log(`\n错误信息：【${result.errorMsg}】`)
-			    msg += `\n签到信息：【${result.Msg}】`
-			    msg += `\n错误信息：【${result.errorMsg}】`
+			    console.log(`\n信息查询：【${result.msg}】`)
+			    msg += `\n信息查询：【${result.msg}】`
 			}
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n-----签到失败！-----`);
-			msg += `\n-----签到失败！-----`
+		        console.log(`\n信息获取失败！【${result.msg}】`);
+			msg += `\n信息获取失败！【${result.msg}】`
 		    })
 		}
 	    })
@@ -175,25 +106,27 @@ class UserInfo {
         }
     }
 
-    async signin_info() {
+    async checkin() {
         try {
 	    const https = require('https')
-
+	    const data = JSON.stringify({
+		"configId": 4,
+		"phone": this.phone,
+		"type": "A" 
+	    })
 	    const options = {
-		hostname: 'wxa-tp.ezrpro.com',
+		hostname: 'minijj.bestseller.com.cn',
 		port: 443,
-		path: '/myvip/Vip/SignIn/GetSignInDtlInfo',
-		method: 'GET',
+		path: '/rest/memberSignV2/sign',
+		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 628,
-		    'ezr-cop-id': 444,
-		    'ezr-sv': 1,
-		    'ezr-source': 'weapp',
-		    'ezr-ss': this.ss,
-		    'ezr-userid': this.userid,
-		    'ezr-st': this.st,
-		    'ezr-vuid': this.vuid
+		    'Content-Length': data.length,
+		    'brand': JACKJONES,
+		    'bs-noncestr': this.bs-noncestr,
+		    'token': this.token,
+		    'bs-signature': this.bs-signature,
+		    'bs-timestamp': 1729780594329
 		}
 	    }
 	    const req = https.request(options, res => {
@@ -204,30 +137,23 @@ class UserInfo {
 		    str += chunk
 		    })
 		    res.on('end', function(){
+			//str = str.replace(/[\r|\n|\t]/g,"")
 			let result = JSON.parse(str)
 			console.log(result)
-			if (result.Success == true) {
-			    console.log(`\n签到查询：【${result.Msg}】`)
-			    console.log(`\n今日签到：【${result.Result.VipSignInDtl.IsSigInToday}】`)
-			    console.log(`\n已经签到：【${result.Result.VipSignInDtl.SignedDays}】天`)
-			    console.log(`\n本周期签到：【${result.Result.VipSignInDtl.StepRoundSignDays}】天`)
-			    console.log(`\n当前周期数：【${result.Result.VipSignInDtl.StepRound}】`)
-		            msg += `\n签到查询：【${result.Msg}】`
-			    msg += `\n今日签到：【${result.Result.VipSignInDtl.IsSigInToday}】`
-			    msg += `\n已经签到：【${result.Result.VipSignInDtl.SignedDays}】天`
-			    msg += `\n本周期签到：【${result.Result.VipSignInDtl.StepRoundSignDays}】天`
-			    msg += `\n当前周期数：【${result.Result.VipSignInDtl.StepRound}】`
+			if (result.code == 0) {
+		            console.log(`\n签到信息：【${result.msg}】`)
+			    msg += `\n签到信息：【${result.msg}】`
 			} else {
-			    console.log(`\n签到信息：【${result.Msg}】【${result.ErrMsg}】`)
-			    msg += `\n签到信息：【${result.Msg}】【${result.ErrMsg}】`
+			    console.log(`\n签到信息：【${result.msg}】`)
+			    msg += `\n签到信息：【${result.msg}】`
 			}
 		    })
 		} else {
 		    res.on('data', d => {
 			let result = JSON.parse(d)
 			console.log(result)
-		        console.log(`\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`);
-			msg += `\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`
+		        console.log(`\n-----签到失败！-----【${result.msg}】`);
+			msg += `\n-----签到失败！-----【${result.msg}】`
 		    })
 		}
 	    })
@@ -236,7 +162,7 @@ class UserInfo {
 		console.error(error)
 	    })
 
-	    //req.write(data)
+	    req.write(data)
 	    req.end()
 
         } catch (e) {
