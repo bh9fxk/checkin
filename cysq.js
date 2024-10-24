@@ -77,14 +77,14 @@ class UserInfo {
 			    msg += `\nToken信息：【${result.msg}】`
 			}
 		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\nToken获取失败！`);
-			    msg += `\nToken获取失败！`
-		        })
-		    }
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\nToken获取失败！`);
+			msg += `\nToken获取失败！`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -135,14 +135,14 @@ class UserInfo {
 			    msg += `\n积分查询：【${result.msg}】`
 			}
 		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n积分查询失败！`);
-			    msg += `\n积分查询失败！`
-		        })
-		    }
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n积分查询失败！`);
+			msg += `\n积分查询失败！`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
@@ -208,7 +208,6 @@ class UserInfo {
 	    req.write(data)
 	    req.end()
 
-		
         } catch (e) {
             console.log(e);
         }
