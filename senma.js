@@ -2,17 +2,16 @@
  * cron 29 8 * * *  senma.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
- * 变量名: fannifen_ck,&分隔两个参数
+ * 变量名: senma_ck,&分隔两个参数
  * 修改ezr-brand-id ezr-cop-id参数
  * 变量值: 抓包cookie中ezr-ss ezr-userid ezr-st ezr-vuid和body中SecretReqeust的值
- * 变量值:抓包ucAccessToken uid sukey的值
  * scriptVersionNow = "0.0.1";
  */
 
 const $ = new Env("森马签到");
 const notify = $.isNode() ? require('./sendNotify') : '';
 const Notify = 1; //开启通知
-let ckName = "mannifen_ck";
+let ckName = "senma_ck";
 let envSplitor = ["@", "\n"]; //多账号分隔符
 let strSplitor = "&"; //多变量分隔符
 let userIdx = 0;
