@@ -149,8 +149,7 @@ class UserInfo {
     async checkin() {
         try {
 	    const https = require('https')
-	    //const data = JSON.stringify({"": ''})
-	    const data = '{}'
+	    const data = JSON.stringify({})
 	    const options = {
 		hostname: 'koplus.icoke.cn',
 		port: 443,
@@ -210,7 +209,7 @@ class UserInfo {
 		hostname: 'koplus.icoke.cn',
 		port: 443,
 		path: '/cre-bff/wechat/check-in/times',
-		method: 'POST',
+		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
 		    //'Content-Length': data.length,
