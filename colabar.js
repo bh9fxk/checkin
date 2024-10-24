@@ -149,7 +149,7 @@ class UserInfo {
     async checkin() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({{}})
+	    const data = JSON.stringify({0})
 	    const options = {
 		hostname: 'koplus.icoke.cn',
 		port: 443,
