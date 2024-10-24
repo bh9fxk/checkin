@@ -21,9 +21,9 @@ let msg = '';
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.bs-noncestr = str.split(strSplitor)[0]; //单账号多变量分隔
+        this.noncestr = str.split(strSplitor)[0]; //单账号多变量分隔
 	this.token = str.split(strSplitor)[1]
-	this.bs-signature = str.split(strSplitor)[2]
+	this.signature = str.split(strSplitor)[2]
 	this.unionid = str.split(strSplitor)[3]
 	this.phone = str.split(strSplitor)[4]
     }
@@ -53,9 +53,9 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'brand': JACKJONES,
-		    'bs-noncestr': this.bs-noncestr,
+		    'bs-noncestr': this.noncestr,
 		    'token': this.token,
-		    'bs-signature': this.bs-signature,
+		    'bs-signature': this.signature,
 		    'bs-timestamp': 1729780594329   
 		}
 	    }
@@ -124,9 +124,9 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'brand': JACKJONES,
-		    'bs-noncestr': this.bs-noncestr,
+		    'bs-noncestr': this.noncestr,
 		    'token': this.token,
-		    'bs-signature': this.bs-signature,
+		    'bs-signature': this.signature,
 		    'bs-timestamp': 1729780594329
 		}
 	    }
