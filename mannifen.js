@@ -3,6 +3,7 @@
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名: fannifen_ck,&分隔两个参数
+ * 修改ezr-brand-id ezr-cop-id参数
  * 变量值:抓包ucAccessToken uid sukey的值
  * scriptVersionNow = "0.0.1";
  */
@@ -50,8 +51,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 224,
-		    'ezr-cop-id': 118,
+		    'ezr-brand-id': 1069,
+		    'ezr-cop-id': 448,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -118,8 +119,8 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'ezr-brand-id': 224,
-		    'ezr-cop-id': 118,
+		    'ezr-brand-id': 1069,
+		    'ezr-cop-id': 448,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
@@ -185,8 +186,8 @@ class UserInfo {
 		method: 'GET',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'ezr-brand-id': 224,
-		    'ezr-cop-id': 118,
+		    'ezr-brand-id': 1069,
+		    'ezr-cop-id': 448,
 		    'ezr-sv': 1,
 		    'ezr-source': 'weapp',
 		    'ezr-ss': this.ss,
