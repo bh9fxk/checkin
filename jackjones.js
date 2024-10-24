@@ -52,7 +52,7 @@ class UserInfo {
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
-		    'brand': JACKJONES,
+		    'brand': 'JACKJONES',
 		    'bs-noncestr': this.noncestr,
 		    'token': this.token,
 		    'bs-signature': this.signature,
@@ -123,7 +123,7 @@ class UserInfo {
 		headers: {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
-		    'brand': JACKJONES,
+		    'brand': 'JACKJONES',
 		    'bs-noncestr': this.noncestr,
 		    'token': this.token,
 		    'bs-signature': this.signature,
