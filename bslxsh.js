@@ -76,14 +76,14 @@ class UserInfo {
 			    msg += `\n信息查询：【${result.msg}】`
 			}
 		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n积分查询：【${result.msg}】`);
-			    msg += `\n积分查询：【${result.msg}】`
-		        })
-		    }
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n积分查询：【${result.msg}】`);
+			msg += `\n积分查询：【${result.msg}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
