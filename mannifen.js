@@ -222,15 +222,15 @@ class UserInfo {
 			    console.log(`\n签到信息：【${result.Msg}】【${result.ErrMsg}】`)
 			    msg += `\n签到信息：【${result.Msg}】【${result.ErrMsg}】`
 			}
-		        })
-		    } else {
-			res.on('data', d => {
-			    let result = JSON.parse(d)
-			    console.log(result)
-		            console.log(`\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`);
-			    msg += `\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`
-		        })
-		    }
+		    })
+		} else {
+		    res.on('data', d => {
+			let result = JSON.parse(d)
+			console.log(result)
+		        console.log(`\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`);
+			msg += `\n签到信息获取失败！【${result.Msg}】【${result.ErrMsg}】`
+		    })
+		}
 	    })
 		
 	    req.on('error', error => {
