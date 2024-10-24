@@ -125,7 +125,7 @@ class UserInfo {
 		    'Content-Type': 'application/json',
 		    'Content-Length': data.length,
 		    'brand': 'JACKJONES',
-		    'bs-noncestr': this.noncestr,
+		    //'bs-noncestr': this.noncestr,
 		    'token': this.token,
 		    'bs-signature': this.signature,
 		    'bs-timestamp': 1729780594329
