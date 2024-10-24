@@ -1,5 +1,5 @@
 /**
- * cron 28 8 * * *  fannifen.js
+ * cron 28 8 * * *  mannifen.js
  * Show:每天运行一次
  * @author:https://github.com/bh9fxk/checkin
  * 变量名: fannifen_ck,&分隔两个参数
