@@ -34,8 +34,8 @@ class UserInfo {
         await this.checkin()
 	await $.wait(3000)
 	await this.checkindays()
-	await $.wait(3000)
-	await SendMsg(msg)
+	//await $.wait(3000)
+	//await SendMsg(msg)
     }
 
     async user() {
@@ -149,7 +149,7 @@ class UserInfo {
     async checkin() {
         try {
 	    const https = require('https')
-	    const data = JSON.stringify({})
+	    const data = JSON.stringify({ })
 	    const options = {
 		hostname: 'koplus.icoke.cn',
 		port: 443,
