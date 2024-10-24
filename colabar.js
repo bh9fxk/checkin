@@ -208,7 +208,7 @@ class UserInfo {
 	    const options = {
 		hostname: 'koplus.icoke.cn',
 		port: 443,
-		path: '/wechat/check-in/times',
+		path: '/cre-bff/wechat/check-in/times',
 		method: 'POST',
 		headers: {
 		    'Content-Type': 'application/json',
